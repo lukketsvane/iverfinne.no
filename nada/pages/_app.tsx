@@ -60,10 +60,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <DefaultSeo
-        title="Adam Majmudar"
+        title="Iver Finne"
         description="I'm a constant learner and aspiring technical generalist. I'm also a founding enginer at thirdweb and on gap year from the University of Pennsylvania."
         openGraph={{
-          title: "Adam Majmudar",
+          title: "Iver Finne",
           description:
             "I'm a constant learner and aspiring technical generalist. I'm also a founding enginer at thirdweb and on gap year from the University of Pennsylvania.",
           images: [
@@ -72,7 +72,7 @@ export default function App({ Component, pageProps }: AppProps) {
               type: "image/jpeg",
             },
           ],
-          siteName: "Adam Majmudar",
+          siteName: "Iver Finne",
         }}
       />
       {getLayout(<Component {...pageProps} />)}

@@ -19,7 +19,7 @@ interface WritingProps {
 const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
   return (
     <>
-      <NextSeo title="Writing | Adam Majmudar" />
+      <NextSeo title="Writing | Iver Finne" />
       <Flex direction="column" align="flex-start" width="100%" gap={3}>
         <Divider width="100%" />
         {posts.map((post) => (
