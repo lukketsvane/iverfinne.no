@@ -1,32 +1,31 @@
 [
   {
-    "title": "A Person of Compute",
-    "date": "November 29, 2023",
-    "url": "/writing/person-of-compute",
-    "external": false
-  },
-  {
-    "title": "Cognitive Architectures and the Future of AI Reasoning",
-    "date": "November 30, 2023",
-    "url": "/writing/future-cognitive-architecture",
-    "external": false
-  },
-  {
-    "title": "Big Compute and the Future of Computational Capacity",
-    "date": "November 26, 2023",
-    "url": "/writing/big-compute",
-    "external": false
-  },
-  {
-    "title": "The Journey of AI: From Logic to Learning",
-    "date": "April 9, 2023",
+    "title": "AI-Driven Novel Generation Systems: Unfolding the Narrative Journey",
+    "description": "An inside look into the architecture and process of AI-driven systems for generating novels, from conception to a ready-to-publish EPUB format.",
+    "date": "2024-01-31T00:00:00.000Z",
     "url": "/writing/journey",
     "external": false
   },
   {
-    "title": "Post-Labour Economics: Rethinking Value in the Age of Automation",
-    "date": "March 15, 2023",
-    "url": "/writing/post-labour-economics",
+    "title": "Big Compute",
+    "description": "Exploring the monumental growth of computational power, the concept of 'people of compute', and the future of GPUs in terms of PFLOPS and energy efficiency.",
+    "image": "https://www.exampleimageurl.com/path/to/image.jpg",
+    "date": "2023/11/29",
+    "url": "/writing/big-compute",
+    "external": false
+  },
+  {
+    "title": "A Person of Compute",
+    "date": "2023-11-29T00:00:00.000Z",
+    "description": "Delving into computational power, conceptualizing 'people of compute', and the advancements in GPU capabilities with a focus on PFLOPS and energy efficiency.",
+    "tags": [
+      "blog",
+      "technology",
+      "computing",
+      "GPUs"
+    ],
+    "author": "You",
+    "url": "/writing/person-of-compute",
     "external": false
   }
 ]
