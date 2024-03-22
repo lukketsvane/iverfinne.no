@@ -1,8 +1,32 @@
 [
   {
-    "title": "Choose Your Games Wisely",
+    "title": "A Person of Compute",
+    "date": "November 29, 2023",
+    "url": "/writing/person-of-compute",
+    "external": false
+  },
+  {
+    "title": "Cognitive Architectures and the Future of AI Reasoning",
+    "date": "November 30, 2023",
+    "url": "/writing/future-cognitive-architecture",
+    "external": false
+  },
+  {
+    "title": "Big Compute and the Future of Computational Capacity",
     "date": "November 26, 2023",
-    "url": "/writing/games",
+    "url": "/writing/big-compute",
+    "external": false
+  },
+  {
+    "title": "The Journey of AI: From Logic to Learning",
+    "date": "April 9, 2023",
+    "url": "/writing/journey",
+    "external": false
+  },
+  {
+    "title": "Post-Labour Economics: Rethinking Value in the Age of Automation",
+    "date": "March 15, 2023",
+    "url": "/writing/post-labour-economics",
     "external": false
   }
 ]
