@@ -53,6 +53,7 @@ function Layout({ children }: PropsWithChildren) {
       gap={{ md: 10 }}
     >
       <Flex
+      
         position="absolute"
         right="100%"
         mr="160px"
@@ -64,9 +65,9 @@ function Layout({ children }: PropsWithChildren) {
               NAVIGATION
             </Text>
             <Navigation link="/">Home</Navigation>
+            <Navigation link="/projects">Projects</Navigation>
             <Navigation link="/writing">Writing</Navigation>
             <Navigation link="/books">Books</Navigation>
-            <Navigation link="/projects">Projects</Navigation>
 
           </VStack>
           <VStack align="flex-start">
