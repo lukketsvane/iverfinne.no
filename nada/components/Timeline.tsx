@@ -11,6 +11,7 @@ interface TimelineProps {
 
 export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilter, onTypeFilterChange }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const timelineWidth = useBreakpointValue({ base: "100%", md: "120%" });
 
   const filteredItems = items.filter((item) =>
     (item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -20,10 +21,10 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
   );
 
   return (
-    <Flex direction={isMobile ? "column" : "row"} width="100%" gap={8} >
+    <Flex direction={isMobile ? "column" : "row"} width="100%" gap={8}>
       <Stack direction={isMobile ? "row" : "column"} spacing={4} width={isMobile ? "100%" : "200px"} mb={isMobile ? 8 : 0} overflowX={isMobile ? "auto" : "visible"}>
-        <Heading as="h4" size="md"  minWidth="80px">Type</Heading>
-        <Flex direction={isMobile ? "row" : "column"} gap={2 }>
+        <Heading as="h4" size="md" minWidth="80px">Type</Heading>
+        <Flex direction={isMobile ? "row" : "column"} gap={2}>
           <Link color={typeFilter === "" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("")}>All</Link>
           <Link color={typeFilter === "public" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("public")}>Public</Link>
           <Link color={typeFilter === "private" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("private")}>Private</Link>
@@ -31,7 +32,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
           <Link color={typeFilter === "personal" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("personal")}>Personal</Link>
         </Flex>
       </Stack>
-      <Flex direction="column" width="100%" position="relative" left="-12"px>
+      <Flex direction="column" width={timelineWidth} position="relative" left="-12px">
         <Box position="absolute" top="12px" left="164px" bottom="0" width="2px" bg="gray.200" zIndex={-1} />
         {filteredItems.map((item, index) => (
           <Flex key={item.title} mb={8} alignItems="center" position="relative">
