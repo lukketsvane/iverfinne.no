@@ -1,3 +1,6 @@
+
+// pages/projects/index.tsx
+import { useState } from "react";
 import { Flex, Heading, Input, Stack, Text, Image, Link, SimpleGrid, Box, AspectRatio } from "@chakra-ui/react";
 import { getAllProjectData, Project, getTimelineData, TimelineItem } from "../../lib/projects";
 import type { NextPageWithLayout } from "next";
@@ -11,17 +14,25 @@ interface ProjectsProps {
 }
 
 const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+
+  const handleTypeFilterChange = (type: string) => {
+    setTypeFilter(type);
+  };
+
   return (
     <>
       <NextSeo title="Projects | Iver Finne" />
-      <Flex direction="column" align="center" width="100%">
+      <Flex direction="column" align="left" width="100%" left={204} maxW="1400px" >
         <Heading as="h1" size="xl" mb={8}>
           build-in-public log
         </Heading>
         <Text fontSize="xl" mb={8}>
           some of my tools and experiments.
         </Text>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} width="100%" mb={12}>
+
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} width="100%"  mb={12}>
           {projects.map((project) => (
             <Link key={project.title} href={project.url}>
               <Box borderWidth={1} borderRadius="lg" overflow="hidden" _hover={{ shadow: "md" }}>
@@ -38,9 +49,18 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
             </Link>
           ))}
         </SimpleGrid>
-        <Input placeholder="Type here to search" mb={12} />
-
-        <Timeline items={timeline} />
+        <Input
+          placeholder="Type here to search"
+          mb={12}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <Timeline
+          items={timeline}
+          searchQuery={searchQuery}
+          typeFilter={typeFilter}
+          onTypeFilterChange={handleTypeFilterChange}
+        />
       </Flex>
     </>
   );
