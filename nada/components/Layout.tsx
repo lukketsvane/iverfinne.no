@@ -85,7 +85,6 @@ function Layout({ children }: PropsWithChildren) {
       <Container width={{ md: "container.md" }} position="relative">
         <Box
           width="100%"
-          bg="white"
           height={20}
           position="fixed"
           top={0}
