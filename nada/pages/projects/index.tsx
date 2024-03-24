@@ -32,7 +32,7 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
           some of my tools and experiments.
         </Text>
 
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} width="100%"  mb={12}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={2} width="100%"  mb={12}>
           {projects.map((project) => (
             <Link key={project.title} href={project.url}>
               <Box borderWidth={1} borderRadius="lg" overflow="hidden" _hover={{ shadow: "md" }}>
