@@ -1,14 +1,16 @@
-import { Flex, Heading, Input, Stack, Text, Image, Link, SimpleGrid, Box } from "@chakra-ui/react";
-import { getAllProjectData, Project } from "../../lib/projects";
+import { Flex, Heading, Input, Stack, Text, Image, Link, SimpleGrid, Box, AspectRatio } from "@chakra-ui/react";
+import { getAllProjectData, Project, getTimelineData, TimelineItem } from "../../lib/projects";
 import type { NextPageWithLayout } from "next";
 import Layout from "../../components/Layout";
 import { NextSeo } from "next-seo";
+import { Timeline } from "../../components/Timeline";
 
 interface ProjectsProps {
   projects: Project[];
+  timeline: TimelineItem[];
 }
 
-const Projects: NextPageWithLayout<ProjectsProps> = ({ projects }) => {
+const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => {
   return (
     <>
       <NextSeo title="Projects | Iver Finne" />
@@ -19,29 +21,26 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects }) => {
         <Text fontSize="xl" mb={8}>
           some of my tools and experiments.
         </Text>
-        <Input placeholder="Type here to search" mb={12} />
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} width="100%">
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} width="100%" mb={12}>
           {projects.map((project) => (
             <Link key={project.title} href={project.url}>
-              <Stack
-                borderWidth={1}
-                borderRadius="lg"
-                _hover={{ shadow: "md" }}
-                overflow="hidden"
-              >
-                <Box height="200px" overflow="hidden">
-                  <Image src={project.image} alt={project.title} objectFit="cover" width="100%" height="100%" />
-                </Box>
-                <Stack p={6}>
-                  <Heading as="h3" size="md" noOfLines={1}>
+              <Box borderWidth={1} borderRadius="lg" overflow="hidden" _hover={{ shadow: "md" }}>
+                <AspectRatio ratio={16 / 9}>
+                  <Image src={project.image} alt={project.title} objectFit="cover" />
+                </AspectRatio>
+                <Box p={4}>
+                  <Heading as="h3" size="md" mb={2} noOfLines={1}>
                     {project.title}
                   </Heading>
                   <Text noOfLines={2}>{project.description}</Text>
-                </Stack>
-              </Stack>
+                </Box>
+              </Box>
             </Link>
           ))}
         </SimpleGrid>
+        <Input placeholder="Type here to search" mb={12} />
+
+        <Timeline items={timeline} />
       </Flex>
     </>
   );
@@ -53,5 +52,6 @@ Projects.getLayout = (page) => <Layout>{page}</Layout>;
 
 export async function getStaticProps() {
   const projects = getAllProjectData();
-  return { props: { projects } };
+  const timeline = getTimelineData();
+  return { props: { projects, timeline } };
 }

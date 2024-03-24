@@ -28,3 +28,22 @@ export function getAllSlugs(): string[] {
 export async function getProject(slug: string): Promise<MaybeContent<Project>> {
   return getMdxContent<Project>("projects", `${slug}.mdx`);
 }
+
+
+export interface TimelineItem {
+  date: string;
+  title: string;
+  description: string;
+  tags: string[];
+  type: "public" | "private" | "prototype" | "personal";
+  url: string;
+}
+
+export function getTimelineData(): TimelineItem[] {
+  return JSON.parse(
+    fs.readFileSync(
+      path.join(process.cwd(), "content", "timeline", "index.json"),
+      "utf8"
+    )
+  );
+}
