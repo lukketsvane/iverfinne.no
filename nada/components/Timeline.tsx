@@ -11,7 +11,7 @@ interface TimelineProps {
 
 export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilter, onTypeFilterChange }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const timelineWidth = useBreakpointValue({ base: "100%", md: "120%" });
+  const timelineWidth = useBreakpointValue({ base: "100%", md: "calc(100% - 150px)" });
 
   const filteredItems = items.filter((item) =>
     (item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -21,26 +21,61 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
   );
 
   return (
-    <Flex direction={isMobile ? "column" : "row"} width="100%" gap={8}>
-      <Stack direction={isMobile ? "row" : "column"} spacing={4} width={isMobile ? "100%" : "200px"} mb={isMobile ? 8 : 0} overflowX={isMobile ? "auto" : "visible"}>
-        <Heading as="h4" size="md" minWidth="80px">Type</Heading>
-        <Flex direction={isMobile ? "row" : "column"} gap={2}>
-          <Link color={typeFilter === "" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("")}>All</Link>
-          <Link color={typeFilter === "public" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("public")}>Public</Link>
-          <Link color={typeFilter === "private" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("private")}>Private</Link>
-          <Link color={typeFilter === "prototype" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("prototype")}>Prototype</Link>
-          <Link color={typeFilter === "personal" ? "blue.500" : "gray.500"} onClick={() => onTypeFilterChange("personal")}>Personal</Link>
+    <Flex direction={isMobile ? "column" : "row"} width="100%" gap={4}>
+      <Stack direction="column" spacing={2} width={isMobile ? "100%" : "150px"} mb={isMobile ? 4 : 0}>
+        <Heading as="h4" size="sm" minWidth="80px">Type</Heading>
+        <Flex direction="column" gap={1}>
+          <Link
+            color={typeFilter === "" ? "blue.500" : "gray.500"}
+            onClick={() => onTypeFilterChange("")}
+            fontWeight={typeFilter === "" ? "bold" : "normal"}
+            fontSize="sm"
+          >
+            All
+          </Link>
+          <Link
+            color={typeFilter === "public" ? "blue.500" : "gray.500"}
+            onClick={() => onTypeFilterChange("public")}
+            fontWeight={typeFilter === "public" ? "bold" : "normal"}
+            fontSize="sm"
+          >
+            Public
+          </Link>
+          <Link
+            color={typeFilter === "private" ? "blue.500" : "gray.500"}
+            onClick={() => onTypeFilterChange("private")}
+            fontWeight={typeFilter === "private" ? "bold" : "normal"}
+            fontSize="sm"
+          >
+            Private
+          </Link>
+          <Link
+            color={typeFilter === "prototype" ? "blue.500" : "gray.500"}
+            onClick={() => onTypeFilterChange("prototype")}
+            fontWeight={typeFilter === "prototype" ? "bold" : "normal"}
+            fontSize="sm"
+          >
+            Prototype
+          </Link>
+          <Link
+            color={typeFilter === "personal" ? "blue.500" : "gray.500"}
+            onClick={() => onTypeFilterChange("personal")}
+            fontWeight={typeFilter === "personal" ? "bold" : "normal"}
+            fontSize="sm"
+          >
+            Personal
+          </Link>
         </Flex>
       </Stack>
-      <Flex direction="column" width={timelineWidth} position="relative" left="-12px">
-        <Box position="absolute" top="12px" left="164px" bottom="0" width="2px" bg="gray.200" zIndex={-1} />
+      <Flex direction="column" width={timelineWidth} position="relative">
+        <Box position="absolute" top="12px" left="120px" bottom="0" width="2px" bg="gray.200" zIndex={-1} />
         {filteredItems.map((item, index) => (
           <Flex key={item.title} mb={8} alignItems="center" position="relative">
-            <Text fontSize="lg" fontWeight="bold" color="gray.700" mr={4} minWidth="120px" textAlign="right">
+            <Text fontSize="lg" fontWeight="bold" color="black" ml={-12} mr={4} minWidth="120px" textAlign="right" whiteSpace="nowrap">
               {item.date}
             </Text>
-            <Circle ml="26px" size="6px" bg="black" zIndex={1} />
-            <Box pl={18}>
+            <Circle size="12px" bg="gray.300" mr={4} />
+            <Box>
               <Link href={item.url}>
                 <Heading as="h3" size="md" mb={2}>
                   {item.title}
@@ -49,7 +84,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
               <Text mb={2}>{item.description}</Text>
               <Flex>
                 {item.tags.map((tag) => (
-                  <Tag key={tag} size="sm" variant="subtle" colorScheme="gray" mr={12}>
+                  <Tag key={tag} size="sm" variant="subtle" colorScheme="gray" mr={2}>
                     <TagLeftIcon as={tag === "private" ? FaLock : FaGlobe} />
                     <TagLabel>{tag}</TagLabel>
                   </Tag>
