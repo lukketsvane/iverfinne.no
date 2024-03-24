@@ -35,7 +35,7 @@ export interface TimelineItem {
   title: string;
   description: string;
   tags: string[];
-  type: "public" | "private" | "prototype" | "personal";
+  type: "public" | "private" | "prototype" ;
   url: string;
 }
 

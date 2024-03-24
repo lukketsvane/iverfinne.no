@@ -57,24 +57,17 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
           >
             Prototype
           </Link>
-          <Link
-            color={typeFilter === "personal" ? "blue.500" : "gray.500"}
-            onClick={() => onTypeFilterChange("personal")}
-            fontWeight={typeFilter === "personal" ? "bold" : "normal"}
-            fontSize="sm"
-          >
-            Personal
-          </Link>
+
         </Flex>
       </Stack>
       <Flex direction="column" width={timelineWidth} position="relative">
         <Box position="absolute" top="12px" left="120px" bottom="0" width="2px" bg="gray.200" zIndex={-1} />
         {filteredItems.map((item, index) => (
           <Flex key={item.title} mb={8} alignItems="center" position="relative">
-            <Text fontSize="lg" fontWeight="bold" color="black" ml={-12} mr={4} minWidth="120px" textAlign="right" whiteSpace="nowrap">
+            <Text fontSize="lg" fontWeight="bold" color="black" ml={-12} mr={3} minWidth="120px" textAlign="right" whiteSpace="nowrap">
               {item.date}
             </Text>
-            <Circle size="12px" bg="gray.300" mr={4} />
+            <Circle size="9px" bg="gray.700" ml={8} mr={14} />
             <Box>
               <Link href={item.url}>
                 <Heading as="h3" size="md" mb={2}>
