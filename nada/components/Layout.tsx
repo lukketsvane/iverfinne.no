@@ -66,6 +66,8 @@ function Layout({ children }: PropsWithChildren) {
             <Navigation link="/">Home</Navigation>
             <Navigation link="/writing">Writing</Navigation>
             <Navigation link="/books">Books</Navigation>
+            <Navigation link="/projects">Projects</Navigation>
+
           </VStack>
           <VStack align="flex-start">
             <Text fontWeight="bold" fontSize="smaller">
@@ -110,6 +112,8 @@ function Layout({ children }: PropsWithChildren) {
                 <Navigation link="/">Home</Navigation>
                 <Navigation link="/writing">Writing</Navigation>
                 <Navigation link="/books">Books</Navigation>
+                <Navigation link="/projects">Projects</Navigation>
+
               </HStack>
               <Menu>
                 <MenuButton
@@ -125,10 +129,11 @@ function Layout({ children }: PropsWithChildren) {
                       <Navigation link="/">Home</Navigation>
                       <Navigation link="/writing">Writing</Navigation>
                       <Navigation link="/books">Books</Navigation>
+                      <Navigation link="/projects">Projects</Navigation>
                     </VStack>
                   </MenuGroup>
                   <MenuGroup title="FIND ME ON">
-                    <VStack align="flex-start" px={4} spacing={3} mb={2}>
+                    <VStack align="flex-start" px={0} spacing={3} mb={2}>
                       <Navigation
                         link="https://twitter.com/amitoser"
                         isExternal

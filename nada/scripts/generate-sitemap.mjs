@@ -42,24 +42,24 @@ async function main() {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://adammaj.com</loc>
+    <loc>https://lukketsvane.com</loc>
   </url>
   <url>
-    <loc>https://adammaj.com/writing</loc>
+    <loc>https://lukketsvane.com/writing</loc>
   </url>
   <url>
-    <loc>https://adammaj.com/engineering</loc>
+    <loc>https://lukketsvane.com/engineering</loc>
   </url>
   <url>
-    <loc>https://adammaj.com/books</loc>
+    <loc>https://lukketsvane.com/books</loc>
   </url>
   <url>
-    <loc>https://adammaj.com/notes</loc>
+    <loc>https://lukketsvane.com/notes</loc>
   </url>${allSlugs
     .map((slug) => {
       return `
   <url>
-    <loc>${`https://adammaj.com${slug}`}</loc>
+    <loc>${`https://lukketsvane.com${slug}`}</loc>
   </url>`;
     })
     .join("")}

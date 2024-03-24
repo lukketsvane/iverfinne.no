@@ -23,7 +23,7 @@ const Post: NextPageWithLayout<PostProps> = ({ post }) => {
           images: [
             {
               url:
-                post.metadata.image || "https://adammaj.com/og-image-dark.jpg",
+                post.metadata.image || "https://lukketsvane.com/og-image-dark.jpg",
             },
           ],
         }}
