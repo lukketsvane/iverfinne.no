@@ -1,0 +1,421 @@
+---
+title: "Exploring Generative Art: Definitions & Types"
+description: "Diving into the essence and categories of generative art."
+date: "2024-03-26"
+image: "/images/generative-art-explained.png"
+---
+
+# What is Generative Art?
+
+An artwork may be generative in some ways and not in others. A piece could have generative aspects even if the artist didn't have that intention. There are ways in which a painting could be considered generative.
+
+I prefer definitions to be inclusive, not restrictive, and my definitions are for the purposes of discussing generative art, not for the purposes of ruling on what "is or isn't" generative art.
+
+Header image: [Forecast #23](https://www.fxhash.xyz/gentk/FX0-1556245)
+
+## Some tentative definitions
+
+Okay, how about…
+
+**Generative Art**: Art created using autonomous processes
+
+We then need a definition for an autonomous process…
+
+**Autonomous Process**: A process not under direct human control
+
+## A way to structure the discussion
+
+I see there being three different types of autonomous process - randomness, rules and natural systems. The bulk of this article will look at these three things, and examples of how each is implemented in generative art. 
+
+This is a non-perfect categorisation, with crossover and omissions which I'll stuff in round the edges, but it is a structure for establishing the different types of autonomy, and for exploring generativity.
+
+## The mainstay of generation
+
+Randomness drives most of what we think of as "generative art". 
+
+An artist writes code which produces different outputs depending on the values of a set of variables. These variables could be things like the number of circles to draw, their positions, what size they are, what colour they are, and so on.
+
+For example, in the following (work in progress) images, variables define the positions of a collection of nodes, the number of nodes, how many other nodes they connect to and the colours and thickness of the connecting lines.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/bw_simple_1.png" alt="bw_simple_1" style={{ width: '100%', marginBottom: '10px' }} />
+    <img src="/images/what-is-generative-art/bw_simple_2.png" alt="bw_simple_2" style={{ width: '100%' }} />
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/bw_simple_3.png" alt="bw_simple_3" style={{ width: '100%', marginBottom: '10px' }} />
+    <img src="/images/what-is-generative-art/bw_simple_4.png" alt="bw_simple_4" style={{ width: '100%' }} />
+  </div>
+</div>
+
+
+
+
+Of course we _could_ define those variables' values in the code, or we _could_ manually drag sliders up and down to alter them - but these would be very human controlled, non-autonomous processes. It would also be tedious to manually define the properties of each of the nodes when there are thousands of them.
+
+Instead, to create a _generative_ artwork, we can use a function like random() to generate the values. Different images can be generated every time the code is run, producing a variety of outputs.
+
+Vera Molnar, a pioneer of generative art, made extensive use of randomness in her work, and [this clip](https://vimeo.com/372579247) of her talking on the topic is a delight.
+
+![vera_molnar_interruptions.png](/images/what-is-generative-art/vera_molnar_interruptions.png)
+
+## Pseudorandom
+
+Something that's super important in a conceptual and technical sense is that, in fact, it's usually not randomness at all, it's pseudorandomness.
+
+Computers generally have no mechanism by which to pick a truly random number, but we can generate numbers which are usually sufficiently random for our purposes as artists using a pseudorandom number generator (prng).
+
+A prng works by taking an initial value, known as a "seed", and running it through an algorithm to produce a result. The seed value is often taken from something like the timestamp on the computer. 
+
+If the algorithm is run 10,000 times with 10,000 different seeds, it should produce a set of results with an even distribution from 0 to 1. This p5js code and output shows 10,000 squares which are evenly distributed across the canvas, as their x,y positions were generated using the **random()** function.
+
+![func_ran.png](/images/what-is-generative-art/func_ran.png)
+
+The seed can also be set to a fixed number, for testing or for reproducible results. In NFTs on sites like [fxhash](https://www.fxhash.xyz/u/Amy%20Goodchild) and [ArtBlocks](https://artblocks.io/), a hash (string of characters) from the blockchain transaction is used as the seed for the randomness in the piece.
+
+When the algorithm is given the same seed, it produces the same results each time. This process is therefore deterministic, not really random at all.
+
+## True Random
+
+In some applications like banking and cryptography, it's necessary to produce truly random numbers. This can be done by leveraging a natural source of chaotic data, for example, [atmospheric noise](https://www.random.org/), picked up by a radio or visual output of [lava lamps](https://en.wikipedia.org/wiki/Lavarand).
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/thunderstorm.png" alt="Thunderstorm" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/lava_lamp.png" alt="Lava Lamp" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+</div>
+
+Producing truly random numbers like this is much more faff than simply typing random(), but it could be interesting conceptually to explore using a truly random number source in a generative art project. 
+
+How much difference does it make to the final piece if the number is random or pseudorandom? Does it make any difference at all?
+
+## A philosophical sidebar
+
+We can say a pseudorandom number generator is deterministic and predictable, while numbers generated from a natural source are chaotic and unpredictable.
+
+In fact though, the latter is only unpredictable if the universe is. If we live in a deterministic universe, where every event is determined by prior events, then theoretically there exists no source of true randomness. Quantum mechanics suggests this is not the case, as subatomic particles can be observed to behave in ways that, as far as we can tell, are truly random and have no cause. However, the debate on [determinism](https://en.wikipedia.org/wiki/Determinism) has not reached consensus.
+
+I'd like to explore this more in a future blog as there are some mysterious conceptual threads to pull at.
+
+In the meantime - we can certainly say that in practical terms natural sources of chaotic data like atmospheric noise are unpredictable, and [quantum](https://phys.org/news/2021-01-unpredictable-nature-quantum-mechanics-random.html) [random](https://qrng.anu.edu.au/) [number](https://www.nature.com/articles/s41598-021-95388-7) [generators](https://www.wired.com/story/quantum-mechanics-could-solve-cryptographys-random-number-problem/) are possibly even theoretically unpredictable.
+
+## Distribution
+
+A good prng should give an even distribution of results but for some artistic applications it can be useful to use mathematical functions to skew those results to an _uneven_ distribution.
+
+[This sketch](https://editor.p5js.org/amygoodchild/sketches/xHSIoZDbq) I made shows some examples, using functions from [easings.net](https://easings.net/) (that are actually intended for animation).
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/distribution%20sketch.png" alt="Distribution Sketch" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/func_spatter.png" alt="Function Spatter" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+</div>
+
+Here's a quick sketch that shows how effective and useful that can be.
+
+The following image is made up of 30,000 low opacity squares. Their x positions are generated randomly and evenly distributed over the width of the canvas. Their y positions are generated randomly but the distribution is skewed towards the top of the canvas using the **easeInCubic()** function. This creates a gradient in the output.
+
+
+## Other Algorithms
+
+An alternative to pseudorandom number generators is a procedural generator like Perlin noise. Where a prng gives evenly distributed but disparate results, Perlin noise produces sequentially similar results.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/func_3.png" alt="Random Distribution" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/func_4.png" alt="Perlin Noise Distribution" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+</div>
+
+Noise is an effective way to create organic looking movement and shapes. Here are two of my pieces from [Genuary 2022](https://genuary.art/) which rely heavily on noise to generate the values for their variables.
+
+## Last thoughts about Randomness
+
+There are significant philosophical questions that surround randomness and this area is filled with possibility for conceptual work.
+
+Even without considering these theoretical ideas, pseudorandomness and procedural number generators like Perlin noise provide us with easy but powerful ways to produce effective and varied results.
+
+## Instructions For Art
+
+Sol LeWitt's work is the quintessential example of one type of rule based art. Some of his pieces comprise a list of instructions, rather than the results of those instructions.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/sol_lewitt_wall_drawing.png" alt="Sol LeWitt - Wall Drawing #118" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/sol_lewitt_proposal_for_wall_drawing.png" alt="Sol LeWitt - Proposal for Wall Drawing" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+</div>
+
+LeWitt's instructions have been implemented many times over.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '33.33%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/sol_lewitt_Interactive_wall_drawing.png" alt="Genuary Day 7 - Sol LeWitt Wall Drawing" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '33.33%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/sol_lewitt_wall_drawing_interactive.png" alt="Interactive Sol LeWitt Wall Drawing" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '33.33%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/sol_lewitt_drawing_being_made_at_dia_beacon.png" alt="Sol LeWitt drawing being made at Dia Beacon" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+</div>
+
+The instructions are simultaneously prescriptive and ambiguous. When the executor of the instructions is a human, they are able to follow or ignore parts of the instructions at will.
+
+Some control over the output lies with LeWitt and some lies with whoever (or whatever) executes the instructions. This is analogous with the way that, in much generative art, some control lies with the artist and some with the machine and algorithms.
+
+## Following instructions
+
+In Studio Moniker's project [_Red Follows Yellow Follows Blue Follows Red_](https://studiomoniker.com/projects/red-follows-yellow-follows-blue-follows-red), a group of participants wear coloured capes and headphones, on which they are given instructions. For example the participants in a red cape might be told to "follow yellow but avoid blue" while participants in blue are told "follow red but avoid yellow".
+
+In this very human experiment, most participants follow the instructions closely but occasionally individuals can be seen to misinterpret or ignore them to varying degrees, shifting the balance of control between the artists and the participants.
+
+As each person behaves under influence of the instructions they're given individually, patterns emerge across the whole group.
+
+## Emergence
+
+When individual components of a system each have their own properties and behaviours, unexpected and interesting results can emerge at the system level.
+
+Emergence is prevalent throughout nature and can be observed in weather systems, ant colonies, flocks of birds, convection and more. We can generate our own emergent systems by creating rules for individual elements.
+
+## Cellular Automata
+
+Cellular automata are a well-known emergent system, seen in examples such as Conway's Game of Life and Wolfram's rules.
+
+Conway's Game of Life plays out on a grid of cells, each of which is set to live or dead for the first turn (perhaps randomly, or in some pattern). For each proceeding turn, each cell looks at its 8 neighbours and determines its own new state according to these rules:
+
+1.  Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+    
+2.  Any live cell with two or three live neighbours lives on to the next turn.
+    
+3.  Any live cell with more than three live neighbours dies, as if by overpopulation.
+    
+4.  Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+    
+This results in surprisingly complex patterns across the whole grid, which are also determined by the starting pattern.
+
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+  <div style={{ width: '30%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/conway-1.gif" alt="3 phase pulsar" style={{ width: '100%' }} />
+    <p style={{ textAlign: 'center' }}>3 phase pulsar</p>
+  </div>
+  <div style={{ width: '30%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/conway-2.gif" alt="Finite pattern" style={{ width: '100%' }} />
+    <p style={{ textAlign: 'center' }}>Finite pattern</p>
+  </div>
+  <div style={{ width: '30%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/conway-3.gif" alt="Gliders" style={{ width: '100%' }} />
+    <p style={{ textAlign: 'center' }}>Gliders</p>
+  </div>
+</div>
+
+You can play with my Conway's Game of Life implementation [here](https://editor.p5js.org/amygoodchild/sketches/RH_6RNRxs). Be sure to click the play button in the top left to start, and check out the controls at the top of the code.
+
+These systems can be made even more complex and varied by increasing the number of possible states, changing the neighbourhood size and shape and playing with different sets of rules. When the system has multiple states and loops around in a cycle, like 0, 1, 2, 3, 0, 1, 2… it is called a Cyclic Cellular Automaton.
+
+
+## Simulated Ecosystems
+
+We can also break out of the grid into more versatile emergent systems made up of moving creatures. Each creature has their own behaviours, which are often inspired by real life, emulating flocking, reproduction, growth, consumption, death and more.
+
+Here are a couple of examples of systems of creatures I've developed with different features.  
+Three elements displaying flocking, avoidance, reproduction, repulsion and consumption.
+
+These creatures move in a flock and generate sounds when they come close together
+
+Interdependence between members of an ecosystem like this is something I plan to explore more in my work. When we incorporate birth and death of creatures, necessity of food sources and threat of predators, we can observe an ecosystem thrive or die out.
+
+## Other simulations
+
+Commonly, artists simulate phenomena from the real world, with algorithms based on things like reaction diffusion, diffusion limited aggregation, forces, snowflakes, tree growth, slime mould, to name just a few.
+
+Many complex real world systems and phenomena can be modelled by simulating the rules which govern their composite parts, and the variables which affect them.
+
+Diffusion limited aggregation simulation by [Andy Lomas](https://www.instagram.com/andylomasart/)
+
+Simulations can vary in their level of abstraction, in a way that could be considered a gradient from art to science, with some works being loosely inspired by something from nature, while others seek to closely model and investigate the real world.
+
+Consider these two sets of snowflakes. The first image shows outputs from [Snowflaker](https://www.misha.studio/snowflaker/), which generates simple and pleasing snowflake svgs. The second shows [Gravner-Griffeath](https://blogs.scientificamerican.com/sa-visual/in-silico-flurries/) snowflakes (interactive example [here](https://cruzgodar.com/applets/gravner-griffeath-snowflakes/gravner-griffeath-snowflakes.html)), which are generated by accurately modelling crystal growth under different conditions.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/snowflake_1.png" alt="Snowflake 1" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/snowflake_2.png" alt="Snowflake 2" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+</div>
+
+
+## Growing Art
+In Magical Contamination, Antoine Bridier-Nahmias curates petri dishes of microorganisms. Just as Gravner-Griffeath’s snowflakes (see above) are defined by a set of modelled variables, here the artist varies the outputs by controlling conditions like oxygen levels, light and temperature, to influence the growth of the mould. 
+
+The key difference of course is that Magical Contamination is of the real world, being less exact, more chaotic and of higher resolution than a simulation. (Or perhaps, the simulation we consider to be the real world is…)
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/magical_contamination_1.png" alt="Magical Contamination 1" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/magical_contamination_2.png" alt="Magical Contamination 2" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+</div>
+
+
+## Mathematics
+
+Mathematics is another major player in rule based systems. Geometry, and trigonometry in particular, are necessary for a lot of things I make, with sohcahtoa popping up all over the place and making me regret my high school eyerolls.
+
+Maths really sings though, in Dave Whyte's work:  
+
+I recommend [this book](https://www.goodreads.com/book/show/41739506-math-art) if you are interested to investigate mathematical algorithms that lend themselves to visual art.
+
+## Algorithm is the idea
+
+Some ideas come to me in a format of "what if it did this, and then this, and then that… what would it look like?" The idea _is_ the algorithm - a list of steps.
+
+In the following pen-plotted works from Casey Reas' series [_RGB-3_](https://reas.com/rgb_3/), the three angles in the titles describe the angles of the red, green and blue lines. Some areas of lines are skipped, creating areas of different crossover effects.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/reas_rgb_3_1.jpg" alt="Casey Reas RGB 3 1" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/reas_rgb_3_2.jpg" alt="Casey Reas RGB 3 2" style={{ width: '100%', marginBottom: '10px' }} />
+  </div>
+</div>
+
+
+## Last thoughts about rules
+
+In this article and in my work so far I have only scratched the surface of what is possible with rule based generation.
+
+Some key things I wanted to get across from this section:
+
+*   There are lots of different ways to set and implement rules.
+    
+*   Rules applied at an individual level can result in unexpected emergent phenomena at a system level, and it's often necessary
+
+# Other Stuff
+
+As I mentioned at the start, there is all kinds of crossover in my categorisation and plenty of absence as well. Let's go through a few things I've missed out so far.
+
+## Data sources and inputs
+
+We've already talked about using a chaotic data source as a true random number generator, but what about using a non-chaotic data source? 
+
+In some work of this genre, there is a clear crossover with data visualisation, as in Aaron Koblin's [_Flight Patterns_](http://www.aaronkoblin.com/project/flight-patterns/), which visualises air traffic across North America. Meanwhile in Maria Takeuchi and Frederico Phillips' film, [_Asphyxia_](http://www.asphyxia-project.com/), a Kinect captures the movements of dancer Shiho Tanaka and uses them to a generated 3D rendered structure. Here the output is still representational of the input, but in a less data-led way.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/flight_patterns.jpg" alt="Flight Patterns (2010) - Aaron Koblin" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Flight Patterns (2010) - Aaron Koblin</p>
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/asphyxia.jpg" alt="Asphyxia (2015) - Maria Takeuchi , Frederico Phillips, performed by Shiho Tanaka" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Asphyxia (2015) - Maria Takeuchi , Frederico Phillips, performed by Shiho Tanaka</p>
+  </div>
+</div>
+
+A "data source" can also be directly applied to an output in an analogue way, as in Charles Sowers' [_Windswept_](https://www.charlessowers.com/new-page-1), in which 612 freely rotating metal arrows are spun by the wind, resulting in patterns which happen to be visually reminiscent of Vera Molnar's Interruptions (see above).
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/charles_sowers_windswept_1.png" alt="Windswept (2011) - Charles Sowers" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Windswept (2011) - Charles Sowers</p>
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/charles_sowers_windswept_2.png" alt="Windswept (2011) - Charles Sowers" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Windswept (2011) - Charles Sowers</p>
+  </div>
+</div>
+
+## Artificial Intelligence
+
+Art that uses machine learning stands parallel to, but separate from generative art. It's almost surprising how little they are considered related, yet outputs from an AI are undoubtedly generative. A machine learning algorithm is a complex system of rules and could perhaps be considered in the Rules section, but it's fair to say that ML/AI art is its own thing.
+
+A machine learning algorithm requires a data source to be trained on. In Anna Ridler's work [_Myriad (Tulips)_](http://annaridler.com/myriad-tulips), she created her data set manually and painstakingly, by taking 10,000 photographs of tulips. Then in her work [_Mosaic Virus_](http://annaridler.com/mosaic-virus) she trained a GAN (generative adversarial network - machine learning framework) on this dataset, to generate new images of tulips.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/myriad_tulips.png" alt="Myriad (Tulips) (2018) - Anna Ridler" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Myriad (Tulips) (2018) - Anna Ridler</p>
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/mosaic_virus.jpg" alt="Mosaic Virus (2019) - Anna Ridler" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Mosaic Virus (2019) - Anna Ridler</p>
+  </div>
+</div>
+
+In many (AI and non AI) cases, a data source is a biproduct of something else - naturally occurring information that needs to be captured and organised. When looking at the balance of control in the output, the data source would be largely outside the artist's control, while they do have control over the way that data is used and manipulated for the output.
+
+This project is different. Ridler had strong control over the dataset, and left the outputs up to the hidden mechanisms in the GAN.
+
+## Automatism
+
+The [surrealists](https://en.wikipedia.org/wiki/Surrealism) used a technique called automatic drawing, wherein the hand is allowed to move "randomly" across a page. By most accounts this is a way to allow the artist's subconscious to express itself, while for early abstract artist [Hilma Af Klint](https://en.wikipedia.org/wiki/Hilma_af_Klint), it was a way of communicating with the spirit world in séances.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/hilma_af_klint_the_five.png" alt="A collective automatic drawing by The Five, Hilma af Klint's spiritualist group" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>A collective automatic drawing by The Five, Hilma af Klint's spiritualist group</p>
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/the_smile_of_the_flamboyant_wings.png" alt="The Smile of the Flamboyant Wings (1953) - Joan Miró" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>The Smile of the Flamboyant Wings (1953) - Joan Miró</p>
+  </div>
+</div>
+
+Earlier, I defined generative art as being made "not under direct human control", so perhaps this inclusion stretches that definition. Or perhaps if artists are truly accessing their subconscious (or, indeed, the spirit world) then this work is not under their direct control. Perhaps the subconscious can be considered a random source.
+
+Thinking about that balance of control present in many generative artworks, between the artist and the computer, or between the artist and a participant; perhaps the artist and their own subconscious can be thought of the same way. When we have ideas, where do they come from? If the idea is a impulse to draw in one direction or the other, is that system any less chaotic than the weather?
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/paul_emile_borduas_untitled.jpg" alt="Untitled (1954-55) - Paul Emile Borduas" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Untitled (1954-55) - Paul Emile Borduas</p>
+  </div>
+  <div style={{ width: '50%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/max_ernst_forest_and_dove.jpg" alt="Forest and Dove (1927) - Max Ernst Uses grattage technique" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Forest and Dove (1927) - Max Ernst Uses grattage technique</p>
+  </div>
+</div>
+
+Some automatists would produce entire pieces purely at the mercy of their subconscious, while other artists would use this technique to begin a piece, and then consciously move more towards figurative or composed imagery as it emerged. [Automatism](https://www.tate.org.uk/art/art-terms/a/automatism) led to techniques that sought to introduce chance and spontaneity to creation and mark making, like collage, pencil rubbings (frottage), and paint scraping (grattage).
+
+This leads us nicely on to the next section:
+
+## Painting and drawing
+
+At the start of this article I said that traditional painting could be considered generative. This is true in two ways - the first is when there is some level of automatism in the artist's process and the second is when the physical process of laying paint down on a canvas involves chance.
+
+[Jackson Pollock](https://www.tate.org.uk/art/artists/jackson-pollock-1785)'s action-paintings are an obvious example of both of these things. His process was influenced by automatism and his work was not made according to any plan. He allowed it to emerge out of the process of painting, surrendering control to existing in the moment. The energetic, unconstrained nature of his drip technique means that natural processes were strongly present in his work, as phenomena like fluid dynamics introduced randomness to the results.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+  <div style={{ width: '80%', padding: '5px' }}>
+    <img src="/images/what-is-generative-art/jackson_pollock_alchemy.png" alt="Alchemy (1947) - Jackson Pollock" style={{ width: '100%', marginBottom: '10px' }} />
+    <p style={{ textAlign: 'center', fontSize: '14px' }}>Alchemy (1947) - Jackson Pollock</p>
+  </div>
+</div>
+
+Rather than thinking of paintings as either having these generative elements or not, I prefer to think of it as a gradient. Some paintings are tightly and consciously controlled by the artist, some are heavily influenced by chance, and many are somewhere in between. The intent and perspective of the artist is also important, in terms of whether they would consider their work to be generative.
+
+## Conclusion
+
+When we think of generative art, we generally think of p5js sketches, Vera Molnar's plotter drawings, and flow fields. These are all things I hold dear to my heart but just below the surface of that view, we can find a rich abundance of other avenues to explore. I am confident there are more examples and perspectives I have not included!
+
+In working with the categories above, I frequently found that examples or ideas could fit into multiple sections. I think a multitude of opportunities for new artworks can be found by looking at ways elements and ideas from each of these categories can be combined and remixed.
+
+There is a rich conceptual scope in considering the boundaries between what is chance and what is the result of a series of prior steps as well as the questions of where ideas and randomness come from, where generativity appears in nature, what _isn't_ generative, what is a simulation, and more.
+
+Generative art isn't a new genre, but it is booming at the moment, and in some ways we're still in the early stages of what's possible. I look forward to seeing (and contributing to!) work that explores these avenues and more, and tackles these conceptual questions.

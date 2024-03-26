@@ -22,10 +22,10 @@ function getAllWritingSlugs() {
   return data.filter((item) => !item.external).map((item) => item.url);
 }
 
-function getAllEngineeringSlugs() {
+function getAllProjectsSlugs() {
   const data = JSON.parse(
     fs.readFileSync(
-      path.join(process.cwd(), "content", "engineering", "index.json"),
+      path.join(process.cwd(), "content", "projects", "index.json"),
       "utf8"
     )
   );
@@ -36,8 +36,8 @@ function getAllEngineeringSlugs() {
 async function main() {
   const bookSlugs = getAllBookSlugs();
   const writingSlugs = getAllWritingSlugs();
-  const engineeringSlugs = getAllEngineeringSlugs();
-  const allSlugs = [...bookSlugs, ...writingSlugs, ...engineeringSlugs];
+  const projectSlugs = getAllProjectsSlugs();
+  const allSlugs = [...bookSlugs, ...writingSlugs, ...projectSlugs];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -48,7 +48,7 @@ async function main() {
     <loc>https://lukketsvane.com/writing</loc>
   </url>
   <url>
-    <loc>https://lukketsvane.com/engineering</loc>
+    <loc>https://lukketsvane.com/projects</loc>
   </url>
   <url>
     <loc>https://lukketsvane.com/books</loc>

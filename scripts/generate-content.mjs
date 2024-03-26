@@ -80,9 +80,9 @@ async function books() {
   );
 }
 
-async function engineering() {
+async function projects() {
   const metadata = [];
-  const basePath = path.join(process.cwd(), "content", "engineering");
+  const basePath = path.join(process.cwd(), "content", "projects");
 
   const external = JSON.parse(
     fs.readFileSync(path.join(basePath, "external.json"), "utf8")
@@ -101,7 +101,7 @@ async function engineering() {
 
         return {
           ...source.frontmatter,
-          url: "/" + path.join("engineering", fileName.split(".")[0]),
+          url: "/" + path.join("projects", fileName.split(".")[0]),
           external: false,
         };
       })
@@ -124,7 +124,7 @@ async function engineering() {
 async function main() {
   await writing();
   await books();
-  await engineering();
+  await projects();
 }
 
 main();

@@ -13,14 +13,14 @@ import Link from "next/link";
 import { Build, getAllBuildData } from "../../lib/engineering";
 import { NextSeo } from "next-seo";
 
-interface EngineeringProps {
+interface ProjectsProps {
   builds: Build[];
 }
 
-const Engineering: NextPageWithLayout<EngineeringProps> = ({ builds }) => {
+const Projects: NextPageWithLayout<ProjectsProps> = ({ builds }) => {
   return (
     <>
-      <NextSeo title="Engineering | Iver Finne" />
+      <NextSeo title="Projects | Iver Finne" />
       <Flex direction="column" align="flex-start">
         {builds.map((build) => (
           <Stack width="100%" key={build.title}>
@@ -59,9 +59,9 @@ const Engineering: NextPageWithLayout<EngineeringProps> = ({ builds }) => {
   );
 };
 
-export default Engineering;
+export default Projects;
 
-Engineering.getLayout = (page) => <Layout>{page}</Layout>;
+Projects.getLayout = (page) => <Layout>{page}</Layout>;
 
 export async function getStaticProps() {
   const builds = getAllBuildData();
