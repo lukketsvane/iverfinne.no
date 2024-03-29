@@ -1,0 +1,39 @@
+[
+  {
+    "title": "Economic Agency in a Post-Labor World",
+    "description": "Exploring the shift towards a post-labor economy and the role of economic agency",
+    "date": "2024-03-28",
+    "url": "/writing/post-labour",
+    "external": false
+  },
+  {
+    "title": "Exploring Generative Art: Definitions & Types",
+    "description": "Diving into the essence and categories of generative art.",
+    "date": "2024-03-26",
+    "image": "/images/generative-art-explained.png",
+    "url": "/writing/what-is-gen-art",
+    "external": false
+  },
+  {
+    "title": "A Person of Compute",
+    "description": "Delving into computational power, conceptualizing 'people of compute', and the advancements in GPU capabilities with a focus on PFLOPS and energy efficiency.",
+    "date": "January 26, 2024",
+    "url": "/writing/person-of-compute",
+    "external": false
+  },
+  {
+    "title": "AI-Driven Novel Generation Systems: From Concept to Creation",
+    "description": "Thoughts from younger me on what defines meaning in life",
+    "date": "November 26, 2023",
+    "url": "/writing/ai-novel-generation",
+    "external": false
+  },
+  {
+    "title": "Big Compute",
+    "description": "Exploring the monumental growth of computational power, the concept of 'people of compute', and the future of GPUs in terms of PFLOPS and energy efficiency.",
+    "image": "https://www.exampleimageurl.com/path/to/image.jpg",
+    "date": "February 4, 2021",
+    "url": "/writing/big-compute",
+    "external": false
+  }
+]

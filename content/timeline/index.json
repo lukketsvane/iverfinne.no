@@ -1,0 +1,42 @@
+[
+    {
+        "date": "2/28/2024",
+        "title": "Gradient",
+        "description": "A book completely generated autonomously using Stable Diffusion, consisting of gradients.",
+        "tags": ["public", "ai", "art"],
+        "type": "public",
+        "url": "https://gradient-taupe.vercel.app/"
+      },
+    {
+      "date": "4/15/2023",
+      "title": "Kitchen Sage",
+      "description": "Expert chef GPT; identifies ingredients from images and suggests recipes.",
+      "tags": ["public", "ai"],
+      "type": "public",
+      "url": "https://chat.openai.com/g/g-fBV5qBHGF-kitchen-sage"
+    },
+    {
+      "date": "4/10/2023",
+      "title": "Novel Craft",
+      "description": "Generate a full-length novel with NovelCraft. Just provide a prompt, choose the number of chapters, and select your desired writing style. Perfect for budding authors and creative minds.",
+      "tags": ["public", "ai", "writing"],
+      "type": "public",
+      "url": "https://chat.openai.com/g/g-2bEPJ3c7W-novel-craft"
+    },
+    {
+      "date": "3/20/2023",
+      "title": "Storygen",
+      "description": "Storygen is an AI-powered story generation platform that helps users create unique and engaging stories with ease.",
+      "tags": ["public", "ai", "writing"],
+      "type": "public",
+      "url": "https://www.storygen.no/en"
+    },  
+    {
+        "date": "12/5/2023",
+        "title": "Storygen Project",
+        "description": "Storygen is an AI-powered story generation platform that helps users create unique and engaging stories with ease.",
+        "tags": ["public", "ai", "writing"],
+        "type": "public",
+        "url": "/projects/storygen"
+      }
+    ]

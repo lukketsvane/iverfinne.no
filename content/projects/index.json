@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Pioneering Additive Manufacturing Optimization",
+    "description": "Leading groundbreaking advancements in additive manufacturing for enhanced efficiency and sustainability.",
+    "date": "2023-11-14",
+    "image": "/images/coral/coral_1.gif",
+    "url": "/projects/coral",
+    "external": false
+  },
+  {
+    "title": "DongJin Tableware",
+    "description": "As an Executive Designer at DongJin Tableware in Yangxin, Shandong, China, I led a team focused on marketing, design, and production. Specialized in graphic design, 3D modeling, and photography for product presentations and catalogs.",
+    "date": "2023-08-26",
+    "image": "/images/ygdrasyl_2.png",
+    "url": "/projects/dongjin",
+    "external": false
+  },
+  {
+    "title": "StoryGen - Making Narratives Accessible Through AI",
+    "description": "StoryGen is an AI-driven platform designed to create real-time narratives based on user inputs. Primarily focused on generating children's stories, the project aims to make storytelling accessible to everyone.",
+    "date": "2023-08-26",
+    "image": "/images/storygen/simplified_graph.jpeg",
+    "url": "/projects/storygen",
+    "external": false
+  },
+  {
+    "title": "Ygdrasyl Project",
+    "description": "Innovating the future of agriculture through automated, energy-efficient vertical farming solutions.",
+    "date": "2018-01-01",
+    "image": "/images/ygdrasyl_2.png",
+    "url": "/projects/ygdrasyl",
+    "external": false
+  }
+]
