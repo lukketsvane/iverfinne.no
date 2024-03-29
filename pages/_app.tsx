@@ -1,5 +1,6 @@
+// ./pages/_app.tsx
 import type { AppProps } from "next/app";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react";
 import { Prose, withProse } from "@nikolovlazar/chakra-ui-prose";
 import Layout from "../components/Layout";
 import { ReactElement } from "react";
@@ -17,6 +18,10 @@ const theme = extendTheme(
       heading: lora.style.fontFamily,
       body: lora.style.fontFamily,
     },
+    config: {
+      initialColorMode: "system",
+      useSystemColorMode: true,
+    },
   },
   withProse({
     baseStyle: {
@@ -29,6 +34,9 @@ const theme = extendTheme(
       },
       a: {
         color: "blue.500",
+        _dark: {
+          color: "blue.300",
+        },
       },
     },
   })
@@ -59,6 +67,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <DefaultSeo
         title="Iver Finne"
         description="I'm a constant learner and aspiring technical generalist. I'm also a founding enginer at thirdweb and on gap year from the University of Pennsylvania."

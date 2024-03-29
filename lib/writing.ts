@@ -1,3 +1,4 @@
+// ./lib/writing.ts
 import path from "path";
 import fs from "fs";
 import { getMdxContent, MaybeContent } from "./mdx";

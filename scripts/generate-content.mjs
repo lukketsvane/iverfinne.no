@@ -1,3 +1,4 @@
+//. ./scripts/generate-content.mjs
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import fs from "fs";

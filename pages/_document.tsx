@@ -1,3 +1,4 @@
+// ./pages/_document.tsx
 import { Html, Head, Main, NextScript } from "next/document";
 import { ColorModeScript } from "@chakra-ui/react";
 import Script from "next/script";
