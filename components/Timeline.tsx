@@ -63,7 +63,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
         <Box position="absolute" top="12px" left="120px" bottom="0" width="2px" bg="gray.200" zIndex={-1} />
         {filteredItems.map((item, index) => (
           <Flex key={item.title} mb={8} alignItems="center" position="relative">
-            <Text fontSize="lg" fontWeight="bold" color="black" ml={-12} mr={4} minWidth="120px" textAlign="right" whiteSpace="nowrap">
+            <Text fontSize="lg" fontWeight="bold" ml={-12} mr={4} minWidth="120px" textAlign="right" whiteSpace="nowrap">
               {item.date}
             </Text>
             <Circle size="8px" bg="gray.700" ml={7} mr={14} />

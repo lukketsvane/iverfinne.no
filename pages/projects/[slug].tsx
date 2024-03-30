@@ -1,3 +1,4 @@
+// pages/projects/[slug].tsx
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { Heading, Flex, Image, Box } from "@chakra-ui/react";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";

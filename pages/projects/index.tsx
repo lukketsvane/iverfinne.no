@@ -1,4 +1,3 @@
-
 // pages/projects/index.tsx
 import { useState } from "react";
 import { Flex, Heading, Input, Stack, Text, Image, Link, SimpleGrid, Box, AspectRatio } from "@chakra-ui/react";
