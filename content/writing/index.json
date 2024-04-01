@@ -1,5 +1,12 @@
 [
   {
+    "title": "Gradient Descent",
+    "description": "An exploration into the fusion of art and AI through GAN and diffusion models, culminating in the creation of unique gradient artworks.",
+    "date": "2024-04-01",
+    "url": "/writing/gradient-descent",
+    "external": false
+  },
+  {
     "title": "Economic Agency in a Post-Labor World",
     "description": "Exploring the shift towards a post-labor economy and the role of economic agency",
     "date": "2024-03-28",
@@ -8,7 +15,7 @@
   },
   {
     "title": "Exploring Generative Art",
-    "description": "Diving into the essence and categories of generative art.",
+    "description": "A deep dive into the essence and categories of generative art",
     "date": "2024-03-26",
     "image": "/images/generative-art-explained.png",
     "url": "/writing/what-is-gen-art",
