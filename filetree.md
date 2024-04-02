@@ -24,6 +24,7 @@ antitype
 │     ├─ ai-novel-generation.mdx                             
 │     ├─ big-compute.mdx                                     
 │     ├─ external.json                                       
+│     ├─ gradient-descent.mdx                                
 │     ├─ index.json                                          
 │     ├─ person-of-compute.mdx                               
 │     ├─ post-labour.mdx                                     
@@ -59,6 +60,24 @@ antitype
 │  │  │  ├─ coral_7.jpeg                                     
 │  │  │  ├─ coral_8.png                                      
 │  │  │  └─ coral_9.jpeg                                     
+│  │  ├─ dongjin                                             
+│  │  │  ├─ IMG_1283.jpeg                                    
+│  │  │  └─ dongjin-logo.jpg                                 
+│  │  ├─ gradient_diffusion                                  
+│  │  │  ├─ gradient_1.webp                                  
+│  │  │  ├─ gradient_10.webp                                 
+│  │  │  ├─ gradient_11.webp                                 
+│  │  │  ├─ gradient_12.webp                                 
+│  │  │  ├─ gradient_13.webp                                 
+│  │  │  ├─ gradient_14.jpg                                  
+│  │  │  ├─ gradient_2.webp                                  
+│  │  │  ├─ gradient_3.webp                                  
+│  │  │  ├─ gradient_4.webp                                  
+│  │  │  ├─ gradient_5.webp                                  
+│  │  │  ├─ gradient_6.webp                                  
+│  │  │  ├─ gradient_7.webp                                  
+│  │  │  ├─ gradient_8.webp                                  
+│  │  │  └─ gradient_9.webp                                  
 │  │  ├─ storygen                                            
 │  │  │  ├─ adv_graph.png                                    
 │  │  │  ├─ book_flipping.gif                                
@@ -109,13 +128,14 @@ antitype
 │  │  │  ├─ the_smile_of_the_flamboyant_wings.png            
 │  │  │  ├─ thunderstorm.png                                 
 │  │  │  └─ vera_molnar_interruptions.webp                   
+│  │  ├─ ygdrasyl                                            
+│  │  │  ├─ ygdrasyl_1.png                                   
+│  │  │  ├─ ygdrasyl_2.png                                   
+│  │  │  ├─ ygdrasyl_3.jpeg                                  
+│  │  │  └─ ygdrasyl_4.jpeg                                  
 │  │  ├─ civilian-employment-seasonal.webp                   
 │  │  ├─ civilian-labor-force-participation-rate.webp        
-│  │  ├─ scenarios-for-output-and-wages.webp                 
-│  │  ├─ ygdrasyl_1.png                                      
-│  │  ├─ ygdrasyl_2.png                                      
-│  │  ├─ ygdrasyl_3.jpeg                                     
-│  │  └─ ygdrasyl_4.jpeg                                     
+│  │  └─ scenarios-for-output-and-wages.webp                 
 │  ├─ favicon-dark.ico                                       
 │  ├─ favicon.ico                                            
 │  ├─ og-image-dark.jpg                                      
@@ -125,12 +145,14 @@ antitype
 │  ├─ generate-content.mjs                                   
 │  └─ generate-sitemap.mjs                                   
 ├─ README.md                                                 
+├─ filetree.md                                               
 ├─ next-env.d.ts                                             
 ├─ next.config.js                                            
 ├─ next.d.ts                                                 
 ├─ package.json                                              
 ├─ tsconfig.json                                             
 └─ yarn.lock                                                 
+                                           
 
 
 // pages/_document.tsx
@@ -421,6 +443,7 @@ import {
   MenuItem,
   Icon,
   MenuGroup,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -439,13 +462,15 @@ function Navigation({
   const router = useRouter();
   const isActive =
     link === "/" ? router.asPath === link : router.asPath.includes(link);
+  const activeColor = useColorModeValue("black", "white");
+  const inactiveColor = useColorModeValue("gray.500", "gray.400");
 
   return (
     <Link href={link} target={isExternal ? "_blank" : "_self"}>
       <Text
         fontSize="lg"
-        color={isActive ? "black" : "gray.500"}
-        _hover={{ color: "black" }}
+        color={isActive ? activeColor : inactiveColor}
+        _hover={{ color: activeColor }}
       >
         {children}
       </Text>
@@ -462,7 +487,6 @@ function Layout({ children }: PropsWithChildren) {
       gap={{ md: 10 }}
     >
       <Flex
-      
         position="absolute"
         right="100%"
         mr="160px"
@@ -477,7 +501,6 @@ function Layout({ children }: PropsWithChildren) {
             <Navigation link="/projects">Projects</Navigation>
             <Navigation link="/writing">Writing</Navigation>
             <Navigation link="/books">Books</Navigation>
-
           </VStack>
           <VStack align="flex-start">
             <Text fontWeight="bold" fontSize="smaller">
@@ -522,7 +545,6 @@ function Layout({ children }: PropsWithChildren) {
                 <Navigation link="/writing">Writing</Navigation>
                 <Navigation link="/books">Books</Navigation>
                 <Navigation link="/projects">Projects</Navigation>
-
               </HStack>
               <Menu>
                 <MenuButton
@@ -549,7 +571,10 @@ function Layout({ children }: PropsWithChildren) {
                       >
                         Twitter
                       </Navigation>
-                      <Navigation link="https://github.com/lukketsvane" isExternal>
+                      <Navigation
+                        link="https://github.com/lukketsvane"
+                        isExternal
+                      >
                         GitHub
                       </Navigation>
                     </VStack>

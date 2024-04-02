@@ -13,6 +13,7 @@ import {
   MenuItem,
   Icon,
   MenuGroup,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,13 +32,15 @@ function Navigation({
   const router = useRouter();
   const isActive =
     link === "/" ? router.asPath === link : router.asPath.includes(link);
+  const activeColor = useColorModeValue("black", "white");
+  const inactiveColor = useColorModeValue("gray.500", "gray.400");
 
   return (
     <Link href={link} target={isExternal ? "_blank" : "_self"}>
       <Text
         fontSize="lg"
-        color={isActive ? "black" : "gray.500"}
-        _hover={{ color: "black" }}
+        color={isActive ? activeColor : inactiveColor}
+        _hover={{ color: activeColor }}
       >
         {children}
       </Text>
@@ -54,7 +57,6 @@ function Layout({ children }: PropsWithChildren) {
       gap={{ md: 10 }}
     >
       <Flex
-      
         position="absolute"
         right="100%"
         mr="160px"
@@ -69,7 +71,6 @@ function Layout({ children }: PropsWithChildren) {
             <Navigation link="/projects">Projects</Navigation>
             <Navigation link="/writing">Writing</Navigation>
             <Navigation link="/books">Books</Navigation>
-
           </VStack>
           <VStack align="flex-start">
             <Text fontWeight="bold" fontSize="smaller">
@@ -114,7 +115,6 @@ function Layout({ children }: PropsWithChildren) {
                 <Navigation link="/writing">Writing</Navigation>
                 <Navigation link="/books">Books</Navigation>
                 <Navigation link="/projects">Projects</Navigation>
-
               </HStack>
               <Menu>
                 <MenuButton
@@ -141,7 +141,10 @@ function Layout({ children }: PropsWithChildren) {
                       >
                         Twitter
                       </Navigation>
-                      <Navigation link="https://github.com/lukketsvane" isExternal>
+                      <Navigation
+                        link="https://github.com/lukketsvane"
+                        isExternal
+                      >
                         GitHub
                       </Navigation>
                     </VStack>
