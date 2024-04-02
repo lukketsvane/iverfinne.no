@@ -70,11 +70,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <DefaultSeo
         title="Iver Finne"
-        description="I'm a constant learner and aspiring technical generalist. I'm also a founding enginer at thirdweb and on gap year from the University of Pennsylvania."
+        description="I'm a constant learner and aspiring technical generalist."
         openGraph={{
           title: "Iver Finne",
           description:
-            "I'm a constant learner and aspiring technical generalist. I'm also a founding enginer at thirdweb and on gap year from the University of Pennsylvania.",
+            "I'm a constant learner and aspiring technical generalist.",
           images: [
             {
               url: "https://adammaj.com/og-image-dark.jpg",
