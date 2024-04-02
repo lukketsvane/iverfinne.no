@@ -1,3 +1,4 @@
+// lib/books.ts
 import { getMdxContent, MaybeContent } from "./mdx";
 import path from "path";
 import fs from "fs";

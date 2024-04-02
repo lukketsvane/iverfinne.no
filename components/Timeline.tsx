@@ -1,3 +1,4 @@
+// components/Timeline.tsx
 import { Box, Flex, Heading, Text, Link, Tag, TagLabel, TagLeftIcon, Circle, Stack, useBreakpointValue } from "@chakra-ui/react";
 import { TimelineItem } from "../lib/projects";
 import { FaLock, FaGlobe } from "react-icons/fa";

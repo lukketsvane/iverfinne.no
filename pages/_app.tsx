@@ -1,3 +1,4 @@
+// pages/_app.tsx
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react";
 import { Prose, withProse } from "@nikolovlazar/chakra-ui-prose";

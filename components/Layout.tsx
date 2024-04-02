@@ -1,4 +1,4 @@
-// ./components/Layout.tsx
+// components/Layout.tsx
 import {
   Container,
   VStack,

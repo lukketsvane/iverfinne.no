@@ -1,3 +1,4 @@
+// pages/writing/index.tsx
 import {
   Heading,
   Link,

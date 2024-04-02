@@ -1,3 +1,4 @@
+// pages/writing/[slug].tsx
 import { MDXRemote } from "next-mdx-remote";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { Heading, Flex } from "@chakra-ui/react";
@@ -23,7 +24,7 @@ const Post: NextPageWithLayout<PostProps> = ({ post }) => {
           images: [
             {
               url:
-                post.metadata.image || "https://lukketsvane.com/og-image-dark.jpg",
+                post.metadata.image || "https://iverfinne.no/og-image-dark.jpg",
             },
           ],
         }}

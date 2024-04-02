@@ -1,4 +1,4 @@
-//. ./scripts/generate-sitemap.mjs
+// scripts/generate-sitemap.mjs
 import fs from "fs";
 import path from "path";
 
@@ -43,24 +43,24 @@ async function main() {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lukketsvane.com</loc>
+    <loc>https://iverfinne.no</loc>
   </url>
   <url>
-    <loc>https://lukketsvane.com/writing</loc>
+    <loc>https://iverfinne.no/writing</loc>
   </url>
   <url>
-    <loc>https://lukketsvane.com/projects</loc>
+    <loc>https://iverfinne.no/projects</loc>
   </url>
   <url>
-    <loc>https://lukketsvane.com/books</loc>
+    <loc>https://iverfinne.no/books</loc>
   </url>
   <url>
-    <loc>https://lukketsvane.com/notes</loc>
+    <loc>https://iverfinne.no/notes</loc>
   </url>${allSlugs
     .map((slug) => {
       return `
   <url>
-    <loc>${`https://lukketsvane.com${slug}`}</loc>
+    <loc>${`https://iverfinne.no${slug}`}</loc>
   </url>`;
     })
     .join("")}
