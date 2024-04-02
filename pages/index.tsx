@@ -1,7 +1,6 @@
 // pages/index.tsx
 import { Expandable } from '../components/Expandable';
 import IndexContent from './about-me.mdx';
-
 import FooterContent from './about-footer.mdx';
 
 const Home: React.FC = () => {
@@ -9,16 +8,9 @@ const Home: React.FC = () => {
     <div>
       <IndexContent />
       <Expandable title="Past Work">
-        Prior to Untapped Capital and subsequent work listed above, Yohei has worked closely with
-        startups as a community builder and investor. He started his career in 2009 contributing to
-        the growth of the Los Angeles startup community as a community leader in various roles,
-        organizing educational events and communities for local startup founders. He started his
-        investment career at Techstars in 2014, helping spin up The Disney Accelerator, then as their
-        first Director of Pipeline, supporting sourcing of startups across 50+ accelerator programs.
-        He then joined Scrum Ventures in 2018 as a venture partner on the investment team and SVP
-        of Scrum Studio, their corporate innovation unit, working closely with top global
-        corporations such as Nintendo, where he led the engagement as managing director of
-        Nintendo Switch+Tech.
+        <div style={{ fontSize: '0.9em' }}>
+          As ABB's Technical Consultant since 2022 and Production Manager at Springbrettet, I've been fusing technical expertise with strategic communication in Norway's business and educational sectors. My past roles as CEO of Coral Solutions AS and Creative Director for the Ygdrasyl Project and Emberlight VR honed my skills in leading innovation in engineering, sustainable design, and VR gaming. I've also driven design and production at Dongjin Tableware, leveraging my proficiency in 3D modeling and graphic design to enhance product development and market presence.
+        </div>
       </Expandable>
       <FooterContent />
     </div>
