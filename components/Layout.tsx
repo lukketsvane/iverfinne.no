@@ -14,6 +14,7 @@ import {
   Icon,
   MenuGroup,
   useColorModeValue,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -50,6 +51,7 @@ function Navigation({
 
 function Layout({ children }: PropsWithChildren) {
   const bgColor = useColorModeValue("white", "gray.800");
+  const displayBooksLink = useBreakpointValue({ base: 'none', lg: 'block' });
 
   return (
     <Container
@@ -112,10 +114,12 @@ function Layout({ children }: PropsWithChildren) {
         >
           <Container px={8}>
             <Flex justify="space-between" width="100%">
-              <HStack spacing={8}>
+                <HStack spacing={8}>
                 <Navigation link="/">Home</Navigation>
                 <Navigation link="/writing">Writing</Navigation>
-                <Navigation link="/books">Books</Navigation>
+                <Box display={displayBooksLink}>
+                  <Navigation link="/books">Books</Navigation>
+                </Box>
                 <Navigation link="/projects">Projects</Navigation>
               </HStack>
               <Menu>

@@ -14,11 +14,11 @@ export const Expandable: React.FC<ExpandableProps> = ({ children, title }) => {
   return (
     <Box position="relative" onClick={onToggle} cursor="pointer">
       <Divider borderColor="gray.300" />
-      <Heading as="h3" size="md" mt={4} mb={2} fontWeight="bold">
+      <Heading as="h3" size="md" mt={2} mb={2} fontWeight="bold">
         {title}
       </Heading>
       <Collapse startingHeight={isOpen ? 'auto' : '60px'} in={isOpen}>
-        <Box py={4} maxHeight={isOpen ? 'none' : '60px'} overflow="hidden">
+        <Box py={2} maxHeight={isOpen ? 'none' : '60px'} overflow="hidden">
           <AnimatePresence>
             {!isOpen && (
               <motion.div
@@ -38,7 +38,7 @@ export const Expandable: React.FC<ExpandableProps> = ({ children, title }) => {
               </motion.div>
             )}
           </AnimatePresence>
-          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} px={12} sx={{
+          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} pb={12} sx={{
             '&::-webkit-scrollbar': {
               width: '0px',
             },

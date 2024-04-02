@@ -5,13 +5,12 @@ import {
   Flex,
   Text,
   Stack,
-  HStack,
   Divider,
-} from "@chakra-ui/react";
-import { getAllPostData, Post } from "../../lib/writing";
-import type { NextPageWithLayout } from "next";
-import Layout from "../../components/Layout";
-import { NextSeo } from "next-seo";
+} from '@chakra-ui/react';
+import { getAllPostData, Post } from '../../lib/writing';
+import type { NextPageWithLayout } from 'next';
+import Layout from '../../components/Layout';
+import { NextSeo } from 'next-seo';
 
 interface WritingProps {
   posts: Post[];
@@ -22,10 +21,12 @@ const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
     <>
       <NextSeo title="Writing | Iver Finne" />
       <Flex direction="column" align="flex-start" width="100%" gap={3}>
-        <Divider width="100%" />
+        <Heading as="h1" size="xl" >Recent Blog Posts</Heading>
+        <Text fontSize='0.9em' mb={6}>refuge for my poorly posed conjectures, research still pending.</Text>
+        <Divider width="100%" mb={4} />
         {posts.map((post) => (
           <>
-            <Stack width="100%" align="flex-start" spacing={1}>
+            <Stack width="100%" align="flex-start" spacing={1} key={post.title}>
               <Link
                 href={post.url}
                 target={post.external ? "_blank" : "_self"}

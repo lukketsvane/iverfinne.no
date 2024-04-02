@@ -30,13 +30,9 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
   return (
     <>
       <NextSeo title="Projects | Iver Finne" />
-      <Flex direction="column" align="left" width="100%" maxW="1200px" mx="auto">
-        <Heading as="h1" size="xl" mb={8}>
-          build-in-public log
-        </Heading>
-        <Text fontSize="xl" mb={8}>
-          some of my tools and experiments.
-        </Text>
+      <Flex direction="column" align="flex-start" width="100%" gap={3}>
+        <Heading as="h1" size="xl" > build-in-public log</Heading>
+        <Text fontSize='0.9em' mb={6}>refuge for my poorly posed conjectures, research still pending.</Text>
         <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} spacing={4} width="100%" mb={6}>
           {latestProjects.map((project) => (
             <Link key={project.title} href={project.url} isExternal>
@@ -56,7 +52,7 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
         </SimpleGrid>
         <Input
           placeholder="Type here to search"
-          mb={12}
+          mb={2}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />

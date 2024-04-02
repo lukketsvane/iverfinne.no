@@ -1,5 +1,21 @@
 // components/Timeline.tsx
-import { Box, Flex, Heading, Text, Link, Tag, TagLabel, TagLeftIcon, Circle, Stack, useBreakpointValue, Wrap, WrapItem, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Link,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
+  Circle,
+  Stack,
+  useBreakpointValue,
+  Wrap,
+  WrapItem,
+  useColorModeValue,
+  Input
+} from "@chakra-ui/react";
 import { TimelineItem } from "../lib/projects";
 import { FaLock, FaGlobe } from "react-icons/fa";
 import { BiCode } from "react-icons/bi";
@@ -14,9 +30,18 @@ interface TimelineProps {
   categoryFilter: string;
   onTypeFilterChange: (type: string) => void;
   onCategoryFilterChange: (category: string) => void;
+  onSearchQueryChange: (query: string) => void;
 }
 
-export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilter, categoryFilter, onTypeFilterChange, onCategoryFilterChange }) => {
+export const Timeline: React.FC<TimelineProps> = ({
+  items,
+  searchQuery,
+  typeFilter,
+  categoryFilter,
+  onTypeFilterChange,
+  onCategoryFilterChange,
+  onSearchQueryChange
+}) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const timelineWidth = useBreakpointValue({ base: "100%", md: "calc(100% - 150px)" });
   const circleColor = useColorModeValue("black", "white");
@@ -28,11 +53,10 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
     (typeFilter === "" || item.type === typeFilter) &&
     (categoryFilter === "" || item.category === categoryFilter)
   );
-
   return (
     <Flex direction={isMobile ? "column" : "row"} width="100%" gap={4}>
       <Stack direction="column" spacing={2} width={isMobile ? "100%" : "150px"} mb={isMobile ? 4 : 0}>
-        <Heading as="h4" size="sm" minWidth="80px">Type</Heading>
+        <Heading as="h4" size="s" minWidth="80px">Type</Heading>
         <Wrap>
           <WrapItem>
             <Tag
@@ -84,7 +108,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
           </WrapItem>
         </Wrap>
 
-        <Heading as="h4" size="sm" minWidth="80px" mt={4}>Category</Heading>
+        <Heading as="h4" size="s" minWidth="80px" mt={0}>Category</Heading>
         <Wrap>
           <WrapItem>
             <Tag
