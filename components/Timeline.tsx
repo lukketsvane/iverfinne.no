@@ -19,7 +19,7 @@ interface TimelineProps {
 export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilter, categoryFilter, onTypeFilterChange, onCategoryFilterChange }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const timelineWidth = useBreakpointValue({ base: "100%", md: "calc(100% - 150px)" });
-  const circleColor = useColorModeValue("white", "white");
+  const circleColor = useColorModeValue("black", "white");
 
   const filteredItems = items.filter((item) =>
     (item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
