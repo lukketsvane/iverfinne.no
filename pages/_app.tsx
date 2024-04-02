@@ -1,11 +1,9 @@
-// ./pages/_app.tsx
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react";
 import { Prose, withProse } from "@nikolovlazar/chakra-ui-prose";
 import Layout from "../components/Layout";
 import { ReactElement } from "react";
 import { DefaultSeo } from "next-seo";
-import posthog from "posthog-js";
 import React from "react";
 import { useRouter } from "next/router";
 import { Lora } from "@next/font/google";
@@ -49,21 +47,7 @@ const getDefaultLayout = (page: ReactElement) => (
 );
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
   const getLayout = Component.getLayout || getDefaultLayout;
-
-  React.useEffect(() => {
-    posthog.init("phc_jFlJqpi333LZJJRxwjiFTkKI2Ufv3Pgf0hnbrPuZdLL", {
-      api_host: "https://app.posthog.com",
-    });
-
-    const handleRouteChange = () => posthog.capture("$pageview");
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, []);
 
   return (
     <ChakraProvider theme={theme}>
@@ -73,8 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
         description="I'm a constant learner and aspiring technical generalist."
         openGraph={{
           title: "Iver Finne",
-          description:
-            "I'm a constant learner and aspiring technical generalist.",
+          description: "I'm a constant learner and aspiring technical generalist.",
           images: [
             {
               url: "https://iverfinne.no/og-image-dark.jpg",
