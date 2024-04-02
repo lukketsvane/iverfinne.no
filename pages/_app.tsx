@@ -1,4 +1,3 @@
-// pages/_app.tsx
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react";
 import { Prose, withProse } from "@nikolovlazar/chakra-ui-prose";
@@ -6,9 +5,8 @@ import Layout from "../components/Layout";
 import { ReactElement } from "react";
 import { DefaultSeo } from "next-seo";
 import React from "react";
-import { useRouter } from "next/router";
+import { Global } from "@emotion/react"; // Import Global from @emotion/react
 import { Lora } from "@next/font/google";
-import { Global, css } from "@emotion/react";
 
 const lora = Lora({ subsets: ["latin"], display: "swap" });
 
@@ -70,7 +68,7 @@ export default function App({ Component, pageProps }: AppProps) {
         }}
       />
       <Global
-        styles={css`
+        styles={`
           body {
             -ms-overflow-style: none;
             scrollbar-width: none;
