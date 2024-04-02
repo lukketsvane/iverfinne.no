@@ -1,11 +1,12 @@
 // lib/projects.ts
+
 import path from "path";
 import fs from "fs";
 import { getMdxContent, MaybeContent } from "./mdx";
 
 export interface Project {
   title: string;
-  description: string; 
+  description: string;
   image: string;
   date: string;
   url: string;
@@ -23,20 +24,20 @@ export function getAllProjectData(): Project[] {
 
 export function getAllSlugs(): string[] {
   const data = getAllProjectData();
-  return data.map((item) => item.url);  
+  return data.map((item) => item.url);
 }
 
 export async function getProject(slug: string): Promise<MaybeContent<Project>> {
   return getMdxContent<Project>("projects", `${slug}.mdx`);
 }
 
-
 export interface TimelineItem {
   date: string;
   title: string;
   description: string;
   tags: string[];
-  type: "public" | "private" | "prototype" ;
+  type: "public" | "private" | "prototype";
+  category: string;
   url: string;
 }
 
