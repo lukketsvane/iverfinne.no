@@ -38,7 +38,7 @@ export const Expandable: React.FC<ExpandableProps> = ({ children, title }) => {
               </motion.div>
             )}
           </AnimatePresence>
-          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} pr={4} sx={{
+          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} px={12} sx={{
             '&::-webkit-scrollbar': {
               width: '0px',
             },

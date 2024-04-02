@@ -67,18 +67,23 @@ export default function App({ Component, pageProps }: AppProps) {
           siteName: "Iver Finne",
         }}
       />
-      <Global
-        styles={`
-          body {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-          body::-webkit-scrollbar {
-            width: 0px;
-            background: transparent;
-          }
-        `}
-      />
+    <Global
+      styles={`
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        ::-webkit-scrollbar {
+          display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        
+        /* Ensure the content is still scrollable */
+        body {
+          overflow-y: scroll;
+        }
+      `}
+    />
       {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
   );
