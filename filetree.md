@@ -1,7 +1,8 @@
-antitype                                                     
+iverfinne.no                                                     
 ├─ components                                                
 │  ├─ Bookshelf.tsx                                          
 │  ├─ Layout.tsx                                             
+│  ├─ Expandable.tsx                                             
 │  ├─ PastWork.tsx                                           
 │  └─ Timeline.tsx                                           
 ├─ content                                                   
@@ -45,9 +46,11 @@ antitype
 │  │  ├─ [slug].tsx                                          
 │  │  └─ index.tsx                                           
 │  ├─ 404.tsx                                                
-│  ├─ _app.tsx                                               
-│  ├─ _document.tsx                                          
-│  └─ index.mdx                                              
+│  ├─ _app.tsx            
+│  ├─ about-footer.tsx                                               
+│  ├─ about-me.tsx                                               
+│  ├─ _document.tsx       
+│  └─ index.tsx                                              
 ├─ public                                                    
 │  ├─ books                                                  
 │  │  └─ steal-like-an-artist.png                            
@@ -400,6 +403,7 @@ import { DefaultSeo } from "next-seo";
 import React from "react";
 import { useRouter } from "next/router";
 import { Lora } from "@next/font/google";
+import { Global, css } from "@emotion/react";
 
 const lora = Lora({ subsets: ["latin"], display: "swap" });
 
@@ -460,11 +464,22 @@ export default function App({ Component, pageProps }: AppProps) {
           siteName: "Iver Finne",
         }}
       />
+      <Global
+        styles={css`
+          body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          body::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+          }
+        `}
+      />
       {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
   );
 }
-
 
 // pages/projects/index.tsx
 import { useState } from "react";
@@ -1429,6 +1444,7 @@ export function Bookshelf({ books }: BookshelfProps) {
 
 
 // components/Layout.tsx
+// components/Layout.tsx
 import {
   Container,
   VStack,
@@ -1479,6 +1495,8 @@ function Navigation({
 }
 
 function Layout({ children }: PropsWithChildren) {
+  const bgColor = useColorModeValue("white", "gray.800");
+
   return (
     <Container
       position="relative"
@@ -1536,7 +1554,7 @@ function Layout({ children }: PropsWithChildren) {
           align="center"
           borderBottom="1px solid"
           borderBottomColor="gray.200"
-          bg="white"
+          bg={bgColor}
         >
           <Container px={8}>
             <Flex justify="space-between" width="100%">
@@ -1776,20 +1794,113 @@ export const Timeline: React.FC<TimelineProps> = ({ items, searchQuery, typeFilt
   );
 };
 
-// pages/index.mdx
+// pages/about-footer.mdx
+Checkout my [projects](/projects) and [writing](/writing).
+
+// pages/about-me.mdx
 
 # Iver Finne
 **Some things about me:**
-I graduated from the University of Bergen (UiB) with a Bachelor's degree in Cognitive Science.
+
+I studiet at the University of Bergen (UiB) with a Bachelor's degree in Cognitive Science.
 I'm passionate about creating things through design, programming, and entrepreneurship.
+
 I believe in leveraging technology to make a positive impact.
 My diverse experiences as a founder, consultant, and designer have shaped my multidisciplinary approach to problem-solving.
 
 **Some things I'm interested in:**
-Exploring the intersection of design, engineering, and sustainability to create innovative solutions.
-Leveraging AI, machine learning, and optimization algorithms to enhance the design process and product performance.
-Collaborating with diverse teams to tackle complex challenges and drive meaningful change.
-Continuously learning and expanding my skill set to stay at the forefront of emerging technologies and trends.
-Creating immersive and engaging experiences through virtual reality, 3D modeling, and interactive design.
 
-Checkout my [projects](/projects) and [writing](/writing).
+Exploring the intersection of design, engineering, and sustainability for innovative solutions. Collaborating on complex challenges for change.
+Leveraging machine learning, computerscience and critical thinking making changes in the physical world.
+
+
+// components/Expandable.tsx
+import { useState } from 'react';
+import { Box, Text, Divider, Collapse, useDisclosure, Heading } from '@chakra-ui/react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+interface ExpandableProps {
+  children: React.ReactNode;
+  title: string;
+}
+
+export const Expandable: React.FC<ExpandableProps> = ({ children, title }) => {
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: false });
+
+  return (
+    <Box position="relative" onClick={onToggle} cursor="pointer">
+      <Divider borderColor="gray.300" />
+      <Heading as="h3" size="md" mt={4} mb={2} fontWeight="bold">
+        {title}
+      </Heading>
+      <Collapse startingHeight={isOpen ? 'auto' : '60px'} in={isOpen}>
+        <Box py={4} maxHeight={isOpen ? 'none' : '60px'} overflow="hidden">
+          <AnimatePresence>
+            {!isOpen && (
+              <motion.div
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Box
+                  position="absolute"
+                  bottom={0}
+                  left={0}
+                  right={0}
+                  height="60px"
+                  background="linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))"
+                  pointerEvents="none"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} pr={4} sx={{
+            '&::-webkit-scrollbar': {
+              width: '0px',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: 'transparent',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: 'transparent',
+            },
+          }}>
+            {children}
+          </Box>
+          <Text mt={4} fontSize="sm" color="gray.500" onClick={onToggle}>
+            {isOpen ? 'Read Less' : 'Read More'}
+          </Text>
+        </Box>
+      </Collapse>
+    </Box>
+  );
+};
+
+// pages/index.tsx
+import { Expandable } from '../components/Expandable';
+import IndexContent from './about-me.mdx';
+
+import FooterContent from './about-footer.mdx';
+
+const Home: React.FC = () => {
+  return (
+    <div>
+      <IndexContent />
+      <Expandable title="Past Work">
+        Prior to Untapped Capital and subsequent work listed above, Yohei has worked closely with
+        startups as a community builder and investor. He started his career in 2009 contributing to
+        the growth of the Los Angeles startup community as a community leader in various roles,
+        organizing educational events and communities for local startup founders. He started his
+        investment career at Techstars in 2014, helping spin up The Disney Accelerator, then as their
+        first Director of Pipeline, supporting sourcing of startups across 50+ accelerator programs.
+        He then joined Scrum Ventures in 2018 as a venture partner on the investment team and SVP
+        of Scrum Studio, their corporate innovation unit, working closely with top global
+        corporations such as Nintendo, where he led the engagement as managing director of
+        Nintendo Switch+Tech.
+      </Expandable>
+      <FooterContent />
+    </div>
+  );
+};
+
+export default Home;

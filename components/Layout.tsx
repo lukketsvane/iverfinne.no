@@ -49,6 +49,8 @@ function Navigation({
 }
 
 function Layout({ children }: PropsWithChildren) {
+  const bgColor = useColorModeValue("white", "gray.800");
+
   return (
     <Container
       position="relative"
@@ -106,7 +108,7 @@ function Layout({ children }: PropsWithChildren) {
           align="center"
           borderBottom="1px solid"
           borderBottomColor="gray.200"
-          bg="white"
+          bg={bgColor}
         >
           <Container px={8}>
             <Flex justify="space-between" width="100%">

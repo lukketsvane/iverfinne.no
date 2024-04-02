@@ -1,4 +1,4 @@
-// pages/projects/index.tsx
+// pages/project
 import { useState } from "react";
 import { Flex, Heading, Input, Stack, Text, Image, Link, SimpleGrid, Box, AspectRatio } from "@chakra-ui/react";
 import { getAllProjectData, Project, getTimelineData, TimelineItem } from "../../lib/projects";
@@ -25,6 +25,8 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
     setCategoryFilter(category);
   };
 
+  const latestProjects = projects.slice(0, 3);
+
   return (
     <>
       <NextSeo title="Projects | Iver Finne" />
@@ -36,7 +38,7 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
           some of my tools and experiments.
         </Text>
         <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} spacing={4} width="100%" mb={6}>
-          {projects.map((project) => (
+          {latestProjects.map((project) => (
             <Link key={project.title} href={project.url} isExternal>
               <Box borderWidth="1px" borderRadius="lg" overflow="hidden" _hover={{ shadow: "md" }}>
                 <AspectRatio ratio={16 / 9}>

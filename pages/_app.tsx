@@ -8,6 +8,7 @@ import { DefaultSeo } from "next-seo";
 import React from "react";
 import { useRouter } from "next/router";
 import { Lora } from "@next/font/google";
+import { Global, css } from "@emotion/react";
 
 const lora = Lora({ subsets: ["latin"], display: "swap" });
 
@@ -67,6 +68,18 @@ export default function App({ Component, pageProps }: AppProps) {
           ],
           siteName: "Iver Finne",
         }}
+      />
+      <Global
+        styles={css`
+          body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          body::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+          }
+        `}
       />
       {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
