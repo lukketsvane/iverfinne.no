@@ -1,6 +1,6 @@
-// pages/project
+// pages/projects/index.tsx
 import { useState } from "react";
-import { Flex, Heading, Input, Stack, Text, Image, Link, SimpleGrid, Box, AspectRatio } from "@chakra-ui/react";
+import { Flex, Heading, Input, SimpleGrid, Box, AspectRatio, Image, Text, Link, Stack } from "@chakra-ui/react";
 import { getAllProjectData, Project, getTimelineData, TimelineItem } from "../../lib/projects";
 import type { NextPageWithLayout } from "next";
 import Layout from "../../components/Layout";
@@ -31,8 +31,8 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
     <>
       <NextSeo title="Projects | Iver Finne" />
       <Flex direction="column" align="flex-start" width="100%" gap={3}>
-        <Heading as="h1" size="xl" > build-in-public log</Heading>
-        <Text fontSize='0.9em' mb={6}>refuge for my poorly posed conjectures, research still pending.</Text>
+        <Heading as="h1" size="xl">build-in-public log</Heading>
+        <Text fontSize="0.9em" mb={6}>refuge for my poorly posed conjectures, research still pending.</Text>
         <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} spacing={4} width="100%" mb={6}>
           {latestProjects.map((project) => (
             <Link key={project.title} href={project.url} isExternal>
@@ -50,20 +50,21 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
             </Link>
           ))}
         </SimpleGrid>
-        <Input
-          placeholder="Type here to search"
-          mb={2}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <Timeline
-          items={timeline}
-          searchQuery={searchQuery}
-          typeFilter={typeFilter}
-          categoryFilter={categoryFilter}
-          onTypeFilterChange={handleTypeFilterChange}
-          onCategoryFilterChange={handleCategoryFilterChange}
-        />
+        <Stack direction="column" width="100%" spacing={4} mb={4}>
+          <Input
+            placeholder="Type here to search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <Timeline
+            items={timeline}
+            searchQuery={searchQuery}
+            typeFilter={typeFilter}
+            categoryFilter={categoryFilter}
+            onTypeFilterChange={handleTypeFilterChange}
+            onCategoryFilterChange={handleCategoryFilterChange}
+          />
+        </Stack>
       </Flex>
     </>
   );

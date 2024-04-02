@@ -14,7 +14,6 @@ import {
   Wrap,
   WrapItem,
   useColorModeValue,
-  Input
 } from "@chakra-ui/react";
 import { TimelineItem } from "../lib/projects";
 import { FaLock, FaGlobe } from "react-icons/fa";
@@ -30,7 +29,6 @@ interface TimelineProps {
   categoryFilter: string;
   onTypeFilterChange: (type: string) => void;
   onCategoryFilterChange: (category: string) => void;
-  onSearchQueryChange: (query: string) => void;
 }
 
 export const Timeline: React.FC<TimelineProps> = ({
@@ -39,8 +37,7 @@ export const Timeline: React.FC<TimelineProps> = ({
   typeFilter,
   categoryFilter,
   onTypeFilterChange,
-  onCategoryFilterChange,
-  onSearchQueryChange
+  onCategoryFilterChange
 }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const timelineWidth = useBreakpointValue({ base: "100%", md: "calc(100% - 150px)" });
@@ -53,6 +50,7 @@ export const Timeline: React.FC<TimelineProps> = ({
     (typeFilter === "" || item.type === typeFilter) &&
     (categoryFilter === "" || item.category === categoryFilter)
   );
+
   return (
     <Flex direction={isMobile ? "column" : "row"} width="100%" gap={4}>
       <Stack direction="column" spacing={2} width={isMobile ? "100%" : "150px"} mb={isMobile ? 4 : 0}>
