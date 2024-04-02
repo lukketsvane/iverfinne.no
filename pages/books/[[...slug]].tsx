@@ -1,3 +1,4 @@
+// pages/books/[[...slug]].tsx
 import {
   Flex,
   Heading,
