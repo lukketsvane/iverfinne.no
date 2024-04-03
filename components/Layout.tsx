@@ -25,8 +25,8 @@ function Layout({ children }: PropsWithChildren<{}>) {
   const displayBooksLink = useBreakpointValue({ base: 'none', lg: 'block' });
 
   return (
-    <Container position="relative" mt={{ base: 16, md: 20 }} pb={{ base: 8, md: "10em" }} gap={{ md: 10 }} maxW={{ base: "100%", xl: "container.lg" }} px={{ base: 4, xl: 12 }}>
-      <Flex position="absolute" right="100%" mr="80px" display={{ base: "none", lg: "flex" }}>
+    <Container position="relative" mt={{ base: 16, md: 20 }} pb={{ base: 8, md: "10em" }} gap={{ md: 10 }} maxW={{ base: "100%", xl: "container.md" }} px={{ base: 8, xl: 12 }}>
+      <Flex position="absolute" right="100%" mr="120px" display={{ base: "none", lg: "flex" }}>
         <VStack position="fixed" align="flex-start" spacing={10}>
           <VStack align="flex-start">
             <Text fontWeight="bold" fontSize="smaller">NAVIGATION</Text>
@@ -44,7 +44,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
       </Flex>
       <Box width="100%" height={20} position="fixed" top={0} zIndex={100} display={{ base: "none", lg: "block" }} />
       <Flex justify="space-between" position="fixed" top={0} display={{ base: "flex", lg: "none" }} height={12} zIndex={50} left={0} width="100%" align="center" borderBottom="1px solid" borderBottomColor="gray.200" bg={bgColor}>
-        <HStack spacing={8} pl={8} pr={8}>
+        <HStack spacing={8} pl={4} pr={8}>
           <Navigation link="/">Home</Navigation>
           <Navigation link="/writing">Writing</Navigation>
           <Box display={displayBooksLink}><Navigation link="/books">Books</Navigation></Box>
