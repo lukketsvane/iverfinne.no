@@ -1,135 +1,56 @@
 // components/Layout.tsx
-import {
-  Container,
-  VStack,
-  Text,
-  Flex,
-  Box,
-  HStack,
-  Menu,
-  MenuButton,
-  IconButton,
-  MenuList,
-  MenuItem,
-  Icon,
-  MenuGroup,
-  useColorModeValue,
-  useBreakpointValue
-} from "@chakra-ui/react";
+import { Container, VStack, Text, Flex, Box, HStack, Menu, MenuButton, IconButton, MenuList, MenuItem, Icon, MenuGroup, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 import { FiMenu } from "react-icons/fi";
-
-function Navigation({
-  link,
-  children,
-  isExternal,
-}: {
-  link: string;
-  children: string;
-  isExternal?: boolean;
-}) {
+function Navigation({ link, children, isExternal, }: { link: string; children: string; isExternal?: boolean; }) {
   const router = useRouter();
-  const isActive =
-    link === "/" ? router.asPath === link : router.asPath.includes(link);
+  const isActive = link === "/" ? router.asPath === link : router.asPath.includes(link);
   const activeColor = useColorModeValue("black", "white");
   const inactiveColor = useColorModeValue("gray.500", "gray.400");
-
   return (
     <Link href={link} target={isExternal ? "_blank" : "_self"}>
-      <Text
-        fontSize="lg"
-        color={isActive ? activeColor : inactiveColor}
-        _hover={{ color: activeColor }}
-      >
+      <Text fontSize="lg" color={isActive ? activeColor : inactiveColor} _hover={{ color: activeColor }}>
         {children}
       </Text>
     </Link>
   );
 }
-
 function Layout({ children }: PropsWithChildren) {
   const bgColor = useColorModeValue("white", "gray.800");
   const displayBooksLink = useBreakpointValue({ base: 'none', lg: 'block' });
-
   return (
-    <Container
-      position="relative"
-      mt={{ base: 16, md: 20 }}
-      pb={{ base: 8, md: "10em" }}
-      gap={{ md: 10 }}
-    >
-      <Flex
-        position="absolute"
-        right="100%"
-        mr="160px"
-        display={{ base: "none", lg: "flex" }}
-      >
+    <Container position="relative" mt={{ base: 16, md: 20 }} pb={{ base: 8, md: "10em" }} gap={{ md: 10 }}>
+      <Flex position="absolute" right="100%" mr="160px" display={{ base: "none", lg: "flex" }}>
         <VStack position="fixed" align="flex-start" spacing={10}>
           <VStack align="flex-start">
-            <Text fontWeight="bold" fontSize="smaller">
-              NAVIGATION
-            </Text>
+            <Text fontWeight="bold" fontSize="smaller">NAVIGATION</Text>
             <Navigation link="/">Home</Navigation>
             <Navigation link="/projects">Projects</Navigation>
             <Navigation link="/writing">Writing</Navigation>
             <Navigation link="/books">Books</Navigation>
           </VStack>
           <VStack align="flex-start">
-            <Text fontWeight="bold" fontSize="smaller">
-              FIND ME ON
-            </Text>
-            <Navigation link="https://twitter.com/amitoser" isExternal>
-              Twitter
-            </Navigation>
-            <Navigation link="https://github.com/lukketsvane" isExternal>
-              GitHub
-            </Navigation>
+            <Text fontWeight="bold" fontSize="smaller">FIND ME ON</Text>
+            <Navigation link="https://twitter.com/amitoser" isExternal>Twitter</Navigation>
+            <Navigation link="https://github.com/lukketsvane" isExternal>GitHub</Navigation>
           </VStack>
         </VStack>
       </Flex>
       <Container width={{ md: "container.md" }} position="relative">
-        <Box
-          width="100%"
-          height={20}
-          position="fixed"
-          top={0}
-          zIndex={100}
-          display={{ base: "none", lg: "block" }}
-        />
-        <Flex
-          justify="space-between"
-          position="fixed"
-          top={0}
-          display={{ base: "flex", lg: "none" }}
-          height={12}
-          zIndex={50}
-          left={0}
-          width="100%"
-          align="center"
-          borderBottom="1px solid"
-          borderBottomColor="gray.200"
-          bg={bgColor}
-        >
+        <Box width="100%" height={20} position="fixed" top={0} zIndex={100} display={{ base: "none", lg: "block" }} />
+        <Flex justify="space-between" position="fixed" top={0} display={{ base: "flex", lg: "none" }} height={12} zIndex={50} left={0} width="100%" align="center" borderBottom="1px solid" borderBottomColor="gray.200" bg={bgColor}>
           <Container px={8}>
             <Flex justify="space-between" width="100%">
-                <HStack spacing={8}>
+              <HStack spacing={8}>
                 <Navigation link="/">Home</Navigation>
                 <Navigation link="/writing">Writing</Navigation>
-                <Box display={displayBooksLink}>
-                  <Navigation link="/books">Books</Navigation>
-                </Box>
+                <Box display={displayBooksLink}><Navigation link="/books">Books</Navigation></Box>
                 <Navigation link="/projects">Projects</Navigation>
               </HStack>
               <Menu>
-                <MenuButton
-                  as={IconButton}
-                  aria-label="Options"
-                  icon={<Icon as={FiMenu} boxSize={4} />}
-                  variant="outline"
-                  size="sm"
-                />
+                <MenuButton as={IconButton} aria-label="Options" icon={<Icon as={FiMenu} boxSize={4} />} variant="outline" size="sm" />
                 <MenuList>
                   <MenuGroup title="NAVIGATION">
                     <VStack align="flex-start" px={4} spacing={3} mb={4}>
@@ -141,18 +62,8 @@ function Layout({ children }: PropsWithChildren) {
                   </MenuGroup>
                   <MenuGroup title="FIND ME ON">
                     <VStack align="flex-start" px={4} spacing={3} mb={2}>
-                      <Navigation
-                        link="https://twitter.com/amitoser"
-                        isExternal
-                      >
-                        Twitter
-                      </Navigation>
-                      <Navigation
-                        link="https://github.com/lukketsvane"
-                        isExternal
-                      >
-                        GitHub
-                      </Navigation>
+                      <Navigation link="https://twitter.com/amitoser" isExternal>Twitter</Navigation>
+                      <Navigation link="https://github.com/lukketsvane" isExternal>GitHub</Navigation>
                     </VStack>
                   </MenuGroup>
                 </MenuList>
@@ -165,5 +76,4 @@ function Layout({ children }: PropsWithChildren) {
     </Container>
   );
 }
-
 export default Layout;

@@ -1,24 +1,20 @@
 // components/Expandable.tsx
 import { useState } from 'react';
-import { Box, Text, Divider, Collapse, useDisclosure, Heading } from '@chakra-ui/react';
+import { Box, Text, Divider, Collapse, useDisclosure, Heading, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-interface ExpandableProps {
-  children: React.ReactNode;
-  title: string;
-}
-
+interface ExpandableProps {children: React.ReactNode;title: string;}
 export const Expandable: React.FC<ExpandableProps> = ({ children, title }) => {
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: false });
-
+  const { colorMode } = useColorMode();
+  const bgColor = useColorModeValue("rgba(255, 255, 255, 1)", "rgba(26, 32, 44, 1)");
   return (
     <Box position="relative" onClick={onToggle} cursor="pointer">
       <Divider borderColor="gray.300" />
-      <Heading as="h3" size="md" mt={2} mb={2} fontWeight="bold">
+      <Heading as="h3" size="md" mt={4} mb={2} fontWeight="bold">
         {title}
       </Heading>
       <Collapse startingHeight={isOpen ? 'auto' : '60px'} in={isOpen}>
-        <Box py={2} maxHeight={isOpen ? 'none' : '60px'} overflow="hidden">
+        <Box py={4} maxHeight={isOpen ? 'none' : '60px'} overflow="hidden">
           <AnimatePresence>
             {!isOpen && (
               <motion.div
@@ -32,13 +28,15 @@ export const Expandable: React.FC<ExpandableProps> = ({ children, title }) => {
                   left={0}
                   right={0}
                   height="60px"
-                  background="linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))"
+                  background={colorMode === "light"
+                              ? "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))"
+                              : `linear-gradient(to bottom, rgba(26, 32, 44, 0), ${bgColor})`} 
                   pointerEvents="none"
                 />
               </motion.div>
             )}
           </AnimatePresence>
-          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} pb={12} sx={{
+          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} pr={4} sx={{
             '&::-webkit-scrollbar': {
               width: '0px',
             },

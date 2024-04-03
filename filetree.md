@@ -1800,7 +1800,7 @@ Checkout my [projects](/projects) and [writing](/writing).
 # Iver Finne
 **Some things about me:**
 
-I studiet at the University of Bergen (UiB) with a Bachelor's degree in Cognitive Science.
+I studied at the University of Bergen (UiB) with a Bachelor's degree in Cognitive Science.
 I'm passionate about creating things through design, programming, and entrepreneurship.
 
 I believe in leveraging technology to make a positive impact.
