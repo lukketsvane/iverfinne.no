@@ -6,40 +6,57 @@ import Layout from "../components/Layout";
 import { ReactElement } from "react";
 import { DefaultSeo } from "next-seo";
 import React from "react";
-import { Global } from "@emotion/react"; // Import Global from @emotion/react
+import { Global } from "@emotion/react";
 import { Lora } from "@next/font/google";
 
 const lora = Lora({ subsets: ["latin"], display: "swap" });
 
-const theme = extendTheme(
-  {
-    fonts: {
-      heading: lora.style.fontFamily,
-      body: lora.style.fontFamily,
-    },
-    config: {
-      initialColorMode: "system",
-      useSystemColorMode: true,
-    },
+const theme = extendTheme({
+  fonts: {
+    heading: lora.style.fontFamily,
+    body: lora.style.fontFamily,
   },
-  withProse({
-    baseStyle: {
-      "h1, h2, h3, h4, h5, h6": {
-        mt: 4,
-        mb: 4,
-      },
-      p: {
-        my: 3,
-      },
-      a: {
-        color: "blue.500",
-        _dark: {
-          color: "blue.300",
+  config: {
+    initialColorMode: "system",
+    useSystemColorMode: true,
+  },
+  styles: {
+    global: {
+      body: {
+        overflowY: "scroll",
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+        "&::-webkit-scrollbar": {
+          display: "none",
         },
       },
     },
-  })
-);
+  },
+  sizes: {
+    container: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+    },
+  },
+}, withProse({
+  baseStyle: {
+    h1: { mt: 4, mb: 4 },
+    h2: { mt: 4, mb: 4 },
+    h3: { mt: 4, mb: 4 },
+    h4: { mt: 4, mb: 4 },
+    h5: { mt: 4, mb: 4 },
+    h6: { mt: 4, mb: 4 },
+    p: { my: 3 },
+    a: {
+      color: "blue.500",
+      _dark: {
+        color: "blue.300",
+      },
+    },
+  },
+}));
 
 const getDefaultLayout = (page: ReactElement) => (
   <Layout>
@@ -68,23 +85,18 @@ export default function App({ Component, pageProps }: AppProps) {
           siteName: "Iver Finne",
         }}
       />
-    <Global
-      styles={`
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        ::-webkit-scrollbar {
-          display: none;
-        }
-
-        /* Hide scrollbar for IE, Edge and Firefox */
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-        
-        /* Ensure the content is still scrollable */
-        body {
-          overflow-y: scroll;
-        }
-      `}
-    />
+      <Global
+        styles={`
+          body {
+            overflow-y: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+          body::-webkit-scrollbar {
+            display: none;
+          }
+        `}
+      />
       {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
   );
