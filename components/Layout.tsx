@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 import { FiMenu } from "react-icons/fi";
-
 function Navigation({ link, children, isExternal }: { link: string; children: string; isExternal?: boolean; }) {
   const router = useRouter();
   const isActive = link === "/" ? router.asPath === link : router.asPath.includes(link);
@@ -18,7 +17,6 @@ function Navigation({ link, children, isExternal }: { link: string; children: st
     </Link>
   );
 }
-
 function Layout({ children }: PropsWithChildren<{}>) {
   const bgColor = useColorModeValue("white", "gray.800");
   const displayBooksLink = useBreakpointValue({ base: false, md: true });
@@ -42,7 +40,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
         </VStack>
       </Flex>
       <Box width="100%" height={20} position="fixed" top={0} zIndex={100} display={{ base: "none", lg: "block" }} />
-      <Flex justify="space-between" px={2} position="fixed" top={0} display={{ base: "flex", lg: "none" }} height={12} zIndex={50} left={0} width="100%" align="center" borderBottom="1px solid" borderBottomColor="gray.200" bg={bgColor}>
+      <Flex justify="space-between" px={2} position="fixed" top={0} display={{ base: "flex", xl: "none" }} height={12} zIndex={50} left={0} width="100%" align="center" borderBottom="1px solid" borderBottomColor="gray.200" bg={bgColor}>
         {displayNavLinks ? (
           <HStack spacing={4} pl={4} pr={8}>
             <Navigation link="/">Home</Navigation>
@@ -79,5 +77,4 @@ function Layout({ children }: PropsWithChildren<{}>) {
     </Container>
   );
 }
-
 export default Layout;
