@@ -13,7 +13,7 @@ const theme = extendTheme({
   fonts: { heading: lora.style.fontFamily, body: lora.style.fontFamily },
   config: { initialColorMode: "system", useSystemColorMode: true },
   styles: { global: { body: { overflowY: "scroll", scrollbarWidth: "none", msOverflowStyle: "none", "&::-webkit-scrollbar": { display: "none" } } } },
-  sizes: { container: { sm: "640px", md: "768px", lg: "1024px", xl: "1280px" } }
+  sizes: { container: { sm: "640px", md: "1080px", xl: "1280px" } }
 }, withProse({ baseStyle: { h1: { mt: 4, mb: 4 }, h2: { mt: 4, mb: 4 }, h3: { mt: 4, mb: 4 }, h4: { mt: 4, mb: 4 }, h5: { mt: 4, mb: 4 }, h6: { mt: 4, mb: 4 }, p: { my: 3 }, a: { color: "blue.500", _dark: { color: "blue.300" } } } }));
 const getDefaultLayout = (page: ReactElement) => <Layout><Prose>{page}</Prose></Layout>;
 export default function App({ Component, pageProps }: AppProps) {

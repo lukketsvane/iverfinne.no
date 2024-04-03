@@ -21,11 +21,11 @@ function Navigation({ link, children, isExternal }: { link: string; children: st
 
 function Layout({ children }: PropsWithChildren<{}>) {
   const bgColor = useColorModeValue("white", "gray.800");
-  const displayBooksLink = useBreakpointValue({ base: 'none', lg: 'block' });
+  const displayBooksLink = useBreakpointValue({ base: false, md: true });
   const displayNavLinks = useBreakpointValue({ base: false, sm: true });
   return (
-    <Container position="relative" mt={{ base: 16, md: 20 }} pb={{ base: 8, md: "10em" }} gap={{ md: 10 }} maxW={{ base: "100%", xl: "container.md" }} px={{ base: 8, xl: 8 }}>
-      <Flex position="absolute" right="100%" mr="140px" display={{ base: "none", lg: "flex" }}>
+    <Container position="relative" mt={{ base: 16, md: 20 }} pb={{ base: 8, md: "10em" }} gap={{ md: 10 }} maxW={{ base: "100%", xl: "container.md" }} px={{ base: 8, xl: 12 }}>
+      <Flex position="absolute" right="100%" mr="120px" display={{ base: "none", lg: "flex" }}>
         <VStack position="fixed" align="flex-start" spacing={10}>
           <VStack align="flex-start">
             <Text fontWeight="bold" fontSize="smaller">NAVIGATION</Text>
@@ -47,7 +47,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
           <HStack spacing={4} pl={4} pr={8}>
             <Navigation link="/">Home</Navigation>
             <Navigation link="/writing">Writing</Navigation>
-            {displayBooksLink === 'block' && (
+            {displayBooksLink && (
               <Navigation link="/books">Books</Navigation>
             )}
             <Navigation link="/projects">Projects</Navigation>
