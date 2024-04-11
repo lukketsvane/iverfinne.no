@@ -1,5 +1,5 @@
 // components/Expandable.tsx
-import { useState } from 'react';
+"use client"; 
 import { Box, Text, Divider, Collapse, useDisclosure, Heading, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 interface ExpandableProps {children: React.ReactNode;title: string;}

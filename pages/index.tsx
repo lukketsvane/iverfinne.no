@@ -2,6 +2,7 @@
 import { Expandable } from '../components/Expandable';
 import IndexContent from './about-me.mdx';
 import FooterContent from './about-footer.mdx';
+
 const Home: React.FC = () => {
   return (
     <div>
@@ -15,4 +16,5 @@ const Home: React.FC = () => {
     </div>
   );
 };
+
 export default Home;
