@@ -1,12 +1,17 @@
 // components/Expandable.tsx
-"use client"; 
-import { Box, Text, Divider, Collapse, useDisclosure, Heading, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Box, Text, Divider, Collapse, useDisclosure, Heading, useColorMode } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
-interface ExpandableProps {children: React.ReactNode;title: string;}
+
+interface ExpandableProps {
+  children: React.ReactNode;
+  title: string;
+}
+
 export const Expandable: React.FC<ExpandableProps> = ({ children, title }) => {
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: false });
   const { colorMode } = useColorMode();
-  const bgColor = useColorModeValue("rgba(255, 255, 255, 1)", "rgba(26, 32, 44, 1)");
+
   return (
     <Box position="relative" onClick={onToggle} cursor="pointer">
       <Divider borderColor="gray.300" />
@@ -30,23 +35,13 @@ export const Expandable: React.FC<ExpandableProps> = ({ children, title }) => {
                   height="60px"
                   background={colorMode === "light"
                               ? "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))"
-                              : `linear-gradient(to bottom, rgba(26, 32, 44, 0), ${bgColor})`} 
+                              : "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))"}
                   pointerEvents="none"
                 />
               </motion.div>
             )}
           </AnimatePresence>
-          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} pr={4} sx={{
-            '&::-webkit-scrollbar': {
-              width: '0px',
-            },
-            '&::-webkit-scrollbar-track': {
-              background: 'transparent',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              background: 'transparent',
-            },
-          }}>
+          <Box overflowY="auto" maxHeight={isOpen ? 'none' : '60px'} pr={4}>
             {children}
           </Box>
           <Text mt={4} fontSize="sm" color="gray.500" onClick={onToggle}>
