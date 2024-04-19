@@ -1,5 +1,13 @@
 [
   {
+    "title": "Introducing Jobbi: Your AI Job Hunt Assistant",
+    "description": "Revolutionize your job search with Jobbi's AI-driven platform.",
+    "date": "2024-04-19",
+    "image": "/images/jobbi/jobbi-web1.jpg",
+    "url": "/projects/jobbi",
+    "external": false
+  },
+  {
     "title": "Korall Engineering: Pioneering Future Designs",
     "description": "A look into Korall Engineering's innovative approach to design and manufacturing.",
     "date": "2024-03-30",

@@ -1,5 +1,14 @@
 [
   {
+    "date": "4/19/2024",
+    "title": "Introducing Jobbi: Your AI Job Hunt Assistant",
+    "description": "Revolutionize your job search with Jobbi's AI-driven platform.",
+    "tags": ["public", "ai", "innovation", "employment"],
+    "type": "public",
+    "category": "employment",
+    "url": "http://jobbi.vercel.app/"
+  },
+  {
     "date": "2/28/2024",
     "title": "Gradient",
     "description": "A book completely generated autonomously using Stable Diffusion, consisting of gradients.",
@@ -47,7 +56,7 @@
   {
     "title": "Korall Engineering: Pioneering Future Designs",
     "description": "A look into Korall Engineering's innovative approach to design and manufacturing.",
-    "date": "2021-03-30",
+    "date": "3/30/2021",
     "image": "/images/coral/coral_11.png",
     "url": "/projects/coral",
     "external": false,
@@ -58,7 +67,7 @@
   {
     "title": "DongJin Tableware",
     "description": "As an Executive Designer at DongJin Tableware in Yangxin, Shandong, China, I led a team focused on marketing, design, and production. Specialized in graphic design, 3D modeling, and photography for product presentations and catalogs.",
-    "date": "2019-08-26",
+    "date": "8/26/2019",
     "image": "/images/dongjin/dongjin-logo.jpg",
     "url": "/projects/dongjin",
     "external": false,
@@ -69,7 +78,7 @@
   {
     "title": "Ygdrasyl Project",
     "description": "Innovating the future of agriculture through automated, energy-efficient vertical farming solutions.",
-    "date": "2018-01-01",
+    "date": "1/1/2019",
     "image": "/images/ygdrasyl/ygdrasyl_2.png",
     "url": "/projects/ygdrasyl",
     "external": false,
