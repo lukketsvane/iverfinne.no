@@ -7,32 +7,50 @@ image: "/images/jobbi/jobbi-web1.jpg"
 
 # Bakgrunn
 
-Som arbeidssøkar oppdagar ein raskt utfordringane med aukande digitalisering i jobbmarknaden. [Finn.no](https://www.finn.no/job/fulltime/search.html) viser 51 875 jobbar, medan [Arbeidsplassen](https://arbeidsplassen.nav.no/stillinger) har 49 677 stillingar, illustrerande for sterk etterspurnad og konkurranse frå *[andre](https://www.khrono.no/skriver-og-selger-masteroppgaver-til-studenter/850025)*.
+Som arbeidssøkar oppdagar ein raskt utfordringane med aukande digitalisering i jobbmarknaden. [Finn.no](https://www.finn.no/job/fulltime/search.html) viser 51 875 jobbar, medan [Arbeidsplassen](https://arbeidsplassen.nav.no/stillinger) har 49 677 stillingar, illustrerande for sterk etterspurnad og konkurranse frå [andre](https://www.khrono.no/skriver-og-selger-masteroppgaver-til-studenter/850025).
 
-Den kognitive industrielle revolusjonen indikerer at *[70% av jobbane](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier)* kan automatiserast. Det er nødvendig *at me går over frå [merksemsøkonomien](https://www.imf.org/en/Publications/fandd/issues/2023/12/Scenario-Planning-for-an-AGI-future-Anton-korinek) til ein meiningsøkonomi*. Uavhengig av kva scenario for framtida vert, "*ville det være uklokt å legge alle eggene i én kurv.*" Stormen av informasjonsstraumar vert ikkje svakare, og me må gjere ein innsats i tiltak som er støykansellerande.
-## Funksjoner for kognitiv avlasting
+Den kognitive industrielle revolusjonen indikerer at [70% av jobbane](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier) kan automatiserast. Det er nødvendig at me går over frå [merksemsøkonomien](https://www.imf.org/en/Publications/fandd/issues/2023/12/Scenario-Planning-for-an-AGI-future-Anton-korinek) til ein meiningsøkonomi. Uavhengig av kva scenario for framtida vert, "ville det være uklokt å legge alle eggene i én kurv." Stormen av informasjonsstraumar vert ikkje svakare, og me må gjere ein innsats i tiltak som er støykansellerande.
 
-Autonome agenter tilbyr verdifulle funksjoner for å redusere den kognitive belastningen assosiert med jobbsøking. Ved å automatisere og forenkle søkeprosessen, avlaster de brukere fra å måtte manuelt filtrere gjennom et omfattende antall jobbannonser. Dette gjør det enklere å identifisere relevante jobbmuligheter raskt og effektivt.
-
-- **Assistent-API:** Bruker AI for å matche brukernes ferdigheter med relevante jobbmuligheter.
-- **Læringsmoduler:** Tilbyr kurs designet for å forbedre karrieremuligheter.
-- **Jobbdatabase:** Tilgang til et bredt arkiv av jobbannonser fra forskjellige kilder i Norge, lett tilgjengelig gjennom avanserte søkefunksjoner.
-
-
-<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-  <div style={{ width: '50%', padding: '5px' }}>
-    <img src="/images/jobbi/jobbi-gif1.gif" style={{ width: '100%', marginBottom: '10px' }} alt="Chat with Jobbi" />
-    <p style={{ textAlign: 'center', fontSize: '14px' }}></p>
+<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+  <div style={{ flex: '1 1 50%', paddingRight: '20px' }}>
+    <video loop autoPlay playsInline muted style={{ maxWidth: '100%', borderRadius: '20px' }} id="jobbiVideo">
+      <source src="/images/jobbi/jobbi_1.mp4" type="video/mp4" />
+      Din nettleser støtter ikke videokodingen.
+    </video>
+    <script>
+      document.getElementById('jobbiVideo').play();
+    </script>
   </div>
-  <div style={{ width: '50%', padding: '5px' }}>
-    <img src="/images/jobbi/jobbi-gif2.gif" style={{ width: '100%', marginBottom: '10px' }} alt="Discover with Jobbi" />
-    <p style={{ textAlign: 'center', fontSize: '14px' }}></p>
-  </div>
+  <div style={{ flex: '1 1 50%', paddingLeft: '20px' }}>
+1. Brukeren sender inn en tekstfil kalt `amika_alfendi_CV.txt` for gjennomgang.
+2. Jobbi bekrefter oppgaven, og sier at den vil lese Amikas CV for å identifisere jobbmuligheter som samsvarer med deres erfaring og kompetanse.
+3. Jobbi behandler dokumentet.
+4. Jobbi presenterer en liste over jobbmuligheter som samsvarer med Amikas profil:
+</div>
 </div>
 
+### Automatisk CoT (Auto-CoT);
+Oddetallene i denne gruppen summeres til et partall: 4, 8, 9, 15, 12, 2, 1.
+A: Å legge sammen alle oddetallene (9, 15, 1) gir 25. Svaret er Usant.
 
-## NAV API-integrasjon
+Oddetallene i denne gruppen summeres til et partall: 15, 32, 5, 13, 82, 7, 1.
+A: Å legge sammen alle oddetallene (15, 5, 13, 7, 1) gir 41. Svaret er Usant.
 
-**Tjenestebeskrivelse**
-NAVs offentlige API gir tilgang til jobbannonser både fra egen database og fra samarbeidspartnere. Autonome agenter benytter denne ressursen til å formidle oppdaterte jobbtilbud over hele Norge. Dette APIet er en viktig kilde til informasjon for agenter som arbeider med å koble jobbsøkere med potensielle arbeidsgivere, noe som ytterligere reduserer tiden og innsatsen som kreves i jobbsøknadsprosessen.
+Dette viser et perfekt resultat når vi tilfører et resonneringstrinn. Faktisk kan vi løse denne oppgaven med enda færre eksempler.
 
+### Nullskudd CoT prompting
+Nullskudd CoT prompting innebærer å legge til "La oss tenke steg for steg" i den opprinnelige prompten. Dette viser seg å være spesielt nyttig der du ikke har for mange eksempler å bruke i prompten.
+
+
+## 
+Autonome agenter gjør det mulig å redusere den kognitive belastningen assosiert med jobbsøking. Ved å automatisere og forenkle søkeprosessen, avlaster de brukere fra å måtte manuelt filtrere gjennom et omfattende antall jobbannonser. Dette gjør det enklere å identifisere relevante jobbmuligheter raskt og effektivt.
+    
+    - **Assistent-API:** Bruker AI for å matche brukernes ferdigheter med relevante jobbmuligheter.
+    - **Læringsmoduler:** Tilbyr kurs designet for å forbedre karrieremuligheter.
+    - **Jobbdatabase:** Tilgang til et bredt arkiv av jobbannonser fra forskjellige kilder i Norge, lett tilgjengelig gjennom avanserte søkefunksjoner.
+  
+    ## NAV API-integrasjon
+  
+    **Tjenestebeskrivelse**
+    NAVs offentlige API gir tilgang til jobbannonser både fra egen database og fra samarbeidspartnere. Autonome agenter benytter denne ressursen til å formidle oppdaterte jobbtilbud over hele Norge. Dette APIet er en viktig kilde til informasjon for agenter som arbeider med å koble jobbsøkere med potensielle arbeidsgivere, noe som ytterligere reduserer tiden og innsatsen som kreves i jobbsøknadsprosessen.
+  
