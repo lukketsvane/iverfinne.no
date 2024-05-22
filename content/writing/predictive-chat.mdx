@@ -1,9 +1,11 @@
 ---
 title: "predictive chat: minimizing latency in conversational ai"
 description: "exploring an innovative approach to reduce latency in conversational ai through anticipation"
-date: "May 19. 2024"
+date: "May 19, 2024"
 image: "/images/predictive-chat-overview.png"
 ---
+
+
 
 ![predictive chat overview](/images/predictive-chat-overview.png)
 
@@ -14,13 +16,16 @@ Flow of data for PredictiveChat, a proof of concept chat app which minimizes lat
 
 ## Abstract
 
+
 PredictiveChat introduces an innovative approach to leveraging large language models (LLMs) to anticipate user input, enabling instantaneous response generation in conversational AI systems. By predicting user messages and pre-generating responses, PredictiveChat aims to significantly enhance user experience through reduced response times. This paper outlines the system’s methodology, contrasts it with existing technologies, discusses its implementation, and explores potential future applications.
 
 [GitHub](https://github.com/yoheinakajima/predictivechat) | [Original X/Twitter Thread](https://twitter.com/yoheinakajima/status/1762313302863200658)
 
 ## 1. Introduction
 
-Conversational AI interfaces often suffer from latency, which can detract from the naturalness of human-computer interaction. PredictiveChat addresses this challenge by emulating the human ability to predict and formulate responses during conversation, aiming to achieve “negative latency” in certain instances and almost zero latency in others. This system not only seeks to reduce wait times but also leverages additional processing time for more thoughtful and contextually relevant responses.
+Conversational AI interfaces often suffer from latency, which can detract from the naturalness of human-computer interaction. PredictiveChat addresses this challenge by emulating the human ability to predict and formulate responses during conversation, aiming to achieve “negative latency” in certain instances and almost zero latency in others. This system not only seeks to reduce wait times but also leverages the additional processing time for more thoughtful and contextually relevant responses.
+
+![predictive chat overview](/images/typing.gif  )
 
 Example input: “When are the next Olympics being held?” cuts off the user message and answers correctly.
 

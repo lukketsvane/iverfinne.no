@@ -1,5 +1,4 @@
 [
-  
   {
     "title": "knowledge graphs and llms",
     "description": "exploring the intersection of knowledge graphs and language models",
@@ -15,7 +14,7 @@
     "image": "/images/predictive-chat-overview.png",
     "url": "/writing/predictive-chat",
     "external": false
-  },  
+  },
   {
     "title": "Gradient Descent",
     "description": "An exploration into the fusion of art and AI through GAN and diffusion models, culminating in the creation of unique gradient artworks.",
