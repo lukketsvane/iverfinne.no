@@ -272,8 +272,8 @@ function Layout({ children }: PropsWithChildren) {
           <VStack align="flex-start">
             <Text fontWeight="bold" fontSize="smaller">NAVIGATION</Text>
             <Navigation link="/">Home</Navigation>
-            <Navigation link="/projects">Projects</Navigation>
-            <Navigation link="/writing">Writing</Navigation>
+            <Navigation link="/projects">Build Log</Navigation>
+            <Navigation link="/writing">Blog</Navigation>
             <Navigation link="/books">Books</Navigation>
           </VStack>
           <VStack align="flex-start">
@@ -290,9 +290,9 @@ function Layout({ children }: PropsWithChildren) {
             <Flex justify="space-between" width="100%">
               <HStack spacing={8}>
                 <Navigation link="/">Home</Navigation>
-                <Navigation link="/writing">Writing</Navigation>
+                <Navigation link="/writing">Blog</Navigation>
                 <Box display={displayBooksLink}><Navigation link="/books">Books</Navigation></Box>
-                <Navigation link="/projects">Projects</Navigation>
+                <Navigation link="/projects">Build Log</Navigation>
               </HStack>
               <Menu>
                 <MenuButton as={IconButton} aria-label="Options" icon={<Icon as={FiMenu} boxSize={4} />} variant="outline" size="sm" />
@@ -300,9 +300,9 @@ function Layout({ children }: PropsWithChildren) {
                   <MenuGroup title="NAVIGATION">
                     <VStack align="flex-start" px={4} spacing={3} mb={4}>
                       <Navigation link="/">Home</Navigation>
-                      <Navigation link="/writing">Writing</Navigation>
+                      <Navigation link="/writing">Blog</Navigation>
                       <Navigation link="/books">Books</Navigation>
-                      <Navigation link="/projects">Projects</Navigation>
+                      <Navigation link="/projects">Build Log</Navigation>
                     </VStack>
                   </MenuGroup>
                   <MenuGroup title="FIND ME ON">

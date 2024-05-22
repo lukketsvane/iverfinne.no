@@ -1,10 +1,19 @@
 [
+  
   {
     "title": "knowledge graphs and llms",
     "description": "exploring the intersection of knowledge graphs and language models",
-    "date": "2024-05-22",
+    "date": "May 22, 2024",
     "image": "/images/knowledge-graph-llms.png",
     "url": "/writing/knowledge-graphs-and-llms",
+    "external": false
+  },
+  {
+    "title": "predictive chat: minimizing latency in conversational ai",
+    "description": "exploring an innovative approach to reduce latency in conversational ai through anticipation",
+    "date": "May 19, 2024",
+    "image": "/images/predictive-chat-overview.png",
+    "url": "/writing/predictive-chat",
     "external": false
   },  
   {

@@ -26,7 +26,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
       <Flex justify="space-between" position="fixed" top={0} display="flex" height={12} zIndex={50} left={0} width="100%" align="center" borderBottom="1px solid" borderBottomColor="gray.200" bg={bgColor}>
         <HStack spacing={4} pl={4} pr={8}>
           <Navigation link="/">Home</Navigation>
-          <Navigation link="/writing">Writing</Navigation>
+          <Navigation link="/writing">Blog</Navigation>
           {displayBooksLink && <Navigation link="/books">Books</Navigation>}
           <Navigation link="/projects">Build Log</Navigation>
         </HStack>
