@@ -1,0 +1,26 @@
+---
+title: "knowledge graphs and llms"
+description: "exploring the intersection of knowledge graphs and language models"
+date: "2024-05-22"
+image: "/images/knowledge-graph-llms.png"
+---
+
+![knowledge graphs and llms](/images/knowledge-graph-llms.png)
+
+at untapped, we're always early in spotting tech trends. recently, we delved into knowledge graphs and llms.
+
+[knowledge graphs](https://en.wikipedia.org/wiki/knowledge_graph) are data structures with nodes (objects) and edges (relationships), enabling efficient querying and reasoning.
+
+introduced by our autonomous agent community, we saw potential in using llms to build knowledge graphs. this led us to create and open-source [instagraph](https://instagraph.ai) (sept 2023, 3.1k stars), which turns natural language into structured graphs. try it at [instagraph.ai](https://instagraph.ai).
+
+we also built and open-sourced [mindgraph](https://mindgraph.ai), which deduplicates nodes and edges as new input is added.
+
+our hypothesis is that as ai memory grows, structuring data on input and querying it will outperform storing raw data. this was validated by microsoft's graphrag (feb 2024), though no code is available.
+
+neo4j, a leading graph database, was frequently mentioned for its vector embedding capabilities. we also found promising startups: falkordb (by redisgraph creators), nexusdb (with public data), and kuzu. similar tools to mindgraph include cognee and whyhow ai, both offering natural language graph building and querying. origin trail uses blockchain for decentralized knowledge graphs.
+
+we're also exploring using graphs to track and improve ai agents, like with langgraph (jan 2024), which tracks task flows to optimize solutions. see our experiments [here](#) and our graph of code dependencies [here](#).
+
+imagine an autonomous ai agent with skills, actions, objectives, and knowledge all interconnected in a massive graph. it could efficiently query parts or the whole, using embeddings for semantic similarity and edge paths for known relationships.
+
+these are our thoughts on combining knowledge graphs, llms, and embeddings. 😊

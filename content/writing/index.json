@@ -1,5 +1,13 @@
 [
   {
+    "title": "knowledge graphs and llms",
+    "description": "exploring the intersection of knowledge graphs and language models",
+    "date": "2024-05-22",
+    "image": "/images/knowledge-graph-llms.png",
+    "url": "/writing/knowledge-graphs-and-llms",
+    "external": false
+  },  
+  {
     "title": "Gradient Descent",
     "description": "An exploration into the fusion of art and AI through GAN and diffusion models, culminating in the creation of unique gradient artworks.",
     "date": "April 1, 2024",
