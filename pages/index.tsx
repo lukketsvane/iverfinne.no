@@ -1,5 +1,5 @@
 // pages/index.tsx
-import { Expandable } from '../components/Expandable';
+import { Expandable } from '../components/expandable';
 import IndexContent from './about-me.mdx';
 import FooterContent from './about-footer.mdx';
 

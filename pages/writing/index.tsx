@@ -2,7 +2,7 @@
 import { Heading, Link, Flex, Text, Stack, Divider, useColorModeValue } from '@chakra-ui/react';
 import { getAllPostData, Post } from '../../lib/writing';
 import type { NextPageWithLayout } from 'next';
-import Layout from '../../components/Layout';
+import Layout from '../../components/layout';
 import { NextSeo } from 'next-seo';
 
 interface WritingProps { posts: Post[]; }

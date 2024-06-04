@@ -1,3 +1,4 @@
+// components/layout.tsx
 import { Container, VStack, Text, Flex, Box, HStack, Menu, MenuButton, IconButton, MenuList, MenuItem, Icon, MenuGroup, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";

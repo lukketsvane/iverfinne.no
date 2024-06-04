@@ -3,7 +3,7 @@ import { MDXRemote } from "next-mdx-remote";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { Heading, Flex } from "@chakra-ui/react";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 import { getAllSlugs, getPost, Post as PostMetadata } from "../../lib/writing";
 import { Content } from "../../lib/mdx";
 import { NextSeo } from "next-seo";

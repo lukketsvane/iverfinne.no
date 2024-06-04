@@ -2,7 +2,7 @@
 import type { AppProps } from 'next/app';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { Prose, withProse } from '@nikolovlazar/chakra-ui-prose';
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
 import { ReactElement } from 'react';
 import { DefaultSeo } from 'next-seo';
 import React from 'react';

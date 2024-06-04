@@ -3,9 +3,9 @@ import { useState } from "react";
 import { Flex, Heading, Input, SimpleGrid, Box, AspectRatio, Image, Text, Link, Stack } from "@chakra-ui/react";
 import { getAllProjectData, Project, getTimelineData, TimelineItem } from "../../lib/projects";
 import type { NextPageWithLayout } from "next";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 import { NextSeo } from "next-seo";
-import { Timeline } from "../../components/Timeline";
+import { Timeline } from "../../components/timeline";
 interface ProjectsProps { projects: Project[]; timeline: TimelineItem[]; }
 const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => {
   const [searchQuery, setSearchQuery] = useState("");

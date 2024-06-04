@@ -2,7 +2,7 @@
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { Heading, Flex, Image, Box } from "@chakra-ui/react";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 import { MDXRemote } from "next-mdx-remote";
 import { getAllSlugs, getProject, Project } from "../../lib/projects";
 import { Content } from "../../lib/mdx";

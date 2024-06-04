@@ -1,11 +1,11 @@
 // pages/books/[[...slug]].tsx
 import { Flex, Heading, Image, Stack, VStack, Text, Divider, Link } from "@chakra-ui/react";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { MDXRemote } from "next-mdx-remote";
 import { Book, getAllBooks, getAllSlugs, getBook } from "../../lib/books";
-import { Bookshelf } from "../../components/Bookshelf";
+import { Bookshelf } from "../../components/bookshelf";
 import { Content } from "../../lib/mdx";
 import { NextSeo } from "next-seo";
 interface BooksProps { books: Book[]; book?: Content<Book>; }
