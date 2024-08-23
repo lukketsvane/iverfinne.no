@@ -264,26 +264,67 @@ import { DefaultSeo } from 'next-seo';
 import React from 'react';
 import { Global } from '@emotion/react';
 import { Lora } from '@next/font/google';
+
 const lora = Lora({ subsets: ['latin'], display: 'swap' });
+
 const theme = extendTheme({
   fonts: { heading: lora.style.fontFamily, body: lora.style.fontFamily },
   config: { initialColorMode: 'light', useSystemColorMode: true },
-  styles: { global: (props) => ({
-      body: { overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', '&::-webkit-scrollbar': { display: 'none' }, color: props.colorMode === 'dark' ? 'white' : 'black', bg: props.colorMode === 'dark' ? 'black' : 'white' }
-    }) }
+  styles: { 
+    global: (props: any) => ({
+      body: { 
+        overflowY: 'scroll', 
+        scrollbarWidth: 'none', 
+        msOverflowStyle: 'none', 
+        '&::-webkit-scrollbar': { display: 'none' }, 
+        color: props.colorMode === 'dark' ? 'white' : 'black', 
+        bg: props.colorMode === 'dark' ? 'black' : 'white' 
+      }
+    }) 
+  }
 }, withProse());
-const getDefaultLayout = (page: ReactElement) => <Layout><Prose>{page}</Prose></Layout>;
-export default function App({ Component, pageProps }: AppProps) {
+
+const getDefaultLayout = (page: ReactElement) => (
+  <Layout>
+    <Prose>{page}</Prose>
+  </Layout>
+);
+
+type NextPageWithLayout = AppProps & {
+  Component: AppProps['Component'] & {
+    getLayout?: (page: ReactElement) => ReactElement
+  }
+}
+
+export default function App({ Component, pageProps }: NextPageWithLayout) {
   const getLayout = Component.getLayout || getDefaultLayout;
+
   return (
     <ChakraProvider theme={theme}>
-      <DefaultSeo title='Iver Finne' description="I'm a constant learner and aspiring technical generalist." openGraph={{ title: 'Iver Finne', description: "I'm a constant learner and aspiring technical generalist.", images: [{ url: 'https://iverfinne.no/og-image-dark.jpg', type: 'image/jpeg' }], siteName: 'Iver Finne' }} />
-      <Global styles={{ body: { overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', '&::-webkit-scrollbar': { display: 'none' } } }} />
+      <DefaultSeo 
+        title='Iver Finne' 
+        description="I'm a constant learner and aspiring technical generalist." 
+        openGraph={{ 
+          title: 'Iver Finne', 
+          description: "I'm a constant learner and aspiring technical generalist.", 
+          images: [{ url: 'https://iverfinne.no/og-image-dark.jpg', type: 'image/jpeg' }], 
+          siteName: 'Iver Finne' 
+        }} 
+      />
+      <Global 
+        styles={{ 
+          body: { 
+            overflowY: 'scroll', 
+            scrollbarWidth: 'none', 
+            msOverflowStyle: 'none', 
+            '&::-webkit-scrollbar': { display: 'none' } 
+          } 
+        }} 
+      />
       {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
   );
 }
-
 
 ================================================================================
 
@@ -332,13 +373,48 @@ File: lib/projects.ts
 import path from "path";
 import fs from "fs";
 import { getMdxContent, MaybeContent } from "./mdx";
-export interface Project { title: string; description: string; image: string; date: string; url: string; source: string; }
-export function getAllProjectData(): Project[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "projects", "index.json"), "utf8")); }
-export function getAllSlugs(): string[] { const data = getAllProjectData(); return data.map((item) => item.url); }
-export async function getProject(slug: string): Promise<MaybeContent<Project>> { return getMdxContent<Project>("projects", `${slug}.mdx`); }
-export interface TimelineItem { date: string; title: string; description: string; tags: string[]; type: "public" | "private" | "prototype"; category: string; url: string; }
-export function getTimelineData(): TimelineItem[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "timeline", "index.json"), "utf8")); }
 
+export interface Project {
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  url: string;
+  source: string;
+}
+
+export interface TimelineItem {
+  date: string;
+  title: string;
+  description: string;
+  tags: string[];
+  type: "public" | "private" | "prototype";
+  category: string;
+  url: string;
+}
+
+export function getAllProjectData(): Project[] {
+  const projectsPath = path.join(process.cwd(), "content", "projects", "index.json");
+  const fileContents = fs.readFileSync(projectsPath, "utf8");
+  return JSON.parse(fileContents);
+}
+
+export function getAllSlugs(): { params: { slug: string } }[] {
+  const data = getAllProjectData();
+  return data.map((item) => ({
+    params: { slug: item.url.replace(/^\/projects\//, '').replace(/\\/g, '/') }
+  }));
+}
+
+export async function getProject(slug: string): Promise<MaybeContent<Project>> {
+  return getMdxContent<Project>("projects", `${slug}.mdx`);
+}
+
+export function getTimelineData(): TimelineItem[] {
+  const timelinePath = path.join(process.cwd(), "content", "timeline", "index.json");
+  const fileContents = fs.readFileSync(timelinePath, "utf8");
+  return JSON.parse(fileContents);
+}
 
 ================================================================================
 
@@ -348,11 +424,35 @@ File: lib/writing.ts
 import path from "path";
 import fs from "fs";
 import { getMdxContent, MaybeContent } from "./mdx";
-export interface Post { title: string; description: string; image: string; date: string; url: string; external: boolean; source: string; }
-export function getAllPostData(): Post[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "writing", "index.json"), "utf8")); }
-export function getAllSlugs(): string[] { const data = getAllPostData(); return data.filter((item) => !item.external).map((item) => item.url); }
-export async function getPost(slug: string): Promise<MaybeContent<Post>> { return getMdxContent<Post>("writing", `${slug}.mdx`); }
 
+export interface Post {
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  url: string;
+  external: boolean;
+  source: string;
+}
+
+export function getAllPostData(): Post[] {
+  const postsPath = path.join(process.cwd(), "content", "writing", "index.json");
+  const fileContents = fs.readFileSync(postsPath, "utf8");
+  return JSON.parse(fileContents);
+}
+
+export function getAllSlugs(): { params: { slug: string } }[] {
+  const data = getAllPostData();
+  return data
+    .filter((item) => !item.external)
+    .map((item) => ({
+      params: { slug: item.url.replace(/^\/writing\//, '').replace(/\\/g, '/') }
+    }));
+}
+
+export async function getPost(slug: string): Promise<MaybeContent<Post>> {
+  return getMdxContent<Post>("writing", `${slug}.mdx`);
+}
 
 ================================================================================
 
@@ -406,12 +506,19 @@ import type { NextPageWithLayout } from "next";
 import Layout from "../../components/layout";
 import { NextSeo } from "next-seo";
 import { Timeline } from "../../components/timeline";
-interface ProjectsProps { projects: Project[]; timeline: TimelineItem[]; }
+import { GetStaticProps } from "next";
+
+interface ProjectsProps { 
+  projects: Project[]; 
+  timeline: TimelineItem[]; 
+}
+
 const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const latestProjects = projects.slice(0, 3);
+  
   return (
     <>
       <NextSeo title="Projects | Iver Finne" />
@@ -427,21 +534,31 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
             </Link>
           ))}
         </SimpleGrid>
-        <Stack direction="column" width="100%" spacing={4} mb={4}><Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-          <Timeline items={timeline} searchQuery={searchQuery} typeFilter={typeFilter} categoryFilter={categoryFilter} onTypeFilterChange={(type) => setTypeFilter(type)} onCategoryFilterChange={(category) => setCategoryFilter(category)} />
+        <Stack direction="column" width="100%" spacing={4} mb={4}>
+          <Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          <Timeline 
+            items={timeline} 
+            searchQuery={searchQuery} 
+            typeFilter={typeFilter} 
+            categoryFilter={categoryFilter} 
+            onTypeFilterChange={setTypeFilter} 
+            onCategoryFilterChange={setCategoryFilter} 
+          />
         </Stack>
       </Flex>
     </>
   );
 };
-export default Projects;
-Projects.getLayout = (page) => <Layout>{page}</Layout>;
-export async function getStaticProps() {
+
+export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
   const projects = getAllProjectData();
   const timeline = getTimelineData();
   return { props: { projects, timeline } };
-}
+};
 
+Projects.getLayout = (page) => <Layout>{page}</Layout>;
+
+export default Projects;
 
 ================================================================================
 
@@ -490,39 +607,43 @@ import { getAllPostData, Post } from '../../lib/writing';
 import type { NextPageWithLayout } from 'next';
 import Layout from '../../components/layout';
 import { NextSeo } from 'next-seo';
+import { GetStaticProps } from 'next';
 
-interface WritingProps { posts: Post[]; }
+interface WritingProps { 
+  posts: Post[]; 
+}
 
 const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
-  const textColor = useColorModeValue("rgba(0, 0, 0, 0.55)", "rgba(255, 255, 255, 0.40)"); // 75% opacity for black in light mode and white in dark mode
+  const textColor = useColorModeValue("rgba(0, 0, 0, 0.55)", "rgba(255, 255, 255, 0.40)");
 
-  return (<>
-    <NextSeo title="Writing | Iver Finne" />
-    <Flex direction="column" align="flex-start" width="100%" gap={3}>
-      <Heading as="h1" pt={2} size="xl" >Recent Blog Posts</Heading>
-      <Divider width="100%" mb={4} />
-      {posts.map((post) => (<>
-        <Stack width="100%" align="flex-start" spacing={1} key={post.title}>
-          <Link href={post.url} target={post.external ? "_blank" : "_self"}>
-            <Text>{post.title}</Text>
-          </Link>
-          <Text fontSize="sm" textAlign={"right"} color={textColor}>{post.date}</Text>
-        </Stack>
-        <Divider width="100%" />
-      </>))}
-    </Flex>
-  </>);
+  return (
+    <>
+      <NextSeo title="Writing | Iver Finne" />
+      <Flex direction="column" align="flex-start" width="100%" gap={3}>
+        <Heading as="h1" pt={2} size="xl" >Recent Blog Posts</Heading>
+        <Divider width="100%" mb={4} />
+        {posts.map((post) => (
+          <Stack width="100%" align="flex-start" spacing={1} key={post.title}>
+            <Link href={post.url} target={post.external ? "_blank" : "_self"}>
+              <Text>{post.title}</Text>
+            </Link>
+            <Text fontSize="sm" textAlign={"right"} color={textColor}>{post.date}</Text>
+            <Divider width="100%" />
+          </Stack>
+        ))}
+      </Flex>
+    </>
+  );
 };
 
-export default Writing;
+export const getStaticProps: GetStaticProps<WritingProps> = async () => {
+  const posts = getAllPostData();
+  return { props: { posts } };
+};
 
 Writing.getLayout = (page) => <Layout>{page}</Layout>;
 
-export async function getStaticProps() {
-  const posts = getAllPostData();
-  return { props: { posts } };
-}
-
+export default Writing;
 
 ================================================================================
 
@@ -656,6 +777,7 @@ File: scripts/generate-content.mjs
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import fs from "fs";
+
 async function writing() {
   const metadata = [];
   const basePath = path.join(process.cwd(), "content", "writing");
@@ -665,13 +787,18 @@ async function writing() {
     const contentPath = path.join(basePath, fileName);
     const fileContents = fs.readFileSync(contentPath, "utf8");
     const source = await serialize(fileContents, { parseFrontmatter: true, mdxOptions: { development: false }, });
-    return { ...source.frontmatter, url: "/" + path.join("writing", fileName.split(".")[0]), external: false, };
+    return { 
+      ...source.frontmatter, 
+      url: "/" + path.join("writing", fileName.split(".")[0]).replace(/\\/g, '/'), 
+      external: false, 
+    };
   }));
   metadata.push(...posts);
   metadata.push(...external);
   metadata.sort((a, b) => new Date(b.date) - new Date(a.date));
   fs.writeFileSync(path.join(basePath, "index.json"), JSON.stringify(metadata, undefined, 2));
 }
+
 async function books() {
   const basePath = path.join(process.cwd(), "content", "books");
   const bookPaths = fs.readdirSync(basePath, "utf8");
@@ -679,11 +806,16 @@ async function books() {
     const contentPath = path.join(basePath, fileName);
     const fileContents = fs.readFileSync(contentPath, "utf8").split("## My Notes")[0];
     const source = await serialize(fileContents, { parseFrontmatter: true, mdxOptions: { development: false }, });
-    return { ...source.frontmatter, slug: "/" + path.join("books", fileName.split(".")[0]), summary: source.compiledSource, };
+    return { 
+      ...source.frontmatter, 
+      slug: "/" + path.join("books", fileName.split(".")[0]).replace(/\\/g, '/'), 
+      summary: source.compiledSource, 
+    };
   }));
   books.sort((a, b) => new Date(b.date) - new Date(a.date));
   fs.writeFileSync(path.join(basePath, "index.json"), JSON.stringify(books, undefined, 2));
 }
+
 async function projects() {
   const metadata = [];
   const basePath = path.join(process.cwd(), "content", "projects");
@@ -693,20 +825,25 @@ async function projects() {
     const contentPath = path.join(basePath, fileName);
     const fileContents = fs.readFileSync(contentPath, "utf8");
     const source = await serialize(fileContents, { parseFrontmatter: true, mdxOptions: { development: false }, });
-    return { ...source.frontmatter, url: "/" + path.join("projects", fileName.split(".")[0]), external: false, };
+    return { 
+      ...source.frontmatter, 
+      url: "/" + path.join("projects", fileName.split(".")[0]).replace(/\\/g, '/'), 
+      external: false, 
+    };
   }));
   metadata.push(...posts);
   metadata.push(...external);
   metadata.sort((a, b) => new Date(b.date) - new Date(a.date));
   fs.writeFileSync(path.join(basePath, "index.json"), JSON.stringify(metadata, undefined, 2));
 }
+
 async function main() {
   await writing();
   await books();
   await projects();
 }
-main();
 
+main();
 
 ================================================================================
 
@@ -768,16 +905,17 @@ main();
 File: next.config.js
 
 const withMDX = require('@next/mdx')({
-    extension: /\.mdx?$/,
-    options: {
-      remarkPlugins: [],
-      rehypePlugins: [],
-    },
-  })
-  
-  module.exports = withMDX({
-    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  })
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+})
+
+module.exports = withMDX({
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  reactStrictMode: true,
+})
 
 ================================================================================
 
