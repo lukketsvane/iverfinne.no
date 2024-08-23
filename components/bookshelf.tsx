@@ -1,23 +1,21 @@
-import {Box,Icon,HStack,Flex,Heading,Image,Center,useDimensions,useBreakpointValue} from "@chakra-ui/react";
-import React, {useEffect, useState} from "react";
+// components/Bookshelf.tsx
+import {Box,Icon,HStack,Flex,Heading,Image,Center,useDimensions,useBreakpointValue,} from "@chakra-ui/react";
+import React from "react";
 import {Book} from "../lib/books";
 import {FaChevronLeft,FaChevronRight} from "react-icons/fa";
 import {useRouter} from "next/router";
-
 interface BookshelfProps {books: Book[];}
-
 export function Bookshelf({books}: BookshelfProps) {
  const router = useRouter();
- const [bookIndex, setBookIndex] = useState(-1);
- const [scroll, setScroll] = useState(0);
- const [isClient, setIsClient] = useState(false);
+ const [bookIndex, setBookIndex] = React.useState(-1);
+ const [scroll, setScroll] = React.useState(-200);
  const bookshelfRef = React.useRef<HTMLDivElement>(null);
  const viewportRef = React.useRef<HTMLDivElement>(null);
  const scrollRightRef = React.useRef<HTMLDivElement>(null);
  const scrollLeftRef = React.useRef<HTMLDivElement>(null);
  const viewportDimensions = useDimensions(viewportRef, true);
- const [isScrolling, setIsScrolling] = useState(false);
- const [booksInViewport, setBooksInViewport] = useState(0);
+ const [isScrolling, setIsScrolling] = React.useState(false);
+ const [booksInViewport, setBooksInViewport] = React.useState(0);
  const scrollEvents = useBreakpointValue({base: { start: "touchstart", stop: "touchend" },sm: { start: "mouseenter", stop: "mouseleave" },});
  const width = 41.5;
  const height = 220;
@@ -27,69 +25,12 @@ export function Bookshelf({books}: BookshelfProps) {
  const bookHeight = `${height}px`;
  const minScroll = 0;
  const maxScroll = React.useMemo(() => (width + 12) * (books.length - booksInViewport) + (bookIndex > -1 ? width * 4 : 0) + 5, [bookIndex, books.length, booksInViewport]);
- 
  const boundedScroll = (scrollX: number) => {setScroll(Math.max(minScroll, Math.min(maxScroll, scrollX)));};
  const boundedRelativeScroll = React.useCallback((incrementX: number) => {setScroll((_scroll) => Math.max(minScroll, Math.min(maxScroll, _scroll + incrementX)));}, [maxScroll]);
- 
- useEffect(() => {
-   setIsClient(true);
-   if (router.query.slug && router.query.slug.length > 0 && bookIndex === -1) {
-     const idx = books.findIndex((b) => b.slug.toLowerCase().includes((router.query.slug as string[])[0].toLowerCase()));
-     setBookIndex(idx);
-   }
- }, [router.query.slug, books, bookIndex]);
- 
- useEffect(() => {
-   if (isClient) {
-     if (bookIndex === -1) {
-       boundedRelativeScroll(0);
-     } else {
-       boundedScroll((bookIndex - (booksInViewport - 4.5) / 2) * (width + 11));
-     }
-   }
- }, [isClient, bookIndex, boundedRelativeScroll, boundedScroll, booksInViewport, width]);
- 
- useEffect(() => {
-   if (isClient && viewportDimensions) {
-     boundedRelativeScroll(0);
-     const numberOfBooks = viewportDimensions.contentBox.width / (width + 11);
-     setBooksInViewport(numberOfBooks);
-   }
- }, [isClient, viewportDimensions, boundedRelativeScroll, width]);
- 
- useEffect(() => {
-   if (!isClient || !scrollEvents) return;
-   const currentScrollEvents = { ...scrollEvents };
-   const currentScrollRightRef = scrollRightRef.current;
-   const currentScrollLeftRef = scrollLeftRef.current;
-   let scrollInterval: NodeJS.Timeout | null = null;
-   const setScrollRightInterval = () => {
-     setIsScrolling(true);
-     scrollInterval = setInterval(() => {boundedRelativeScroll(3);}, 10);
-   };
-   const setScrollLeftInterval = () => {
-     setIsScrolling(true);
-     scrollInterval = setInterval(() => {boundedRelativeScroll(-3);}, 10);
-   };
-   const clearScrollInterval = () => {
-     setIsScrolling(false);
-     if (scrollInterval) {clearInterval(scrollInterval);}
-   };
-   currentScrollRightRef?.addEventListener(currentScrollEvents.start, setScrollRightInterval);
-   currentScrollRightRef?.addEventListener(currentScrollEvents.stop, clearScrollInterval);
-   currentScrollLeftRef?.addEventListener(currentScrollEvents.start, setScrollLeftInterval);
-   currentScrollLeftRef?.addEventListener(currentScrollEvents.stop, clearScrollInterval);
-   return () => {
-     clearScrollInterval();
-     currentScrollRightRef?.removeEventListener(currentScrollEvents.start, setScrollRightInterval);
-     currentScrollRightRef?.removeEventListener(currentScrollEvents.stop, clearScrollInterval);
-     currentScrollLeftRef?.removeEventListener(currentScrollEvents.start, setScrollLeftInterval);
-     currentScrollLeftRef?.removeEventListener(currentScrollEvents.stop, clearScrollInterval);
-   };
- }, [isClient, scrollEvents, boundedRelativeScroll]);
- 
- if (!isClient) return null;
-
+ React.useEffect(() => {if (router.query.slug && router.query.slug.length > 0 && bookIndex === -1) {const idx = books.findIndex((b) => b.slug.toLowerCase().includes((router.query.slug as string[])[0].toLowerCase()));setBookIndex(idx);}}, []);
+ React.useEffect(() => {if (bookIndex === -1) {boundedRelativeScroll(0);} else {boundedScroll((bookIndex - (booksInViewport - 4.5) / 2) * (width + 11));}}, [bookIndex, boundedRelativeScroll]);
+ React.useEffect(() => {if (viewportDimensions) {boundedRelativeScroll(0);const numberOfBooks = viewportDimensions.contentBox.width / (width + 11);setBooksInViewport(numberOfBooks);}}, [viewportDimensions, boundedRelativeScroll]);
+ React.useEffect(() => {if (!scrollEvents) {return;}const currentScrollEvents = { ...scrollEvents };const currentScrollRightRef = scrollRightRef.current;const currentScrollLeftRef = scrollLeftRef.current;let scrollInterval: NodeJS.Timeout | null = null;const setScrollRightInterval = () => {setIsScrolling(true);scrollInterval = setInterval(() => {boundedRelativeScroll(3);}, 10);};const setScrollLeftInterval = () => {setIsScrolling(true);scrollInterval = setInterval(() => {boundedRelativeScroll(-3);}, 10);};const clearScrollInterval = () => {setIsScrolling(false);if (scrollInterval) {clearInterval(scrollInterval);}};currentScrollRightRef!.addEventListener(currentScrollEvents.start, setScrollRightInterval);currentScrollRightRef!.addEventListener(currentScrollEvents.stop, clearScrollInterval);currentScrollLeftRef!.addEventListener(currentScrollEvents.start, setScrollLeftInterval);currentScrollLeftRef!.addEventListener(currentScrollEvents.stop, clearScrollInterval);return () => {clearScrollInterval();currentScrollRightRef!.removeEventListener(currentScrollEvents.start, setScrollRightInterval);currentScrollRightRef!.removeEventListener(currentScrollEvents.stop, clearScrollInterval);currentScrollLeftRef!.removeEventListener(currentScrollEvents.start, setScrollLeftInterval);currentScrollLeftRef!.removeEventListener(currentScrollEvents.stop, clearScrollInterval);};}, [boundedRelativeScroll]);
  return (
  <>
 <svg style={{position: "absolute",inset: 0,visibility: "hidden",}}><defs><filter id="paper" x="0%" y="0%" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="8" result="noise" /><feDiffuseLighting in="noise" lightingColor="white" surfaceScale="1" result="diffLight"><feDistantLight azimuth="45" elevation="35" /></feDiffuseLighting></filter></defs></svg>
