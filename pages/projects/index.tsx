@@ -6,12 +6,19 @@ import type { NextPageWithLayout } from "next";
 import Layout from "../../components/layout";
 import { NextSeo } from "next-seo";
 import { Timeline } from "../../components/timeline";
-interface ProjectsProps { projects: Project[]; timeline: TimelineItem[]; }
+import { GetStaticProps } from "next";
+
+interface ProjectsProps { 
+  projects: Project[]; 
+  timeline: TimelineItem[]; 
+}
+
 const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const latestProjects = projects.slice(0, 3);
+  
   return (
     <>
       <NextSeo title="Projects | Iver Finne" />
@@ -27,17 +34,28 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
             </Link>
           ))}
         </SimpleGrid>
-        <Stack direction="column" width="100%" spacing={4} mb={4}><Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-          <Timeline items={timeline} searchQuery={searchQuery} typeFilter={typeFilter} categoryFilter={categoryFilter} onTypeFilterChange={(type) => setTypeFilter(type)} onCategoryFilterChange={(category) => setCategoryFilter(category)} />
+        <Stack direction="column" width="100%" spacing={4} mb={4}>
+          <Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          <Timeline 
+            items={timeline} 
+            searchQuery={searchQuery} 
+            typeFilter={typeFilter} 
+            categoryFilter={categoryFilter} 
+            onTypeFilterChange={setTypeFilter} 
+            onCategoryFilterChange={setCategoryFilter} 
+          />
         </Stack>
       </Flex>
     </>
   );
 };
-export default Projects;
-Projects.getLayout = (page) => <Layout>{page}</Layout>;
-export async function getStaticProps() {
+
+export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
   const projects = getAllProjectData();
   const timeline = getTimelineData();
   return { props: { projects, timeline } };
-}
+};
+
+Projects.getLayout = (page) => <Layout>{page}</Layout>;
+
+export default Projects;

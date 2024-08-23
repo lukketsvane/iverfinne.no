@@ -4,7 +4,7 @@
     "description": "exploring the intersection of knowledge graphs and language models",
     "date": "May 22, 2024",
     "image": "/images/knowledge-graph-llms.png",
-    "url": "/writing\\knowledge-graphs-and-llms",
+    "url": "/writing/knowledge-graphs-and-llms",
     "external": false
   },
   {
@@ -12,21 +12,21 @@
     "description": "exploring an innovative approach to reduce latency in conversational ai through anticipation",
     "date": "May 19, 2024",
     "image": "/images/predictive-chat-overview.png",
-    "url": "/writing\\predictive-chat",
+    "url": "/writing/predictive-chat",
     "external": false
   },
   {
     "title": "Gradient Descent",
     "description": "An exploration into the fusion of art and AI through GAN and diffusion models, culminating in the creation of unique gradient artworks.",
     "date": "April 1, 2024",
-    "url": "/writing\\gradient-descent",
+    "url": "/writing/gradient-descent",
     "external": false
   },
   {
     "title": "Economic Agency in a Post-Labor World",
     "description": "Exploring the shift towards a post-labor economy and the role of economic agency",
     "date": "March 28, 2024",
-    "url": "/writing\\post-labour",
+    "url": "/writing/post-labour",
     "external": false
   },
   {
@@ -34,21 +34,21 @@
     "description": "A deep dive into the essence and categories of generative art",
     "date": "March 26, 2024",
     "image": "/images/generative-art-explained.png",
-    "url": "/writing\\what-is-gen-art",
+    "url": "/writing/what-is-gen-art",
     "external": false
   },
   {
     "title": "A Person of Compute",
     "description": "Delving into computational power, conceptualizing 'people of compute', and the advancements in GPU capabilities with a focus on PFLOPS and energy efficiency.",
     "date": "January 26, 2024",
-    "url": "/writing\\person-of-compute",
+    "url": "/writing/person-of-compute",
     "external": false
   },
   {
     "title": "AI-Driven Novel Generation Systems: From Concept to Creation",
     "description": "Thoughts from younger me on what defines meaning in life",
     "date": "November 26, 2023",
-    "url": "/writing\\ai-novel-generation",
+    "url": "/writing/ai-novel-generation",
     "external": false
   },
   {
@@ -56,7 +56,7 @@
     "description": "Exploring the monumental growth of computational power, the concept of 'people of compute', and the future of GPUs in terms of PFLOPS and energy efficiency.",
     "image": "https://www.exampleimageurl.com/path/to/image.jpg",
     "date": "February 4, 2021",
-    "url": "/writing\\big-compute",
+    "url": "/writing/big-compute",
     "external": false
   }
 ]

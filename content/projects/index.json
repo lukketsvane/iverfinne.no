@@ -4,7 +4,7 @@
     "description": "Se etter jobbmuligheter",
     "date": "2024-04-19",
     "image": "/images/jobbi/jobbi-web1.jpg",
-    "url": "/projects\\jobbi",
+    "url": "/projects/jobbi",
     "external": false
   },
   {
@@ -12,7 +12,7 @@
     "description": "A look into Korall Engineering's innovative approach to design and manufacturing.",
     "date": "2024-03-30",
     "image": "/images/coral/coral_11.png",
-    "url": "/projects\\coral",
+    "url": "/projects/coral",
     "external": false
   },
   {
@@ -20,7 +20,7 @@
     "description": "As an Executive Designer at DongJin Tableware in Yangxin, Shandong, China, I led a team focused on marketing, design, and production. Specialized in graphic design, 3D modeling, and photography for product presentations and catalogs.",
     "date": "2023-08-26",
     "image": "/images/dongjin/dongjin-logo.jpg",
-    "url": "/projects\\dongjin",
+    "url": "/projects/dongjin",
     "external": false
   },
   {
@@ -28,7 +28,7 @@
     "description": "StoryGen is an AI-driven platform designed to create real-time narratives based on user inputs. Primarily focused on generating children's stories, the project aims to make storytelling accessible to everyone.",
     "date": "2023-08-26",
     "image": "/images/storygen/simplified_graph.jpeg",
-    "url": "/projects\\storygen",
+    "url": "/projects/storygen",
     "external": false
   },
   {
@@ -36,7 +36,7 @@
     "description": "Innovating the future of agriculture through automated, energy-efficient vertical farming solutions.",
     "date": "2018-01-01",
     "image": "/images/ygdrasyl/ygdrasyl_2.png",
-    "url": "/projects\\ygdrasyl",
+    "url": "/projects/ygdrasyl",
     "external": false
   }
 ]
