@@ -6,24 +6,18 @@ import type { NextPageWithLayout } from "next";
 import Layout from "../../components/layout";
 import { NextSeo } from "next-seo";
 import { Timeline } from "../../components/timeline";
-import { GetStaticProps } from "next";
-
-interface ProjectsProps { 
-  projects: Project[]; 
-  timeline: TimelineItem[]; 
-}
-
+interface ProjectsProps { projects: Project[]; timeline: TimelineItem[]; }
 const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const latestProjects = projects.slice(0, 3);
-  
   return (
     <>
       <NextSeo title="Projects | Iver Finne" />
       <Flex direction="column" align="flex-start" width="100%" gap={3}>
         <Heading as="h1" pt={2} size="xl">build-in-public log</Heading>
+        <Text fontSize="0.9em" mb={6}>refuge for my poorly posed conjectures, research still pending.</Text>
         <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} spacing={4} width="100%" mb={6}>
           {latestProjects.map((project) => (
             <Link key={project.title} href={project.url} isExternal>
@@ -34,28 +28,17 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
             </Link>
           ))}
         </SimpleGrid>
-        <Stack direction="column" width="100%" spacing={4} mb={4}>
-          <Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-          <Timeline 
-            items={timeline} 
-            searchQuery={searchQuery} 
-            typeFilter={typeFilter} 
-            categoryFilter={categoryFilter} 
-            onTypeFilterChange={setTypeFilter} 
-            onCategoryFilterChange={setCategoryFilter} 
-          />
+        <Stack direction="column" width="100%" spacing={4} mb={4}><Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          <Timeline items={timeline} searchQuery={searchQuery} typeFilter={typeFilter} categoryFilter={categoryFilter} onTypeFilterChange={(type) => setTypeFilter(type)} onCategoryFilterChange={(category) => setCategoryFilter(category)} />
         </Stack>
       </Flex>
     </>
   );
 };
-
-export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
+export default Projects;
+Projects.getLayout = (page) => <Layout>{page}</Layout>;
+export async function getStaticProps() {
   const projects = getAllProjectData();
   const timeline = getTimelineData();
   return { props: { projects, timeline } };
-};
-
-Projects.getLayout = (page) => <Layout>{page}</Layout>;
-
-export default Projects;
+}
