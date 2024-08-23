@@ -1,5 +1,23 @@
 [
   {
+    "date": "7/22/2024",
+    "title": "AHO Slot",
+    "description": "A slot machine game designed for the Oslo School of Architecture and Design (AHO).",
+    "tags": ["public", "game", "design"],
+    "type": "public",
+    "category": "game",
+    "url": "https://aho-slot.vercel.app/"
+  },
+  {
+    "date": "7/16/2024",
+    "title": "Matlas",
+    "description": "An interactive atlas of materials, showcasing various properties and applications.",
+    "tags": ["public", "education", "materials"],
+    "type": "public",
+    "category": "education",
+    "url": "https://matlas.vercel.app/"
+  },
+  {
     "date": "4/19/2024",
     "title": "jobbi: Autonom assistent for jobbsøk",
     "description": "få",
