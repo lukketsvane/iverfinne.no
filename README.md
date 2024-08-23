@@ -26,9 +26,11 @@
    yarn generate:sitemap
    ```
 
-#### Content Management
-- Add new books, buildlog, or writings in the `content` directory.
-- Run `yarn generate:content` to update the index files.
-
-#### License
-This buildlog is licensed under the MIT License.
+git add .
+git commit -m "Update dependencies and configurations"
+git push origin main
+rm -rf node_modules yarn.lock
+yarn install
+yarn build
+yarn start
+vercel --prod

@@ -1,5 +1,5 @@
 import { Container, VStack, Text, Flex, Box, HStack, Menu, MenuButton, IconButton, MenuList, MenuItem, Icon, MenuGroup, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
-import Link from "next/link";
+import NextLink from 'next/link';
 import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 import { FiMenu } from "react-icons/fi";
@@ -9,12 +9,30 @@ function Navigation({ link, children, isExternal }: { link: string; children: st
   const isActive = link === "/" ? router.asPath === link : router.asPath.includes(link);
   const activeColor = useColorModeValue("black", "#fafafa");
   const inactiveColor = useColorModeValue("gray.600", "rgba(255, 255, 255, 0.50)");
+
+  const content = (
+    <Text
+      as="span"
+      fontSize="lg"
+      color={isActive ? activeColor : inactiveColor}
+      _hover={{ color: activeColor }}
+    >
+      {children}
+    </Text>
+  );
+
+  if (isExternal) {
+    return (
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        {content}
+      </a>
+    );
+  }
+
   return (
-    <Link href={link} passHref>
-      <Text as="a" target={isExternal ? "_blank" : "_self"} fontSize="lg" color={isActive ? activeColor : inactiveColor} _hover={{ color: activeColor }}>
-        {children}
-      </Text>
-    </Link>
+    <NextLink href={link} passHref legacyBehavior>
+      <a>{content}</a>
+    </NextLink>
   );
 }
 

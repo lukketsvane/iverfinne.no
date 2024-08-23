@@ -1,5 +1,5 @@
-import { Flex, Heading, Image, Stack, VStack, Text, Divider, Link, Box, Spinner } from "@chakra-ui/react";
-import { GetStaticPropsContext } from "next";
+import { Flex, Heading, Image, Stack, VStack, Text, Divider, Link, Box } from "@chakra-ui/react";
+import { GetStaticPropsContext, NextPage } from "next";
 import Layout from "../../components/layout";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
@@ -13,61 +13,101 @@ interface BooksProps {
   book?: Book & { content: MDXRemoteSerializeResult };
 }
 
-const BookDetails: React.FC<{ book: Book & { content: MDXRemoteSerializeResult } }> = ({ book }) => (
-  <>
-    <NextSeo
-      title={book.title}
-      description={`By: ${book.author} - Read: ${book.date} - Rating: ${book.rating}/10`}
-      openGraph={{
-        title: book.title,
-        description: `By: ${book.author} - Read: ${book.date} - Rating: ${book.rating}/10`,
-      }}
-    />
-    <Stack spacing={6}>
-      <VStack align="flex-start" spacing={2}>
-        <Heading size="xl">{book.title}</Heading>
-        <Text fontSize="xl" fontWeight="bold" color="gray.600">By: {book.author}</Text>
-        <Text color="gray.500">Read: {book.date} • Rating: {book.rating}/10</Text>
-      </VStack>
-      <Image src={book.coverImage} alt={book.title} maxHeight="400px" objectFit="contain" />
-      <Prose><MDXRemote {...book.content} /></Prose>
-    </Stack>
-  </>
-);
+type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactElement;
+};
+
+const BookDetails: React.FC<{ book: Book & { content: MDXRemoteSerializeResult } }> = ({ book }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // or a loading spinner
+  }
+
+  return (
+    <>
+      <NextSeo
+        title={book.title}
+        description={`By: ${book.author} - Read: ${book.date} - Rating: ${book.rating}/10`}
+        openGraph={{
+          title: book.title,
+          description: `By: ${book.author} - Read: ${book.date} - Rating: ${book.rating}/10`,
+        }}
+      />
+      <Stack spacing={6}>
+        <VStack align="flex-start" spacing={2}>
+          <Heading size="xl">{book.title}</Heading>
+          <Text fontSize="xl" fontWeight="bold" color="gray.600">
+            By: {book.author}
+          </Text>
+          <Text color="gray.500">
+            Read: {book.date} • Rating: {book.rating}/10
+          </Text>
+        </VStack>
+        <Image
+          src={book.coverImage}
+          alt={book.title}
+          maxHeight="400px"
+          objectFit="contain"
+        />
+        <Prose>
+          <MDXRemote {...book.content} />
+        </Prose>
+      </Stack>
+    </>
+  );
+};
 
 const BookList: React.FC<{ books: Book[] }> = ({ books }) => (
   <>
     <NextSeo title="Books | Iver Finne" />
     <Stack spacing={8}>
-      {books.sort((a, b) => b.rating - a.rating).map((book) => (
-        <Box key={book.title} scrollMarginTop={20}>
-          <Flex direction={{ base: "column", md: "row" }} align="flex-start" gap={6}>
-            <Image border="1px solid" borderColor="gray.200" src={book.coverImage} alt={book.title} height={{ base: "200px", md: "250px" }} objectFit="contain" />
-            <VStack align="flex-start" flexGrow={1} spacing={3}>
-              <Link href={`/books/${book.slug.replace(/^\/books\//, '')}`}>
-                <Heading size="lg">{book.title}</Heading>
-              </Link>
-              <Text fontSize="lg" fontWeight="medium">{book.author}</Text>
-              <Text color="gray.600">Read: {book.date} • Rating: {book.rating}/10</Text>
-              <Text>{book.summary}</Text>
-            </VStack>
-          </Flex>
-          <Divider mt={8} />
-        </Box>
-      ))}
+      {books
+        .sort((a, b) => b.rating - a.rating)
+        .map((book) => (
+          <Box key={book.title} scrollMarginTop={20}>
+            <Flex direction={{ base: "column", md: "row" }} align="flex-start" gap={6}>
+              <Image
+                border="1px solid"
+                borderColor="gray.200"
+                src={book.coverImage}
+                alt={book.title}
+                height={{ base: "200px", md: "250px" }}
+                objectFit="contain"
+              />
+              <VStack align="flex-start" flexGrow={1} spacing={3}>
+                <Link href={`/books/${book.slug.replace(/^\/books\//, '')}`}>
+                  <Heading size="lg">{book.title}</Heading>
+                </Link>
+                <Text fontSize="lg" fontWeight="medium">
+                  {book.author}
+                </Text>
+                <Text color="gray.600">
+                  Read: {book.date} • Rating: {book.rating}/10
+                </Text>
+                <Text>{book.summary}</Text>
+              </VStack>
+            </Flex>
+            <Divider mt={8} />
+          </Box>
+        ))}
     </Stack>
   </>
 );
 
-const Books: React.FC<BooksProps> = ({ books, book }) => {
-  const [isClient, setIsClient] = useState(false);
+const Books: NextPageWithLayout<BooksProps> = ({ books, book }) => {
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
+    setIsMounted(true);
   }, []);
 
-  if (!isClient) {
-    return <Spinner />;
+  if (!isMounted) {
+    return null; // or a loading spinner
   }
 
   return book ? <BookDetails book={book} /> : <BookList books={books} />;
@@ -96,7 +136,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   if (params.slug.length > 1) {
     return { redirect: { destination: "/books", permanent: false } };
   }
-  const book = await getBook(params.slug[0] as string);
+  const book = await getBook(params.slug[0]);
   if (!book) {
     return { redirect: { destination: "/books", permanent: false } };
   }
