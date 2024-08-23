@@ -17,7 +17,6 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
       <NextSeo title="Projects | Iver Finne" />
       <Flex direction="column" align="flex-start" width="100%" gap={3}>
         <Heading as="h1" pt={2} size="xl">build-in-public log</Heading>
-        <Text fontSize="0.9em" mb={6}>refuge for my poorly posed conjectures, research still pending.</Text>
         <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} spacing={4} width="100%" mb={6}>
           {latestProjects.map((project) => (
             <Link key={project.title} href={project.url} isExternal>
