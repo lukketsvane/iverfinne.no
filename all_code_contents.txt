@@ -1,0 +1,783 @@
+File: pages/books/[[...slug]].tsx
+
+import { Flex, Heading, Image, Stack, VStack, Text, Divider, Link, Box, Spinner } from "@chakra-ui/react";
+import { GetStaticPropsContext, NextPage } from "next";
+import Layout from "../../components/layout";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { Book, getAllBooks, getAllSlugs, getBook } from "../../lib/books";
+import { Bookshelf } from "../../components/bookshelf";
+import { NextSeo } from "next-seo";
+import { ReactElement, useEffect, useState } from "react";
+
+interface BooksProps {
+  books: Book[];
+  book?: Book & { content: MDXRemoteSerializeResult };
+}
+
+type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactElement;
+};
+
+const BookDetails: React.FC<{ book: Book & { content: MDXRemoteSerializeResult } }> = ({ book }) => {
+  return (
+    <>
+      <NextSeo
+        title={book.title}
+        description={`By: ${book.author} - Read: ${book.date} - Rating: ${book.rating}/10`}
+        openGraph={{
+          title: book.title,
+          description: `By: ${book.author} - Read: ${book.date} - Rating: ${book.rating}/10`,
+        }}
+      />
+      <Stack spacing={6}>
+        <VStack align="flex-start" spacing={2}>
+          <Heading size="xl">{book.title}</Heading>
+          <Text fontSize="xl" fontWeight="bold" color="gray.600">
+            By: {book.author}
+          </Text>
+          <Text color="gray.500">
+            Read: {book.date} • Rating: {book.rating}/10
+          </Text>
+        </VStack>
+        <Image
+          src={book.coverImage}
+          alt={book.title}
+          maxHeight="400px"
+          objectFit="contain"
+        />
+        <Prose>
+          <MDXRemote {...book.content} />
+        </Prose>
+      </Stack>
+    </>
+  );
+};
+
+const BookList: React.FC<{ books: Book[] }> = ({ books }) => (
+  <>
+    <NextSeo title="Books | Iver Finne" />
+    <Stack spacing={8}>
+      {books
+        .sort((a, b) => b.rating - a.rating)
+        .map((book) => (
+          <Box key={book.title} scrollMarginTop={20}>
+            <Flex direction={{ base: "column", md: "row" }} align="flex-start" gap={6}>
+              <Image
+                border="1px solid"
+                borderColor="gray.200"
+                src={book.coverImage}
+                alt={book.title}
+                height={{ base: "200px", md: "250px" }}
+                objectFit="contain"
+              />
+              <VStack align="flex-start" flexGrow={1} spacing={3}>
+                <Link href={`/books/${book.slug.replace(/^\/books\//, '')}`}>
+                  <Heading size="lg">{book.title}</Heading>
+                </Link>
+                <Text fontSize="lg" fontWeight="medium">
+                  {book.author}
+                </Text>
+                <Text color="gray.600">
+                  Read: {book.date} • Rating: {book.rating}/10
+                </Text>
+                <Text>{book.summary}</Text>
+              </VStack>
+            </Flex>
+            <Divider mt={8} />
+          </Box>
+        ))}
+    </Stack>
+  </>
+);
+
+const Books: NextPageWithLayout<BooksProps> = ({ books, book }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return <Spinner />;
+  }
+
+  return book ? <BookDetails book={book} /> : <BookList books={books} />;
+};
+
+Books.getLayout = (page: ReactElement) => (
+  <Layout>
+    <Flex direction="column" gap={8}>
+      <Bookshelf books={(page.props as BooksProps).books} />
+      <Divider />
+      {page}
+    </Flex>
+  </Layout>
+);
+
+export async function getStaticPaths() {
+  const paths = getAllSlugs();
+  return { paths: [{ params: { slug: [] } }, ...paths], fallback: false };
+}
+
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const books = getAllBooks();
+  if (!params?.slug || params.slug.length === 0) {
+    return { props: { books } };
+  }
+  if (params.slug.length > 1) {
+    return { redirect: { destination: "/books", permanent: false } };
+  }
+  const book = await getBook(params.slug[0]);
+  if (!book) {
+    return { redirect: { destination: "/books", permanent: false } };
+  }
+  return { props: { books, book } };
+}
+
+export default Books;
+
+================================================================================
+
+File: lib/books.ts
+
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import path from 'path';
+import fs from 'fs';
+import matter from 'gray-matter';
+
+export interface Book {
+  title: string;
+  author: string;
+  date: string;
+  rating: number;
+  coverImage: string;
+  spineColor: string;
+  textColor: string;
+  slug: string;
+  summary: string;
+}
+
+export function getAllBooks(): Book[] {
+  const booksPath = path.join(process.cwd(), 'content', 'books');
+  const bookFiles = fs.readdirSync(booksPath).filter(file => file.endsWith('.mdx'));
+  
+  return bookFiles.map(file => {
+    const filePath = path.join(booksPath, file);
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const { data } = matter(fileContents);
+    return {
+      ...data,
+      slug: `/books/${file.replace('.mdx', '')}`,
+    } as Book;
+  });
+}
+
+export function getAllSlugs(): { params: { slug: string[] } }[] {
+  const books = getAllBooks();
+  return books.map(book => ({
+    params: { slug: [book.slug.replace(/^\/books\//, '')] }
+  }));
+}
+
+export async function getBook(slug: string): Promise<(Book & { content: MDXRemoteSerializeResult }) | undefined> {
+  const books = getAllBooks();
+  const book = books.find(b => b.slug.replace(/^\/books\//, '') === slug);
+  if (!book) {
+    return undefined;
+  }
+  const fullPath = path.join(process.cwd(), 'content', 'books', `${slug}.mdx`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { content, data } = matter(fileContents);
+  const mdxSource = await serialize(content);
+  return { ...book, ...data, content: mdxSource };
+}
+
+================================================================================
+
+File: components/bookshelf.tsx
+
+// components/Bookshelf.tsx
+import {Box,Icon,HStack,Flex,Heading,Image,Center,useDimensions,useBreakpointValue,} from "@chakra-ui/react";
+import React from "react";
+import {Book} from "../lib/books";
+import {FaChevronLeft,FaChevronRight} from "react-icons/fa";
+import {useRouter} from "next/router";
+interface BookshelfProps {books: Book[];}
+export function Bookshelf({books}: BookshelfProps) {
+ const router = useRouter();
+ const [bookIndex, setBookIndex] = React.useState(-1);
+ const [scroll, setScroll] = React.useState(-200);
+ const bookshelfRef = React.useRef<HTMLDivElement>(null);
+ const viewportRef = React.useRef<HTMLDivElement>(null);
+ const scrollRightRef = React.useRef<HTMLDivElement>(null);
+ const scrollLeftRef = React.useRef<HTMLDivElement>(null);
+ const viewportDimensions = useDimensions(viewportRef, true);
+ const [isScrolling, setIsScrolling] = React.useState(false);
+ const [booksInViewport, setBooksInViewport] = React.useState(0);
+ const scrollEvents = useBreakpointValue({base: { start: "touchstart", stop: "touchend" },sm: { start: "mouseenter", stop: "mouseleave" },});
+ const width = 41.5;
+ const height = 220;
+ const spineWidth = `${width}px`;
+ const coverWidth = `${width * 4}px`;
+ const bookWidth = `${width * 5}px`;
+ const bookHeight = `${height}px`;
+ const minScroll = 0;
+ const maxScroll = React.useMemo(() => (width + 12) * (books.length - booksInViewport) + (bookIndex > -1 ? width * 4 : 0) + 5, [bookIndex, books.length, booksInViewport]);
+ const boundedScroll = (scrollX: number) => {setScroll(Math.max(minScroll, Math.min(maxScroll, scrollX)));};
+ const boundedRelativeScroll = React.useCallback((incrementX: number) => {setScroll((_scroll) => Math.max(minScroll, Math.min(maxScroll, _scroll + incrementX)));}, [maxScroll]);
+ React.useEffect(() => {if (router.query.slug && router.query.slug.length > 0 && bookIndex === -1) {const idx = books.findIndex((b) => b.slug.toLowerCase().includes((router.query.slug as string[])[0].toLowerCase()));setBookIndex(idx);}}, []);
+ React.useEffect(() => {if (bookIndex === -1) {boundedRelativeScroll(0);} else {boundedScroll((bookIndex - (booksInViewport - 4.5) / 2) * (width + 11));}}, [bookIndex, boundedRelativeScroll]);
+ React.useEffect(() => {if (viewportDimensions) {boundedRelativeScroll(0);const numberOfBooks = viewportDimensions.contentBox.width / (width + 11);setBooksInViewport(numberOfBooks);}}, [viewportDimensions, boundedRelativeScroll]);
+ React.useEffect(() => {if (!scrollEvents) {return;}const currentScrollEvents = { ...scrollEvents };const currentScrollRightRef = scrollRightRef.current;const currentScrollLeftRef = scrollLeftRef.current;let scrollInterval: NodeJS.Timeout | null = null;const setScrollRightInterval = () => {setIsScrolling(true);scrollInterval = setInterval(() => {boundedRelativeScroll(3);}, 10);};const setScrollLeftInterval = () => {setIsScrolling(true);scrollInterval = setInterval(() => {boundedRelativeScroll(-3);}, 10);};const clearScrollInterval = () => {setIsScrolling(false);if (scrollInterval) {clearInterval(scrollInterval);}};currentScrollRightRef!.addEventListener(currentScrollEvents.start, setScrollRightInterval);currentScrollRightRef!.addEventListener(currentScrollEvents.stop, clearScrollInterval);currentScrollLeftRef!.addEventListener(currentScrollEvents.start, setScrollLeftInterval);currentScrollLeftRef!.addEventListener(currentScrollEvents.stop, clearScrollInterval);return () => {clearScrollInterval();currentScrollRightRef!.removeEventListener(currentScrollEvents.start, setScrollRightInterval);currentScrollRightRef!.removeEventListener(currentScrollEvents.stop, clearScrollInterval);currentScrollLeftRef!.removeEventListener(currentScrollEvents.start, setScrollLeftInterval);currentScrollLeftRef!.removeEventListener(currentScrollEvents.stop, clearScrollInterval);};}, [boundedRelativeScroll]);
+ return (
+ <>
+<svg style={{position: "absolute",inset: 0,visibility: "hidden",}}><defs><filter id="paper" x="0%" y="0%" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="8" result="noise" /><feDiffuseLighting in="noise" lightingColor="white" surfaceScale="1" result="diffLight"><feDistantLight azimuth="45" elevation="35" /></feDiffuseLighting></filter></defs></svg>
+<Box position="relative" ref={bookshelfRef}>
+<Box position="absolute" left={{ base: "-28px", md: "-36px" }} height="100%" display={scroll > minScroll ? "block" : "none"}><Center ref={scrollLeftRef} borderRadius="md" height="100%" width="28px" _hover={{ bg: "gray.100" }} borderRightRadius={{ base: 0, md: undefined }}><Icon as={FaChevronLeft} boxSize={3} /></Center></Box>
+<HStack alignItems="center" gap={1} overflowX="hidden" cursor="grab" ref={viewportRef}>{books.map((book, index) => (<button key={book.title} onClick={() => {if (index === bookIndex) {setBookIndex(-1);router.push(`/books`);} else {setBookIndex(index);router.push(book.slug);}}}
+ style={{display: "flex",flexDirection: "row",alignItems: "center",justifyContent: "flex-start",outline: "none",flexShrink: 0,transform: `translateX(-${scroll}px)`,width: bookIndex === index ? bookWidth : spineWidth,perspective: "1000px",WebkitPerspective: "1000px",gap: "0px",transition: isScrolling ? `transform 100ms linear` : `all 500ms ease`,willChange: "auto",}}><Flex alignItems="flex-start" justifyContent="center" width={spineWidth} height={bookHeight} flexShrink={0} transformOrigin="right" backgroundColor={book.spineColor} color={book.textColor} transform={`translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(${bookIndex === index ? "-60deg" : "0deg"}) rotateZ(0deg) skew(0deg, 0deg)`} transition={"all 500ms ease"} willChange="auto" filter="brightness(0.8) contrast(2)"
+style={{transformStyle: "preserve-3d",}}><span
+style={{pointerEvents: "none",position: "fixed",top: 0,left: 0,zIndex: 50,height: bookHeight,width: spineWidth,opacity: 0.4,filter: "url(#paper)",}} /><Heading mt="12px" as="h2" fontSize="xs" fontFamily={`"DM Sans", sans-serif`} style={{ writingMode: "vertical-rl" }} userSelect="none" textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden" maxHeight={`${height - 24}px`}>{book.title}</Heading></Flex><Box position="relative" flexShrink={0} overflow="hidden" transformOrigin="left" transform={`translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(${bookIndex === index ? "30deg" : "88.8deg"}) rotateZ(0deg) skew(0deg, 0deg)`} transition={"all 500ms ease"} willChange="auto" filter="brightness(0.8) contrast(2)"
+style={{transformStyle: "preserve-3d",}}><span
+style={{pointerEvents: "none",position: "fixed",top: 0,right: 0,zIndex: 50,height: bookHeight,width: coverWidth,opacity: 0.4,filter: "url(#paper)",}} /><span
+style={{pointerEvents: "none",position: "absolute",top: 0,left: 0,zIndex: 50,height: bookHeight,width: coverWidth,background: `linear-gradient(to right, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.5) 3px, rgba(255, 255, 255, 0.25) 4px, rgba(255, 255, 255, 0.25) 6px, transparent 7px, transparent 9px, rgba(255, 255, 255, 0.25) 9px, transparent 12px)`,}} /><Image src={book.coverImage} alt={book.title} width={coverWidth} height={bookHeight}
+style={{transition: "all 500ms ease",willChange: "auto",}} /></Box></button>))}</HStack>
+<Box position="absolute" right={{ base: "-28px", md: "-36px" }} pl="10px" height="100%" top={0} display={scroll < maxScroll ? "block" : "none"}><Center borderLeftRadius={{ base: 0, md: undefined }} ref={scrollRightRef} height="100%" borderRadius="md" width="28px" _hover={{ bg: "gray.100" }}><Icon as={FaChevronRight} boxSize={3} /></Center></Box>
+</Box>
+ </>
+ );
+}
+
+================================================================================
+
+File: pages/_app.tsx
+
+// pages/_app.tsx
+import type { AppProps } from 'next/app';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { Prose, withProse } from '@nikolovlazar/chakra-ui-prose';
+import Layout from '../components/layout';
+import { ReactElement } from 'react';
+import { DefaultSeo } from 'next-seo';
+import React from 'react';
+import { Global } from '@emotion/react';
+import { Lora } from '@next/font/google';
+const lora = Lora({ subsets: ['latin'], display: 'swap' });
+const theme = extendTheme({
+  fonts: { heading: lora.style.fontFamily, body: lora.style.fontFamily },
+  config: { initialColorMode: 'light', useSystemColorMode: true },
+  styles: { global: (props) => ({
+      body: { overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', '&::-webkit-scrollbar': { display: 'none' }, color: props.colorMode === 'dark' ? 'white' : 'black', bg: props.colorMode === 'dark' ? 'black' : 'white' }
+    }) }
+}, withProse());
+const getDefaultLayout = (page: ReactElement) => <Layout><Prose>{page}</Prose></Layout>;
+export default function App({ Component, pageProps }: AppProps) {
+  const getLayout = Component.getLayout || getDefaultLayout;
+  return (
+    <ChakraProvider theme={theme}>
+      <DefaultSeo title='Iver Finne' description="I'm a constant learner and aspiring technical generalist." openGraph={{ title: 'Iver Finne', description: "I'm a constant learner and aspiring technical generalist.", images: [{ url: 'https://iverfinne.no/og-image-dark.jpg', type: 'image/jpeg' }], siteName: 'Iver Finne' }} />
+      <Global styles={{ body: { overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', '&::-webkit-scrollbar': { display: 'none' } } }} />
+      {getLayout(<Component {...pageProps} />)}
+    </ChakraProvider>
+  );
+}
+
+
+================================================================================
+
+File: pages/index.tsx
+
+// pages/index.tsx
+import { Expandable } from '../components/expandable';
+import IndexContent from './about-me.mdx';
+import FooterContent from './about-footer.mdx';
+
+const Home: React.FC = () => {
+  return (
+    <div>
+      <IndexContent />
+      <FooterContent />
+      <Expandable title="Past Work">
+        <div style={{ fontSize: '0.9em' }}>
+          As ABB&apos;s Technical Consultant since 2022 and Production Manager at Springbrettet, I&apos;ve been fusing technical expertise with strategic communication in Norway&apos;s business and educational sectors. My past roles as CEO of Coral Solutions AS and Creative Director for the Ygdrasyl Project and Emberlight VR honed my skills in leading innovation in engineering, sustainable design, and VR gaming. I&apos;ve also driven design and production at Dongjin Tableware, leveraging my proficiency in 3D modeling and graphic design to enhance product development and market presence.
+        </div>
+      </Expandable>
+    </div>
+  );
+};
+
+export default Home;
+
+
+================================================================================
+
+File: lib/mdx.ts
+
+// lib/mdx.ts
+import { serialize } from "next-mdx-remote/serialize";
+import path from "path";
+import fs from "fs";
+export interface Content<TMetadata = { [key: string]: any }> { metadata: TMetadata; source: string; }
+export type MaybeContent<TMetadata> = Content<TMetadata> | undefined;
+export async function getMdxContent<TMetadata>(...paths: string[]): Promise<MaybeContent<TMetadata>> { const contentPath = path.join(process.cwd(), "content", ...paths); if (!fs.existsSync(contentPath)) { return undefined; } const content = fs.readFileSync(contentPath, "utf8"); const source = await serialize(content, { parseFrontmatter: true, mdxOptions: { development: false }, }); return { metadata: source.frontmatter as TMetadata, source: source.compiledSource, }; }
+
+
+================================================================================
+
+File: lib/projects.ts
+
+// lib/projects.ts
+import path from "path";
+import fs from "fs";
+import { getMdxContent, MaybeContent } from "./mdx";
+export interface Project { title: string; description: string; image: string; date: string; url: string; source: string; }
+export function getAllProjectData(): Project[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "projects", "index.json"), "utf8")); }
+export function getAllSlugs(): string[] { const data = getAllProjectData(); return data.map((item) => item.url); }
+export async function getProject(slug: string): Promise<MaybeContent<Project>> { return getMdxContent<Project>("projects", `${slug}.mdx`); }
+export interface TimelineItem { date: string; title: string; description: string; tags: string[]; type: "public" | "private" | "prototype"; category: string; url: string; }
+export function getTimelineData(): TimelineItem[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "timeline", "index.json"), "utf8")); }
+
+
+================================================================================
+
+File: lib/writing.ts
+
+// lib/writing.ts
+import path from "path";
+import fs from "fs";
+import { getMdxContent, MaybeContent } from "./mdx";
+export interface Post { title: string; description: string; image: string; date: string; url: string; external: boolean; source: string; }
+export function getAllPostData(): Post[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "writing", "index.json"), "utf8")); }
+export function getAllSlugs(): string[] { const data = getAllPostData(); return data.filter((item) => !item.external).map((item) => item.url); }
+export async function getPost(slug: string): Promise<MaybeContent<Post>> { return getMdxContent<Post>("writing", `${slug}.mdx`); }
+
+
+================================================================================
+
+File: pages/projects/[slug].tsx
+
+// pages/projects/[slug].tsx
+import { GetStaticPropsContext, NextPageWithLayout } from "next";
+import { Heading, Flex, Image, Box } from "@chakra-ui/react";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
+import Layout from "../../components/layout";
+import { MDXRemote } from "next-mdx-remote";
+import { getAllSlugs, getProject, Project } from "../../lib/projects";
+import { Content } from "../../lib/mdx";
+import { NextSeo } from "next-seo";
+interface ProjectProps { project: Content<Project>; }
+const ProjectPage: NextPageWithLayout<ProjectProps> = ({ project }) => {
+  return (
+    <>
+      <NextSeo title={project.metadata.title} description={project.metadata.description} openGraph={{ title: project.metadata.title, description: project.metadata.description, images: [{ url: project.metadata.image, alt: project.metadata.title, }], }} />
+      <Flex direction="column">
+        <Heading as="h1" size="2xl" mb={8}>{project.metadata.title}</Heading>
+        <Box mb={8}><Image src={project.metadata.image} alt={project.metadata.title} /></Box>
+        <Prose><MDXRemote compiledSource={project.source} /></Prose>
+      </Flex>
+    </>
+  );
+};
+export default ProjectPage;
+ProjectPage.getLayout = (page) => <Layout>{page}</Layout>;
+export async function getStaticPaths() {
+  const paths = getAllSlugs();
+  return { paths, fallback: false, };
+}
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  if (!params || !params.slug || typeof params.slug !== "string") { return { redirect: { destination: "/projects" } }; }
+  const project = await getProject(params.slug as string);
+  if (!project) { return { redirect: { destination: "/projects" } }; }
+  return { props: { project } };
+}
+
+
+================================================================================
+
+File: pages/projects/index.tsx
+
+// pages/projects/index.tsx
+import { useState } from "react";
+import { Flex, Heading, Input, SimpleGrid, Box, AspectRatio, Image, Text, Link, Stack } from "@chakra-ui/react";
+import { getAllProjectData, Project, getTimelineData, TimelineItem } from "../../lib/projects";
+import type { NextPageWithLayout } from "next";
+import Layout from "../../components/layout";
+import { NextSeo } from "next-seo";
+import { Timeline } from "../../components/timeline";
+interface ProjectsProps { projects: Project[]; timeline: TimelineItem[]; }
+const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const latestProjects = projects.slice(0, 3);
+  return (
+    <>
+      <NextSeo title="Projects | Iver Finne" />
+      <Flex direction="column" align="flex-start" width="100%" gap={3}>
+        <Heading as="h1" pt={2} size="xl">build-in-public log</Heading>
+        <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} spacing={4} width="100%" mb={6}>
+          {latestProjects.map((project) => (
+            <Link key={project.title} href={project.url} isExternal>
+              <Box borderWidth="1px" borderRadius="lg" overflow="hidden" _hover={{ shadow: "md" }}>
+                <AspectRatio ratio={16 / 9}><Image src={project.image} alt={project.title} objectFit="cover" /></AspectRatio>
+                <Box p={4}><Heading as="h3" size="sm" mb={2} noOfLines={1}>{project.title}</Heading><Text fontSize="sm" noOfLines={2}>{project.description}</Text></Box>
+              </Box>
+            </Link>
+          ))}
+        </SimpleGrid>
+        <Stack direction="column" width="100%" spacing={4} mb={4}><Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          <Timeline items={timeline} searchQuery={searchQuery} typeFilter={typeFilter} categoryFilter={categoryFilter} onTypeFilterChange={(type) => setTypeFilter(type)} onCategoryFilterChange={(category) => setCategoryFilter(category)} />
+        </Stack>
+      </Flex>
+    </>
+  );
+};
+export default Projects;
+Projects.getLayout = (page) => <Layout>{page}</Layout>;
+export async function getStaticProps() {
+  const projects = getAllProjectData();
+  const timeline = getTimelineData();
+  return { props: { projects, timeline } };
+}
+
+
+================================================================================
+
+File: pages/writing/[slug].tsx
+
+// pages/writing/[slug].tsx
+import { MDXRemote } from "next-mdx-remote";
+import { GetStaticPropsContext, NextPageWithLayout } from "next";
+import { Heading, Flex } from "@chakra-ui/react";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
+import Layout from "../../components/layout";
+import { getAllSlugs, getPost, Post as PostMetadata } from "../../lib/writing";
+import { Content } from "../../lib/mdx";
+import { NextSeo } from "next-seo";
+interface PostProps { post: Content<PostMetadata>; }
+const Post: NextPageWithLayout<PostProps> = ({ post }) => {
+  return (<>
+    <NextSeo title={post.metadata.title} description={post.metadata.description} openGraph={{ title: post.metadata.title, description: post.metadata.description, images: [{ url: post.metadata.image || "https://iverfinne.no/og-image-dark.jpg", }], }} />
+    <Flex direction="column" gap={2}>
+      <Heading size="lg">{post.metadata.title}</Heading>
+      <Prose><MDXRemote compiledSource={post.source} /></Prose>
+    </Flex>
+  </>);
+};
+export default Post;
+Post.getLayout = (page) => <Layout>{page}</Layout>;
+export async function getStaticPaths() {
+  const paths = getAllSlugs();
+  return { paths, fallback: false };
+}
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  if (!params || !params.slug || typeof params.slug !== "string") { return { redirect: { destination: "/" } }; }
+  const post = await getPost(params.slug as string);
+  if (!post) { return { redirect: { destination: "/" } }; }
+  return { props: { post } };
+}
+
+
+================================================================================
+
+File: pages/writing/index.tsx
+
+// pages/writing/index.tsx
+import { Heading, Link, Flex, Text, Stack, Divider, useColorModeValue } from '@chakra-ui/react';
+import { getAllPostData, Post } from '../../lib/writing';
+import type { NextPageWithLayout } from 'next';
+import Layout from '../../components/layout';
+import { NextSeo } from 'next-seo';
+
+interface WritingProps { posts: Post[]; }
+
+const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
+  const textColor = useColorModeValue("rgba(0, 0, 0, 0.55)", "rgba(255, 255, 255, 0.40)"); // 75% opacity for black in light mode and white in dark mode
+
+  return (<>
+    <NextSeo title="Writing | Iver Finne" />
+    <Flex direction="column" align="flex-start" width="100%" gap={3}>
+      <Heading as="h1" pt={2} size="xl" >Recent Blog Posts</Heading>
+      <Divider width="100%" mb={4} />
+      {posts.map((post) => (<>
+        <Stack width="100%" align="flex-start" spacing={1} key={post.title}>
+          <Link href={post.url} target={post.external ? "_blank" : "_self"}>
+            <Text>{post.title}</Text>
+          </Link>
+          <Text fontSize="sm" textAlign={"right"} color={textColor}>{post.date}</Text>
+        </Stack>
+        <Divider width="100%" />
+      </>))}
+    </Flex>
+  </>);
+};
+
+export default Writing;
+
+Writing.getLayout = (page) => <Layout>{page}</Layout>;
+
+export async function getStaticProps() {
+  const posts = getAllPostData();
+  return { props: { posts } };
+}
+
+
+================================================================================
+
+File: components/layout.tsx
+
+import { Container, VStack, Text, Flex, Box, HStack, Menu, MenuButton, IconButton, MenuList, MenuItem, Icon, MenuGroup, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { PropsWithChildren } from "react";
+import { FiMenu } from "react-icons/fi";
+
+function Navigation({ link, children, isExternal }: { link: string; children: string; isExternal?: boolean }) {
+  const router = useRouter();
+  const isActive = link === "/" ? router.asPath === link : router.asPath.includes(link);
+  const activeColor = useColorModeValue("black", "#fafafa");
+  const inactiveColor = useColorModeValue("gray.600", "rgba(255, 255, 255, 0.50)");
+  return (
+    <Link href={link} passHref>
+      <Text as="a" target={isExternal ? "_blank" : "_self"} fontSize="lg" color={isActive ? activeColor : inactiveColor} _hover={{ color: activeColor }}>
+        {children}
+      </Text>
+    </Link>
+  );
+}
+
+function Layout({ children }: PropsWithChildren<{}>) {
+  const bgColor = useColorModeValue("white", "#0a0a0a");
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
+  return (
+    <Container position="relative" mt={{ base: 16, md: 20 }} pb={{ base: 8, md: "10em" }} maxW={{ base: "100%", xl: "container.md" }} px={{ base: 8, xl: 12 }}>
+      <Flex justify="space-between" position="fixed" top={0} display="flex" height={12} zIndex={50} left={0} width="100%" align="center" borderBottom="1px solid" borderBottomColor="gray.200" bg={bgColor}>
+        {!isMobile && (
+          <HStack spacing={4} pl={4} pr={8}>
+            <Navigation link="/">Home</Navigation>
+            <Navigation link="/writing">Blog</Navigation>
+            <Navigation link="/books">Books</Navigation>
+            <Navigation link="/projects">Build Log</Navigation>
+          </HStack>
+        )}
+        <Box ml="auto" mr={4}>
+          <Menu>
+            <MenuButton as={IconButton} aria-label="Options" icon={<Icon as={FiMenu} boxSize={4} />} variant="outline" size="sm" />
+            <MenuList bg={bgColor}>
+              <MenuGroup title="NAVIGATION">
+                <VStack align="flex-start" px={4} spacing={3} mb={4}>
+                  <Navigation link="/">Home</Navigation>
+                  <Navigation link="/writing">Blog</Navigation>
+                  <Navigation link="/books">Books</Navigation>
+                  <Navigation link="/projects">Build Log</Navigation>
+                </VStack>
+              </MenuGroup>
+              <MenuGroup title="FIND ME ON">
+                <VStack align="flex-start" px={4} spacing={3} mb={2}>
+                  <Navigation link="https://twitter.com/amitoser" isExternal>Twitter</Navigation>
+                  <Navigation link="https://github.com/lukketsvane" isExternal>GitHub</Navigation>
+                </VStack>
+              </MenuGroup>
+            </MenuList>
+          </Menu>
+        </Box>
+      </Flex>
+      {children}
+    </Container>
+  );
+}
+
+export default Layout;
+
+================================================================================
+
+File: components/timeline.tsx
+
+// components/Timeline.tsx
+import {Box,Flex,Heading,Text,Link,Tag,TagLabel,TagLeftIcon,Circle,Stack,useBreakpointValue,Wrap,WrapItem,useColorModeValue,} from "@chakra-ui/react";
+import {TimelineItem} from "../lib/projects";
+import {FaLock,FaGlobe} from "react-icons/fa";
+import {BiCode} from "react-icons/bi";
+import {AiOutlineVideoCamera} from "react-icons/ai";
+import {RiArtboardLine} from "react-icons/ri";
+import {BsGlobe2} from "react-icons/bs";
+interface TimelineProps {items: TimelineItem[];searchQuery: string;typeFilter: string;categoryFilter: string;onTypeFilterChange: (type: string) => void;onCategoryFilterChange: (category: string) => void;}
+export const Timeline: React.FC<TimelineProps> = ({items,searchQuery,typeFilter,categoryFilter,onTypeFilterChange,onCategoryFilterChange}) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const timelineWidth = useBreakpointValue({ base: "100%", md: "calc(100% - 150px)" });
+  const circleColor = useColorModeValue("black", "white");
+  const filteredItems = items.filter((item) => (item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.description.toLowerCase().includes(searchQuery.toLowerCase()) || item.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))) && (typeFilter === "" || item.type === typeFilter) && (categoryFilter === "" || item.category === categoryFilter));
+  return (
+    <Flex direction={isMobile ? "column" : "row"} width="100%" gap={4}>
+      <Stack direction="column" spacing={2} width={isMobile ? "100%" : "150px"} mb={isMobile ? 4 : 0}>
+        <Heading as="h4" size="s" minWidth="80px">Type</Heading>
+        <Wrap>
+          <WrapItem><Tag size="sm" variant={typeFilter === "" ? "solid" : "outline"} colorScheme="blue" cursor="pointer" onClick={() => onTypeFilterChange("")}><TagLeftIcon as={FaGlobe} /><TagLabel>All</TagLabel></Tag></WrapItem>
+          <WrapItem><Tag size="sm" variant={typeFilter === "public" ? "solid" : "outline"} colorScheme="green" cursor="pointer" onClick={() => onTypeFilterChange("public")}><TagLeftIcon as={FaGlobe} /><TagLabel>Public</TagLabel></Tag></WrapItem>
+          <WrapItem><Tag size="sm" variant={typeFilter === "private" ? "solid" : "outline"} colorScheme="red" cursor="pointer" onClick={() => onTypeFilterChange("private")}><TagLeftIcon as={FaLock} /><TagLabel>Private</TagLabel></Tag></WrapItem>
+          <WrapItem><Tag size="sm" variant={typeFilter === "prototype" ? "solid" : "outline"} colorScheme="orange" cursor="pointer" onClick={() => onTypeFilterChange("prototype")}><TagLeftIcon as={BiCode} /><TagLabel>Prototype</TagLabel></Tag></WrapItem>
+        </Wrap>
+        <Heading as="h4" size="s" minWidth="80px">Category</Heading>
+        <Wrap>
+          <WrapItem><Tag size="sm" variant={categoryFilter === "" ? "solid" : "outline"} colorScheme="blue" cursor="pointer" onClick={() => onCategoryFilterChange("")}><TagLeftIcon as={FaGlobe} /><TagLabel>All</TagLabel></Tag></WrapItem>
+          <WrapItem><Tag size="sm" variant={categoryFilter === "ai" ? "solid" : "outline"} colorScheme="teal" cursor="pointer" onClick={() => onCategoryFilterChange("ai")}><TagLeftIcon as={BiCode} /><TagLabel>AI</TagLabel></Tag></WrapItem>
+          <WrapItem><Tag size="sm" variant={categoryFilter === "web3" ? "solid" : "outline"} colorScheme="purple" cursor="pointer" onClick={() => onCategoryFilterChange("web3")}><TagLeftIcon as={BsGlobe2} /><TagLabel>Web3</TagLabel></Tag></WrapItem>
+          <WrapItem><Tag size="sm" variant={categoryFilter === "art" ? "solid" : "outline"} colorScheme="pink" cursor="pointer" onClick={() => onCategoryFilterChange("art")}><TagLeftIcon as={RiArtboardLine} /><TagLabel>Art</TagLabel></Tag></WrapItem>
+          <WrapItem><Tag size="sm" variant={categoryFilter === "vc" ? "solid" : "outline"} colorScheme="yellow" cursor="pointer" onClick={() => onCategoryFilterChange("vc")}><TagLeftIcon as={AiOutlineVideoCamera} /><TagLabel>VC</TagLabel></Tag></WrapItem>
+        </Wrap>
+      </Stack>
+      <Flex direction="column" width={timelineWidth} position="relative">
+        <Box position="absolute" top="12px" left="120px" bottom="-160px" width="2px" bg="gray.200" zIndex={-1} />
+        {filteredItems.map((item, index) => (
+          <Flex key={item.title} mb={8} alignItems="center" position="relative">
+            <Text fontSize="lg" fontWeight="bold" ml={-12} mr={4} minWidth="120px" textAlign="right" whiteSpace="nowrap">{item.date}</Text>
+            <Circle size="8px" bg={circleColor} ml={7} mr={14} />
+            <Box>
+              <Link href={item.url}><Heading as="h3" size="md" mb={2}>{item.title}</Heading></Link>
+              <Text mb={2}>{item.description}</Text>
+              <Wrap>{item.tags.map((tag) => (<WrapItem key={tag}><Tag size="sm" variant="subtle" colorScheme="gray"><TagLeftIcon as={tag === "private" ? FaLock : FaGlobe} /><TagLabel>{tag}</TagLabel></Tag></WrapItem>))}</Wrap>
+            </Box>
+          </Flex>
+        ))}
+      </Flex>
+    </Flex>
+  );
+};
+
+
+================================================================================
+
+File: scripts/generate-content.mjs
+
+// scripts/generate-content.mjs
+import { serialize } from "next-mdx-remote/serialize";
+import path from "path";
+import fs from "fs";
+async function writing() {
+  const metadata = [];
+  const basePath = path.join(process.cwd(), "content", "writing");
+  const external = JSON.parse(fs.readFileSync(path.join(basePath, "external.json"), "utf8")).map((item) => ({ ...item, external: true }));
+  const postPaths = fs.readdirSync(basePath, "utf8");
+  const posts = await Promise.all(postPaths.filter((fileName) => fileName.includes(".mdx")).map(async (fileName) => {
+    const contentPath = path.join(basePath, fileName);
+    const fileContents = fs.readFileSync(contentPath, "utf8");
+    const source = await serialize(fileContents, { parseFrontmatter: true, mdxOptions: { development: false }, });
+    return { ...source.frontmatter, url: "/" + path.join("writing", fileName.split(".")[0]), external: false, };
+  }));
+  metadata.push(...posts);
+  metadata.push(...external);
+  metadata.sort((a, b) => new Date(b.date) - new Date(a.date));
+  fs.writeFileSync(path.join(basePath, "index.json"), JSON.stringify(metadata, undefined, 2));
+}
+async function books() {
+  const basePath = path.join(process.cwd(), "content", "books");
+  const bookPaths = fs.readdirSync(basePath, "utf8");
+  const books = await Promise.all(bookPaths.filter((fileName) => fileName.includes(".mdx")).map(async (fileName) => {
+    const contentPath = path.join(basePath, fileName);
+    const fileContents = fs.readFileSync(contentPath, "utf8").split("## My Notes")[0];
+    const source = await serialize(fileContents, { parseFrontmatter: true, mdxOptions: { development: false }, });
+    return { ...source.frontmatter, slug: "/" + path.join("books", fileName.split(".")[0]), summary: source.compiledSource, };
+  }));
+  books.sort((a, b) => new Date(b.date) - new Date(a.date));
+  fs.writeFileSync(path.join(basePath, "index.json"), JSON.stringify(books, undefined, 2));
+}
+async function projects() {
+  const metadata = [];
+  const basePath = path.join(process.cwd(), "content", "projects");
+  const external = JSON.parse(fs.readFileSync(path.join(basePath, "external.json"), "utf8")).map((item) => ({ ...item, external: true }));
+  const postPaths = fs.readdirSync(basePath, "utf8");
+  const posts = await Promise.all(postPaths.filter((fileName) => fileName.includes(".mdx")).map(async (fileName) => {
+    const contentPath = path.join(basePath, fileName);
+    const fileContents = fs.readFileSync(contentPath, "utf8");
+    const source = await serialize(fileContents, { parseFrontmatter: true, mdxOptions: { development: false }, });
+    return { ...source.frontmatter, url: "/" + path.join("projects", fileName.split(".")[0]), external: false, };
+  }));
+  metadata.push(...posts);
+  metadata.push(...external);
+  metadata.sort((a, b) => new Date(b.date) - new Date(a.date));
+  fs.writeFileSync(path.join(basePath, "index.json"), JSON.stringify(metadata, undefined, 2));
+}
+async function main() {
+  await writing();
+  await books();
+  await projects();
+}
+main();
+
+
+================================================================================
+
+File: scripts/generate-sitemap.mjs
+
+// scripts/generate-sitemap.mjs
+import fs from "fs";
+import path from "path";
+function getAllBookSlugs() {
+  const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "books", "index.json"), "utf8"));
+  return data.map((item) => item.slug);
+}
+function getAllWritingSlugs() {
+  const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "writing", "index.json"), "utf8"));
+  return data.filter((item) => !item.external).map((item) => item.url);
+}
+function getAllProjectsSlugs() {
+  const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "projects", "index.json"), "utf8"));
+  return data.filter((item) => !item.external).map((item) => item.url);
+}
+async function main() {
+  const bookSlugs = getAllBookSlugs();
+  const writingSlugs = getAllWritingSlugs();
+  const projectSlugs = getAllProjectsSlugs();
+  const allSlugs = [...bookSlugs, ...writingSlugs, ...projectSlugs];
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://iverfinne.no</loc>
+  </url>
+  <url>
+    <loc>https://iverfinne.no/writing</loc>
+  </url>
+  <url>
+    <loc>https://iverfinne.no/projects</loc>
+  </url>
+  <url>
+    <loc>https://iverfinne.no/books</loc>
+  </url>
+  <url>
+    <loc>https://iverfinne.no/notes</loc>
+  </url>${allSlugs.map((slug) => {
+      return `
+  <url>
+    <loc>${`https://iverfinne.no${slug}`}</loc>
+  </url>`;
+    }).join("")}
+</urlset>`;
+  if (fs.existsSync("public/sitemap.xml")) {
+    fs.unlinkSync("public/sitemap.xml");
+  }
+  fs.writeFileSync("public/sitemap.xml", sitemap);
+}
+main();
+
+
+================================================================================
+
+File: next.config.js
+
+const withMDX = require('@next/mdx')({
+    extension: /\.mdx?$/,
+    options: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+    },
+  })
+  
+  module.exports = withMDX({
+    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  })
+
+================================================================================
+

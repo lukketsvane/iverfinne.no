@@ -1,32 +1,40 @@
 {
-  "name": "personal-website-next",
-  "version": "0.1.0",
+  "name": "your-project-name",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "generate": "node scripts/generate-content.mjs"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mdx-js/loader": "^2.3.0",
-    "@mdx-js/react": "^2.3.0",
-    "@next/mdx": "^13.5.6",
-    "framer-motion": "^8.5.5",
-    "gray-matter": "^4.0.3",
+    "@chakra-ui/react": "2.8.2",
+    "@emotion/react": "11.11.4",
+    "@emotion/styled": "11.11.0",
+    "@mdx-js/loader": "2.3.0",
+    "@mdx-js/react": "2.3.0",
+    "@next/font": "13.1.1",
+    "@next/mdx": "13.1.1",
+    "@nikolovlazar/chakra-ui-prose": "1.2.1",
+    "framer-motion": "8.5.5",
     "next": "13.1.1",
-    "next-mdx-remote": "^5.0.0",
-    "react": "^18.2.0",
-    "react-dom": "18.2.0"
+    "next-seo": "5.15.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "5.0.1"
   },
   "devDependencies": {
+    "@types/node": "18.11.18",
     "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
+    "@typescript-eslint/parser": "5.62.0",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
-    "typescript": "^5.4.5"
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "typescript": "5.4.2",
+    "webpack": "5.90.3"
   }
 }
