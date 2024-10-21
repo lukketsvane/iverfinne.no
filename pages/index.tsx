@@ -20,7 +20,7 @@ const Home: React.FC = () => {
         </Box>
         <Expandable title="Past Work">
           <Text fontSize="0.9em">
-            As ABB's Technical Consultant since 2022 and Production Manager at Springbrettet, I've been fusing technical expertise with strategic communication in Norway's business and educational sectors. My past roles as CEO of Coral Solutions AS and Creative Director for the Ygdrasyl Project and Emberlight VR honed my skills in leading innovation in engineering, sustainable design, and VR gaming. I've also driven design and production at Dongjin Tableware, leveraging my proficiency in 3D modeling and graphic design to enhance product development and market presence.
+            As ABB's Technical Consultant since 2022 and Production Manager at Springbrettet, I've been fusing technical expertise with strategic communication in Norway's business and educational sectors. My past roles as CEO of Coral Solutions AS and Creative Director for the Ygdrasyl Project and Emberlight VR honed my skills in leading innovation in projects, sustainable design, and VR gaming. I've also driven design and production at Dongjin Tableware, leveraging my proficiency in 3D modeling and graphic design to enhance product development and market presence.
           </Text>
         </Expandable>
       </VStack>

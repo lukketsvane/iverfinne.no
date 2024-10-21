@@ -38,7 +38,7 @@ function Navigation({ link, children, isExternal }: { link: string; children: st
 
 function Layout({ children }: PropsWithChildren<{}>) {
   const bgColor = useColorModeValue("white", "#0a0a0a");
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useBreakpointValue({ base: true, lg: false });
 
   return (
     <Container position="relative" mt={{ base: 16, md: 20 }} pb={{ base: 8, md: "10em" }} maxW={{ base: "100%", xl: "container.md" }} px={{ base: 8, xl: 12 }}>
@@ -47,33 +47,37 @@ function Layout({ children }: PropsWithChildren<{}>) {
           <HStack spacing={4} pl={4} pr={8}>
             <Navigation link="/">Home</Navigation>
             <Navigation link="/writing">Writing</Navigation>
-            <Navigation link="/books">Reading</Navigation>
+            <Navigation link="/reading">Reading</Navigation>
             <Navigation link="/projects">Build Log</Navigation>
           </HStack>
         )}
         <Box ml="auto" mr={4}>
-          <Menu>
-            <MenuButton as={IconButton} aria-label="Options" icon={<Icon as={FiMenu} boxSize={4} />} variant="outline" size="sm" />
-            <MenuList bg={bgColor}>
-              <MenuGroup title="NAVIGATION">
-                <VStack align="flex-start" px={4} spacing={3} mb={4}>
-                  <Navigation link="/">Home</Navigation>
-                  <Navigation link="/writing">Writing</Navigation>
-                  <Navigation link="/books">Reading</Navigation>
-                  <Navigation link="/projects">Build Log</Navigation>
-                </VStack>
-              </MenuGroup>
-              <MenuGroup title="FIND ME ON">
-                <VStack align="flex-start" px={4} spacing={3} mb={2}>
-                  <Navigation link="https://twitter.com/amitoser" isExternal>Twitter</Navigation>
-                  <Navigation link="https://github.com/lukketsvane" isExternal>GitHub</Navigation>
-                </VStack>
-              </MenuGroup>
-            </MenuList>
-          </Menu>
+          {isMobile ? (
+            <Menu>
+              <MenuButton as={IconButton} aria-label="Options" icon={<Icon as={FiMenu} boxSize={4} />} variant="outline" size="sm" />
+              <MenuList bg={bgColor}>
+                <MenuGroup title="NAVIGATION">
+                  <VStack align="flex-start" px={4} spacing={3} mb={4}>
+                    <Navigation link="/">Home</Navigation>
+                    <Navigation link="/writing">Writing</Navigation>
+                    <Navigation link="/reading">Reading</Navigation>
+                    <Navigation link="/projects">Build Log</Navigation>
+                  </VStack>
+                </MenuGroup>
+                <MenuGroup title="FIND ME ON">
+                  <VStack align="flex-start" px={4} spacing={3} mb={2}>
+                    <Navigation link="https://twitter.com/amitoser" isExternal>Twitter</Navigation>
+                    <Navigation link="https://github.com/lukketsvane" isExternal>GitHub</Navigation>
+                  </VStack>
+                </MenuGroup>
+              </MenuList>
+            </Menu>
+          ) : null}
         </Box>
       </Flex>
-      {children}
+      <Box mt={12}>
+        {children}
+      </Box>
     </Container>
   );
 }

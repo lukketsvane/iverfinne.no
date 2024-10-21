@@ -111,3 +111,8 @@ model-viewer {
 .Hotspot:focus-visible {
   outline: 4px solid #0078d4; /* Prominent focus ring for keyboard navigation */
 }
+
+.mermaid {
+  max-width: 100%;
+  margin: 20px 0;
+}

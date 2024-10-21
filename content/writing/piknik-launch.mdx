@@ -3,6 +3,11 @@ title: "PikNik Launch: Collaborative Cooking Reinvented"
 description: "PikNik makes cooking social and creative with real-time collaboration and AI-assisted recipes."
 date: "10/21/2024"
 image: "/images/piknik/piknik.png"
+tags:
+  - public
+  - cooking
+  - collaboration
+  - launch
 ---
 
 # PikNik Launch: Collaborative Cooking Reinvented
@@ -19,44 +24,22 @@ PikNik is a platform for collaborative meal creation using real-time interaction
 
 ---
 
-## Key Features
-
-- **Real-Time Sessions**: Collaborate with up to six participants to add ingredients and generate recipes.
-- **AI-Assisted Recipes**: PikNik’s AI provides recipe suggestions based on the ingredients you have.
-- **Sustainability**: Reduce food waste by using all available ingredients.
-- **Ingredient Management**: Add, edit, or remove ingredients.
-- **Session Control**: Manage processes including voting and countdowns.
-
----
-
-## User Interface
-
-- **Login**: Join or create a session using a 4-digit code.
-- **Main Screen**: Manage ingredients.
-- **Recipe Generation**: Generate and share AI-created recipes.
-
-[PikNik Web App](https://matmix.vercel.app/)
-
-![PikNik Mascot](/images/piknik/piknik.png)
-
----
-
 ## User Story Flowcharts
 
 ### 1. Family Cooking Together
 
-```mermaid
+<div class="mermaid">
 graph TD
     A[Start Session] -->|Username + Code| B[Create Session]
     B --> C[Children Add Ingredients]
     C -->|Potatoes, Carrot, Salmon, Dill| D[AI Generates Recipe]
     D --> E[Show Family-Friendly Recipe]
     E --> F[Cook Together]
-```
+</div>
 
 ### 2. Friends in a Shared House
 
-```mermaid
+<div class="mermaid">
 graph TD
     A[Start Session] -->|Username + Code| B[Join Existing Session]
     B --> C[Everyone Adds Ingredients]
@@ -64,18 +47,18 @@ graph TD
     D -->|All Agree| E[AI Generates Recipe]
     E --> F[Show Pasta Recipe]
     F --> G[Everyone Shares the Meal]
-```
+</div>
 
 ### 3. Reducing Food Waste
 
-```mermaid
+<div class="mermaid">
 graph TD
     A[Start Session] -->|Username + Code| B[Invite Friends]
     B --> C[Add Leftovers]
     C -->|Rice, Chicken, Onion, Spices| D[AI Generates Recipe]
     D --> E[Show Stir-Fry Recipe]
     E --> F[Cook and Reduce Waste]
-```
+</div>
 
 ---
 
@@ -90,40 +73,6 @@ graph TD
 | **Database**                     | MongoDB or PostgreSQL    | Stores session data and ingredients. |
 | **Authentication**               | JSON Web Tokens (JWT)    | User authentication.                 |
 | **Responsive Design**            | CSS, Tailwind CSS        | Cross-device functionality.          |
-
----
-
-## Data Model
-
-| Data Model     | Attribute                | Description                             |
-| -------------- | ------------------------ | --------------------------------------- |
-| **Session**    | Session Code             | Unique identifier.                      |
-|                | Participants             | List of participants.                   |
-|                | Ingredients              | List of ingredients.                    |
-| **Ingredient** | Name                     | Ingredient name.                        |
-|                | Quantity                 | Quantity, e.g., 500 grams.              |
-|                | Unit                     | Unit, e.g., grams, pieces.              |
-|                | Category                 | Ingredient category.                    |
-| **Recipe**     | Title                    | Recipe title.                           |
-|                | Ingredient List          | Ingredients used.                       |
-|                | Method                   | Preparation instructions.               |
-
----
-
-## Future Development
-
-- **Food Delivery Integration**: Order ingredients from within the app.
-- **Save Recipes**: Option to save recipes.
-- **Filtering**: Filter by category or dietary preference.
-
----
-
-## Technical Considerations
-
-- **Framework**: **React** with **Next.js** for the frontend, **Node.js** and **Express** for the backend.
-- **Libraries**: **D3.js** for diagrams, **GSAP** for animations, **React Spring** for transitions.
-- **Responsive Design**: Ensure usability on all devices.
-- **Deployment**: Host live or package for offline use.
 
 ---
 

@@ -1,9 +1,15 @@
 [
   {
-    "title": "PikNik Launch: Collaborative Cooking Reinvented",
+    "title": "PikNik",
     "description": "PikNik makes cooking social and creative with real-time collaboration and AI-assisted recipes.",
     "date": "10/21/2024",
     "image": "/images/piknik/piknik.png",
+    "tags": [
+      "public",
+      "cooking",
+      "collaboration",
+      "launch"
+    ],
     "url": "/projects/piknik",
     "external": false
   },
@@ -16,8 +22,8 @@
     "external": false
   },
   {
-    "title": "Korall Engineering: Pioneering Future Designs",
-    "description": "A look into Korall Engineering's innovative approach to design and manufacturing.",
+    "title": "Korall Projects: Pioneering Future Designs",
+    "description": "A look into Korall Projects's innovative approach to design and manufacturing.",
     "date": "2024-03-30",
     "image": "/images/coral/coral_11.png",
     "url": "/projects/coral",
