@@ -1,5 +1,13 @@
 [
   {
+    "title": "PikNik Launch: Collaborative Cooking Reinvented",
+    "description": "PikNik makes cooking social and creative with real-time collaboration and AI-assisted recipes.",
+    "date": "10/21/2024",
+    "image": "/images/piknik/piknik.png",
+    "url": "/projects/piknik",
+    "external": false
+  },
+  {
     "title": "Jobbi: Ai-Assistent for Jobbsøk",
     "description": "Se etter jobbmuligheter",
     "date": "2024-04-19",

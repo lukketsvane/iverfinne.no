@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { Prose, withProse } from '@nikolovlazar/chakra-ui-prose';
@@ -6,6 +7,7 @@ import { ReactElement } from 'react';
 import { DefaultSeo } from 'next-seo';
 import { Global } from '@emotion/react';
 import { Lora } from '@next/font/google';
+import mermaid from 'mermaid';
 
 const lora = Lora({ subsets: ['latin'], display: 'swap' });
 
@@ -40,6 +42,10 @@ type NextPageWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: NextPageWithLayout) {
   const getLayout = Component.getLayout || getDefaultLayout;
+
+  useEffect(() => {
+    mermaid.initialize({ startOnLoad: true });
+  }, []);
 
   return (
     <ChakraProvider theme={theme}>

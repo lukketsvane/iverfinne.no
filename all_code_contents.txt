@@ -5,12 +5,12 @@ import { GetStaticPropsContext, NextPage } from "next";
 import Layout from "../../components/layout";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { Book, getAllBooks, getAllSlugs, getBook } from "../../lib/books";
-import { Bookshelf } from "../../components/bookshelf";
+import { Book, getAllReading, getAllSlugs, getBook } from "../../lib/books";
+import { Readinghelf } from "../../components/bookshelf";
 import { NextSeo } from "next-seo";
 import { ReactElement, useEffect, useState } from "react";
 
-interface BooksProps {
+interface ReadingProps {
   books: Book[];
   book?: Book & { content: MDXRemoteSerializeResult };
 }
@@ -66,7 +66,7 @@ const BookDetails: React.FC<{ book: Book & { content: MDXRemoteSerializeResult }
 
 const BookList: React.FC<{ books: Book[] }> = ({ books }) => (
   <>
-    <NextSeo title="Books | Iver Finne" />
+    <NextSeo title="Reading | Iver Finne" />
     <Stack spacing={8}>
       {books
         .sort((a, b) => b.rating - a.rating)
@@ -101,7 +101,7 @@ const BookList: React.FC<{ books: Book[] }> = ({ books }) => (
   </>
 );
 
-const Books: NextPageWithLayout<BooksProps> = ({ books, book }) => {
+const Reading: NextPageWithLayout<ReadingProps> = ({ books, book }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -115,10 +115,10 @@ const Books: NextPageWithLayout<BooksProps> = ({ books, book }) => {
   return book ? <BookDetails book={book} /> : <BookList books={books} />;
 };
 
-Books.getLayout = (page: ReactElement) => (
+Reading.getLayout = (page: ReactElement) => (
   <Layout>
     <Flex direction="column" gap={8}>
-      <Bookshelf books={(page.props as BooksProps).books} />
+      <Readinghelf books={(page.props as ReadingProps).books} />
       <Divider />
       {page}
     </Flex>
@@ -131,7 +131,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const books = getAllBooks();
+  const books = getAllReading();
   if (!params?.slug || params.slug.length === 0) {
     return { props: { books } };
   }
@@ -145,7 +145,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   return { props: { books, book } };
 }
 
-export default Books;
+export default Reading;
 
 ================================================================================
 
@@ -169,7 +169,7 @@ export interface Book {
   summary: string;
 }
 
-export function getAllBooks(): Book[] {
+export function getAllReading(): Book[] {
   const booksPath = path.join(process.cwd(), 'content', 'books');
   const bookFiles = fs.readdirSync(booksPath).filter(file => file.endsWith('.mdx'));
   
@@ -185,14 +185,14 @@ export function getAllBooks(): Book[] {
 }
 
 export function getAllSlugs(): { params: { slug: string[] } }[] {
-  const books = getAllBooks();
+  const books = getAllReading();
   return books.map(book => ({
     params: { slug: [book.slug.replace(/^\/books\//, '')] }
   }));
 }
 
 export async function getBook(slug: string): Promise<(Book & { content: MDXRemoteSerializeResult }) | undefined> {
-  const books = getAllBooks();
+  const books = getAllReading();
   const book = books.find(b => b.slug.replace(/^\/books\//, '') === slug);
   if (!book) {
     return undefined;
@@ -214,9 +214,9 @@ import {Book} from "../lib/books";
 import {FaChevronLeft,FaChevronRight} from "react-icons/fa";
 import {useRouter} from "next/router";
 
-interface BookshelfProps {books: Book[];}
+interface ReadinghelfProps {books: Book[];}
 
-export function Bookshelf({books}: BookshelfProps) {
+export function Readinghelf({books}: ReadinghelfProps) {
  const router = useRouter();
  const [bookIndex, setBookIndex] = useState(-1);
  const [scroll, setScroll] = useState(0);
@@ -227,7 +227,7 @@ export function Bookshelf({books}: BookshelfProps) {
  const scrollLeftRef = React.useRef<HTMLDivElement>(null);
  const viewportDimensions = useDimensions(viewportRef, true);
  const [isScrolling, setIsScrolling] = useState(false);
- const [booksInViewport, setBooksInViewport] = useState(0);
+ const [booksInViewport, setReadingInViewport] = useState(0);
  const scrollEvents = useBreakpointValue({base: { start: "touchstart", stop: "touchend" },sm: { start: "mouseenter", stop: "mouseleave" },});
  const width = 41.5;
  const height = 220;
@@ -262,8 +262,8 @@ export function Bookshelf({books}: BookshelfProps) {
  useEffect(() => {
    if (isClient && viewportDimensions) {
      boundedRelativeScroll(0);
-     const numberOfBooks = viewportDimensions.contentBox.width / (width + 11);
-     setBooksInViewport(numberOfBooks);
+     const numberOfReading = viewportDimensions.contentBox.width / (width + 11);
+     setReadingInViewport(numberOfReading);
    }
  }, [isClient, viewportDimensions, boundedRelativeScroll, width]);
  
@@ -678,7 +678,7 @@ const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
     <>
       <NextSeo title="Writing | Iver Finne" />
       <Flex direction="column" align="flex-start" width="100%" gap={3}>
-        <Heading as="h1" pt={2} size="xl" >Recent Blog Posts</Heading>
+        <Heading as="h1" pt={2} size="xl" >Recent Writing Posts</Heading>
         <Divider width="100%" mb={4} />
         {posts.map((post) => (
           <Stack width="100%" align="flex-start" spacing={1} key={post.title}>
@@ -737,8 +737,8 @@ function Layout({ children }: PropsWithChildren<{}>) {
         {!isMobile && (
           <HStack spacing={4} pl={4} pr={8}>
             <Navigation link="/">Home</Navigation>
-            <Navigation link="/writing">Blog</Navigation>
-            <Navigation link="/books">Books</Navigation>
+            <Navigation link="/writing">Writing</Navigation>
+            <Navigation link="/books">Reading</Navigation>
             <Navigation link="/projects">Build Log</Navigation>
           </HStack>
         )}
@@ -749,8 +749,8 @@ function Layout({ children }: PropsWithChildren<{}>) {
               <MenuGroup title="NAVIGATION">
                 <VStack align="flex-start" px={4} spacing={3} mb={4}>
                   <Navigation link="/">Home</Navigation>
-                  <Navigation link="/writing">Blog</Navigation>
-                  <Navigation link="/books">Books</Navigation>
+                  <Navigation link="/writing">Writing</Navigation>
+                  <Navigation link="/books">Reading</Navigation>
                   <Navigation link="/projects">Build Log</Navigation>
                 </VStack>
               </MenuGroup>

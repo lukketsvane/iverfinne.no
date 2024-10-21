@@ -46,8 +46,8 @@ function Layout({ children }: PropsWithChildren<{}>) {
         {!isMobile && (
           <HStack spacing={4} pl={4} pr={8}>
             <Navigation link="/">Home</Navigation>
-            <Navigation link="/writing">Blog</Navigation>
-            <Navigation link="/books">Books</Navigation>
+            <Navigation link="/writing">Writing</Navigation>
+            <Navigation link="/books">Reading</Navigation>
             <Navigation link="/projects">Build Log</Navigation>
           </HStack>
         )}
@@ -58,8 +58,8 @@ function Layout({ children }: PropsWithChildren<{}>) {
               <MenuGroup title="NAVIGATION">
                 <VStack align="flex-start" px={4} spacing={3} mb={4}>
                   <Navigation link="/">Home</Navigation>
-                  <Navigation link="/writing">Blog</Navigation>
-                  <Navigation link="/books">Books</Navigation>
+                  <Navigation link="/writing">Writing</Navigation>
+                  <Navigation link="/books">Reading</Navigation>
                   <Navigation link="/projects">Build Log</Navigation>
                 </VStack>
               </MenuGroup>

@@ -1,5 +1,13 @@
 [
   {
+    "title": "PikNik Launch: Collaborative Cooking Reinvented",
+    "description": "PikNik makes cooking social and creative with real-time collaboration and AI-assisted recipes.",
+    "date": "10/21/2024",
+    "image": "/images/piknik/piknik.png",
+    "url": "/writing/piknik-launch",
+    "external": false
+  },
+  {
     "title": "knowledge graphs and llms",
     "description": "exploring the intersection of knowledge graphs and language models",
     "date": "May 22, 2024",

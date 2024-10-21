@@ -17,7 +17,7 @@ const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
     <>
       <NextSeo title="Writing | Iver Finne" />
       <Flex direction="column" align="flex-start" width="100%" gap={3}>
-        <Heading as="h1" pt={2} size="xl" >Recent Blog Posts</Heading>
+        <Heading as="h1" pt={2} size="xl" >Recent Writing Posts</Heading>
         <Divider width="100%" mb={4} />
         {posts.map((post) => (
           <Stack width="100%" align="flex-start" spacing={1} key={post.title}>

@@ -1,11 +1,11 @@
-// components/Bookshelf.tsx
+// components/Readinghelf.tsx
 import {Box,Icon,HStack,Flex,Heading,Image,Center,useDimensions,useBreakpointValue,} from "@chakra-ui/react";
 import React from "react";
 import {Book} from "../lib/books";
 import {FaChevronLeft,FaChevronRight} from "react-icons/fa";
 import {useRouter} from "next/router";
-interface BookshelfProps {books: Book[];}
-export function Bookshelf({books}: BookshelfProps) {
+interface ReadinghelfProps {books: Book[];}
+export function Readinghelf({books}: ReadinghelfProps) {
  const router = useRouter();
  const [bookIndex, setBookIndex] = React.useState(-1);
  const [scroll, setScroll] = React.useState(-200);
@@ -15,7 +15,7 @@ export function Bookshelf({books}: BookshelfProps) {
  const scrollLeftRef = React.useRef<HTMLDivElement>(null);
  const viewportDimensions = useDimensions(viewportRef, true);
  const [isScrolling, setIsScrolling] = React.useState(false);
- const [booksInViewport, setBooksInViewport] = React.useState(0);
+ const [booksInViewport, setReadingInViewport] = React.useState(0);
  const scrollEvents = useBreakpointValue({base: { start: "touchstart", stop: "touchend" },sm: { start: "mouseenter", stop: "mouseleave" },});
  const width = 41.5;
  const height = 220;
@@ -29,7 +29,7 @@ export function Bookshelf({books}: BookshelfProps) {
  const boundedRelativeScroll = React.useCallback((incrementX: number) => {setScroll((_scroll) => Math.max(minScroll, Math.min(maxScroll, _scroll + incrementX)));}, [maxScroll]);
  React.useEffect(() => {if (router.query.slug && router.query.slug.length > 0 && bookIndex === -1) {const idx = books.findIndex((b) => b.slug.toLowerCase().includes((router.query.slug as string[])[0].toLowerCase()));setBookIndex(idx);}}, []);
  React.useEffect(() => {if (bookIndex === -1) {boundedRelativeScroll(0);} else {boundedScroll((bookIndex - (booksInViewport - 4.5) / 2) * (width + 11));}}, [bookIndex, boundedRelativeScroll]);
- React.useEffect(() => {if (viewportDimensions) {boundedRelativeScroll(0);const numberOfBooks = viewportDimensions.contentBox.width / (width + 11);setBooksInViewport(numberOfBooks);}}, [viewportDimensions, boundedRelativeScroll]);
+ React.useEffect(() => {if (viewportDimensions) {boundedRelativeScroll(0);const numberOfReading = viewportDimensions.contentBox.width / (width + 11);setReadingInViewport(numberOfReading);}}, [viewportDimensions, boundedRelativeScroll]);
  React.useEffect(() => {if (!scrollEvents) {return;}const currentScrollEvents = { ...scrollEvents };const currentScrollRightRef = scrollRightRef.current;const currentScrollLeftRef = scrollLeftRef.current;let scrollInterval: NodeJS.Timeout | null = null;const setScrollRightInterval = () => {setIsScrolling(true);scrollInterval = setInterval(() => {boundedRelativeScroll(3);}, 10);};const setScrollLeftInterval = () => {setIsScrolling(true);scrollInterval = setInterval(() => {boundedRelativeScroll(-3);}, 10);};const clearScrollInterval = () => {setIsScrolling(false);if (scrollInterval) {clearInterval(scrollInterval);}};currentScrollRightRef!.addEventListener(currentScrollEvents.start, setScrollRightInterval);currentScrollRightRef!.addEventListener(currentScrollEvents.stop, clearScrollInterval);currentScrollLeftRef!.addEventListener(currentScrollEvents.start, setScrollLeftInterval);currentScrollLeftRef!.addEventListener(currentScrollEvents.stop, clearScrollInterval);return () => {clearScrollInterval();currentScrollRightRef!.removeEventListener(currentScrollEvents.start, setScrollRightInterval);currentScrollRightRef!.removeEventListener(currentScrollEvents.stop, clearScrollInterval);currentScrollLeftRef!.removeEventListener(currentScrollEvents.start, setScrollLeftInterval);currentScrollLeftRef!.removeEventListener(currentScrollEvents.stop, clearScrollInterval);};}, [boundedRelativeScroll]);
  return (
  <>
