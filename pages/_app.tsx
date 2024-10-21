@@ -1,41 +1,51 @@
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Prose, withProse } from "@nikolovlazar/chakra-ui-prose";
-import Layout from "../components/layout";  
-import { ReactElement } from "react";
+import Layout from "../components/layout";
 import { DefaultSeo } from "next-seo";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
-import React, { useEffect } from "react";
+import React, { useEffect, ReactElement, ReactNode } from "react";
 import { useRouter } from "next/router";
 
+// Chakra UI theme extension
 const theme = extendTheme(
   {
     fonts: {
-      heading: "Lora, sans-serif",  // Using Google Fonts (make sure the link is in _document.tsx)
+      heading: "Lora, sans-serif", // Using Google Fonts
       body: "Lora, sans-serif",
     },
   },
-  withProse()
+  withProse() // Adding better styling for long-form content
 );
 
+// Default layout function
 const getDefaultLayout = (page: ReactElement) => (
   <Layout>
     <Prose>{page}</Prose>
   </Layout>
 );
 
+// ComponentWithLayout type definition
+interface ComponentWithLayout extends React.FC {
+  getLayout?: (page: ReactElement) => ReactNode;
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const getLayout = Component.getLayout || getDefaultLayout;
+  const CustomComponent = Component as ComponentWithLayout;
 
+  // Check if the component has a getLayout method
+  const getLayout = CustomComponent.getLayout || getDefaultLayout;
+
+  // Initialize PostHog and track page views
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY || "", {
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com',
-        person_profiles: 'identified_only', // Optional, change to 'always' for anonymous profiles
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://eu.i.posthog.com",
+        persistence: "localStorage",
         loaded: (posthog) => {
-          if (process.env.NODE_ENV === 'development') posthog.debug();
+          if (process.env.NODE_ENV === "development") posthog.debug();
         },
       });
 
@@ -66,7 +76,8 @@ export default function App({ Component, pageProps }: AppProps) {
             siteName: "Iver Finne",
           }}
         />
-        {getLayout(<Component {...pageProps} />)}
+        {/* Render the page with the layout */}
+        {getLayout(<CustomComponent {...pageProps} />)}
       </PostHogProvider>
     </ChakraProvider>
   );
