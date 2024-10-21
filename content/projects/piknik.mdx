@@ -3,47 +3,160 @@ title: "PikNik"
 description: "PikNik makes cooking social and creative with real-time collaboration and AI-assisted recipes."
 date: "10/21/2024"
 image: "/images/piknik/piknik.png"
-tags:
-  - public
-  - cooking
-  - collaboration
-  - launch
 ---
 
-# PikNik - collaborative cook
+# PikNik - Collaborative Cooking Reinvented
 
-**PikNik** transforms cooking into a real-time collaborative event. Families, friends, and food lovers can combine creativity and technology to make every cooking session an interactive experience.
+**PikNik** transforms cooking into a real-time collaborative event. Families, friends, and food lovers can now combine creativity and technology, making every cooking session an interactive and joyful experience.
 
-[GitHub Repository](https://github.com/lukketsvane/piknik)
+<video 
+  src="/images/piknik/piknik-ios.webm" 
+  autoplay 
+  loop 
+  muted 
+  playsInline 
+  style={{ 
+    width: "100%", 
+    borderRadius: "8px", 
+    marginTop: "20px", 
+    marginBottom: "20px" 
+  }} 
+/>
 
 ---
 
-## Overview
+## Oversikt
 
-PikNik is a platform for collaborative meal creation using real-time interactions and AI-driven recipe generation. It ensures every session is interactive, using available ingredients effectively.
+PikNik er ei plattform der brukarar kan skape kreative måltid i fellesskap, gjennom å samarbeide om ingrediensane dei har tilgjengeleg. Gjennom sanntidsinteraksjon og AI-assistert oppskriftsgenerering, tilbyr PikNik ei sosial og innovativ tilnærming til matlaging.
+
+PikNik er ei interaktiv matlagingsapp der brukarar kan samarbeide i sanntid for å lage kreative oppskrifter basert på ingrediensane dei har.
+
+<img src="/images/piknik/utlops-varsel.png" alt="PikNik Reducing Food Waste" style={{ width: "100%", borderRadius: "8px", marginTop: "20px", marginBottom: "20px" }} />
 
 ---
 
-## User Story Flowcharts
+## Filstruktur
 
-### 1. Family Cooking Together
+<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem' }}>
+  
+### Filstruktur
 
-```mermaid
-graph TD
-    A[Start Session] -->|Username + Code| B[Create Session]
-    B --> C[Children Add Ingredients]
-    C -->|Potatoes, Carrot, Salmon, Dill| D[AI Generates Recipe]
-    D --> E[Show Family-Friendly Recipe]
-    E --> F[Cook Together]
-
+```plaintext
+piknik/
+  ├─ app/
+  │  ├─ [code]/
+  │  │  └─ page.tsx
+  │  ├─ fonts/
+  │  │  ├─ GeistMonoVF.woff
+  │  │  └─ GeistVF.woff
+  │  ├─ favicon.ico
+  │  ├─ globals.css
+  │  ├─ layout.tsx
+  │  └─ page.tsx
+  ├─ components/
+  │  ├─ ui/
+  │  │  ├─ button.tsx
+  │  │  ├─ card.tsx
+  │  │  ├─ checkbox.tsx
+  │  │  ├─ dialog.tsx
+  │  │  ├─ input.tsx
+  │  │  ├─ label.tsx
+  │  │  ├─ scroll-area.tsx
+  │  │  ├─ select.tsx
+  │  │  ├─ switch.tsx
+  │  │  ├─ table.tsx
+  │  │  ├─ toast.tsx
+  │  │  ├─ toaster.tsx
+  │  │  ├─ tooltip.tsx
+  │  │  └─ use-toast.ts
+  │  └─ piknik.tsx
+  ├─ hooks/
+  │  └─ use-toast.ts
+  ├─ lib/
+  │  └─ utils.ts
+  ├─ public/
+  │  └─ music/
+  │     ├─ alt03-answer_010sec.mp3
+  │     └─ lobby-classic-game.mp3
+  ├─ .env
+  ├─ .eslintrc.json
+  ├─ .gitignore
+  ├─ components.json
+  ├─ filetree.txt
+  ├─ next.config.mjs
+  ├─ package-lock.json
+  ├─ package.json
+  ├─ postcss.config.mjs
+  ├─ README.md
+  ├─ tailwind.config.ts
+  └─ tsconfig.json
 ```
-### 2. Reducing Food Waste
 
-```mermaid
-graph TD
-    A[Start Session] -->|Username + Code| B[Invite Friends]
-    B --> C[Add Leftovers]
-    C -->|Rice, Chicken, Onion, Spices| D[AI Generates Recipe]
-    D --> E[Show Stir-Fry Recipe]
-    E --> F[Cook and Reduce Waste]
-```
+### Teknisk Funksjonalitet
+
+| **Funksjonalitet**               | **Teknologi**                  | **Beskriving**                                                                                                                                                    |
+|-----------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Frontend                         | React, Next.js                 | Utvikling av eit responsivt og brukarvennleg grensesnitt.                                                                                                          |
+| Backend                          | Node.js, Express               | Handtering av brukarforespørslar og kommunikasjon mellom frontend og AI-tenester.                                                                                 |
+| Sanntidskommunikasjon             | WebSockets (socket.io)         | Moglegheit for at fleire brukarar kan samhandle i sanntid.                                                                                                         |
+| AI-drevet Oppskriftsgenerering    | Anthropic API                  | Generering av oppskrifter basert på ingrediensane lagt til av brukarane.                                                                                          |
+| Database                         | MongoDB eller PostgreSQL       | Lagring av øktdata, ingrediensar og oppskrifter midlertidig under ei økt.                                                                                         |
+| Autentisering                    | JSON Web Tokens (JWT)          | Autentisering av brukarar som opprettar eller blir med i ei økt.                                                                                                   |
+| Responsivt Design                | CSS, Tailwind CSS              | Funksjonalitet som fungerer sømlaus både på skrivebord og mobile einingar.                                                                                        |
+
+</div>
+
+---
+
+## Hovudfunksjonar
+
+- **Sanntids Samarbeid**: Brukarar kan opprette eller bli med i ei økt (opp til seks personar) for å legge til ingrediensar.
+- **Ingredienshåndtering**: Brukarar kan legge til, redigere og slette ingrediensar.
+- **AI-drevet Oppskriftsgenerering**: Bruk AI for å generere ei oppskrift basert på valde ingrediensar.
+- **Øktstyring**: Den som opprettar ei økt kan styre prosessen, inkludert avstemming og nedteljing.
+
+---
+
+## Brukargrensesnitt
+
+- **Innlogging**: Start ei ny økt eller bli med i ei eksisterande ved å bruke ein 4-sifra kode.
+- **Hovudskjerm**: Liste over ingrediensar som brukarar kan leggje til, redigere eller slette.
+- **Oppskriftsgenerering**: Generer oppskrifter ved hjelp av AI og last dei ned eller del dei.
+
+---
+
+## Brukarforteljingar
+
+1. **Småbarnsfamilien**
+
+   *Beskrivelse*: Kari og familien brukar PikNik til å lage middag saman. Barna legg til ingrediensar dei finn på kjøkenet, og AI-en lagar ei enkel oppskrift som alle kan vere med på å lage.
+
+2. **Kollektivet**
+
+   *Beskrivelse*: Med få ingrediensar igjen bestemmer kollektivet seg for å lage noko saman. Etter avstemming vel dei alle ingrediensane, og PikNik lagar ei oppskrift på ein enkel pastarett.
+
+3. **Matsvinn-entusiasten**
+
+   *Beskrivelse*: Ola inviterer vener til ei økt for å redusere matsvinn. Dei legg til restane dei har, og PikNik gir dei ei oppskrift på ein smakfull wok som nyttar alle ingrediensane utan at noko går til spille.
+
+---
+
+## Datamodell
+
+| **Datamodell**  | **Attributt**                   | **Beskriving**                                                                                       |
+|-----------------|---------------------------------|------------------------------------------------------------------------------------------------------|
+| Økt             | Økt-kode                        | Unik identifikator for økta.                                                                          |
+|                 | Liste over deltakarar           | Inneheld alle deltakarane i ei økt.                                                                   |
+|                 | Liste over ingrediensar         | Inneheld alle ingrediensane lagt til av deltakarane i økta.                                           |
+| Ingrediens      | Namn                            | Namnet på ingrediensen.                                                                               |
+|                 | Mengde                          | Mengda av ingrediensen, t.d. 500 gram.                                                                |
+|                 | Eining                          | Eining som blir brukt, t.d. gram, stk, ss.                                                            |
+|                 | Kategori                        | Kategori som ingrediensen høyrer til, t.d. grønsaker, kjøt, krydder.                                  |
+| Brukar          | Brukaren som la til ingrediensen |                                                                                                      |
+| Oppskrift       | Tittel                          | Tittel på oppskrifta.                                                                                 |
+|                 | Skildring                       | Kort skildring av retten.                                                                             |
+|                 | Ingrediensliste                 | Liste over ingrediensane som blir brukt i oppskrifta.                                                 |
+|                 | Framgangsmåte                   | Steg-for-steg instruksjonar for korleis ein lagar retten.                                              |
+
+---
+
