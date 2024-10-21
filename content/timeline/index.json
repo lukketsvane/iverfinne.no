@@ -1,4 +1,125 @@
 [
+    {
+      "date": "7/22/2024",
+      "title": "AHO Slot",
+      "description": "A slot machine game designed for the Oslo School of Architecture and Design (AHO).",
+      "tags": ["public", "game", "design"],
+      "type": "public",
+      "category": "game",
+      "url": "https://aho-slot.vercel.app/"
+    },
+    {
+      "date": "7/16/2024",
+      "title": "Matlas",
+      "description": "An interactive atlas of materials, showcasing various properties and applications.",
+      "tags": ["public", "education", "materials"],
+      "type": "public",
+      "category": "education",
+      "url": "https://matlas.vercel.app/"
+    },
+    {
+      "date": "4/19/2024",
+      "title": "jobbi: Autonom assistent for jobbsøk",
+      "description": "få",
+      "tags": ["public", "ai", "innovation", "employment"],
+      "type": "public",
+      "category": "employment",
+      "url": "http://jobbi.vercel.app/"
+    },
+    {
+      "date": "2/28/2024",
+      "title": "Gradient",
+      "description": "A book completely generated autonomously using Stable Diffusion, consisting of gradients.",
+      "tags": ["public", "ai", "art"],
+      "type": "public",
+      "category": "ai",
+      "url": "https://gradient-taupe.vercel.app/"
+    },
+    {
+      "date": "4/15/2023",
+      "title": "Kitchen Sage",
+      "description": "Expert chef GPT; identifies ingredients from images and suggests recipes.",
+      "tags": ["public", "ai"],
+      "type": "public",
+      "category": "ai",
+      "url": "https://chat.openai.com/g/g-fBV5qBHGF-kitchen-sage"
+    },
+    {
+      "date": "4/10/2023",
+      "title": "Novel Craft",
+      "description": "Generate a full-length novel with NovelCraft. Just provide a prompt, choose the number of chapters, and select your desired writing style. Perfect for budding authors and creative minds.",
+      "tags": ["public", "ai", "writing"],
+      "type": "public",
+      "category": "ai",
+      "url": "https://chat.openai.com/g/g-2bEPJ3c7W-novel-craft"
+    },
+    {
+      "date": "3/20/2023",
+      "title": "Storygen",
+      "description": "Storygen is an AI-powered story generation platform that helps users create unique and engaging stories with ease.",
+      "tags": ["public", "ai", "writing"],
+      "type": "public",
+      "category": "ai",
+      "url": "https://www.storygen.no/en"
+    },
+    {
+      "date": "12/5/2023",
+      "title": "Storygen Project",
+      "description": "Storygen is an AI-powered story generation platform that helps users create unique and engaging stories with ease.",
+      "tags": ["public", "ai", "writing"],
+      "type": "public",
+      "category": "ai",
+      "url": "/projects/storygen"
+    },
+    {
+      "date": "3/30/2021",
+      "title": "Korall Engineering: Pioneering Future Designs",
+      "description": "A look into Korall Engineering's innovative approach to design and manufacturing.",
+      "image": "/images/coral/coral_11.png",
+      "url": "/projects/coral",
+      "tags": [],
+      "type": "public",
+      "category": "design"
+    },
+    {
+      "date": "8/26/2019",
+      "title": "DongJin Tableware",
+      "description": "As an Executive Designer at DongJin Tableware in Yangxin, Shandong, China, I led a team focused on marketing, design, and production. Specialized in graphic design, 3D modeling, and photography for product presentations and catalogs.",
+      "image": "/images/dongjin/dongjin-logo.jpg",
+      "url": "/projects/dongjin",
+      "tags": [],
+      "type": "public",
+      "category": "design"
+    },
+    {
+      "date": "1/1/2019",
+      "title": "Ygdrasyl Project",
+      "description": "Innovating the future of agriculture through automated, energy-efficient vertical farming solutions.",
+      "image": "/images/ygdrasyl/ygdrasyl_2.png",
+      "url": "/projects/ygdrasyl",
+      "tags": [],
+      "type": "public",
+      "category": "agriculture"
+    },
+    {
+      "date": "10/21/2024",
+      "title": "Daily Challenge for Wrinkly Brains",
+      "description": "Launched a daily challenge inviting interest for a Wordle successor. Created from idea to web app within minutes with @v0.",
+      "tags": ["public", "game", "interactive"],
+      "type": "public",
+      "category": "game",
+      "url": "https://sphere.v0.build"
+    },
+    {
+      "date": "10/21/2024",
+      "title": "3D Sphere Editor",
+      "description": "A Three.js-based web tool allowing users to paint meta materials on a 3D sphere.",
+      "tags": ["public", "design", "3d"],
+      "type": "public",
+      "category": "design",
+      "url": "https://sphere.v0.build"
+    },
+  
   {
     "date": "7/22/2024",
     "title": "AHO Slot",
