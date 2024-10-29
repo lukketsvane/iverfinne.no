@@ -14,6 +14,7 @@ def write_code_contents(output_file):
         'pages/index.tsx',
         'lib/mdx.ts',
         'lib/projects.ts',
+        'lib/books.ts',
         'lib/writing.ts',
         'pages/projects/[slug].tsx',
         'pages/projects/index.tsx',

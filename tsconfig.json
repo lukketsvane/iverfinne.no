@@ -22,6 +22,6 @@
     "noImplicitThis": false,
     "alwaysStrict": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.tsx"],
   "exclude": ["node_modules"]
 }

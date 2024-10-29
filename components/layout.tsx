@@ -1,81 +1,139 @@
-import { Container, VStack, Text, Flex, Box, HStack, Menu, MenuButton, IconButton, MenuList, MenuItem, Icon, MenuGroup, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
-import NextLink from 'next/link';
-import { useRouter } from "next/router";
-import { PropsWithChildren } from "react";
-import { FiMenu } from "react-icons/fi";
+import React from 'react'
+import { Box, Flex, Text, useBreakpointValue, Image, IconButton, Menu, MenuButton, MenuList, MenuItem, Container } from "@chakra-ui/react"
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import styled from '@emotion/styled'
+import { Menu as MenuIcon } from 'lucide-react'
 
-function Navigation({ link, children, isExternal }: { link: string; children: string; isExternal?: boolean }) {
-  const router = useRouter();
-  const isActive = link === "/" ? router.asPath === link : router.asPath.includes(link);
-  const activeColor = useColorModeValue("black", "#fafafa");
-  const inactiveColor = useColorModeValue("gray.600", "rgba(255, 255, 255, 0.50)");
+const NavLink = styled(Link, {
+  shouldForwardProp: (prop) => ['href', 'children'].includes(prop),
+})<{ isActive: boolean }>`
+  color: ${props => props.isActive ? '#ff0000' : 'inherit'};
+  text-decoration: none;
+  margin-left: 1rem;
+  cursor: pointer;
+  font-weight: ${props => props.isActive ? 'bold' : 'normal'};
+  transition: color 0.3s ease, transform 0.2s ease;
 
-  const content = (
-    <Text
-      as="span"
-      fontSize="lg"
-      color={isActive ? activeColor : inactiveColor}
-      _hover={{ color: activeColor }}
-    >
-      {children}
-    </Text>
-  );
-
-  if (isExternal) {
-    return (
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        {content}
-      </a>
-    );
+  &:hover {
+    color: #ff0000;
+    transform: translateY(-2px);
   }
+`
+
+interface LayoutProps {
+  children: React.ReactNode
+}
+
+function Navigation({
+  link,
+  children,
+  isExternal,
+}: {
+  link: string;
+  children: string;
+  isExternal?: boolean;
+}) {
+  const router = useRouter();
+  const isActive =
+    link === "/" ? router.asPath === link : router.asPath.includes(link);
 
   return (
-    <NextLink href={link} passHref legacyBehavior>
-      <a>{content}</a>
-    </NextLink>
+    <Link href={link} passHref>
+      <Text
+        as="a"
+        fontSize="lg"
+        color={isActive ? "black" : "gray.500"}
+        _hover={{ color: "black" }}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+      >
+        {children}
+      </Text>
+    </Link>
   );
 }
 
-function Layout({ children }: PropsWithChildren<{}>) {
-  const bgColor = useColorModeValue("white", "#0a0a0a");
-  const isMobile = useBreakpointValue({ base: true, md: false });
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const router = useRouter()
+  const isMobile = useBreakpointValue({ base: true, md: false })
 
   return (
-    <Container position="relative" mt={{ base: 16, md: 20 }} pb={{ base: 8, md: "10em" }} maxW={{ base: "100%", xl: "container.md" }} px={{ base: 8, xl: 12 }}>
-      <Flex justify="space-between" position="fixed" top={0} display="flex" height={12} zIndex={50} left={0} width="100%" align="center" borderBottom="1px solid" borderBottomColor="gray.200" bg={bgColor}>
-        {!isMobile && (
-          <HStack spacing={4} pl={4} pr={8}>
-            <Navigation link="/">Home</Navigation>
-            <Navigation link="/writing">Blog</Navigation>
-            <Navigation link="/books">Books</Navigation>
-            <Navigation link="/projects">Build Log</Navigation>
-          </HStack>
-        )}
-        <Box ml="auto" mr={4}>
-          <Menu>
-            <MenuButton as={IconButton} aria-label="Options" icon={<Icon as={FiMenu} boxSize={4} />} variant="outline" size="sm" />
-            <MenuList bg={bgColor}>
-              <MenuGroup title="NAVIGATION">
-                <VStack align="flex-start" px={4} spacing={3} mb={4}>
-                  <Navigation link="/">Home</Navigation>
-                  <Navigation link="/writing">Blog</Navigation>
-                  <Navigation link="/books">Books</Navigation>
-                  <Navigation link="/projects">Build Log</Navigation>
-                </VStack>
-              </MenuGroup>
-              <MenuGroup title="FIND ME ON">
-                <VStack align="flex-start" px={4} spacing={3} mb={2}>
-                  <Navigation link="https://twitter.com/amitoser" isExternal>Twitter</Navigation>
-                  <Navigation link="https://github.com/lukketsvane" isExternal>GitHub</Navigation>
-                </VStack>
-              </MenuGroup>
-            </MenuList>
-          </Menu>
-        </Box>
-      </Flex>
-      {children}
-    </Container>
-  );
+    <Box minHeight="100vh" display="flex" flexDirection="column">
+      <Box 
+        as="header" 
+        position="fixed" 
+        top={0} 
+        left={0} 
+        right={0} 
+        height="70px" 
+        zIndex={100} 
+        bg="rgba(255, 255, 255, 0.95)"
+        boxShadow="0 2px 10px rgba(0,0,0,0.1)"
+        backdropFilter="blur(10px)"
+      >
+        <Container maxW="container.xl" height="100%">
+          <Flex justifyContent="space-between" alignItems="center" height="100%">
+            <Flex alignItems="center">
+              <Text fontSize="sm" ml={4} display={{ base: 'none', md: 'block' }} color="gray.600">
+                OSLO, NORWAY
+              </Text>
+            </Flex>
+            <Flex alignItems="center">
+              <Box width="0.75rem" height="0.75rem" borderRadius="50%" bg="red.500" mr={2} />
+              {!isMobile && (
+                <Flex as="nav" alignItems="center">
+                  <NavLink href="/" isActive={router.pathname === '/'}>HOME</NavLink>
+                  <NavLink href="/reading" isActive={router.pathname === '/reading'}>READING</NavLink>
+                  <NavLink href="/writing" isActive={router.pathname === '/writing'}>WRITING</NavLink>
+                  <NavLink href="/projects" isActive={router.pathname === '/projects'}>BUILD LOG</NavLink>
+                </Flex>
+              )}
+              {isMobile && (
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label="Options"
+                    icon={<MenuIcon />}
+                    variant="outline"
+                    size="sm"
+                  />
+                  <MenuList>
+                    <MenuItem as="div"><Navigation link="/">HOME</Navigation></MenuItem>
+                    <MenuItem as="div"><Navigation link="/reading">READING</Navigation></MenuItem>
+                    <MenuItem as="div"><Navigation link="/writing">WRITING</Navigation></MenuItem>
+                    <MenuItem as="div"><Navigation link="/projects">BUILD LOG</Navigation></MenuItem>
+                  </MenuList>
+                </Menu>
+              )}
+            </Flex>
+          </Flex>
+        </Container>
+      </Box>
+      <Box as="main" pt="90px" flex={1}>
+        <Container maxW="container.xl" px={4}>
+          {children}
+        </Container>
+      </Box>
+      <Box as="footer" py={6} bg="gray.50">
+        <Container maxW="container.xl">
+          <Flex justifyContent="space-between" alignItems="center" flexWrap="wrap">
+            <Text fontSize="sm" color="gray.600">
+              © {new Date().getFullYear()} FINNE KODER. All rights reserved.
+            </Text>
+            <Flex mt={{ base: 4, md: 0 }}>
+              <Link href="/privacy" passHref>
+                <Text as="a" fontSize="sm" color="gray.600" mr={4} _hover={{ color: "red.500" }}>Privacy Policy</Text>
+              </Link>
+              <Link href="/terms" passHref>
+                <Text as="a" fontSize="sm" color="gray.600" _hover={{ color: "red.500" }}>Terms of Service</Text>
+              </Link>
+            </Flex>
+          </Flex>
+        </Container>
+      </Box>
+    </Box>
+  )
 }
 
-export default Layout;
+export default Layout

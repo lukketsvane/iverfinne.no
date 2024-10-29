@@ -15,7 +15,7 @@ const ProjectPage: NextPageWithLayout<ProjectProps> = ({ project }) => {
       <Flex direction="column">
         <Heading as="h1" size="2xl" mb={8}>{project.metadata.title}</Heading>
         <Box mb={8}><Image src={project.metadata.image} alt={project.metadata.title} /></Box>
-        <Prose><MDXRemote compiledSource={project.source} /></Prose>
+        <Prose><MDXRemote compiledSource={project.source} scope={undefined} frontmatter={undefined} /></Prose>
       </Flex>
     </>
   );

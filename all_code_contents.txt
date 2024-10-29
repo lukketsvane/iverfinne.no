@@ -1,233 +1,92 @@
 File: pages/books/[[...slug]].tsx
 
-import { Flex, Heading, Image, Stack, VStack, Text, Divider, Link, Box } from "@chakra-ui/react";
-import { GetStaticPropsContext, NextPage } from "next";
+// pages/books/[[...slug]].tsx
+import { Flex, Heading, Image, Stack, VStack, Text, Divider, Link } from "@chakra-ui/react";
+import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import Layout from "../../components/layout";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { MDXRemote } from "next-mdx-remote";
 import { Book, getAllBooks, getAllSlugs, getBook } from "../../lib/books";
 import { Bookshelf } from "../../components/bookshelf";
+import { Content } from "../../lib/mdx";
 import { NextSeo } from "next-seo";
-import { ReactElement, useEffect, useState } from "react";
-
-interface BooksProps {
-  books: Book[];
-  book?: Book & { content: MDXRemoteSerializeResult };
-}
-
-type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactElement;
-};
-
-const BookDetails: React.FC<{ book: Book & { content: MDXRemoteSerializeResult } }> = ({ book }) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null; // or a loading spinner
+interface BooksProps { books: Book[]; book?: Content<Book>; }
+const Books: NextPageWithLayout<BooksProps> = ({ books, book }) => {
+  if (book) {
+    return (
+      <>
+        <NextSeo title={book.metadata.title} description={`By: ${book.metadata.author} - Read: ${book.metadata.date} - Rating: ${book.metadata.rating}/10`} openGraph={{ title: book.metadata.title, description: `By: ${book.metadata.author} - Read: ${book.metadata.date} - Rating: ${book.metadata.rating}/10`, }} />
+        <Stack spacing={3}>
+          <Flex direction="row" align="flex-start" gap={6}>
+            <VStack align="flex-start" flexGrow={1}><Heading size="xl">{book.metadata.title}</Heading><Text color="gray.400" fontSize="xl">By: {book.metadata.author} - Read: {book.metadata.date} - Rating: {book.metadata.rating}/10</Text></VStack>
+          </Flex>
+          <Prose><MDXRemote compiledSource={book.source} /></Prose>
+        </Stack>
+      </>
+    );
   }
-
   return (
     <>
-      <NextSeo
-        title={book.title}
-        description={`By: ${book.author} - Read: ${book.date} - Rating: ${book.rating}/10`}
-        openGraph={{
-          title: book.title,
-          description: `By: ${book.author} - Read: ${book.date} - Rating: ${book.rating}/10`,
-        }}
-      />
-      <Stack spacing={6}>
-        <VStack align="flex-start" spacing={2}>
-          <Heading size="xl">{book.title}</Heading>
-          <Text fontSize="xl" fontWeight="bold" color="gray.600">
-            By: {book.author}
-          </Text>
-          <Text color="gray.500">
-            Read: {book.date} • Rating: {book.rating}/10
-          </Text>
-        </VStack>
-        <Image
-          src={book.coverImage}
-          alt={book.title}
-          maxHeight="400px"
-          objectFit="contain"
-        />
-        <Prose>
-          <MDXRemote {...book.content} />
-        </Prose>
+      <NextSeo title="Books | Iver Finne" />
+      <Stack spacing={5}>{books.slice().sort((a, b) => b.rating - a.rating).map((book, index) => (
+        <Stack key={book.title} scrollMarginTop={20}><Stack>{index > 0 && <Divider mb={3} width="100%" />}
+          <Flex direction="row" align="flex-start" gap={6}><Image border="1px solid" borderColor="gray.200" src={book.coverImage} alt={book.title} height={{ base: "100px", sm: "140px", md: "160px" }} />
+            <VStack align="flex-start" flexGrow={1}><Link href={book.slug}><Heading size="md">{book.title}</Heading></Link><Text color="#999" size="md">{book.author}</Text><Text color="#666">Read: {book.date} • Rating: {book.rating}/10</Text><Prose><MDXRemote compiledSource={book.summary} /></Prose></VStack>
+          </Flex></Stack></Stack>))}
       </Stack>
     </>
   );
 };
-
-const BookList: React.FC<{ books: Book[] }> = ({ books }) => (
-  <>
-    <NextSeo title="Books | Iver Finne" />
-    <Stack spacing={8}>
-      {books
-        .sort((a, b) => b.rating - a.rating)
-        .map((book) => (
-          <Box key={book.title} scrollMarginTop={20}>
-            <Flex direction={{ base: "column", md: "row" }} align="flex-start" gap={6}>
-              <Image
-                border="1px solid"
-                borderColor="gray.200"
-                src={book.coverImage}
-                alt={book.title}
-                height={{ base: "200px", md: "250px" }}
-                objectFit="contain"
-              />
-              <VStack align="flex-start" flexGrow={1} spacing={3}>
-                <Link href={`/books/${book.slug.replace(/^\/books\//, '')}`}>
-                  <Heading size="lg">{book.title}</Heading>
-                </Link>
-                <Text fontSize="lg" fontWeight="medium">
-                  {book.author}
-                </Text>
-                <Text color="gray.600">
-                  Read: {book.date} • Rating: {book.rating}/10
-                </Text>
-                <Text>{book.summary}</Text>
-              </VStack>
-            </Flex>
-            <Divider mt={8} />
-          </Box>
-        ))}
-    </Stack>
-  </>
-);
-
-const Books: NextPageWithLayout<BooksProps> = ({ books, book }) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null; // or a loading spinner
-  }
-
-  return book ? <BookDetails book={book} /> : <BookList books={books} />;
-};
-
-Books.getLayout = (page: ReactElement) => (
-  <Layout>
-    <Flex direction="column" gap={8}>
-      <Bookshelf books={(page.props as BooksProps).books} />
-      <Divider />
-      {page}
-    </Flex>
-  </Layout>
-);
-
+export default Books;
+Books.getLayout = (page: JSX.Element) => (<Layout><Flex direction="column" gap={8}><Bookshelf books={page.props.books} /><Divider />{page}</Flex></Layout>);
 export async function getStaticPaths() {
   const paths = getAllSlugs();
-  return { paths: [{ params: { slug: [] } }, ...paths], fallback: false };
+  return { paths: [{ params: { slug: undefined } }, ...paths], fallback: false, };
 }
-
 export async function getStaticProps({ params }: GetStaticPropsContext) {
+  if (params && params.slug && params.slug.length > 1) { return { redirect: { destination: "/books", }, }; }
   const books = getAllBooks();
-  if (!params?.slug || params.slug.length === 0) {
-    return { props: { books } };
-  }
-  if (params.slug.length > 1) {
-    return { redirect: { destination: "/books", permanent: false } };
-  }
-  const book = await getBook(params.slug[0]);
-  if (!book) {
-    return { redirect: { destination: "/books", permanent: false } };
-  }
-  return { props: { books, book } };
+  if (!params || !params.slug || params.slug.length === 0) { return { props: { books, }, }; }
+  const book = await getBook(params.slug[0] as string);
+  if (!book) { return { redirect: { destination: "/books", }, }; }
+  return { props: { books, book }, };
 }
-
-export default Books;
 
 ================================================================================
 
 File: lib/books.ts
 
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import path from 'path';
-import fs from 'fs';
-import matter from 'gray-matter';
-
-export interface Book {
-  title: string;
-  author: string;
-  date: string;
-  rating: number;
-  coverImage: string;
-  spineColor: string;
-  textColor: string;
-  slug: string;
-  summary: string;
-}
-
-export function getAllBooks(): Book[] {
-  const booksPath = path.join(process.cwd(), 'content', 'books');
-  const bookFiles = fs.readdirSync(booksPath).filter(file => file.endsWith('.mdx'));
-  
-  return bookFiles.map(file => {
-    const filePath = path.join(booksPath, file);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(fileContents);
-    return {
-      ...data,
-      slug: `/books/${file.replace('.mdx', '')}`,
-    } as Book;
-  });
-}
-
-export function getAllSlugs(): { params: { slug: string[] } }[] {
-  const books = getAllBooks();
-  return books.map(book => ({
-    params: { slug: [book.slug.replace(/^\/books\//, '')] }
-  }));
-}
-
-export async function getBook(slug: string): Promise<(Book & { content: MDXRemoteSerializeResult }) | undefined> {
-  const books = getAllBooks();
-  const book = books.find(b => b.slug.replace(/^\/books\//, '') === slug);
-  if (!book) {
-    return undefined;
-  }
-  const fullPath = path.join(process.cwd(), 'content', 'books', `${slug}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { content, data } = matter(fileContents);
-  const mdxSource = await serialize(content);
-  return { ...book, ...data, content: mdxSource };
-}
+// lib/books.ts
+import { getMdxContent, MaybeContent } from "./mdx";
+import path from "path";
+import fs from "fs";
+export interface Book { title: string; author: string; date: string; rating: number; coverImage: string; spineColor: string; textColor: string; slug: string; summary: string; }
+export function getAllBooks(): Book[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "books", "index.json"), "utf8")); }
+export function getAllSlugs(): string[] { const data = getAllBooks(); return data.map((item) => item.slug); }
+export async function getBook(slug: string): Promise<MaybeContent<Book>> { const book = await getMdxContent<Book>("books", `${slug}.mdx`); if (!book) { return undefined; } return { ...book, }; }
 
 ================================================================================
 
 File: components/bookshelf.tsx
 
-import {Box,Icon,HStack,Flex,Heading,Image,Center,useDimensions,useBreakpointValue} from "@chakra-ui/react";
-import React, {useEffect, useState} from "react";
+// components/Bookshelf.tsx
+import {Box,Icon,HStack,Flex,Heading,Image,Center,useDimensions,useBreakpointValue,} from "@chakra-ui/react";
+import React from "react";
 import {Book} from "../lib/books";
 import {FaChevronLeft,FaChevronRight} from "react-icons/fa";
 import {useRouter} from "next/router";
-
 interface BookshelfProps {books: Book[];}
-
 export function Bookshelf({books}: BookshelfProps) {
  const router = useRouter();
- const [bookIndex, setBookIndex] = useState(-1);
- const [scroll, setScroll] = useState(0);
- const [isClient, setIsClient] = useState(false);
+ const [bookIndex, setBookIndex] = React.useState(-1);
+ const [scroll, setScroll] = React.useState(-200);
  const bookshelfRef = React.useRef<HTMLDivElement>(null);
  const viewportRef = React.useRef<HTMLDivElement>(null);
  const scrollRightRef = React.useRef<HTMLDivElement>(null);
  const scrollLeftRef = React.useRef<HTMLDivElement>(null);
  const viewportDimensions = useDimensions(viewportRef, true);
- const [isScrolling, setIsScrolling] = useState(false);
- const [booksInViewport, setBooksInViewport] = useState(0);
+ const [isScrolling, setIsScrolling] = React.useState(false);
+ const [booksInViewport, setBooksInViewport] = React.useState(0);
  const scrollEvents = useBreakpointValue({base: { start: "touchstart", stop: "touchend" },sm: { start: "mouseenter", stop: "mouseleave" },});
  const width = 41.5;
  const height = 220;
@@ -237,69 +96,12 @@ export function Bookshelf({books}: BookshelfProps) {
  const bookHeight = `${height}px`;
  const minScroll = 0;
  const maxScroll = React.useMemo(() => (width + 12) * (books.length - booksInViewport) + (bookIndex > -1 ? width * 4 : 0) + 5, [bookIndex, books.length, booksInViewport]);
- 
  const boundedScroll = (scrollX: number) => {setScroll(Math.max(minScroll, Math.min(maxScroll, scrollX)));};
  const boundedRelativeScroll = React.useCallback((incrementX: number) => {setScroll((_scroll) => Math.max(minScroll, Math.min(maxScroll, _scroll + incrementX)));}, [maxScroll]);
- 
- useEffect(() => {
-   setIsClient(true);
-   if (router.query.slug && router.query.slug.length > 0 && bookIndex === -1) {
-     const idx = books.findIndex((b) => b.slug.toLowerCase().includes((router.query.slug as string[])[0].toLowerCase()));
-     setBookIndex(idx);
-   }
- }, [router.query.slug, books, bookIndex]);
- 
- useEffect(() => {
-   if (isClient) {
-     if (bookIndex === -1) {
-       boundedRelativeScroll(0);
-     } else {
-       boundedScroll((bookIndex - (booksInViewport - 4.5) / 2) * (width + 11));
-     }
-   }
- }, [isClient, bookIndex, boundedRelativeScroll, boundedScroll, booksInViewport, width]);
- 
- useEffect(() => {
-   if (isClient && viewportDimensions) {
-     boundedRelativeScroll(0);
-     const numberOfBooks = viewportDimensions.contentBox.width / (width + 11);
-     setBooksInViewport(numberOfBooks);
-   }
- }, [isClient, viewportDimensions, boundedRelativeScroll, width]);
- 
- useEffect(() => {
-   if (!isClient || !scrollEvents) return;
-   const currentScrollEvents = { ...scrollEvents };
-   const currentScrollRightRef = scrollRightRef.current;
-   const currentScrollLeftRef = scrollLeftRef.current;
-   let scrollInterval: NodeJS.Timeout | null = null;
-   const setScrollRightInterval = () => {
-     setIsScrolling(true);
-     scrollInterval = setInterval(() => {boundedRelativeScroll(3);}, 10);
-   };
-   const setScrollLeftInterval = () => {
-     setIsScrolling(true);
-     scrollInterval = setInterval(() => {boundedRelativeScroll(-3);}, 10);
-   };
-   const clearScrollInterval = () => {
-     setIsScrolling(false);
-     if (scrollInterval) {clearInterval(scrollInterval);}
-   };
-   currentScrollRightRef?.addEventListener(currentScrollEvents.start, setScrollRightInterval);
-   currentScrollRightRef?.addEventListener(currentScrollEvents.stop, clearScrollInterval);
-   currentScrollLeftRef?.addEventListener(currentScrollEvents.start, setScrollLeftInterval);
-   currentScrollLeftRef?.addEventListener(currentScrollEvents.stop, clearScrollInterval);
-   return () => {
-     clearScrollInterval();
-     currentScrollRightRef?.removeEventListener(currentScrollEvents.start, setScrollRightInterval);
-     currentScrollRightRef?.removeEventListener(currentScrollEvents.stop, clearScrollInterval);
-     currentScrollLeftRef?.removeEventListener(currentScrollEvents.start, setScrollLeftInterval);
-     currentScrollLeftRef?.removeEventListener(currentScrollEvents.stop, clearScrollInterval);
-   };
- }, [isClient, scrollEvents, boundedRelativeScroll]);
- 
- if (!isClient) return null;
-
+ React.useEffect(() => {if (router.query.slug && router.query.slug.length > 0 && bookIndex === -1) {const idx = books.findIndex((b) => b.slug.toLowerCase().includes((router.query.slug as string[])[0].toLowerCase()));setBookIndex(idx);}}, []);
+ React.useEffect(() => {if (bookIndex === -1) {boundedRelativeScroll(0);} else {boundedScroll((bookIndex - (booksInViewport - 4.5) / 2) * (width + 11));}}, [bookIndex, boundedRelativeScroll]);
+ React.useEffect(() => {if (viewportDimensions) {boundedRelativeScroll(0);const numberOfBooks = viewportDimensions.contentBox.width / (width + 11);setBooksInViewport(numberOfBooks);}}, [viewportDimensions, boundedRelativeScroll]);
+ React.useEffect(() => {if (!scrollEvents) {return;}const currentScrollEvents = { ...scrollEvents };const currentScrollRightRef = scrollRightRef.current;const currentScrollLeftRef = scrollLeftRef.current;let scrollInterval: NodeJS.Timeout | null = null;const setScrollRightInterval = () => {setIsScrolling(true);scrollInterval = setInterval(() => {boundedRelativeScroll(3);}, 10);};const setScrollLeftInterval = () => {setIsScrolling(true);scrollInterval = setInterval(() => {boundedRelativeScroll(-3);}, 10);};const clearScrollInterval = () => {setIsScrolling(false);if (scrollInterval) {clearInterval(scrollInterval);}};currentScrollRightRef!.addEventListener(currentScrollEvents.start, setScrollRightInterval);currentScrollRightRef!.addEventListener(currentScrollEvents.stop, clearScrollInterval);currentScrollLeftRef!.addEventListener(currentScrollEvents.start, setScrollLeftInterval);currentScrollLeftRef!.addEventListener(currentScrollEvents.stop, clearScrollInterval);return () => {clearScrollInterval();currentScrollRightRef!.removeEventListener(currentScrollEvents.start, setScrollRightInterval);currentScrollRightRef!.removeEventListener(currentScrollEvents.stop, clearScrollInterval);currentScrollLeftRef!.removeEventListener(currentScrollEvents.start, setScrollLeftInterval);currentScrollLeftRef!.removeEventListener(currentScrollEvents.stop, clearScrollInterval);};}, [boundedRelativeScroll]);
  return (
  <>
 <svg style={{position: "absolute",inset: 0,visibility: "hidden",}}><defs><filter id="paper" x="0%" y="0%" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="8" result="noise" /><feDiffuseLighting in="noise" lightingColor="white" surfaceScale="1" result="diffLight"><feDistantLight azimuth="45" elevation="35" /></feDiffuseLighting></filter></defs></svg>
@@ -323,101 +125,45 @@ style={{transition: "all 500ms ease",willChange: "auto",}} /></Box></button>))}<
 
 File: pages/_app.tsx
 
-import type { AppProps } from 'next/app';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { Prose, withProse } from '@nikolovlazar/chakra-ui-prose';
-import Layout from '../components/layout';
-import { ReactElement } from 'react';
-import { DefaultSeo } from 'next-seo';
-import { Global } from '@emotion/react';
-import { Lora } from '@next/font/google';
+import type { AppProps } from 'next/app'
+import { Global, css } from '@emotion/react'
+import Head from 'next/head'
 
-const lora = Lora({ subsets: ['latin'], display: 'swap' });
-
-const theme = extendTheme({
-  fonts: { heading: lora.style.fontFamily, body: lora.style.fontFamily },
-  config: { initialColorMode: 'light', useSystemColorMode: true },
-  styles: { 
-    global: (props: any) => ({
-      body: { 
-        overflowY: 'scroll', 
-        scrollbarWidth: 'none', 
-        msOverflowStyle: 'none', 
-        '&::-webkit-scrollbar': { display: 'none' }, 
-        color: props.colorMode === 'dark' ? 'white' : 'black', 
-        bg: props.colorMode === 'dark' ? 'black' : 'white' 
-      }
-    }) 
+const globalStyles = css`
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
-}, withProse());
+`
 
-const getDefaultLayout = (page: ReactElement) => (
-  <Layout>
-    <Prose>{page}</Prose>
-  </Layout>
-);
-
-type NextPageWithLayout = AppProps & {
-  Component: AppProps['Component'] & {
-    getLayout?: (page: ReactElement) => ReactElement
-  }
-}
-
-export default function App({ Component, pageProps }: NextPageWithLayout) {
-  const getLayout = Component.getLayout || getDefaultLayout;
-
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider theme={theme}>
-      <DefaultSeo 
-        title='Iver Finne' 
-        description="I'm a constant learner and aspiring technical generalist." 
-        openGraph={{ 
-          title: 'Iver Finne', 
-          description: "I'm a constant learner and aspiring technical generalist.", 
-          images: [{ url: 'https://iverfinne.no/og-image-dark.jpg', type: 'image/jpeg' }], 
-          siteName: 'Iver Finne' 
-        }} 
-      />
-      <Global 
-        styles={{ 
-          body: { 
-            overflowY: 'scroll', 
-            scrollbarWidth: 'none', 
-            msOverflowStyle: 'none', 
-            '&::-webkit-scrollbar': { display: 'none' } 
-          } 
-        }} 
-      />
-      {getLayout(<Component {...pageProps} />)}
-    </ChakraProvider>
-  );
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Line Animation Studio</title>
+      </Head>
+      <Global styles={globalStyles} />
+      <Component {...pageProps} />
+    </>
+  )
 }
+
+export default MyApp
 
 ================================================================================
 
 File: pages/index.tsx
 
-// pages/index.tsx
-import { Expandable } from '../components/expandable';
-import IndexContent from './about-me.mdx';
-import FooterContent from './about-footer.mdx';
+import React from 'react'
+import InteractiveLanding from '../components/InteractiveLanding'
 
 const Home: React.FC = () => {
-  return (
-    <div>
-      <IndexContent />
-      <FooterContent />
-      <Expandable title="Past Work">
-        <div style={{ fontSize: '0.9em' }}>
-          As ABB&apos;s Technical Consultant since 2022 and Production Manager at Springbrettet, I&apos;ve been fusing technical expertise with strategic communication in Norway&apos;s business and educational sectors. My past roles as CEO of Coral Solutions AS and Creative Director for the Ygdrasyl Project and Emberlight VR honed my skills in leading innovation in engineering, sustainable design, and VR gaming. I&apos;ve also driven design and production at Dongjin Tableware, leveraging my proficiency in 3D modeling and graphic design to enhance product development and market presence.
-        </div>
-      </Expandable>
-    </div>
-  );
-};
+  return <InteractiveLanding />
+}
 
-export default Home;
-
+export default Home
 
 ================================================================================
 
@@ -456,35 +202,29 @@ export async function getMdxContent<TMetadata>(...paths: string[]): Promise<Mayb
 
 File: lib/projects.ts
 
+// lib/projects.ts
 import path from "path";
 import fs from "fs";
 import { getMdxContent, MaybeContent } from "./mdx";
+export interface Project { title: string; description: string; image: string; date: string; url: string; source: string; }
+export function getAllProjectData(): Project[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "projects", "index.json"), "utf8")); }
+export function getAllSlugs(): string[] { const data = getAllProjectData(); return data.map((item) => item.url); }
+export async function getProject(slug: string): Promise<MaybeContent<Project>> { return getMdxContent<Project>("projects", `${slug}.mdx`); }
+export interface TimelineItem { date: string; title: string; description: string; tags: string[]; type: "public" | "private" | "prototype"; category: string; url: string; }
+export function getTimelineData(): TimelineItem[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "timeline", "index.json"), "utf8")); }
 
-export interface Project {
-  title: string; description: string; image: string;
-  date: string; url: string; source: string;
-}
+================================================================================
 
-export interface TimelineItem {
-  date: string; title: string; description: string;
-  tags: string[]; type: "public" | "private" | "prototype";
-  category: string; url: string;
-}
+File: lib/books.ts
 
-const readJsonFile = (filePath: string) => 
-  JSON.parse(fs.readFileSync(path.join(process.cwd(), ...filePath.split('/')), "utf8"));
-
-export const getAllProjectData = (): Project[] => 
-  readJsonFile("content/projects/index.json");
-
-export const getAllSlugs = () => getAllProjectData()
-  .map(item => ({ params: { slug: item.url.replace(/^\/projects\//, '').replace(/\\/g, '/') } }));
-
-export const getProject = (slug: string): Promise<MaybeContent<Project>> => 
-  getMdxContent<Project>("projects", `${slug}.mdx`);
-
-export const getTimelineData = (): TimelineItem[] => 
-  readJsonFile("content/timeline/index.json");
+// lib/books.ts
+import { getMdxContent, MaybeContent } from "./mdx";
+import path from "path";
+import fs from "fs";
+export interface Book { title: string; author: string; date: string; rating: number; coverImage: string; spineColor: string; textColor: string; slug: string; summary: string; }
+export function getAllBooks(): Book[] { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "books", "index.json"), "utf8")); }
+export function getAllSlugs(): string[] { const data = getAllBooks(); return data.map((item) => item.slug); }
+export async function getBook(slug: string): Promise<MaybeContent<Book>> { const book = await getMdxContent<Book>("books", `${slug}.mdx`); if (!book) { return undefined; } return { ...book, }; }
 
 ================================================================================
 
@@ -492,30 +232,70 @@ File: lib/writing.ts
 
 import path from "path";
 import fs from "fs";
-import { getMdxContent, MaybeContent } from "./mdx";
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import matter from 'gray-matter';
 
 export interface Post {
-  title: string; description: string; image: string;
-  date: string; url: string; external: boolean; source: string;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  url: string;
+  external: boolean;
 }
 
-const readJsonFile = (filePath: string) => 
-  JSON.parse(fs.readFileSync(path.join(process.cwd(), ...filePath.split('/')), "utf8"));
+export interface PostContent extends Post {
+  content: MDXRemoteSerializeResult;
+}
 
-export const getAllPostData = (): Post[] => 
-  readJsonFile("content/writing/index.json");
+export const getAllPostData = (): Post[] => {
+  const filePath = path.join(process.cwd(), "content", "writing", "index.json");
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
 
-export const getAllSlugs = () => getAllPostData()
-  .filter(item => !item.external)
-  .map(item => ({ params: { slug: item.url.replace(/^\/writing\//, '').replace(/\\/g, '/') } }));
+export const getAllSlugs = () => {
+  const posts = getAllPostData();
+  return posts
+    .filter(item => !item.external)
+    .map(item => ({ params: { slug: item.url.replace(/^\/writing\//, '').replace(/\\/g, '/') } }));
+}
 
-export const getPost = (slug: string): Promise<MaybeContent<Post>> => 
-  getMdxContent<Post>("writing", `${slug}.mdx`);
+export const getPost = async (slug: string): Promise<PostContent | null> => {
+  const posts = getAllPostData();
+  const post = posts.find(p => p.url.replace(/^\/writing\//, '') === slug);
+
+  if (!post || post.external) return null;
+
+  const fullPath = path.join(process.cwd(), 'content', 'writing', `${slug}.mdx`);
+  
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+
+  const mdxSource = await serialize(content, {
+    scope: data,
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+    },
+  });
+
+  return {
+    ...post,
+    ...data,
+    content: mdxSource,
+  };
+};
 
 ================================================================================
 
 File: pages/projects/[slug].tsx
 
+// pages/projects/[slug].tsx
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { Heading, Flex, Image, Box } from "@chakra-ui/react";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
@@ -524,33 +304,31 @@ import { MDXRemote } from "next-mdx-remote";
 import { getAllSlugs, getProject, Project } from "../../lib/projects";
 import { Content } from "../../lib/mdx";
 import { NextSeo } from "next-seo";
-
 interface ProjectProps { project: Content<Project>; }
-
-const ProjectPage: NextPageWithLayout<ProjectProps> = ({ project }) => (
-  <>
-    <NextSeo title={project.metadata.title} description={project.metadata.description} 
-      openGraph={{ title: project.metadata.title, description: project.metadata.description, 
-        images: [{ url: project.metadata.image, alt: project.metadata.title }] }} />
-    <Flex direction="column">
-      <Heading as="h1" size="2xl" mb={8}>{project.metadata.title}</Heading>
-      <Box mb={8}><Image src={project.metadata.image} alt={project.metadata.title} /></Box>
-      <Prose><MDXRemote {...project.source} /></Prose>
-    </Flex>
-  </>
-);
-
-ProjectPage.getLayout = (page) => <Layout>{page}</Layout>;
-
-export const getStaticPaths = async () => ({ paths: getAllSlugs(), fallback: false });
-
-export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  if (!params?.slug || typeof params.slug !== "string") return { redirect: { destination: "/projects" } };
-  const project = await getProject(params.slug as string);
-  return project ? { props: { project } } : { redirect: { destination: "/projects" } };
+const ProjectPage: NextPageWithLayout<ProjectProps> = ({ project }) => {
+  return (
+    <>
+      <NextSeo title={project.metadata.title} description={project.metadata.description} openGraph={{ title: project.metadata.title, description: project.metadata.description, images: [{ url: project.metadata.image, alt: project.metadata.title, }], }} />
+      <Flex direction="column">
+        <Heading as="h1" size="2xl" mb={8}>{project.metadata.title}</Heading>
+        <Box mb={8}><Image src={project.metadata.image} alt={project.metadata.title} /></Box>
+        <Prose><MDXRemote compiledSource={project.source} /></Prose>
+      </Flex>
+    </>
+  );
 };
-
 export default ProjectPage;
+ProjectPage.getLayout = (page) => <Layout>{page}</Layout>;
+export async function getStaticPaths() {
+  const paths = getAllSlugs();
+  return { paths, fallback: false, };
+}
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  if (!params || !params.slug || typeof params.slug !== "string") { return { redirect: { destination: "/projects" } }; }
+  const project = await getProject(params.slug as string);
+  if (!project) { return { redirect: { destination: "/projects" } }; }
+  return { props: { project } };
+}
 
 ================================================================================
 
@@ -564,24 +342,18 @@ import type { NextPageWithLayout } from "next";
 import Layout from "../../components/layout";
 import { NextSeo } from "next-seo";
 import { Timeline } from "../../components/timeline";
-import { GetStaticProps } from "next";
-
-interface ProjectsProps { 
-  projects: Project[]; 
-  timeline: TimelineItem[]; 
-}
-
+interface ProjectsProps { projects: Project[]; timeline: TimelineItem[]; }
 const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const latestProjects = projects.slice(0, 3);
-  
   return (
     <>
       <NextSeo title="Projects | Iver Finne" />
       <Flex direction="column" align="flex-start" width="100%" gap={3}>
         <Heading as="h1" pt={2} size="xl">build-in-public log</Heading>
+        <Text fontSize="0.9em" mb={6}>refuge for my poorly posed conjectures, research still pending.</Text>
         <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} spacing={4} width="100%" mb={6}>
           {latestProjects.map((project) => (
             <Link key={project.title} href={project.url} isExternal>
@@ -592,68 +364,82 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({ projects, timeline }) => 
             </Link>
           ))}
         </SimpleGrid>
-        <Stack direction="column" width="100%" spacing={4} mb={4}>
-          <Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-          <Timeline 
-            items={timeline} 
-            searchQuery={searchQuery} 
-            typeFilter={typeFilter} 
-            categoryFilter={categoryFilter} 
-            onTypeFilterChange={setTypeFilter} 
-            onCategoryFilterChange={setCategoryFilter} 
-          />
+        <Stack direction="column" width="100%" spacing={4} mb={4}><Input placeholder="Type here to search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          <Timeline items={timeline} searchQuery={searchQuery} typeFilter={typeFilter} categoryFilter={categoryFilter} onTypeFilterChange={(type) => setTypeFilter(type)} onCategoryFilterChange={(category) => setCategoryFilter(category)} />
         </Stack>
       </Flex>
     </>
   );
 };
-
-export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
+export default Projects;
+Projects.getLayout = (page) => <Layout>{page}</Layout>;
+export async function getStaticProps() {
   const projects = getAllProjectData();
   const timeline = getTimelineData();
   return { props: { projects, timeline } };
-};
-
-Projects.getLayout = (page) => <Layout>{page}</Layout>;
-
-export default Projects;
+}
 
 ================================================================================
 
 File: pages/writing/[slug].tsx
 
-// pages/writing/[slug].tsx
 import { MDXRemote } from "next-mdx-remote";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
-import { Heading, Flex } from "@chakra-ui/react";
+import { Heading, Flex, Box, Text, Image } from "@chakra-ui/react";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import Layout from "../../components/layout";
-import { getAllSlugs, getPost, Post as PostMetadata } from "../../lib/writing";
-import { Content } from "../../lib/mdx";
+import { getAllSlugs, getPost, PostContent } from "../../lib/writing";
 import { NextSeo } from "next-seo";
-interface PostProps { post: Content<PostMetadata>; }
+
+interface PostProps { post: PostContent; }
+
 const Post: NextPageWithLayout<PostProps> = ({ post }) => {
-  return (<>
-    <NextSeo title={post.metadata.title} description={post.metadata.description} openGraph={{ title: post.metadata.title, description: post.metadata.description, images: [{ url: post.metadata.image || "https://iverfinne.no/og-image-dark.jpg", }], }} />
-    <Flex direction="column" gap={2}>
-      <Heading size="lg">{post.metadata.title}</Heading>
-      <Prose><MDXRemote compiledSource={post.source} /></Prose>
-    </Flex>
-  </>);
+  if (!post) {
+    return <Box>Post not found</Box>;
+  }
+
+  return (
+    <>
+      <NextSeo 
+        title={post.title || 'Untitled Post'} 
+        description={post.description || ''} 
+        openGraph={{ 
+          title: post.title || 'Untitled Post', 
+          description: post.description || '', 
+          images: post.image ? [{ url: post.image }] : [], 
+        }} 
+      />
+      <Flex direction="column" gap={4}>
+        <Heading size="xl">{post.title || 'Untitled Post'}</Heading>
+        <Text fontSize="md" color="gray.500">{post.date}</Text>
+        {post.image && <Image src={post.image} alt={post.title} />}
+        <Prose>
+          <MDXRemote {...post.content} />
+        </Prose>
+      </Flex>
+    </>
+  );
 };
+
 export default Post;
+
 Post.getLayout = (page) => <Layout>{page}</Layout>;
+
 export async function getStaticPaths() {
   const paths = getAllSlugs();
   return { paths, fallback: false };
 }
+
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  if (!params || !params.slug || typeof params.slug !== "string") { return { redirect: { destination: "/" } }; }
-  const post = await getPost(params.slug as string);
-  if (!post) { return { redirect: { destination: "/" } }; }
+  if (!params?.slug || typeof params.slug !== "string") { 
+    return { notFound: true }; 
+  }
+  const post = await getPost(params.slug);
+  if (!post) { 
+    return { notFound: true }; 
+  }
   return { props: { post } };
 }
-
 
 ================================================================================
 
@@ -708,7 +494,7 @@ export default Writing;
 File: components/layout.tsx
 
 import { Container, VStack, Text, Flex, Box, HStack, Menu, MenuButton, IconButton, MenuList, MenuItem, Icon, MenuGroup, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
-import Link from "next/link";
+import NextLink from 'next/link';
 import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 import { FiMenu } from "react-icons/fi";
@@ -718,12 +504,30 @@ function Navigation({ link, children, isExternal }: { link: string; children: st
   const isActive = link === "/" ? router.asPath === link : router.asPath.includes(link);
   const activeColor = useColorModeValue("black", "#fafafa");
   const inactiveColor = useColorModeValue("gray.600", "rgba(255, 255, 255, 0.50)");
+
+  const content = (
+    <Text
+      as="span"
+      fontSize="lg"
+      color={isActive ? activeColor : inactiveColor}
+      _hover={{ color: activeColor }}
+    >
+      {children}
+    </Text>
+  );
+
+  if (isExternal) {
+    return (
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        {content}
+      </a>
+    );
+  }
+
   return (
-    <Link href={link} passHref>
-      <Text as="a" target={isExternal ? "_blank" : "_self"} fontSize="lg" color={isActive ? activeColor : inactiveColor} _hover={{ color: activeColor }}>
-        {children}
-      </Text>
-    </Link>
+    <NextLink href={link} passHref legacyBehavior>
+      <a>{content}</a>
+    </NextLink>
   );
 }
 
@@ -962,19 +766,36 @@ const withMDX = require('@next/mdx')({
   options: {
     remarkPlugins: [],
     rehypePlugins: [],
-    // Add this line:
     providerImportSource: "@mdx-js/react",
   },
 })
 
 module.exports = withMDX({
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  reactStrictMode: true,
+  reactStrictMode: false,
   typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+      },
+    ],
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+      };
+    }
+    return config;
   },
 })
 

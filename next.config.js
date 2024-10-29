@@ -7,14 +7,25 @@ const withMDX = require('@next/mdx')({
   },
 })
 
-module.exports = withMDX({
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  reactStrictMode: false,
+  reactStrictMode: true,
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -25,5 +36,18 @@ module.exports = withMDX({
       };
     }
     return config;
+  },
+}
+
+module.exports = withMDX({
+  ...nextConfig,
+  async redirects() {
+    return [
+      {
+        source: "/books/:slug*",
+        destination: "/reading/:slug*",
+        permanent: true,
+      },
+    ];
   },
 })
