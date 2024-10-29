@@ -8,7 +8,7 @@ import { Menu as MenuIcon } from 'lucide-react'
 const NavLink = styled(Link, {
   shouldForwardProp: (prop) => ['href', 'children'].includes(prop),
 })<{ isActive: boolean }>`
-  color: ${props => props.isActive ? '#ff0000' : 'inherit'};
+  color: ${props => props.isActive ? '#FFA500' : 'inherit'};
   text-decoration: none;
   margin-left: 1rem;
   cursor: pointer;
@@ -16,13 +16,14 @@ const NavLink = styled(Link, {
   transition: color 0.3s ease, transform 0.2s ease;
 
   &:hover {
-    color: #ff0000;
+    color: #FFA500;
     transform: translateY(-2px);
   }
 `
 
 interface LayoutProps {
   children: React.ReactNode
+  isInteractiveLanding?: boolean
 }
 
 function Navigation({
@@ -43,8 +44,9 @@ function Navigation({
       <Text
         as="a"
         fontSize="lg"
-        color={isActive ? "black" : "gray.500"}
-        _hover={{ color: "black" }}
+        color={isActive ? "#FFA500" : "gray.500"}
+        _hover={{ color: "#FFA500" }}
+        fontWeight={isActive ? "bold" : "normal"}
         target={isExternal ? "_blank" : undefined}
         rel={isExternal ? "noopener noreferrer" : undefined}
       >
@@ -54,7 +56,7 @@ function Navigation({
   );
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, isInteractiveLanding = false }) => {
   const router = useRouter()
   const isMobile = useBreakpointValue({ base: true, md: false })
 
@@ -75,12 +77,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Container maxW="container.xl" height="100%">
           <Flex justifyContent="space-between" alignItems="center" height="100%">
             <Flex alignItems="center">
+              <Image 
+                src="https://i.ibb.co/5Md8Msb/finne-koder.png" 
+                alt="FINNE KODER" 
+                height="40px"
+                objectFit="contain"
+              />
               <Text fontSize="sm" ml={4} display={{ base: 'none', md: 'block' }} color="gray.600">
                 OSLO, NORWAY
               </Text>
             </Flex>
             <Flex alignItems="center">
-              <Box width="0.75rem" height="0.75rem" borderRadius="50%" bg="red.500" mr={2} />
+              <Box width="0.75rem" height="0.75rem" borderRadius="50%" bg="orange.500" mr={2} />
               {!isMobile && (
                 <Flex as="nav" alignItems="center">
                   <NavLink href="/" isActive={router.pathname === '/'}>HOME</NavLink>
@@ -110,10 +118,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Flex>
         </Container>
       </Box>
-      <Box as="main" pt="90px" flex={1}>
-        <Container maxW="container.xl" px={4}>
-          {children}
-        </Container>
+      <Box as="main" pt="70px" flex={1}>
+        {isInteractiveLanding ? (
+          children
+        ) : (
+          <Container maxW="container.xl" px={{ base: 4, md: 6 }} py={{ base: 6, md: 8 }}>
+            {children}
+          </Container>
+        )}
       </Box>
       <Box as="footer" py={6} bg="gray.50">
         <Container maxW="container.xl">
@@ -123,10 +135,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </Text>
             <Flex mt={{ base: 4, md: 0 }}>
               <Link href="/privacy" passHref>
-                <Text as="a" fontSize="sm" color="gray.600" mr={4} _hover={{ color: "red.500" }}>Privacy Policy</Text>
+                <Text as="a" fontSize="sm" color="gray.600" mr={4} _hover={{ color: "#FFA500" }}>Privacy Policy</Text>
               </Link>
               <Link href="/terms" passHref>
-                <Text as="a" fontSize="sm" color="gray.600" _hover={{ color: "red.500" }}>Terms of Service</Text>
+                <Text as="a" fontSize="sm" color="gray.600" _hover={{ color: "#FFA500" }}>Terms of Service</Text>
               </Link>
             </Flex>
           </Flex>

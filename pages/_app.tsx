@@ -45,7 +45,7 @@ const theme = extendTheme(
 );
 
 const getDefaultLayout = (page: ReactElement) => (
-  <Layout>
+  <Layout isInteractiveLanding={true}>
     <Prose>{page}</Prose>
   </Layout>
 );
