@@ -77,6 +77,7 @@ body{
   padding:0 1.125rem 1rem;
   scroll-behavior:auto;
 }
+.read:focus-visible{outline:1px solid var(--dim);outline-offset:-1px}
 .stream{padding:.375rem 0 .625rem}
 .prop{
   --indent:0rem;
@@ -291,6 +292,10 @@ document.getElementById('next').addEventListener('click',()=>step(1));
    synchronized with the text nearest the reading line. */
 function currentFromScroll(){
   if(performance.now()<programmaticUntil) return;
+  if(readEl.scrollTop<=2){
+    if(cur!==order[0]) setCurrent(order[0],true,false);
+    return;
+  }
   const atEnd=readEl.scrollTop+readEl.clientHeight>=readEl.scrollHeight-2;
   if(atEnd){
     const last=order[order.length-1];
