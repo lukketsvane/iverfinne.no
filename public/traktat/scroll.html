@@ -1,0 +1,326 @@
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<title>Formlæretreet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#FFFFFF;
+  --fg:#000000;
+  --dim:#8A8A8A;
+  --line:#D2D2D2;
+  --hair:#E8E8E8;
+  --serif:"Literata",Charter,Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --top:env(safe-area-inset-top,0px);
+  --bot:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --fg:#FFFFFF; --dim:#7C7C7C; --line:#343434; --hair:#1C1C1C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --fg:#FFFFFF; --dim:#7C7C7C; --line:#343434; --hair:#1C1C1C;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+html,body{
+  height:100%;margin:0;background:var(--bg);color:var(--fg);
+  overflow:hidden;overscroll-behavior:none;
+}
+body{
+  font-family:var(--serif);font-size:17px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  -webkit-user-select:none;user-select:none;
+}
+
+.app{
+  height:100vh;height:100dvh;
+  max-width:430px;margin:0 auto;
+  display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;
+  border-left:1px solid var(--hair);border-right:1px solid var(--hair);
+}
+@media (max-width:432px){.app{border:0}}
+
+.bar{
+  padding:calc(var(--top) + 14px) 18px 10px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);
+}
+
+.strip{padding:2px 16px 12px;border-bottom:1px solid var(--hair)}
+.strip svg{display:block;width:100%;height:auto;overflow:visible;touch-action:none}
+.strip{-webkit-user-select:none;user-select:none}
+.rbar{stroke:var(--line);stroke-width:1.1;fill:none;stroke-linecap:round}
+.rbar.on{stroke:var(--fg)}
+.stem{stroke:var(--line);stroke-width:.9;fill:none}
+.stem.sec{stroke:var(--dim)}
+.stem.on{stroke:var(--fg);stroke-width:1.8}
+.dot{fill:var(--fg)}
+.rlab{font-family:var(--mono);font-size:9px;fill:var(--dim);text-anchor:middle}
+.rlab.on{fill:var(--fg)}
+.tap{fill:transparent}
+
+.read{
+  overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:0 18px 44px;
+  scroll-behavior:smooth;
+}
+.stream{padding:8px 0 36px}
+.prop{
+  display:grid;grid-template-columns:44px 1fr;gap:0 10px;align-items:start;
+  padding:14px 0;border-bottom:1px solid var(--hair);
+  scroll-margin-top:18px;
+}
+.prop .n{
+  font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--dim);
+  font-variant-numeric:tabular-nums;padding-top:2px;
+}
+.prop .t{
+  font-size:16px;line-height:1.48;letter-spacing:-.006em;text-wrap:pretty;
+  -webkit-user-select:text;user-select:text;
+}
+.prop.depth0{
+  margin-top:34px;padding-top:20px;border-top:1.5px solid var(--fg);
+}
+.prop.depth0:first-child{margin-top:0}
+.prop.depth0 .n{color:var(--fg)}
+.prop.depth0 .t{font-size:21px;line-height:1.36;font-weight:600;letter-spacing:-.012em}
+.prop.depth1{padding-top:18px;padding-bottom:18px}
+.prop.depth1 .t{font-size:17px;font-weight:600;line-height:1.43}
+.prop.depth2 .t{font-size:15.7px;color:var(--fg)}
+.prop.active{
+  border-top:1.5px solid var(--fg);
+  margin-top:-1.5px;
+}
+.prop.active .n{color:var(--fg)}
+.prop.active .t{font-weight:600}
+.prop.depth0.active .t,.prop.depth1.active .t{font-weight:600}
+.endmark{
+  padding:26px 0 12px;text-align:center;font-family:var(--mono);
+  font-size:10px;letter-spacing:.18em;color:var(--dim);
+}
+
+.pager{
+  display:grid;grid-template-columns:64px 1fr 64px;align-items:center;
+  border-top:1px solid var(--hair);
+  padding-bottom:var(--bot);
+}
+.pager button{
+  height:56px;background:none;border:0;color:var(--fg);
+  font-family:var(--serif);font-size:26px;line-height:1;
+  touch-action:manipulation;-webkit-appearance:none;
+}
+.pager button:disabled{color:var(--hair)}
+.pager button:active:not(:disabled){background:var(--hair)}
+.pos{
+  text-align:center;font-family:var(--mono);font-size:12px;color:var(--dim);
+  font-variant-numeric:tabular-nums;letter-spacing:.06em;
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="app">
+  <div class="bar">FORMLÆRE</div>
+  <div class="strip"><svg id="tree" role="img" aria-label="Traktatens tre"></svg></div>
+  <main class="read" id="read"><div class="stream" id="stream"></div></main>
+  <nav class="pager">
+    <button type="button" id="prev" aria-label="Forrige">‹</button>
+    <span class="pos" id="pos"></span>
+    <button type="button" id="next" aria-label="Neste">›</button>
+  </nav>
+</div>
+
+<script>
+async function loadData(){
+  const source=await fetch('/traktat/index.html',{cache:'no-store'}).then(r=>{
+    if(!r.ok) throw new Error('Kunne ikke laste traktaten');
+    return r.text();
+  });
+  const m=source.match(/const DATA\s*=\s*(\[[\s\S]*?\]);/);
+  if(!m) throw new Error('Fant ikke traktatdata');
+  return JSON.parse(m[1]);
+}
+
+(async()=>{
+const DATA=await loadData();
+
+const byNum = new Map();
+DATA.forEach(d=>{
+  const dot=d.n.indexOf('.');
+  d.depth = dot<0?0 : d.n.length-dot-1;
+  d.parent = d.depth===0?null : d.depth===1?d.n.slice(0,dot) : d.n.slice(0,d.n.length-1);
+  d.kids=[]; byNum.set(d.n,d);
+});
+DATA.forEach(d=>{ if(d.parent) byNum.get(d.parent).kids.push(d); });
+const roots = DATA.filter(d=>d.depth===0);
+const order = DATA.map(d=>d.n);
+let cur = '1';
+
+const VW=358, PAD=5, SGAP=5;
+const NB = roots.reduce((a,r)=>a+r.kids.length,0);
+const STEP = (VW - PAD*2 - SGAP*(roots.length-1)) / NB;
+const Y_LAB=8, Y_ROOT=17, UNIT=8.0;
+let x = PAD;
+roots.forEach(r=>{
+  r.x0 = x;
+  r.kids.forEach(b=>{ b.x = x + STEP/2; x += STEP; });
+  r.x1 = x; x += SGAP;
+});
+const maxT = Math.max(...DATA.filter(d=>d.depth===1).map(d=>d.kids.length));
+const VH = Y_ROOT + (maxT+1)*UNIT + 7;
+
+const svg=document.getElementById('tree'), NS='http://www.w3.org/2000/svg';
+function mk(t,a){ const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); return e; }
+
+function drawTree(){
+  svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`);
+  svg.innerHTML='';
+  const sec = cur.split('.')[0];
+  const br = cur.includes('.') ? sec+'.'+cur.split('.')[1][0] : null;
+  const g=mk('g',{});
+
+  roots.forEach(r=>{
+    const inSec = r.n===sec;
+    g.appendChild(mk('path',{d:`M${r.x0},${Y_ROOT} H${r.x1}`, class:'rbar'+(inSec?' on':'')}));
+    const lab=mk('text',{x:(r.x0+r.x1)/2, y:Y_LAB, class:'rlab'+(inSec?' on':'')});
+    lab.textContent=r.n; g.appendChild(lab);
+    r.kids.forEach(b=>{
+      const onB = b.n===br;
+      const cls = onB?' on' : inSec?' sec' : '';
+      const len = (b.kids.length+1)*UNIT;
+      g.appendChild(mk('path',{d:`M${b.x},${Y_ROOT} V${Y_ROOT+len}`, class:'stem'+cls}));
+      let dotY = null;
+      if(b.n===cur) dotY = Y_ROOT + UNIT/2;
+      else { const ci=b.kids.findIndex(k=>k.n===cur);
+             if(ci>=0) dotY = Y_ROOT + (ci+1)*UNIT + UNIT/2; }
+      if(dotY!==null) g.appendChild(mk('circle',{cx:b.x, cy:dotY, r:2.4, class:'dot'}));
+    });
+  });
+  svg.appendChild(g);
+}
+
+const readEl=document.getElementById('read'), streamEl=document.getElementById('stream'),
+      posEl=document.getElementById('pos');
+const rowByNum=new Map();
+let hashT=0, scrollRAF=0, programmaticUntil=0;
+
+function buildStream(){
+  const frag=document.createDocumentFragment();
+  DATA.forEach(d=>{
+    const row=document.createElement('article');
+    row.className=`prop depth${d.depth}`;
+    row.dataset.n=d.n;
+    const n=document.createElement('span'); n.className='n'; n.textContent=d.n;
+    const t=document.createElement('span'); t.className='t'; t.textContent=d.t;
+    row.appendChild(n); row.appendChild(t);
+    row.addEventListener('click',()=>{ if(!window.getSelection()?.toString()) setCurrent(d.n,true,false); });
+    rowByNum.set(d.n,row); frag.appendChild(row);
+  });
+  const end=document.createElement('div'); end.className='endmark'; end.textContent='7.53 · SLUTT';
+  frag.appendChild(end); streamEl.appendChild(frag);
+}
+
+function writeHash(){
+  clearTimeout(hashT);
+  hashT=setTimeout(()=>{ try{ history.replaceState(null,'','#'+cur); }catch(e){} }, 320);
+}
+
+function paintCurrent(){
+  rowByNum.forEach((el,n)=>el.classList.toggle('active',n===cur));
+  const i=order.indexOf(cur);
+  posEl.textContent=cur;
+  document.getElementById('prev').disabled=i===0;
+  document.getElementById('next').disabled=i===order.length-1;
+  drawTree();
+}
+
+function setCurrent(n, write=true, scroll=false, behavior='smooth'){
+  if(!byNum.has(n)) return;
+  cur=n; paintCurrent();
+  if(write) writeHash();
+  if(scroll){
+    programmaticUntil=performance.now()+520;
+    rowByNum.get(n)?.scrollIntoView({block:'start',behavior});
+  }
+}
+
+function go(n, behavior='smooth'){ setCurrent(n,true,true,behavior); }
+function step(k){
+  const i=order.indexOf(cur)+k;
+  if(i>=0 && i<order.length) go(order[i]);
+}
+document.getElementById('prev').addEventListener('click',()=>step(-1));
+document.getElementById('next').addEventListener('click',()=>step(1));
+
+function currentFromScroll(){
+  if(performance.now()<programmaticUntil) return;
+  const top=readEl.getBoundingClientRect().top+28;
+  let best=order[0], bestDist=Infinity;
+  for(const n of order){
+    const r=rowByNum.get(n).getBoundingClientRect();
+    const dist=Math.abs(r.top-top);
+    if(r.bottom>=top-8 && dist<bestDist){ best=n; bestDist=dist; }
+    if(r.top>top+160 && bestDist<Infinity) break;
+  }
+  if(best!==cur) setCurrent(best,true,false);
+}
+readEl.addEventListener('scroll',()=>{
+  if(scrollRAF) return;
+  scrollRAF=requestAnimationFrame(()=>{ scrollRAF=0; currentFromScroll(); });
+},{passive:true});
+
+const branches = DATA.filter(d=>d.depth===1);
+let scrubbing=false, pending=null, raf=0;
+
+function atPoint(cx, cy){
+  const r = svg.getBoundingClientRect();
+  if(!r.width) return null;
+  const u = (cx - r.left) / r.width * VW;
+  const v = (cy - r.top) / r.height * VH;
+  let best=branches[0], bd=Infinity;
+  for(const b of branches){ const d=Math.abs(b.x-u); if(d<bd){bd=d; best=b;} }
+  if(v < Y_ROOT) return best.parent;
+  const i = Math.floor((v - Y_ROOT) / UNIT);
+  if(i <= 0) return best.n;
+  return best.kids[Math.min(i-1, best.kids.length-1)].n;
+}
+function scrubTo(cx, cy){
+  const n = atPoint(cx, cy);
+  if(!n || n===cur) return;
+  pending = n;
+  if(!raf) raf = requestAnimationFrame(()=>{ raf=0; if(pending) go(pending,'auto'); pending=null; });
+}
+svg.addEventListener('pointerdown', e=>{
+  scrubbing=true; svg.setPointerCapture(e.pointerId);
+  scrubTo(e.clientX, e.clientY); e.preventDefault();
+});
+svg.addEventListener('pointermove', e=>{ if(scrubbing) scrubTo(e.clientX, e.clientY); });
+svg.addEventListener('pointerup', ()=>{ scrubbing=false; });
+svg.addEventListener('pointercancel', ()=>{ scrubbing=false; });
+
+let sx=0, sy=0, tracking=false;
+readEl.addEventListener('touchstart',e=>{
+  if(e.touches.length!==1) return;
+  sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true;
+},{passive:true});
+readEl.addEventListener('touchend',e=>{
+  if(!tracking) return; tracking=false;
+  const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+  if(Math.abs(dx)>64 && Math.abs(dy)<44) step(dx<0?1:-1);
+},{passive:true});
+
+buildStream();
+const h=decodeURIComponent(location.hash.replace('#',''));
+if(byNum.has(h)) cur=h;
+paintCurrent();
+if(cur!=='1') requestAnimationFrame(()=>go(cur,'auto'));
+})().catch(err=>{
+  const read=document.getElementById('read');
+  if(read) read.innerHTML='<div style="padding:24px 0;font-family:var(--mono);font-size:12px;color:var(--dim)">Kunne ikke laste traktaten.</div>';
+  console.error(err);
+});
+</script>
