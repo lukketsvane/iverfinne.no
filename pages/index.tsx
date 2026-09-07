@@ -15,6 +15,13 @@ const Home: React.FC<HomeProps> = ({ isTraktat }) => {
       <iframe
         src="/traktat/scroll.html"
         title="FORMLÆRE"
+        onLoad={(event) => {
+          const read = event.currentTarget.contentDocument?.querySelector<HTMLElement>('.read');
+          if (!read) return;
+          const fade = 'linear-gradient(to bottom, #000 0%, #000 78%, rgba(0,0,0,.96) 86%, rgba(0,0,0,.84) 93%, rgba(0,0,0,.68) 100%)';
+          read.style.setProperty('-webkit-mask-image', fade);
+          read.style.setProperty('mask-image', fade);
+        }}
         style={{
           position: 'fixed',
           inset: 0,
