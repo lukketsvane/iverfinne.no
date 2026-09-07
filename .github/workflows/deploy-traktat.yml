@@ -1,0 +1,48 @@
+name: Deploy FORMLAERE Traktat
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'traktat/**'
+      - '.github/workflows/deploy-traktat.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_SCOPE: iverfinnes-projects
+      PROJECT_NAME: traktat.iverfinne.no
+      DOMAIN_NAME: traktat.iverfinne.no
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify Vercel credentials
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "VERCEL_TOKEN is not available to this workflow"
+            exit 1
+          fi
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Ensure project exists
+        run: |
+          if ! vercel project inspect "$PROJECT_NAME" --scope "$VERCEL_SCOPE" --token "$VERCEL_TOKEN" >/dev/null 2>&1; then
+            vercel project add "$PROJECT_NAME" --scope "$VERCEL_SCOPE" --token "$VERCEL_TOKEN"
+          fi
+
+      - name: Link and deploy static site
+        working-directory: traktat
+        run: |
+          vercel link --yes --project "$PROJECT_NAME" --scope "$VERCEL_SCOPE" --token "$VERCEL_TOKEN"
+          vercel deploy --prod --yes --scope "$VERCEL_SCOPE" --token "$VERCEL_TOKEN"
+
+      - name: Attach custom domain
+        run: |
+          vercel domains add "$DOMAIN_NAME" "$PROJECT_NAME" --force --scope "$VERCEL_SCOPE" --token "$VERCEL_TOKEN" || true
+          vercel domains inspect "$DOMAIN_NAME" --scope "$VERCEL_SCOPE" --token "$VERCEL_TOKEN" || true
