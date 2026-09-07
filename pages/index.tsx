@@ -13,7 +13,7 @@ const Home: React.FC<HomeProps> = ({ isTraktat }) => {
   if (isTraktat) {
     return (
       <iframe
-        src="https://grutnegitless-iverfinnes-projects.vercel.app/"
+        src="/traktat/scroll.html"
         title="FORMLÆRE"
         style={{
           position: 'fixed',
