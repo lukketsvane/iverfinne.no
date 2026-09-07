@@ -1,53 +1,305 @@
-<!doctype html>
-<html lang="nb">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FORMLÆRE — interaktiv traktat</title>
-<meta name="description" content="En interaktiv utforskning av FORMLÆRE av Iver Raknes Finne.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<title>Formlæretreet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
 <style>
-:root{--paper:#f4f1e9;--card:#fbfaf6;--ink:#11110f;--muted:#706b63;--line:#d0c9bc;--accent:#8b2e24;--soft:#eadfd9}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.shell{max-width:1180px;margin:auto;padding:0 20px 100px}.serif{font-family:Georgia,"Times New Roman",serif}.eyebrow,.label{font-size:11px;font-weight:750;letter-spacing:.15em;color:var(--muted)}button,input{font:inherit}.hero{padding:clamp(70px,11vw,150px) 0 clamp(55px,8vw,100px);border-bottom:1px solid var(--line)}h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(54px,9.5vw,122px);line-height:.88;letter-spacing:-.055em;margin:18px 0 28px;max-width:1050px}.lead{font-family:Georgia,"Times New Roman",serif;font-size:clamp(20px,2.6vw,31px);line-height:1.38;max-width:860px;margin:0;color:#2c2925}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}.pill{min-height:46px;border:1px solid var(--ink);border-radius:999px;padding:0 18px;background:transparent;cursor:pointer}.pill.primary{background:var(--ink);color:var(--paper)}.section{padding:58px 0;border-bottom:1px solid var(--line)}.moves{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin-top:18px;border-top:1px solid var(--line);border-left:1px solid var(--line)}.move{border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;text-align:left;padding:17px 14px 20px;min-height:225px;cursor:pointer}.move:hover,.move:focus-visible{background:#eae6dd;outline:none}.move b{display:block;font-family:Georgia,serif;font-weight:400;font-size:40px;margin-bottom:30px}.move strong{display:block;font-size:10px;letter-spacing:.1em;margin-bottom:12px}.move span{display:block;font-family:Georgia,serif;font-size:15px;line-height:1.4;color:#504b44}.labs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}.lab{border:1px solid var(--line);background:var(--card);padding:18px;min-height:435px}.lab .num{font-size:11px;font-weight:800;color:var(--accent)}.lab h2{font-family:Georgia,serif;font-size:27px;font-weight:400;line-height:1.04;margin:6px 0 18px}.lab p{font-family:Georgia,serif;font-size:16px;line-height:1.48;color:#454039}.lab label{font-size:12px;font-weight:700;display:grid;gap:7px;margin:13px 0}.lab input[type=range]{width:100%;accent-color:var(--accent)}.lab-button{border:1px solid var(--ink);border-radius:999px;background:transparent;min-height:42px;padding:0 14px;cursor:pointer}.readout{font-size:13px;font-weight:750;min-height:20px}.diagram{width:100%;height:150px}.wire{stroke:var(--accent);stroke-width:2}.node{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}.diagram text{text-anchor:middle;font-size:12px;fill:var(--ink)}.reach{height:130px;display:flex;align-items:center;gap:10px}.reach .line{height:1px;background:var(--ink);flex:1}.gate{height:78px;width:20px;border-left:4px solid var(--accent);border-right:4px solid var(--accent);transition:.18s}.reach small{font-weight:750}.threshold{height:155px;position:relative;background:#eee9df;overflow:hidden}.wall{position:absolute;top:0;bottom:0;background:var(--ink);transition:.15s}.wall.left{left:0}.wall.right{right:0}.opening-top{position:absolute;top:0;height:9px;background:var(--ink);left:0;right:0}.body{position:absolute;bottom:12px;height:30px;border:1px solid var(--accent);color:var(--accent);background:var(--card);display:grid;place-items:center;font-size:10px;font-weight:800}.b1{left:12px;width:30px}.b2{left:57px;width:48px}.b3{left:120px;width:72px}.bridge{padding:65px 0 25px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}.bridge p{font-family:Georgia,serif;font-size:23px;line-height:1.35;max-width:700px;margin:8px 0 0}.bridge .down{font-size:42px}.explorer{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 20px 55px rgba(0,0,0,.045)}.toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}.tabs{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px}.tab{border:0;border-radius:999px;background:transparent;min-height:38px;padding:0 13px;cursor:pointer}.tab.on{background:var(--soft)}.search{width:100%;min-height:46px;border:1px solid var(--line);border-radius:12px;background:transparent;padding:0 13px;font-size:16px;margin:14px 0}.roots{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.root{border:1px solid var(--line);border-radius:11px;background:transparent;padding:8px;text-align:left;min-height:62px;cursor:pointer}.root.on{border-color:var(--accent);background:var(--soft)}.root b{display:block;font-family:Georgia,serif;font-size:23px;font-weight:400}.root span{font-size:10px;line-height:1.25;color:var(--muted);display:block}.landmarks{display:flex;gap:7px;overflow:auto;padding:12px 0}.mark{white-space:nowrap;border:1px solid var(--line);background:transparent;border-radius:999px;min-height:38px;padding:0 10px;font-size:12px;cursor:pointer}.tree-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr);gap:22px;margin-top:12px}.headline{border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;gap:14px;align-items:flex-start}.headline .n{font-family:Georgia,serif;font-size:34px}.headline .t{font-family:Georgia,serif;font-size:19px;line-height:1.35}.subhead{font-size:10px;font-weight:800;letter-spacing:.13em;color:var(--muted);margin:18px 0 8px}.child{width:100%;border:0;border-left:2px solid var(--line);background:transparent;text-align:left;padding:9px 10px 9px 12px;cursor:pointer;display:grid;grid-template-columns:48px 1fr;gap:8px}.child.on{border-left-color:var(--accent);background:var(--soft)}.child .n,.leaf .n,.result .n{font-size:12px;font-weight:800}.child .t,.leaf .t,.result .t{font-family:Georgia,serif;font-size:15px;line-height:1.42}.leaf,.result{width:100%;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;padding:10px 0;display:grid;grid-template-columns:50px 1fr;gap:10px;cursor:pointer}.ladder{padding-top:16px}.progress{height:2px;background:var(--line);margin-bottom:18px}.progress i{display:block;height:100%;background:var(--accent)}.ladder-card{border:1px solid var(--line);border-radius:15px;padding:22px}.path{font-size:12px;color:var(--muted);margin-bottom:18px}.ladder-main{display:flex;gap:18px}.ladder-main .n{font-family:Georgia,serif;font-size:44px}.ladder-main .t{font-family:Georgia,serif;font-size:21px;line-height:1.5}.nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}.nav button{border:1px solid var(--line);border-radius:11px;background:transparent;min-height:44px;padding:0 13px;cursor:pointer}.search-results{margin-top:5px}.hidden{display:none!important}.status{font-size:12px;color:var(--muted)}@media(max-width:900px){.moves{grid-template-columns:repeat(2,minmax(0,1fr))}.move{min-height:160px}.move b{margin-bottom:14px}.labs{grid-template-columns:1fr}.lab{min-height:0}.tree-grid{grid-template-columns:1fr}.roots{grid-template-columns:repeat(4,1fr)}}@media(max-width:540px){.shell{padding-left:12px;padding-right:12px}.moves{grid-template-columns:1fr}.roots{grid-template-columns:repeat(4,1fr)}.root span{display:none}.move{min-height:0}.bridge .down{display:none}.ladder-main{display:block}.ladder-main .n{margin-bottom:10px}.explorer{padding:12px}}
+:root{
+  --bg:#FFFFFF;
+  --fg:#000000;
+  --dim:#8A8A8A;
+  --line:#D2D2D2;
+  --hair:#E8E8E8;
+  --serif:"Literata",Charter,Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --top:env(safe-area-inset-top,0px);
+  --bot:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --fg:#FFFFFF; --dim:#7C7C7C; --line:#343434; --hair:#1C1C1C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --fg:#FFFFFF; --dim:#7C7C7C; --line:#343434; --hair:#1C1C1C;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+html,body{
+  height:100%;margin:0;background:var(--bg);color:var(--fg);
+  overflow:hidden;overscroll-behavior:none;
+}
+body{
+  font-family:var(--serif);font-size:17px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  -webkit-user-select:none;user-select:none;
+}
+
+.app{
+  height:100vh;height:100dvh;
+  max-width:430px;margin:0 auto;
+  display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;
+  border-left:1px solid var(--hair);border-right:1px solid var(--hair);
+}
+@media (max-width:432px){.app{border:0}}
+
+/* ---- top ---- */
+.bar{
+  padding:calc(var(--top) + 14px) 18px 10px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);
+}
+
+/* ---- tree strip ---- */
+.strip{padding:2px 16px 12px;border-bottom:1px solid var(--hair)}
+.strip svg{display:block;width:100%;height:auto;overflow:visible;touch-action:none}
+.strip{-webkit-user-select:none;user-select:none}
+.rbar{stroke:var(--line);stroke-width:1.1;fill:none;stroke-linecap:round}
+.rbar.on{stroke:var(--fg)}
+.stem{stroke:var(--line);stroke-width:.9;fill:none}
+.stem.sec{stroke:var(--dim)}
+.stem.on{stroke:var(--fg);stroke-width:1.8}
+.dot{fill:var(--fg)}
+.rlab{font-family:var(--mono);font-size:9px;fill:var(--dim);text-anchor:middle}
+.rlab.on{fill:var(--fg)}
+.tap{fill:transparent}
+
+/* ---- reading ---- */
+.read{
+  overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:20px 18px 28px;
+}
+.up{
+  display:grid;grid-template-columns:44px 1fr;gap:0 10px;align-items:start;
+  width:100%;background:none;border:0;padding:7px 0;text-align:left;
+  font-family:inherit;font-size:14.5px;line-height:1.42;color:var(--dim);
+  -webkit-appearance:none;touch-action:manipulation;
+}
+.up:active{color:var(--fg)}
+
+.now{
+  display:block;margin:14px 0 4px;padding:16px 0 20px;
+  border-top:1.5px solid var(--fg);border-bottom:1px solid var(--hair);
+}
+.now .n{
+  display:block;font-family:var(--mono);font-size:12px;color:var(--dim);
+  letter-spacing:.04em;margin-bottom:9px;
+}
+.now .t{
+  display:block;font-size:21px;line-height:1.34;font-weight:600;
+  letter-spacing:-.012em;text-wrap:pretty;
+  -webkit-user-select:text;user-select:text;
+}
+
+.kid{
+  display:grid;grid-template-columns:44px 1fr;gap:0 10px;align-items:start;
+  width:100%;background:none;border:0;border-bottom:1px solid var(--hair);
+  padding:15px 0;text-align:left;min-height:52px;
+  font-family:inherit;font-size:16px;line-height:1.45;color:var(--fg);
+  -webkit-appearance:none;touch-action:manipulation;
+}
+.kid:active{background:var(--hair)}
+.kid.self{color:var(--dim)}
+.kid.self .t{font-style:italic}
+.up .n,.kid .n{
+  font-family:var(--mono);font-size:12px;color:var(--dim);
+  font-variant-numeric:tabular-nums;padding-top:2px;
+}
+.up .t,.kid .t{text-wrap:pretty}
+
+/* ---- pager ---- */
+.pager{
+  display:grid;grid-template-columns:64px 1fr 64px;align-items:center;
+  border-top:1px solid var(--hair);
+  padding-bottom:var(--bot);
+}
+.pager button{
+  height:56px;background:none;border:0;color:var(--fg);
+  font-family:var(--serif);font-size:26px;line-height:1;
+  touch-action:manipulation;-webkit-appearance:none;
+}
+.pager button:disabled{color:var(--hair)}
+.pager button:active:not(:disabled){background:var(--hair)}
+.pos{
+  text-align:center;font-family:var(--mono);font-size:12px;color:var(--dim);
+  font-variant-numeric:tabular-nums;letter-spacing:.06em;
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-</head>
-<body>
-<main class="shell">
-<header class="hero">
-  <div class="eyebrow">FORMLÆRE · IVER RAKNES FINNE</div>
-  <h1>En traktat som kan undersøkes</h1>
-  <p class="lead">Les ikke bare nedover. Flytt på vilkårene, se hvilke forskjeller som blir virksomme, og følg hvordan begrepene vokser fra form til liv, design og ansvar.</p>
-  <div class="actions"><button class="pill primary jump" data-p="1">Begynn ved 1</button><button class="pill" id="to-labs">Få intuisjonen først</button></div>
-</header>
-<section class="section">
-  <div class="label">ARGUMENTETS SJU BEVEGELSER</div>
-  <div class="moves">
-    <button class="move jump" data-p="1"><b>1</b><strong>TING → RELASJONER</strong><span>Formen ligger ikke bare i delene, men i ordningen mellom dem.</span></button>
-    <button class="move jump" data-p="2.33"><b>2</b><strong>MULIG → NÅBAR</strong><span>En mulighet finnes ikke på samme måte fra alle ståsteder.</span></button>
-    <button class="move jump" data-p="3.6"><b>3</b><strong>FORM → FORLØP</strong><span>Historie, minne og tilbakekobling gjør formen tidslig.</span></button>
-    <button class="move jump" data-p="4.42"><b>4</b><strong>REGULERING → OMHU</strong><span>Det som teller, viser seg i hva handlingen faktisk lar koste.</span></button>
-    <button class="move jump" data-p="5.8"><b>5</b><strong>AGENT → FORM FOR LIV</strong><span>Kropper, ting og forventninger lager handlingsrom sammen.</span></button>
-    <button class="move jump" data-p="6.33"><b>6</b><strong>FORM → DESIGN</strong><span>Design er å innrette vilkår andre må handle under.</span></button>
-    <button class="move jump" data-p="7.4"><b>7</b><strong>RESULTAT → UTGANGSPUNKT</strong><span>Også formlæren må kunne endres av det den møter.</span></button>
-  </div>
-</section>
-<section class="section" id="labs">
-  <div class="label">TRE INTUISJONSLABORATORIER</div>
-  <div class="labs">
-    <article class="lab"><div class="num">1.22</div><h2>Samme deler. Ny form.</h2><svg class="diagram" viewBox="0 0 320 150"><line id="rel-a" class="wire" x1="65" y1="75" x2="160" y2="40"/><line id="rel-b" class="wire" x1="160" y1="40" x2="255" y2="75"/><circle class="node" cx="65" cy="75" r="18"/><circle class="node" cx="160" cy="40" r="18"/><circle class="node" cx="255" cy="75" r="18"/><text x="65" y="80">A</text><text x="160" y="45">B</text><text x="255" y="80">C</text></svg><p>Ingen del legges til eller tas bort. Bare forbindelsen skifter — og dermed formen.</p><button class="lab-button" id="toggle-rel">Skift forbindelsen</button></article>
-    <article class="lab"><div class="num">2.33</div><h2>Mulig er ikke det samme som nåbar.</h2><div class="reach"><small>her</small><div class="line"></div><div class="gate" id="gate"></div><small>mulig form</small></div><label>Tilgjengelige ressurser<input id="resources" type="range" min="0" max="100" value="38"></label><div class="readout" id="reach-out"></div><p>Det samme alternativet kan finnes i formrommet og likevel være utilgjengelig fra dette utgangspunktet.</p></article>
-    <article class="lab"><div class="num">5.51–5.55</div><h2>En åpning fordeler handlingsmuligheter.</h2><div class="threshold" id="threshold"><div class="wall left" id="wl"></div><div class="wall right" id="wr"></div><div class="opening-top"></div><div class="body b1">A</div><div class="body b2">B</div><div class="body b3">C</div></div><label>Åpningens bredde<input id="opening" type="range" min="28" max="120" value="56"></label><div class="readout" id="access-out"></div><p>«Åpent» er ikke en egenskap ved åpningen alene. Tilgjengelighet ligger i forholdet mellom åpningen og kroppen.</p></article>
-  </div>
-</section>
-<section class="bridge"><div><div class="label">LES DERETTER HELE TRAKTATEN SOM ET TRE</div><p>Nummereringen er ikke pynt. Den viser hvilke påstander som bærer hvilke andre.</p></div><div class="down">↓</div></section>
-<section class="explorer" id="explorer" aria-live="polite">
-  <div class="toolbar"><div><div class="label">232 PROPOSISJONER · 7 HOVEDGRENER</div><div class="status" id="status">Laster traktaten…</div></div><div class="tabs"><button class="tab on" id="tab-tree">Tre</button><button class="tab" id="tab-ladder">Stige</button></div></div>
-  <input class="search" id="search" type="search" placeholder="Søk etter nummer eller ord — f.eks. «former for liv»">
-  <div class="roots" id="roots"></div>
-  <div class="landmarks" id="landmarks"></div>
-  <div id="search-view" class="search-results hidden"></div>
-  <div id="tree-view"><div class="headline"><div class="n" id="root-n"></div><div class="t" id="root-t"></div></div><div class="tree-grid"><div><div class="subhead">ANDRE NIVÅ</div><div id="children"></div></div><div><div class="subhead" id="child-label">TREDJE NIVÅ</div><div id="leaves"></div></div></div></div>
-  <div id="ladder-view" class="ladder hidden"><div class="progress"><i id="progress"></i></div><div class="ladder-card"><div class="path" id="path"></div><div class="ladder-main"><div class="n" id="ladder-n"></div><div class="t" id="ladder-t"></div></div></div><div class="nav"><button id="prev">← Forrige</button><span class="status" id="index"></span><button id="next">Neste →</button></div></div>
-</section>
-</main>
-<script src="/traktat/app.js"></script>
-</body>
-</html>
+
+<div class="app">
+  <div class="bar">FORMLÆRE</div>
+  <div class="strip"><svg id="tree" role="img" aria-label="Traktatens tre"></svg></div>
+  <main class="read" id="read">
+    <div id="chain"></div>
+    <div class="now" id="now"></div>
+    <div id="kids"></div>
+  </main>
+  <nav class="pager">
+    <button type="button" id="prev" aria-label="Forrige">‹</button>
+    <span class="pos" id="pos"></span>
+    <button type="button" id="next" aria-label="Neste">›</button>
+  </nav>
+</div>
+
+<script>
+const DATA = [{"n":"1","t":"Form er ordning av forskjeller."},{"n":"1.1","t":"Vi beskriver en form ved å si hva som kan skilles, og hvordan det som skilles hører sammen."},{"n":"1.11","t":"En grense skiller og binder: den avgrenser det som ligger på hver side, og gjør sidene til sider av samme grense."},{"n":"1.12","t":"Et mellomrom hører til formen gjennom forholdet mellom det som avgrenser det."},{"n":"1.13","t":"Formen omfatter derfor mer enn de delene som fyller den."},{"n":"1.2","t":"De samme delene kan inngå i forskjellige former."},{"n":"1.21","t":"Å oppgi delene er ikke å oppgi hvordan de er ordnet."},{"n":"1.22","t":"En forbindelse kan endres uten at noe legges til eller tas bort."},{"n":"1.23","t":"Det som skiller to helheter, kan være forholdet mellom det de har felles."},{"n":"1.3","t":"Et system er det vi undersøker som en sammenheng av deler, relasjoner og grenser."},{"n":"1.31","t":"Hva vi regner som en del, avhenger av sammenhengen vi undersøker. Platen er en del av stolen; fiberen en del av platen."},{"n":"1.32","t":"Det vi undersøker som en helhet, kan selv inngå som del i en annen."},{"n":"1.33","t":"Grensen for undersøkelsen er ikke nødvendigvis en grense for det som virker."},{"n":"1.4","t":"Forskjellige systemer kan dele en form når bestemte relasjoner bevares mellom dem."},{"n":"1.41","t":"Ulike deler kan stå i samme forhold til hverandre."},{"n":"1.42","t":"Hva vi kaller samme form, avhenger derfor av hva vi krever bevart."},{"n":"1.43","t":"Likhet i ett forhold opphever ikke forskjell i et annet."},{"n":"1.5","t":"Også et forløp har form."},{"n":"1.51","t":"I et forløp er det tilstandene og overgangene mellom dem som er ordnet."},{"n":"1.52","t":"To forløp kan bevare samme forhold mellom endringene uten å gå gjennom de samme tilstandene."},{"n":"1.53","t":"Det som går igjen, kan ligge i måten noe blir til på."},{"n":"1.6","t":"En formbeskrivelse bevarer utvalgte forskjeller og relasjoner i det beskrevne."},{"n":"1.61","t":"Beskrivelsen har sin egen form. At den er ordnet, viser ikke at den svarer til det den beskriver."},{"n":"1.62","t":"Vi må undersøke om forskjellene den utelater, kan endre svaret på spørsmålet vi stiller."},{"n":"1.63","t":"En beskrivelse kan være tilstrekkelig uten å være uttømmende."},{"n":"1.64","t":"Det vi har utelatt, er ikke dermed borte."},{"n":"2","t":"En form er mulig under vilkår."},{"n":"2.1","t":"Vilkårene avgrenser hvilke ordninger som kan finnes, og hvilke forløp som kan finne sted."},{"n":"2.11","t":"At en ordning kan beskrives, viser ikke at vilkårene for den kan oppfylles."},{"n":"2.12","t":"At vi ikke kan beskrive den, viser heller ikke at den er utelukket."},{"n":"2.13","t":"Grensen for det mulige og grensen for det vi kan forestille oss, er forskjellige grenser."},{"n":"2.2","t":"En form er realisert når ordningen finnes."},{"n":"2.21","t":"Realiseringen viser at ordningen var mulig under de vilkårene som forelå."},{"n":"2.22","t":"Den viser ikke alene hvilke vilkår som var nødvendige."},{"n":"2.23","t":"Heller ikke viser den at andre ordninger var utelukket."},{"n":"2.3","t":"En mulig form er nåbar fra en tilstand når et forløp kan føre fra tilstanden til formen innenfor de tilgjengelige ressursene."},{"n":"2.31","t":"Nåbarhet har et utgangspunkt, en vei og et tidsrom."},{"n":"2.32","t":"To som står ved samme mulighet, kan stå ulikt i forhold til veien dit."},{"n":"2.33","t":"En form kan være mulig uten å være nåbar herfra."},{"n":"2.34","t":"For å gjøre den nåbar kan vi måtte forme noe annet først."},{"n":"2.4","t":"Et formrom er en fremstilling av alternative former og forholdene mellom dem."},{"n":"2.41","t":"Rommet viser forskjellene vi har valgt å ordne det etter."},{"n":"2.42","t":"Former som ligger nær hverandre i fremstillingen, kan kreve vidt forskjellige forløp for å bli til."},{"n":"2.43","t":"Avstanden på kartet er ikke arbeidet med å komme frem."},{"n":"2.44","t":"En ny fremgangsmåte kan gjøre en overgang tilgjengelig uten å gjøre formene likere."},{"n":"2.5","t":"Det tenkelige er det vi kan fremstille som et alternativ. Det kjente er det vi har grunnlag for å holde for avgjort."},{"n":"2.51","t":"Vi kan forestille oss en mulighet uten å vite om den finnes."},{"n":"2.52","t":"Vi kan også frembringe noe før vi forstår hvordan det lot seg frembringe."},{"n":"2.53","t":"Et forsøk kan derfor endre både det vi vet, og forskjellene vi er i stand til å se."},{"n":"2.54","t":"Den nye forskjellen kan kreve et nytt begrep; begrepet kan åpne for et nytt forsøk."},{"n":"2.6","t":"En enkelt realisering kan vise et forhold som lar seg realisere på flere måter."},{"n":"2.61","t":"Vi undersøker dette ved å skifte deler, materiale eller fremgangsmåte og prøve hva som holder."},{"n":"2.62","t":"Det som holder gjennom skiftet, kan føres videre til en annen sammenheng."},{"n":"2.63","t":"Det allmenne i en form er det vi kan føre videre uten å føre med alt."},{"n":"3","t":"Forming er et forløp der en ordning oppstår eller blir endret."},{"n":"3.1","t":"En forklaring av forming viser hvordan vilkår og overganger virker sammen i det som blir til."},{"n":"3.11","t":"Forklaringen må vise hvorfor utfallet skiller seg fra de alternativene spørsmålet gjelder."},{"n":"3.12","t":"Hvorfor noe holder, hvorfor det ble laget, og hvorfor det blir brukt, kan kreve forskjellige forklaringer."},{"n":"3.13","t":"At vi kjenner formen, betyr ikke at vi kjenner forløpet som frembrakte den."},{"n":"3.2","t":"En omformingsregel sier hvordan en ordning kan erstattes med en annen."},{"n":"3.21","t":"Fra bestemte utgangspunkter gir reglene et språk av former: det som kan nås gjennom dem."},{"n":"3.22","t":"At en form hører til språket, sier ikke at den blir realisert."},{"n":"3.23","t":"Mellom regelen og utfallet ligger vilkårene for at regelen kan brukes, og for at den blir brukt."},{"n":"3.3","t":"Et vilkår er virksomt når en endring av det kan gjøre en forskjell for forløpet eller utfallet."},{"n":"3.31","t":"Virkningen avhenger også av de øvrige vilkårene. Samme inngrep kan derfor få forskjellige følger."},{"n":"3.32","t":"Flere vilkår kan virke sammen slik at den samlede virkningen ikke er summen av det de gjør hver for seg."},{"n":"3.33","t":"Å finne delene som virker, er ikke det samme som å finne hvordan de virker sammen."},{"n":"3.34","t":"En prøve av forklaringen må skille virkningen vi tilskriver inngrepet, fra det som ville ha hendt uten det."},{"n":"3.35","t":"Der flere forklaringer fortsatt svarer til samme erfaring, har erfaringen ennå ikke avgjort mellom dem."},{"n":"3.4","t":"En ordning er stabil overfor bestemte påvirkninger når den holder seg innenfor bestemte grenser gjennom dem."},{"n":"3.41","t":"Det må være noe bestemt som holder seg. Alt trenger ikke holde seg."},{"n":"3.42","t":"Delene kan skiftes ut mens forholdet mellom dem består."},{"n":"3.43","t":"Stabilitet kan derfor ligge i en vedvarende omforming."},{"n":"3.44","t":"Det som ser ut som ro, kan være arbeid vi ikke ser."},{"n":"3.5","t":"Et forløp kan etterlate forskjeller som virker inn på senere forløp."},{"n":"3.51","t":"Vi kaller dette minne når virkningen av det tidligere blir bevart og endrer en senere respons."},{"n":"3.52","t":"To systemer med samme synlige omriss kan derfor svare ulikt på samme påvirkning."},{"n":"3.53","t":"Historien kan være virksom uten å være synlig i det ferdige omrisset."},{"n":"3.54","t":"Det som har hendt, kan bli et vilkår for det som ennå kan hende."},{"n":"3.6","t":"Et systems virksomhet kan endre vilkårene for dets egen fortsettelse."},{"n":"3.61","t":"Når følgene virker tilbake på virksomheten, danner forbindelsen en tilbakekobling."},{"n":"3.62","t":"Tilbakekoblingen kan forsterke en endring eller motvirke den."},{"n":"3.63","t":"Der virksomheten motvirker bestemte avvik, kan ordningen bestå gjennom måten den svarer på det som truer den."},{"n":"4","t":"Et system kan opprettholde en ordning ved å endre sin egen virksomhet."},{"n":"4.1","t":"Et avvik kan utløse en endring som minsker avviket."},{"n":"4.11","t":"Det som blir bevart, er da ikke den enkelte bevegelsen, men et forhold bevegelsene bidrar til å opprettholde."},{"n":"4.12","t":"For å holde fast ved det samme kan systemet måtte gjøre noe annet."},{"n":"4.13","t":"Gjentakelse av et utfall og gjentakelse av en fremgangsmåte er derfor forskjellige ting."},{"n":"4.2","t":"Et mål angir det reguleringen er rettet mot å oppnå, opprettholde eller unngå."},{"n":"4.21","t":"Målet må kunne kjennes igjen i hvilke avvik som utløser hvilke korrigeringer."},{"n":"4.22","t":"Et gunstig utfall alene viser ikke at systemet regulerte virksomheten mot det."},{"n":"4.23","t":"Vi prøver forskjellen ved å endre vilkårene og undersøke om og hvordan systemet motvirker avvik fra det antatte målet."},{"n":"4.24","t":"Målet må også kunne utebli. Ellers har beskrivelsen gjort ethvert utfall til en oppfyllelse."},{"n":"4.3","t":"Vi kaller slik regulering agens. Systemet som utfører den, er en agent."},{"n":"4.31","t":"I den enkleste formen korrigeres et avvik gjennom en fast respons."},{"n":"4.32","t":"En videre evne viser seg når agenten kan skifte fremgangsmåte der den vanlige veien blir stengt."},{"n":"4.33","t":"Skifte av fremgangsmåte, læring og endring av mål stiller forskjellige krav til organiseringen."},{"n":"4.34","t":"Et felles begrep gjør det mulig å undersøke disse forskjellene. Det opphever dem ikke."},{"n":"4.4","t":"Gjennom reguleringen får noen forskjeller betydning som avvik, andre som noe som kan tåles."},{"n":"4.41","t":"Det samme utfallet kan være en oppfyllelse for én agent og et tap for en annen."},{"n":"4.42","t":"Den praktiske vekten agenten gir tilstander og følger, kaller vi omhu."},{"n":"4.43","t":"Omhuen viser seg i det virksomheten retter seg etter, også når agenten ikke kan sette ord på det."},{"n":"4.44","t":"Det agenten sier at den tar hensyn til, og det som faktisk endrer handlingen, kan derfor skille lag."},{"n":"4.45","t":"Der flere hensyn ikke kan oppfylles samtidig, blir forskjellen mellom vektene deres synlig."},{"n":"4.46","t":"Det som teller, viser seg i det som får koste."},{"n":"4.5","t":"Omhuen har et innhold, en rekkevidde og en fordeling."},{"n":"4.51","t":"Innholdet er det som blir tatt hensyn til; rekkevidden er hvilke tidsrom og hvilke berørte hensynet omfatter."},{"n":"4.52","t":"Fordelingen viser seg i hvilke hensyn som holdes oppe når det koster å holde flere oppe samtidig."},{"n":"4.53","t":"At noe tillegges vekt, sier ennå ikke at andre blir ivaretatt."},{"n":"4.54","t":"En virksomhet kan være nøye innrettet mot noe som skader andre."},{"n":"4.6","t":"Kompetanse er evnen til å nå eller opprettholde mål under variasjon i vilkårene."},{"n":"4.61","t":"Omhuen sier hva handlingen retter seg etter. Kompetansen sier hva den får til."},{"n":"4.62","t":"Et godt resultat kan skyldes gunstige vilkår. En påstand om kompetanse må også si hvilke endringer i vilkårene agenten kan mestre."},{"n":"4.63","t":"Minne kan endre kompetansen når det tidligere forløpet gjør en senere handling bedre i stand til å nå målet."},{"n":"4.64","t":"Det lærte kan ligge i en endret måte å handle på, uten å foreligge som en beskrivelse av handlingen."},{"n":"4.65","t":"At et hensyn ikke blir oppfylt, viser ikke alene at det mangler vekt. Agenten kan mangle evnen til å følge det."},{"n":"4.7","t":"Agens undersøkes her gjennom organiseringen av virksomheten."},{"n":"4.71","t":"Derfor kan samme spørsmål stilles til systemer av ulikt materiale og på ulike skalaer."},{"n":"4.72","t":"Materialet er et virksomt vilkår. Samme ordning av forbindelser garanterer ikke samme kompetanse."},{"n":"4.73","t":"Felles språk gir sammenlignbare spørsmål. Like svar må vises."},{"n":"4.8","t":"Det som faller utenfor omhuen, kan fortsatt påvirke agenten og bli påvirket av den."},{"n":"4.81","t":"Grensen for det agenten tar hensyn til, er ikke grensen for det handlingen gjør."},{"n":"4.82","t":"En følge kan nå andre før den får betydning for den som frembrakte den."},{"n":"4.83","t":"Det som ikke teller her, kan være avgjørende der."},{"n":"5","t":"Det som er handling for én, kan være vilkår for en annen."},{"n":"5.1","t":"Delene i en agent kan selv være agenter."},{"n":"5.11","t":"Det delen opprettholder, kan bidra til noe helheten opprettholder, uten at delen regulerer virksomheten etter helhetens mål."},{"n":"5.12","t":"Delenes mål kan også komme i konflikt med hverandre eller med det helheten opprettholder."},{"n":"5.13","t":"At noe tjener helheten, viser derfor ikke at det tjener hver del."},{"n":"5.2","t":"Koblingene mellom delene avgrenser hva som kan nå frem, samordnes og holdes atskilt."},{"n":"5.21","t":"Gjennom en kobling kan det som skjer lokalt, få virkning på en større skala."},{"n":"5.22","t":"Den kan også forplante et avvik som ellers ville ha forblitt lokalt."},{"n":"5.23","t":"Det som øker rekkevidden, kan samtidig øke sårbarheten."},{"n":"5.3","t":"Et kollektiv undersøkes som en agent når det på helhetens nivå finnes regulering mot bestemte mål."},{"n":"5.31","t":"At mange bidrar til samme utfall, er ikke tilstrekkelig. Utfallet kan ha oppstått uten at noen felles regulering finnes."},{"n":"5.32","t":"Vi undersøker hva helheten gjenoppretter når deler, forbindelser eller omgivelser blir endret."},{"n":"5.33","t":"Der delene kan skiftes ut mens reguleringen fortsetter, kan noe av kompetansen ligge i organiseringen som består."},{"n":"5.34","t":"Evnen kan tilhøre en sammenheng uten å finnes samlet i noen enkelt del."},{"n":"5.4","t":"Også en enkelt agents kompetanse kan bero på ordninger utenfor dens egen kropp."},{"n":"5.41","t":"Redskapet, arbeidsplassen og hjelpen fra andre kan gjøre en handling mulig som agenten ikke kan utføre uten dem."},{"n":"5.42","t":"Det vi tilskriver den enkelte, kan derfor være en evne ved den enkelte i en bestemt sammenheng."},{"n":"5.43","t":"Fjernes sammenhengen, kan evnen forsvinne uten at kroppen er endret."},{"n":"5.5","t":"Et handlingsrom er de handlingene en agent kan utføre under de aktuelle vilkårene."},{"n":"5.51","t":"En åpning er ikke like fremkommelig for alle kropper."},{"n":"5.52","t":"Det som er en vei for én, kan være en hindring for en annen. Forskjellen ligger i forholdet mellom kroppen og åpningen."},{"n":"5.53","t":"At noe er åpent, betyr ikke at det er tilgjengelig for enhver."},{"n":"5.54","t":"For den som skal et sted, beror veien også på hvor åpningen fører. Å komme gjennom er ikke det samme som å komme frem."},{"n":"5.55","t":"Formen er derfor også en fordeling av handlingsmuligheter."},{"n":"5.6","t":"Når handlinger gjentas, kan de opprettholde vilkårene som gjør gjentakelsen mulig."},{"n":"5.61","t":"En vei kan holdes åpen gjennom bruken av den. En ferdighet kan holdes ved like gjennom utøvelsen."},{"n":"5.62","t":"Mellom mennesker kan det som gjentas, bli noe andre regner med."},{"n":"5.63","t":"Det vi regner med, blir et vilkår for det vi selv gjør."},{"n":"5.64","t":"En forventning kan slik medvirke til å opprettholde ordningen den bygger på."},{"n":"5.7","t":"En felles praksis kan videreføres gjennom at nye deltakere lærer å finne frem i den."},{"n":"5.71","t":"De lærer både hva de kan gjøre, og hva en handling vil bli møtt med."},{"n":"5.72","t":"Når handlinger møtes med krav og korrigeringer, kan det vanlige også få betydning som det riktige."},{"n":"5.73","t":"At en forventning håndheves, viser at den virker. Om den er berettiget, er et annet spørsmål."},{"n":"5.74","t":"Deltakerne trenger ikke dele alle mål for å videreføre samme praksis. Også en ordning de strider om, kan bære handlingene deres."},{"n":"5.75","t":"Det som for én var en avgjørelse, kan for en annen være slik verden er."},{"n":"5.8","t":"Vi kaller sammenhenger av virksomheter og vilkår som liv føres og opprettholdes gjennom, former for liv."},{"n":"5.81","t":"Her inngår kropper, ting, ferdigheter, vaner og forventninger gjennom det de gjør mulig for hverandre."},{"n":"5.82","t":"Gjentatte handlinger gir ordningen varighet; ordningen gir livet bestemte veier videre."},{"n":"5.83","t":"Mennesker kan leve ulikt under samme ordning. At den består, betyr ikke at alle kan leve godt i den."},{"n":"5.84","t":"Den enkeltes liv kan krysse flere slike sammenhenger og avhenge av at de lar seg forbinde."},{"n":"5.85","t":"Grensene mellom formene følger ikke nødvendigvis grensene mellom kroppene."},{"n":"5.9","t":"Ting inngår i former for liv gjennom det de åpner, opprettholder og stenger."},{"n":"5.91","t":"En terskel har høyde også når ingen møter den. Hvem den stanser, viser seg i møtet."},{"n":"5.92","t":"Endres terskelen, kan deltakelsen endres, selv om forventningene på den andre siden står fast."},{"n":"5.93","t":"Endres forventningene, kan deltakelsen endres, selv om terskelen blir stående."},{"n":"5.94","t":"Det vi lever gjennom, kan formes på mer enn én måte."},{"n":"6","t":"En formgiver påvirker gjennom handling hvilke former som blir til eller opprettholdes."},{"n":"6.1","t":"Formgiveren kan utføre omformingen selv eller innrette vilkårene for at andre systemer utfører den."},{"n":"6.11","t":"Materialets egenskaper, verktøyets virkemåte og andres kompetanse kan alle bidra til resultatet."},{"n":"6.12","t":"Et lite inngrep kan få en omfattende følge fordi det som blir påvirket, utfører resten."},{"n":"6.13","t":"Presisjonen i inngrepet ligger da i hva det utløser, ikke bare i hvor mye det flytter."},{"n":"6.2","t":"Det andre kan opprettholde og frembringe, er et vilkår for det vi kan forme gjennom dem."},{"n":"6.21","t":"Den samme ønskede formen kan kreve forskjellige inngrep i systemer med forskjellig historie."},{"n":"6.22","t":"Et inngrep som påtvinger systemet en tilstand, kan svekke evnen det hadde til selv å opprettholde den."},{"n":"6.23","t":"Å frembringe en form og å sikre vilkårene for at den består, er forskjellige oppgaver."},{"n":"6.3","t":"Blant formgivere finnes det en ulikhet i hvem som kan fastsette vilkårene for hvem."},{"n":"6.31","t":"Én kan bestemme åpningens mål; en annen må finne ut om kroppen kommer gjennom."},{"n":"6.32","t":"Begge handler. De har ikke samme innflytelse over forholdet de handler i."},{"n":"6.33","t":"Designerens rolle er å innrette vilkårene for andres handlingsrom."},{"n":"6.34","t":"Rollen er privilegert i forhold til dem som må handle under vilkårene uten tilsvarende mulighet til å endre dem."},{"n":"6.35","t":"Særstillingen ligger i forholdet mellom formgivere. Den samme formgiveren kan ha den i én sammenheng og være underlagt den i en annen."},{"n":"6.4","t":"Designerens hensyn kan få varighet i det andre må forholde seg til."},{"n":"6.41","t":"En forestilling om kroppen kan bli et mål kroppen må passe."},{"n":"6.42","t":"En forventning om handling kan bli en regel handlingen blir bedømt etter."},{"n":"6.43","t":"Det som ble tatt for gitt under formgivningen, kan bli det andre ikke får anledning til å sette spørsmål ved."},{"n":"6.44","t":"Det designeren slipper å merke, kan være det brukeren ikke kommer utenom."},{"n":"6.5","t":"Kunnskap om andre er ikke alene omsorg for dem."},{"n":"6.51","t":"En reaksjon kan forutsies for å utnyttes."},{"n":"6.52","t":"Vi må derfor skille mellom å kjenne andres mål, å bruke kunnskapen om dem og å la hensynet til dem begrense egen handling."},{"n":"6.53","t":"Omsorg for andre er omhu der det å ivareta dem får praktisk vekt."},{"n":"6.54","t":"Forskjellen blir tydelig der hensynet til dem koster designeren eller oppdragsgiveren noe."},{"n":"6.55","t":"Et hensyn som aldri kan endre hva designeren velger, har ingen praktisk vekt i valget."},{"n":"6.6","t":"En vurdering av form avhenger av hvilke følger som teller, for hvem og over hvilket tidsrom."},{"n":"6.61","t":"Det som letter én handling, kan gjøre en annen vanskeligere. Det som tjener én, kan skade en annen."},{"n":"6.62","t":"En samlet rangering krever derfor at hensynene veies mot hverandre."},{"n":"6.63","t":"Vektingen kan bygges inn i formen og fortsette å virke uten å bli avgjort på nytt."},{"n":"6.64","t":"Forklaringen viser hvordan avgjørelsen virker. Vurderingen gjelder om den bør virke slik. Myndighet gjelder hvem som har rett til å gjøre den bindende."},{"n":"6.65","t":"At en form virker etter hensikten, viser ikke alene at hensikten er berettiget."},{"n":"6.7","t":"Det designerens beskrivelse utelater, kan fortsatt være til stede i livet som skal leves gjennom formen."},{"n":"6.71","t":"En utelatt forskjell kan gjøre et menneske til et avvik fra beskrivelsen."},{"n":"6.72","t":"Avviket kan da vise en grense ved beskrivelsen før det viser en mangel ved mennesket."},{"n":"6.73","t":"Det vi har utelatt, er ikke dermed borte."},{"n":"6.8","t":"Designerens kunnskap om de berørte kan ikke erstatte deres mulighet til å svare."},{"n":"6.81","t":"Et svar kan gjøre synlig en forskjell formgivningen ikke tok høyde for."},{"n":"6.82","t":"Å kunne gi et svar og å kunne få det til å virke er forskjellige muligheter."},{"n":"6.83","t":"Dersom svaret skal korrigere formen, må det finnes en vei fra den erfarte følgen tilbake til vilkårene som frembrakte den."},{"n":"6.84","t":"Også denne veien kan åpnes, forsinkes eller stenges."},{"n":"7","t":"Også vilkårene for å forme videre har form."},{"n":"7.1","t":"En form kan gjøre senere endringer lette, vanskelige eller utilgjengelige for dem som lever med den."},{"n":"7.11","t":"At formen kan endres, sier ikke hvem som kan endre den."},{"n":"7.12","t":"At noen blir hørt, sier ikke hva de har myndighet til å forandre."},{"n":"7.13","t":"Også muligheten til å endre en fordeling er fordelt."},{"n":"7.2","t":"Når de berørtes svar kan endre videre formgivning, inngår de selv i reguleringen av den."},{"n":"7.21","t":"Det krever en forbindelse mellom det de erfarer, det som blir undersøkt, og det som kan besluttes på nytt."},{"n":"7.22","t":"En slik forbindelse må selv holdes virksom. Den kan finnes i beskrivelsen og mangle i praksis."},{"n":"7.23","t":"Der hensynet til de berørte opprettholdes gjennom forbindelsen, kan omsorgen vare utover den første formgiverens oppmerksomhet."},{"n":"7.3","t":"Det som skal bevares, og formen det foreløpig er bevart i, kan komme i konflikt."},{"n":"7.31","t":"Å holde fast ved en bestemt ordning kan ødelegge det ordningen skulle ivareta."},{"n":"7.32","t":"For å holde fast ved det samme kan vi måtte gjøre noe annet."},{"n":"7.33","t":"Også målet kan måtte endres når vi lærer hva oppfyllelsen koster andre."},{"n":"7.4","t":"Formlæren undersøker disse overgangene: hvordan forskjeller ordnes, hvordan ordninger virker, og hvordan virkningene kan endre det som ordner dem."},{"n":"7.41","t":"Begrepene skal gjøre forskjellene mulige å undersøke. De skal ikke avgjøre på forhånd hva undersøkelsen får vise."},{"n":"7.42","t":"En felles formlære må selv kunne endres av forskjellene den møter."},{"n":"7.43","t":"Også denne beskrivelsen har sin form. Også den utelater noe."},{"n":"7.5","t":"Den ferdige formen avslutter ikke forløpet den inngår i."},{"n":"7.51","t":"Den møter kropper som endres, hensyn som ikke var kjent, og bruk den ikke var tenkt for."},{"n":"7.52","t":"En ordning kan måtte endres for at livet den bærer, skal kunne fortsette."},{"n":"7.53","t":"Det som for oss er et resultat, er for andre et utgangspunkt."}];
+
+const byNum = new Map();
+DATA.forEach(d=>{
+  const dot=d.n.indexOf('.');
+  d.depth = dot<0?0 : d.n.length-dot-1;
+  d.parent = d.depth===0?null : d.depth===1?d.n.slice(0,dot) : d.n.slice(0,d.n.length-1);
+  d.kids=[]; byNum.set(d.n,d);
+});
+DATA.forEach(d=>{ if(d.parent) byNum.get(d.parent).kids.push(d); });
+const roots = DATA.filter(d=>d.depth===0);
+const order = DATA.map(d=>d.n);
+let cur = '1';
+
+function chainOf(n){ const o=[]; let d=byNum.get(n); while(d.parent){ d=byNum.get(d.parent); o.unshift(d);} return o; }
+
+/* ---------- tree strip: fits the width exactly, never scrolls ---------- */
+const VW=358, PAD=5, SGAP=5;
+const NB = roots.reduce((a,r)=>a+r.kids.length,0);
+const STEP = (VW - PAD*2 - SGAP*(roots.length-1)) / NB;
+const Y_LAB=8, Y_ROOT=17, UNIT=8.0;
+let x = PAD;
+roots.forEach(r=>{
+  r.x0 = x;
+  r.kids.forEach(b=>{ b.x = x + STEP/2; x += STEP; });
+  r.x1 = x; x += SGAP;
+});
+const maxT = Math.max(...DATA.filter(d=>d.depth===1).map(d=>d.kids.length));
+const VH = Y_ROOT + (maxT+1)*UNIT + 7;
+
+const svg=document.getElementById('tree'), NS='http://www.w3.org/2000/svg';
+function mk(t,a){ const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); return e; }
+
+function drawTree(){
+  svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`);
+  svg.innerHTML='';
+  const sec = cur.split('.')[0];
+  const br = cur.includes('.') ? sec+'.'+cur.split('.')[1][0] : null;
+  const g=mk('g',{});
+
+  roots.forEach(r=>{
+    const inSec = r.n===sec;
+    g.appendChild(mk('path',{d:`M${r.x0},${Y_ROOT} H${r.x1}`, class:'rbar'+(inSec?' on':'')}));
+    const lab=mk('text',{x:(r.x0+r.x1)/2, y:Y_LAB, class:'rlab'+(inSec?' on':'')});
+    lab.textContent=r.n; g.appendChild(lab);
+    r.kids.forEach(b=>{
+      const onB = b.n===br;
+      const cls = onB?' on' : inSec?' sec' : '';
+      const len = (b.kids.length+1)*UNIT;
+      g.appendChild(mk('path',{d:`M${b.x},${Y_ROOT} V${Y_ROOT+len}`, class:'stem'+cls}));
+      let dotY = null;
+      if(b.n===cur) dotY = Y_ROOT + UNIT/2;
+      else { const ci=b.kids.findIndex(k=>k.n===cur);
+             if(ci>=0) dotY = Y_ROOT + (ci+1)*UNIT + UNIT/2; }
+      if(dotY!==null) g.appendChild(mk('circle',{cx:b.x, cy:dotY, r:2.4, class:'dot'}));
+    });
+
+  });
+  svg.appendChild(g);
+}
+
+/* ---------- reading ---------- */
+const chainEl=document.getElementById('chain'), nowEl=document.getElementById('now'),
+      kidsEl=document.getElementById('kids'), readEl=document.getElementById('read'),
+      posEl=document.getElementById('pos');
+
+function rowBtn(cls,n,t,fn){
+  const b=document.createElement('button'); b.type='button'; b.className=cls;
+  const a=document.createElement('span'); a.className='n'; a.textContent=n;
+  const c=document.createElement('span'); c.className='t'; c.textContent=t;
+  b.appendChild(a); b.appendChild(c); b.addEventListener('click',fn); return b;
+}
+
+function draw(){
+  const d=byNum.get(cur);
+  chainEl.innerHTML='';
+  chainOf(cur).forEach(a=> chainEl.appendChild(rowBtn('up',a.n,a.t,()=>go(a.n))));
+
+  nowEl.innerHTML='';
+  const n=document.createElement('span'); n.className='n'; n.textContent=d.n;
+  const t=document.createElement('span'); t.className='t'; t.textContent=d.t;
+  nowEl.appendChild(n); nowEl.appendChild(t);
+
+  kidsEl.innerHTML='';
+  const list = d.kids.length ? d.kids : (d.parent ? byNum.get(d.parent).kids : []);
+  list.forEach(k=> kidsEl.appendChild(
+    rowBtn('kid'+(k.n===cur?' self':''), k.n, k.t, ()=>go(k.n))));
+
+  const i=order.indexOf(cur);
+  posEl.textContent = d.n;
+  document.getElementById('prev').disabled = i===0;
+  document.getElementById('next').disabled = i===order.length-1;
+}
+
+let hashT=0;
+function go(n){
+  if(!byNum.has(n)) return;
+  cur=n;
+  drawTree(); draw();
+  readEl.scrollTop=0;
+  // Safari throttles replaceState; only write the hash once the scrub settles
+  clearTimeout(hashT);
+  hashT=setTimeout(()=>{ try{ history.replaceState(null,'','#'+cur); }catch(e){} }, 400);
+}
+function step(k){
+  const i=order.indexOf(cur)+k;
+  if(i>=0 && i<order.length) go(order[i]);
+}
+document.getElementById('prev').addEventListener('click',()=>step(-1));
+document.getElementById('next').addEventListener('click',()=>step(1));
+
+/* scrub: drag anywhere across the strip. x picks the branch, y picks how far
+   down that branch you are — band 0 is the branch itself, then its remarks. */
+const branches = DATA.filter(d=>d.depth===1);
+let scrubbing=false, pending=null, raf=0;
+
+function atPoint(cx, cy){
+  const r = svg.getBoundingClientRect();
+  if(!r.width) return null;
+  const u = (cx - r.left) / r.width * VW;
+  const v = (cy - r.top) / r.height * VH;
+  let best=branches[0], bd=Infinity;
+  for(const b of branches){ const d=Math.abs(b.x-u); if(d<bd){bd=d; best=b;} }
+  if(v < Y_ROOT) return best.parent;
+  const i = Math.floor((v - Y_ROOT) / UNIT);
+  if(i <= 0) return best.n;
+  return best.kids[Math.min(i-1, best.kids.length-1)].n;
+}
+function scrubTo(cx, cy){
+  const n = atPoint(cx, cy);
+  if(!n || n===cur) return;
+  pending = n;
+  if(!raf) raf = requestAnimationFrame(()=>{ raf=0; if(pending) go(pending); pending=null; });
+}
+svg.addEventListener('pointerdown', e=>{
+  scrubbing=true; svg.setPointerCapture(e.pointerId);
+  scrubTo(e.clientX, e.clientY); e.preventDefault();
+});
+svg.addEventListener('pointermove', e=>{ if(scrubbing) scrubTo(e.clientX, e.clientY); });
+svg.addEventListener('pointerup', ()=>{ scrubbing=false; });
+svg.addEventListener('pointercancel', ()=>{ scrubbing=false; });
+
+/* swipe */
+let sx=0, sy=0, tracking=false;
+readEl.addEventListener('touchstart',e=>{
+  if(e.touches.length!==1) return;
+  sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true;
+},{passive:true});
+readEl.addEventListener('touchend',e=>{
+  if(!tracking) return; tracking=false;
+  const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+  if(Math.abs(dx)>64 && Math.abs(dy)<44) step(dx<0?1:-1);
+},{passive:true});
+
+const h=decodeURIComponent(location.hash.replace('#',''));
+if(byNum.has(h)) cur=h;
+drawTree(); draw();
+</script>
