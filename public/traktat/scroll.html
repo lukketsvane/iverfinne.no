@@ -32,25 +32,27 @@ html,body{
   overflow:hidden;overscroll-behavior:none;
 }
 body{
-  font-family:var(--serif);font-size:17px;line-height:1.5;
+  font-family:var(--serif);font-size:15.5px;line-height:1.44;
   -webkit-font-smoothing:antialiased;
   -webkit-user-select:none;user-select:none;
 }
 
 .app{
   height:100vh;height:100dvh;
-  max-width:430px;margin:0 auto;
+  max-width:520px;margin:0 auto;
   display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;
   border-left:1px solid var(--hair);border-right:1px solid var(--hair);
 }
-@media (max-width:432px){.app{border:0}}
+@media (max-width:522px){.app{border:0}}
 
+/* ---- top ---- */
 .bar{
-  padding:calc(var(--top) + 14px) 18px 10px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);
+  padding:calc(var(--top) + 10px) 16px 7px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.19em;color:var(--dim);
 }
 
-.strip{padding:2px 16px 12px;border-bottom:1px solid var(--hair)}
+/* ---- tree strip ---- */
+.strip{padding:1px 14px 8px;border-bottom:1px solid var(--hair)}
 .strip svg{display:block;width:100%;height:auto;overflow:visible;touch-action:none}
 .strip{-webkit-user-select:none;user-select:none}
 .rbar{stroke:var(--line);stroke-width:1.1;fill:none;stroke-linecap:round}
@@ -63,61 +65,72 @@ body{
 .rlab.on{fill:var(--fg)}
 .tap{fill:transparent}
 
+/* ---- reading / continuous stream ---- */
 .read{
   overflow-y:auto;overscroll-behavior:contain;
   -webkit-overflow-scrolling:touch;
-  padding:0 18px 44px;
+  padding:0 16px 34px;
   scroll-behavior:smooth;
 }
-.stream{padding:8px 0 36px}
+.stream{padding:4px 0 26px}
 .prop{
-  display:grid;grid-template-columns:44px 1fr;gap:0 10px;align-items:start;
-  padding:14px 0;border-bottom:1px solid var(--hair);
-  scroll-margin-top:18px;
+  --indent:0px;
+  position:relative;
+  display:grid;grid-template-columns:38px minmax(0,1fr);gap:0 8px;align-items:start;
+  margin-left:var(--indent);
+  padding:8px 0;
+  border-bottom:1px solid var(--hair);
+  scroll-margin-top:12px;
 }
 .prop .n{
-  font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--dim);
-  font-variant-numeric:tabular-nums;padding-top:2px;
+  font-family:var(--mono);font-size:10.5px;line-height:1.45;color:var(--dim);
+  font-variant-numeric:tabular-nums;padding-top:1px;
 }
 .prop .t{
-  font-size:16px;line-height:1.48;letter-spacing:-.006em;text-wrap:pretty;
+  font-size:14.35px;line-height:1.42;letter-spacing:-.004em;text-wrap:pretty;
   -webkit-user-select:text;user-select:text;
 }
 .prop.depth0{
-  margin-top:34px;padding-top:20px;border-top:1.5px solid var(--fg);
+  --indent:0px;
+  margin-top:18px;padding-top:13px;padding-bottom:10px;
+  border-top:1.25px solid var(--fg);
 }
 .prop.depth0:first-child{margin-top:0}
 .prop.depth0 .n{color:var(--fg)}
-.prop.depth0 .t{font-size:21px;line-height:1.36;font-weight:600;letter-spacing:-.012em}
-.prop.depth1{padding-top:18px;padding-bottom:18px}
-.prop.depth1 .t{font-size:17px;font-weight:600;line-height:1.43}
-.prop.depth2 .t{font-size:15.7px;color:var(--fg)}
-.prop.active{
-  border-top:1.5px solid var(--fg);
-  margin-top:-1.5px;
+.prop.depth0 .t{font-size:17.4px;line-height:1.34;font-weight:600;letter-spacing:-.01em}
+.prop.depth1{
+  --indent:11px;
+  padding-top:10px;padding-bottom:10px;
+}
+.prop.depth1 .t{font-size:15.2px;font-weight:600;line-height:1.38}
+.prop.depth2{--indent:25px}
+.prop.depth2 .t{font-size:14.15px;line-height:1.42;color:var(--fg)}
+.prop.active::before{
+  content:"";position:absolute;left:-7px;top:6px;bottom:6px;width:1.5px;background:var(--fg);
 }
 .prop.active .n{color:var(--fg)}
-.prop.active .t{font-weight:600}
-.prop.depth0.active .t,.prop.depth1.active .t{font-weight:600}
+
+/* tiny end marker: the document really ends; no pagination wall */
 .endmark{
-  padding:26px 0 12px;text-align:center;font-family:var(--mono);
-  font-size:10px;letter-spacing:.18em;color:var(--dim);
+  padding:18px 0 8px;text-align:center;font-family:var(--mono);
+  font-size:9px;letter-spacing:.18em;color:var(--dim);
 }
 
+/* ---- pager ---- */
 .pager{
   display:grid;grid-template-columns:64px 1fr 64px;align-items:center;
   border-top:1px solid var(--hair);
   padding-bottom:var(--bot);
 }
 .pager button{
-  height:56px;background:none;border:0;color:var(--fg);
-  font-family:var(--serif);font-size:26px;line-height:1;
+  height:48px;background:none;border:0;color:var(--fg);
+  font-family:var(--serif);font-size:23px;line-height:1;
   touch-action:manipulation;-webkit-appearance:none;
 }
 .pager button:disabled{color:var(--hair)}
 .pager button:active:not(:disabled){background:var(--hair)}
 .pos{
-  text-align:center;font-family:var(--mono);font-size:12px;color:var(--dim);
+  text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--dim);
   font-variant-numeric:tabular-nums;letter-spacing:.06em;
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -160,6 +173,9 @@ const roots = DATA.filter(d=>d.depth===0);
 const order = DATA.map(d=>d.n);
 let cur = '1';
 
+function chainOf(n){ const o=[]; let d=byNum.get(n); while(d.parent){ d=byNum.get(d.parent); o.unshift(d);} return o; }
+
+/* ---------- tree strip: fits the width exactly, never scrolls ---------- */
 const VW=358, PAD=5, SGAP=5;
 const NB = roots.reduce((a,r)=>a+r.kids.length,0);
 const STEP = (VW - PAD*2 - SGAP*(roots.length-1)) / NB;
@@ -199,10 +215,12 @@ function drawTree(){
              if(ci>=0) dotY = Y_ROOT + (ci+1)*UNIT + UNIT/2; }
       if(dotY!==null) g.appendChild(mk('circle',{cx:b.x, cy:dotY, r:2.4, class:'dot'}));
     });
+
   });
   svg.appendChild(g);
 }
 
+/* ---------- reading: one continuous document ---------- */
 const readEl=document.getElementById('read'), streamEl=document.getElementById('stream'),
       posEl=document.getElementById('pos');
 const rowByNum=new Map();
@@ -217,7 +235,7 @@ function buildStream(){
     const n=document.createElement('span'); n.className='n'; n.textContent=d.n;
     const t=document.createElement('span'); t.className='t'; t.textContent=d.t;
     row.appendChild(n); row.appendChild(t);
-    row.addEventListener('click',()=>{ if(!window.getSelection()?.toString()) setCurrent(d.n,true,false); });
+    row.addEventListener('click',e=>{ if(!window.getSelection()?.toString()) setCurrent(d.n,true,false); });
     rowByNum.set(d.n,row); frag.appendChild(row);
   });
   const end=document.createElement('div'); end.className='endmark'; end.textContent='7.53 · SLUTT';
@@ -256,6 +274,8 @@ function step(k){
 document.getElementById('prev').addEventListener('click',()=>step(-1));
 document.getElementById('next').addEventListener('click',()=>step(1));
 
+/* While the reader simply doom-scrolls, keep the tree and proposition number
+   synchronized with the text nearest the reading line. */
 function currentFromScroll(){
   if(performance.now()<programmaticUntil) return;
   const top=readEl.getBoundingClientRect().top+28;
@@ -273,6 +293,8 @@ readEl.addEventListener('scroll',()=>{
   scrollRAF=requestAnimationFrame(()=>{ scrollRAF=0; currentFromScroll(); });
 },{passive:true});
 
+/* scrub: drag anywhere across the strip. x picks the branch, y picks how far
+   down that branch you are — band 0 is the branch itself, then its remarks. */
 const branches = DATA.filter(d=>d.depth===1);
 let scrubbing=false, pending=null, raf=0;
 
@@ -302,6 +324,7 @@ svg.addEventListener('pointermove', e=>{ if(scrubbing) scrubTo(e.clientX, e.clie
 svg.addEventListener('pointerup', ()=>{ scrubbing=false; });
 svg.addEventListener('pointercancel', ()=>{ scrubbing=false; });
 
+/* swipe */
 let sx=0, sy=0, tracking=false;
 readEl.addEventListener('touchstart',e=>{
   if(e.touches.length!==1) return;
