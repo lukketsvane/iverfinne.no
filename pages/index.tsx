@@ -3,8 +3,33 @@ import { Expandable } from '../components/expandable';
 import IndexContent from './about-me.mdx';
 import FooterContent from './about-footer.mdx';
 import { NextSeo } from 'next-seo';
+import type { GetServerSideProps } from 'next';
 
-const Home: React.FC = () => {
+type HomeProps = {
+  isTraktat: boolean;
+};
+
+const Home: React.FC<HomeProps> = ({ isTraktat }) => {
+  if (isTraktat) {
+    return (
+      <iframe
+        src="https://grutnegitless-iverfinnes-projects.vercel.app/"
+        title="FORMLÆRE"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100%',
+          height: '100dvh',
+          border: 0,
+          margin: 0,
+          padding: 0,
+          zIndex: 2147483647,
+          background: '#fff',
+        }}
+      />
+    );
+  }
+
   return (
     <>
       <NextSeo
@@ -26,6 +51,11 @@ const Home: React.FC = () => {
       </VStack>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async ({ req }) => {
+  const host = (req.headers.host || '').split(':')[0].toLowerCase();
+  return { props: { isTraktat: host === 'traktat.iverfinne.no' } };
 };
 
 export default Home;
