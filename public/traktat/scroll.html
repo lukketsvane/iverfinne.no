@@ -93,7 +93,6 @@ body{
 .prop.depth0{
   --indent:0px;
   margin-top:15px;padding-top:10px;padding-bottom:8px;
-  border-top:1.25px solid var(--fg);
 }
 .prop.depth0:first-child{margin-top:0}
 .prop.depth0 .n{color:var(--fg)}
@@ -105,10 +104,7 @@ body{
 .prop.depth1 .t{font-size:14.65px;font-weight:400;line-height:1.41}
 .prop.depth2{--indent:25px}
 .prop.depth2 .t{font-size:14.15px;font-weight:400;line-height:1.43;color:var(--fg)}
-.prop.active::before{
-  content:"";position:absolute;left:-6px;top:6px;bottom:6px;width:1px;background:var(--fg);
-}
-.prop.active .n{color:var(--fg)}
+.prop.active .n{color:var(--fg);font-weight:500}
 
 /* tiny end marker: the document really ends; no pagination wall */
 .endmark{
