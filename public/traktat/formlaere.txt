@@ -1,0 +1,467 @@
+FORMLÆRE
+
+Iver Raknes Finne
+
+1 Form er ordning av forskjeller.
+
+1.1 Vi beskriver en form ved å si hva som kan skilles, og hvordan det som skilles hører sammen.
+
+1.11 En grense skiller og binder: den avgrenser det som ligger på hver side, og gjør sidene til sider av samme grense.
+
+1.12 Et mellomrom hører til formen gjennom forholdet mellom det som avgrenser det.
+
+1.13 Formen omfatter derfor mer enn de delene som fyller den.
+
+1.2 De samme delene kan inngå i forskjellige former.
+
+1.21 Å oppgi delene er ikke å oppgi hvordan de er ordnet.
+
+1.22 En forbindelse kan endres uten at noe legges til eller tas bort.
+
+1.23 Det som skiller to helheter, kan være forholdet mellom det de har felles.
+
+1.3 Et system er det vi undersøker som en sammenheng av deler, relasjoner og grenser.
+
+1.31 Hva vi regner som en del, avhenger av sammenhengen vi undersøker. Platen er en del av stolen; fiberen en del av platen.
+
+1.32 Det vi undersøker som en helhet, kan selv inngå som del i en annen.
+
+1.33 Grensen for undersøkelsen er ikke nødvendigvis en grense for det som virker.
+
+1.4 Forskjellige systemer kan dele en form når bestemte relasjoner bevares mellom dem.
+
+1.41 Ulike deler kan stå i samme forhold til hverandre.
+
+1.42 Hva vi kaller samme form, avhenger derfor av hva vi krever bevart.
+
+1.43 Likhet i ett forhold opphever ikke forskjell i et annet.
+
+1.5 Også et forløp har form.
+
+1.51 I et forløp er det tilstandene og overgangene mellom dem som er ordnet.
+
+1.52 To forløp kan bevare samme forhold mellom endringene uten å gå gjennom de samme tilstandene.
+
+1.53 Det som går igjen, kan ligge i måten noe blir til på.
+
+1.6 En formbeskrivelse bevarer utvalgte forskjeller og relasjoner i det beskrevne.
+
+1.61 Beskrivelsen har sin egen form. At den er ordnet, viser ikke at den svarer til det den beskriver.
+
+1.62 Vi må undersøke om forskjellene den utelater, kan endre svaret på spørsmålet vi stiller.
+
+1.63 En beskrivelse kan være tilstrekkelig uten å være uttømmende.
+
+1.64 Det vi har utelatt, er ikke dermed borte.
+
+2 En form er mulig under vilkår.
+
+2.1 Vilkårene avgrenser hvilke ordninger som kan finnes, og hvilke forløp som kan finne sted.
+
+2.11 At en ordning kan beskrives, viser ikke at vilkårene for den kan oppfylles.
+
+2.12 At vi ikke kan beskrive den, viser heller ikke at den er utelukket.
+
+2.13 Grensen for det mulige og grensen for det vi kan forestille oss, er forskjellige grenser.
+
+2.2 En form er realisert når ordningen finnes.
+
+2.21 Realiseringen viser at ordningen var mulig under de vilkårene som forelå.
+
+2.22 Den viser ikke alene hvilke vilkår som var nødvendige.
+
+2.23 Heller ikke viser den at andre ordninger var utelukket.
+
+2.3 En mulig form er nåbar fra en tilstand når et forløp kan føre fra tilstanden til formen innenfor de tilgjengelige ressursene.
+
+2.31 Nåbarhet har et utgangspunkt, en vei og et tidsrom.
+
+2.32 To som står ved samme mulighet, kan stå ulikt i forhold til veien dit.
+
+2.33 En form kan være mulig uten å være nåbar herfra.
+
+2.34 For å gjøre den nåbar kan vi måtte forme noe annet først.
+
+2.4 Et formrom er en fremstilling av alternative former og forholdene mellom dem.
+
+2.41 Rommet viser forskjellene vi har valgt å ordne det etter.
+
+2.42 Former som ligger nær hverandre i fremstillingen, kan kreve vidt forskjellige forløp for å bli til.
+
+2.43 Avstanden på kartet er ikke arbeidet med å komme frem.
+
+2.44 En ny fremgangsmåte kan gjøre en overgang tilgjengelig uten å gjøre formene likere.
+
+2.5 Det tenkelige er det vi kan fremstille som et alternativ. Det kjente er det vi har grunnlag for å holde for avgjort.
+
+2.51 Vi kan forestille oss en mulighet uten å vite om den finnes.
+
+2.52 Vi kan også frembringe noe før vi forstår hvordan det lot seg frembringe.
+
+2.53 Et forsøk kan derfor endre både det vi vet, og forskjellene vi er i stand til å se.
+
+2.54 Den nye forskjellen kan kreve et nytt begrep; begrepet kan åpne for et nytt forsøk.
+
+2.6 En enkelt realisering kan vise et forhold som lar seg realisere på flere måter.
+
+2.61 Vi undersøker dette ved å skifte deler, materiale eller fremgangsmåte og prøve hva som holder.
+
+2.62 Det som holder gjennom skiftet, kan føres videre til en annen sammenheng.
+
+2.63 Det allmenne i en form er det vi kan føre videre uten å føre med alt.
+
+3 Forming er et forløp der en ordning oppstår eller blir endret.
+
+3.1 En forklaring av forming viser hvordan vilkår og overganger virker sammen i det som blir til.
+
+3.11 Forklaringen må vise hvorfor utfallet skiller seg fra de alternativene spørsmålet gjelder.
+
+3.12 Hvorfor noe holder, hvorfor det ble laget, og hvorfor det blir brukt, kan kreve forskjellige forklaringer.
+
+3.13 At vi kjenner formen, betyr ikke at vi kjenner forløpet som frembrakte den.
+
+3.2 En omformingsregel sier hvordan en ordning kan erstattes med en annen.
+
+3.21 Fra bestemte utgangspunkter gir reglene et språk av former: det som kan nås gjennom dem.
+
+3.22 At en form hører til språket, sier ikke at den blir realisert.
+
+3.23 Mellom regelen og utfallet ligger vilkårene for at regelen kan brukes, og for at den blir brukt.
+
+3.3 Et vilkår er virksomt når en endring av det kan gjøre en forskjell for forløpet eller utfallet.
+
+3.31 Virkningen avhenger også av de øvrige vilkårene. Samme inngrep kan derfor få forskjellige følger.
+
+3.32 Flere vilkår kan virke sammen slik at den samlede virkningen ikke er summen av det de gjør hver for seg.
+
+3.33 Å finne delene som virker, er ikke det samme som å finne hvordan de virker sammen.
+
+3.34 En prøve av forklaringen må skille virkningen vi tilskriver inngrepet, fra det som ville ha hendt uten det.
+
+3.35 Der flere forklaringer fortsatt svarer til samme erfaring, har erfaringen ennå ikke avgjort mellom dem.
+
+3.4 En ordning er stabil overfor bestemte påvirkninger når den holder seg innenfor bestemte grenser gjennom dem.
+
+3.41 Det må være noe bestemt som holder seg. Alt trenger ikke holde seg.
+
+3.42 Delene kan skiftes ut mens forholdet mellom dem består.
+
+3.43 Stabilitet kan derfor ligge i en vedvarende omforming.
+
+3.44 Det som ser ut som ro, kan være arbeid vi ikke ser.
+
+3.5 Et forløp kan etterlate forskjeller som virker inn på senere forløp.
+
+3.51 Vi kaller dette minne når virkningen av det tidligere blir bevart og endrer en senere respons.
+
+3.52 To systemer med samme synlige omriss kan derfor svare ulikt på samme påvirkning.
+
+3.53 Historien kan være virksom uten å være synlig i det ferdige omrisset.
+
+3.54 Det som har hendt, kan bli et vilkår for det som ennå kan hende.
+
+3.6 Et systems virksomhet kan endre vilkårene for dets egen fortsettelse.
+
+3.61 Når følgene virker tilbake på virksomheten, danner forbindelsen en tilbakekobling.
+
+3.62 Tilbakekoblingen kan forsterke en endring eller motvirke den.
+
+3.63 Der virksomheten motvirker bestemte avvik, kan ordningen bestå gjennom måten den svarer på det som truer den.
+
+4 Et system kan opprettholde en ordning ved å endre sin egen virksomhet.
+
+4.1 Et avvik kan utløse en endring som minsker avviket.
+
+4.11 Det som blir bevart, er da ikke den enkelte bevegelsen, men et forhold bevegelsene bidrar til å opprettholde.
+
+4.12 For å holde fast ved det samme kan systemet måtte gjøre noe annet.
+
+4.13 Gjentakelse av et utfall og gjentakelse av en fremgangsmåte er derfor forskjellige ting.
+
+4.2 Et mål angir det reguleringen er rettet mot å oppnå, opprettholde eller unngå.
+
+4.21 Målet må kunne kjennes igjen i hvilke avvik som utløser hvilke korrigeringer.
+
+4.22 Et gunstig utfall alene viser ikke at systemet regulerte virksomheten mot det.
+
+4.23 Vi prøver forskjellen ved å endre vilkårene og undersøke om og hvordan systemet motvirker avvik fra det antatte målet.
+
+4.24 Målet må også kunne utebli. Ellers har beskrivelsen gjort ethvert utfall til en oppfyllelse.
+
+4.3 Vi kaller slik regulering agens. Systemet som utfører den, er en agent.
+
+4.31 I den enkleste formen korrigeres et avvik gjennom en fast respons.
+
+4.32 En videre evne viser seg når agenten kan skifte fremgangsmåte der den vanlige veien blir stengt.
+
+4.33 Skifte av fremgangsmåte, læring og endring av mål stiller forskjellige krav til organiseringen.
+
+4.34 Et felles begrep gjør det mulig å undersøke disse forskjellene. Det opphever dem ikke.
+
+4.4 Gjennom reguleringen får noen forskjeller betydning som avvik, andre som noe som kan tåles.
+
+4.41 Det samme utfallet kan være en oppfyllelse for én agent og et tap for en annen.
+
+4.42 Den praktiske vekten agenten gir tilstander og følger, kaller vi omhu.
+
+4.43 Omhuen viser seg i det virksomheten retter seg etter, også når agenten ikke kan sette ord på det.
+
+4.44 Det agenten sier at den tar hensyn til, og det som faktisk endrer handlingen, kan derfor skille lag.
+
+4.45 Der flere hensyn ikke kan oppfylles samtidig, blir forskjellen mellom vektene deres synlig.
+
+4.46 Det som teller, viser seg i det som får koste.
+
+4.5 Omhuen har et innhold, en rekkevidde og en fordeling.
+
+4.51 Innholdet er det som blir tatt hensyn til; rekkevidden er hvilke tidsrom og hvilke berørte hensynet omfatter.
+
+4.52 Fordelingen viser seg i hvilke hensyn som holdes oppe når det koster å holde flere oppe samtidig.
+
+4.53 At noe tillegges vekt, sier ennå ikke at andre blir ivaretatt.
+
+4.54 En virksomhet kan være nøye innrettet mot noe som skader andre.
+
+4.6 Kompetanse er evnen til å nå eller opprettholde mål under variasjon i vilkårene.
+
+4.61 Omhuen sier hva handlingen retter seg etter. Kompetansen sier hva den får til.
+
+4.62 Et godt resultat kan skyldes gunstige vilkår. En påstand om kompetanse må også si hvilke endringer i vilkårene agenten kan mestre.
+
+4.63 Minne kan endre kompetansen når det tidligere forløpet gjør en senere handling bedre i stand til å nå målet.
+
+4.64 Det lærte kan ligge i en endret måte å handle på, uten å foreligge som en beskrivelse av handlingen.
+
+4.65 At et hensyn ikke blir oppfylt, viser ikke alene at det mangler vekt. Agenten kan mangle evnen til å følge det.
+
+4.7 Agens undersøkes her gjennom organiseringen av virksomheten.
+
+4.71 Derfor kan samme spørsmål stilles til systemer av ulikt materiale og på ulike skalaer.
+
+4.72 Materialet er et virksomt vilkår. Samme ordning av forbindelser garanterer ikke samme kompetanse.
+
+4.73 Felles språk gir sammenlignbare spørsmål. Like svar må vises.
+
+4.8 Det som faller utenfor omhuen, kan fortsatt påvirke agenten og bli påvirket av den.
+
+4.81 Grensen for det agenten tar hensyn til, er ikke grensen for det handlingen gjør.
+
+4.82 En følge kan nå andre før den får betydning for den som frembrakte den.
+
+4.83 Det som ikke teller her, kan være avgjørende der.
+
+5 Det som er handling for én, kan være vilkår for en annen.
+
+5.1 Delene i en agent kan selv være agenter.
+
+5.11 Det delen opprettholder, kan bidra til noe helheten opprettholder, uten at delen regulerer virksomheten etter helhetens mål.
+
+5.12 Delenes mål kan også komme i konflikt med hverandre eller med det helheten opprettholder.
+
+5.13 At noe tjener helheten, viser derfor ikke at det tjener hver del.
+
+5.2 Koblingene mellom delene avgrenser hva som kan nå frem, samordnes og holdes atskilt.
+
+5.21 Gjennom en kobling kan det som skjer lokalt, få virkning på en større skala.
+
+5.22 Den kan også forplante et avvik som ellers ville ha forblitt lokalt.
+
+5.23 Det som øker rekkevidden, kan samtidig øke sårbarheten.
+
+5.3 Et kollektiv undersøkes som en agent når det på helhetens nivå finnes regulering mot bestemte mål.
+
+5.31 At mange bidrar til samme utfall, er ikke tilstrekkelig. Utfallet kan ha oppstått uten at noen felles regulering finnes.
+
+5.32 Vi undersøker hva helheten gjenoppretter når deler, forbindelser eller omgivelser blir endret.
+
+5.33 Der delene kan skiftes ut mens reguleringen fortsetter, kan noe av kompetansen ligge i organiseringen som består.
+
+5.34 Evnen kan tilhøre en sammenheng uten å finnes samlet i noen enkelt del.
+
+5.4 Også en enkelt agents kompetanse kan bero på ordninger utenfor dens egen kropp.
+
+5.41 Redskapet, arbeidsplassen og hjelpen fra andre kan gjøre en handling mulig som agenten ikke kan utføre uten dem.
+
+5.42 Det vi tilskriver den enkelte, kan derfor være en evne ved den enkelte i en bestemt sammenheng.
+
+5.43 Fjernes sammenhengen, kan evnen forsvinne uten at kroppen er endret.
+
+5.5 Et handlingsrom er de handlingene en agent kan utføre under de aktuelle vilkårene.
+
+5.51 En åpning er ikke like fremkommelig for alle kropper.
+
+5.52 Det som er en vei for én, kan være en hindring for en annen. Forskjellen ligger i forholdet mellom kroppen og åpningen.
+
+5.53 At noe er åpent, betyr ikke at det er tilgjengelig for enhver.
+
+5.54 For den som skal et sted, beror veien også på hvor åpningen fører. Å komme gjennom er ikke det samme som å komme frem.
+
+5.55 Formen er derfor også en fordeling av handlingsmuligheter.
+
+5.6 Når handlinger gjentas, kan de opprettholde vilkårene som gjør gjentakelsen mulig.
+
+5.61 En vei kan holdes åpen gjennom bruken av den. En ferdighet kan holdes ved like gjennom utøvelsen.
+
+5.62 Mellom mennesker kan det som gjentas, bli noe andre regner med.
+
+5.63 Det vi regner med, blir et vilkår for det vi selv gjør.
+
+5.64 En forventning kan slik medvirke til å opprettholde ordningen den bygger på.
+
+5.7 En felles praksis kan videreføres gjennom at nye deltakere lærer å finne frem i den.
+
+5.71 De lærer både hva de kan gjøre, og hva en handling vil bli møtt med.
+
+5.72 Når handlinger møtes med krav og korrigeringer, kan det vanlige også få betydning som det riktige.
+
+5.73 At en forventning håndheves, viser at den virker. Om den er berettiget, er et annet spørsmål.
+
+5.74 Deltakerne trenger ikke dele alle mål for å videreføre samme praksis. Også en ordning de strider om, kan bære handlingene deres.
+
+5.75 Det som for én var en avgjørelse, kan for en annen være slik verden er.
+
+5.8 Vi kaller sammenhenger av virksomheter og vilkår som liv føres og opprettholdes gjennom, former for liv.
+
+5.81 Her inngår kropper, ting, ferdigheter, vaner og forventninger gjennom det de gjør mulig for hverandre.
+
+5.82 Gjentatte handlinger gir ordningen varighet; ordningen gir livet bestemte veier videre.
+
+5.83 Mennesker kan leve ulikt under samme ordning. At den består, betyr ikke at alle kan leve godt i den.
+
+5.84 Den enkeltes liv kan krysse flere slike sammenhenger og avhenge av at de lar seg forbinde.
+
+5.85 Grensene mellom formene følger ikke nødvendigvis grensene mellom kroppene.
+
+5.9 Ting inngår i former for liv gjennom det de åpner, opprettholder og stenger.
+
+5.91 En terskel har høyde også når ingen møter den. Hvem den stanser, viser seg i møtet.
+
+5.92 Endres terskelen, kan deltakelsen endres, selv om forventningene på den andre siden står fast.
+
+5.93 Endres forventningene, kan deltakelsen endres, selv om terskelen blir stående.
+
+5.94 Det vi lever gjennom, kan formes på mer enn én måte.
+
+6 En formgiver påvirker gjennom handling hvilke former som blir til eller opprettholdes.
+
+6.1 Formgiveren kan utføre omformingen selv eller innrette vilkårene for at andre systemer utfører den.
+
+6.11 Materialets egenskaper, verktøyets virkemåte og andres kompetanse kan alle bidra til resultatet.
+
+6.12 Et lite inngrep kan få en omfattende følge fordi det som blir påvirket, utfører resten.
+
+6.13 Presisjonen i inngrepet ligger da i hva det utløser, ikke bare i hvor mye det flytter.
+
+6.2 Det andre kan opprettholde og frembringe, er et vilkår for det vi kan forme gjennom dem.
+
+6.21 Den samme ønskede formen kan kreve forskjellige inngrep i systemer med forskjellig historie.
+
+6.22 Et inngrep som påtvinger systemet en tilstand, kan svekke evnen det hadde til selv å opprettholde den.
+
+6.23 Å frembringe en form og å sikre vilkårene for at den består, er forskjellige oppgaver.
+
+6.3 Blant formgivere finnes det en ulikhet i hvem som kan fastsette vilkårene for hvem.
+
+6.31 Én kan bestemme åpningens mål; en annen må finne ut om kroppen kommer gjennom.
+
+6.32 Begge handler. De har ikke samme innflytelse over forholdet de handler i.
+
+6.33 Designerens rolle er å innrette vilkårene for andres handlingsrom.
+
+6.34 Rollen er privilegert i forhold til dem som må handle under vilkårene uten tilsvarende mulighet til å endre dem.
+
+6.35 Særstillingen ligger i forholdet mellom formgivere. Den samme formgiveren kan ha den i én sammenheng og være underlagt den i en annen.
+
+6.4 Designerens hensyn kan få varighet i det andre må forholde seg til.
+
+6.41 En forestilling om kroppen kan bli et mål kroppen må passe.
+
+6.42 En forventning om handling kan bli en regel handlingen blir bedømt etter.
+
+6.43 Det som ble tatt for gitt under formgivningen, kan bli det andre ikke får anledning til å sette spørsmål ved.
+
+6.44 Det designeren slipper å merke, kan være det brukeren ikke kommer utenom.
+
+6.5 Kunnskap om andre er ikke alene omsorg for dem.
+
+6.51 En reaksjon kan forutsies for å utnyttes.
+
+6.52 Vi må derfor skille mellom å kjenne andres mål, å bruke kunnskapen om dem og å la hensynet til dem begrense egen handling.
+
+6.53 Omsorg for andre er omhu der det å ivareta dem får praktisk vekt.
+
+6.54 Forskjellen blir tydelig der hensynet til dem koster designeren eller oppdragsgiveren noe.
+
+6.55 Et hensyn som aldri kan endre hva designeren velger, har ingen praktisk vekt i valget.
+
+6.6 En vurdering av form avhenger av hvilke følger som teller, for hvem og over hvilket tidsrom.
+
+6.61 Det som letter én handling, kan gjøre en annen vanskeligere. Det som tjener én, kan skade en annen.
+
+6.62 En samlet rangering krever derfor at hensynene veies mot hverandre.
+
+6.63 Vektingen kan bygges inn i formen og fortsette å virke uten å bli avgjort på nytt.
+
+6.64 Forklaringen viser hvordan avgjørelsen virker. Vurderingen gjelder om den bør virke slik. Myndighet gjelder hvem som har rett til å gjøre den bindende.
+
+6.65 At en form virker etter hensikten, viser ikke alene at hensikten er berettiget.
+
+6.7 Det designerens beskrivelse utelater, kan fortsatt være til stede i livet som skal leves gjennom formen.
+
+6.71 En utelatt forskjell kan gjøre et menneske til et avvik fra beskrivelsen.
+
+6.72 Avviket kan da vise en grense ved beskrivelsen før det viser en mangel ved mennesket.
+
+6.73 Det vi har utelatt, er ikke dermed borte.
+
+6.8 Designerens kunnskap om de berørte kan ikke erstatte deres mulighet til å svare.
+
+6.81 Et svar kan gjøre synlig en forskjell formgivningen ikke tok høyde for.
+
+6.82 Å kunne gi et svar og å kunne få det til å virke er forskjellige muligheter.
+
+6.83 Dersom svaret skal korrigere formen, må det finnes en vei fra den erfarte følgen tilbake til vilkårene som frembrakte den.
+
+6.84 Også denne veien kan åpnes, forsinkes eller stenges.
+
+7 Også vilkårene for å forme videre har form.
+
+7.1 En form kan gjøre senere endringer lette, vanskelige eller utilgjengelige for dem som lever med den.
+
+7.11 At formen kan endres, sier ikke hvem som kan endre den.
+
+7.12 At noen blir hørt, sier ikke hva de har myndighet til å forandre.
+
+7.13 Også muligheten til å endre en fordeling er fordelt.
+
+7.2 Når de berørtes svar kan endre videre formgivning, inngår de selv i reguleringen av den.
+
+7.21 Det krever en forbindelse mellom det de erfarer, det som blir undersøkt, og det som kan besluttes på nytt.
+
+7.22 En slik forbindelse må selv holdes virksom. Den kan finnes i beskrivelsen og mangle i praksis.
+
+7.23 Der hensynet til de berørte opprettholdes gjennom forbindelsen, kan omsorgen vare utover den første formgiverens oppmerksomhet.
+
+7.3 Det som skal bevares, og formen det foreløpig er bevart i, kan komme i konflikt.
+
+7.31 Å holde fast ved en bestemt ordning kan ødelegge det ordningen skulle ivareta.
+
+7.32 For å holde fast ved det samme kan vi måtte gjøre noe annet.
+
+7.33 Også målet kan måtte endres når vi lærer hva oppfyllelsen koster andre.
+
+7.4 Formlæren undersøker disse overgangene: hvordan forskjeller ordnes, hvordan ordninger virker, og hvordan virkningene kan endre det som ordner dem.
+
+7.41 Begrepene skal gjøre forskjellene mulige å undersøke. De skal ikke avgjøre på forhånd hva undersøkelsen får vise.
+
+7.42 En felles formlære må selv kunne endres av forskjellene den møter.
+
+7.43 Også denne beskrivelsen har sin form. Også den utelater noe.
+
+7.5 Den ferdige formen avslutter ikke forløpet den inngår i.
+
+7.51 Den møter kropper som endres, hensyn som ikke var kjent, og bruk den ikke var tenkt for.
+
+7.52 En ordning kan måtte endres for at livet den bærer, skal kunne fortsette.
+
+7.53 Det som for oss er et resultat, er for andre et utgangspunkt.
