@@ -250,7 +250,7 @@ Iver Raknes Finne
 
 4.83 Det som ikke teller her, kan være avgjørende der.
 
-5 Det som er handling for én, kan være vilkår for en annen.
+5 Den enes handling blir den andres vilkår.
 
 5.1 Delene i en agent kan selv være agenter.
 
