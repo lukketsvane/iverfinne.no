@@ -150,13 +150,16 @@ body{
 
 <script>
 async function loadData(){
-  const source=await fetch('/traktat/index.html',{cache:'no-store'}).then(r=>{
+  const source=await fetch('/traktat/formlaere.txt',{cache:'no-store'}).then(r=>{
     if(!r.ok) throw new Error('Kunne ikke laste traktaten');
     return r.text();
   });
-  const m=source.match(/const DATA\s*=\s*(\[[\s\S]*?\]);/);
-  if(!m) throw new Error('Fant ikke traktatdata');
-  return JSON.parse(m[1]);
+  const data=source.split(/\r?\n/).map(line=>{
+    const m=line.trim().match(/^(\d+(?:\.\d+)?)\s+(.+)$/);
+    return m ? {n:m[1],t:m[2]} : null;
+  }).filter(Boolean);
+  if(!data.length) throw new Error('Fant ikke traktatdata');
+  return data;
 }
 
 (async()=>{
@@ -216,7 +219,6 @@ function drawTree(){
              if(ci>=0) dotY = Y_ROOT + (ci+1)*UNIT + UNIT/2; }
       if(dotY!==null) g.appendChild(mk('circle',{cx:b.x, cy:dotY, r:1.9, class:'dot'}));
     });
-
   });
   svg.appendChild(g);
 }
