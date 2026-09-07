@@ -14,12 +14,12 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Attach custom domain and alias current production
+      - name: Attach traktat domain to gitless reader
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           set -euo pipefail
           test -n "$VERCEL_TOKEN"
-          vercel domains add traktat.iverfinne.no iverfinneno --force --scope iverfinnes-projects --token "$VERCEL_TOKEN" || true
-          vercel alias set https://iverfinneno-oj0981dtg-iverfinnes-projects.vercel.app traktat.iverfinne.no --scope iverfinnes-projects --token "$VERCEL_TOKEN"
+          vercel domains add traktat.iverfinne.no grutne_gitless --force --scope iverfinnes-projects --token "$VERCEL_TOKEN" || true
+          vercel alias set https://grutnegitless-3czlwy5sl-iverfinnes-projects.vercel.app traktat.iverfinne.no --scope iverfinnes-projects --token "$VERCEL_TOKEN"
           vercel domains inspect traktat.iverfinne.no --scope iverfinnes-projects --token "$VERCEL_TOKEN" || true
