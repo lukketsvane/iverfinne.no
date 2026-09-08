@@ -1,0 +1,232 @@
+name: Temporary Zaha P1S A3 slice
+
+on:
+  push:
+    branches:
+      - temp-slice-zaha-a3
+
+jobs:
+  slice:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild model
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cat tmp/zaha_model.part* | base64 -d > /tmp/model.stl.gz
+          gunzip -c /tmp/model.stl.gz > /tmp/zaha_chair_1-7.stl
+          ls -lh /tmp/zaha_chair_1-7.stl
+          python3 - <<'PY'
+          import struct
+          p='/tmp/zaha_chair_1-7.stl'
+          d=open(p,'rb').read()
+          n=struct.unpack_from('<I',d,80)[0]
+          assert len(d)==84+n*50, (len(d),n)
+          print('binary STL triangles:',n)
+          PY
+
+      - name: Download Bambu Studio 2.8.2.61
+        shell: bash
+        run: |
+          set -euxo pipefail
+          wget -q --show-progress \
+            https://github.com/bambulab/BambuStudio/releases/download/v02.08.02.61/BambuStudio_ubuntu24.04-v02.08.02.61-20260820225108.AppImage \
+            -O /tmp/BambuStudio.AppImage
+          chmod +x /tmp/BambuStudio.AppImage
+          cd /tmp
+          ./BambuStudio.AppImage --appimage-extract >/dev/null
+          test -x /tmp/squashfs-root/AppRun
+
+      - name: Build full P1S / ABS / process profiles
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          root=Path('/tmp/squashfs-root')
+          machine_target=next(root.rglob('profiles/BBL/machine/Bambu Lab P1S 0.4 nozzle.json'))
+          bbl=machine_target.parent.parent
+          out=Path('/tmp/profiles'); out.mkdir(exist_ok=True)
+
+          def index_dir(d):
+              idx={}
+              for p in d.rglob('*.json'):
+                  try: j=json.loads(p.read_text(errors='ignore'))
+                  except Exception: continue
+                  if isinstance(j,dict) and j.get('name'):
+                      idx[j['name']]=j
+              return idx
+
+          def flatten(name, idx, stack=()):
+              if name in stack: raise RuntimeError('inherit cycle: '+' -> '.join(stack+(name,)))
+              if name not in idx: raise KeyError(f'missing profile {name!r}')
+              cur=idx[name]; merged={}
+              parent=cur.get('inherits')
+              if parent: merged.update(flatten(parent,idx,stack+(name,)))
+              for inc in cur.get('include',[]) or []:
+                  if inc in idx: merged.update(flatten(inc,idx,stack+(name,)))
+              for k,v in cur.items():
+                  if k not in ('inherits','include'): merged[k]=v
+              return merged
+
+          mi=index_dir(bbl/'machine')
+          pi=index_dir(bbl/'process')
+          fi=index_dir(bbl/'filament')
+          m=flatten('Bambu Lab P1S 0.4 nozzle',mi)
+          p=flatten('0.16mm Optimal @BBL X1C',pi)
+          f=flatten('Bambu ABS @BBL P1S 0.4 nozzle',fi)
+
+          # Requested setup: one ABS material, organic/tree supports.
+          p.update({
+              'enable_support':'1',
+              'support_type':'tree(auto)',
+              'support_style':'tree_hybrid',
+              'support_threshold_angle':'35',
+              'support_on_build_plate_only':'0',
+              'support_filament':'0',
+              'support_interface_filament':'0',
+              'wall_loops':'4',
+              'sparse_infill_density':'15%',
+              'sparse_infill_pattern':'gyroid',
+          })
+          # Current official Bambu ABS values for P1S 0.4 / Textured PEI.
+          f.update({
+              'filament_type':['ABS'],
+              'nozzle_temperature_initial_layer':['260'],
+              'nozzle_temperature':['270'],
+              'textured_plate_temp_initial_layer':['90'],
+              'textured_plate_temp':['90'],
+          })
+
+          (out/'machine.json').write_text(json.dumps(m,indent=2))
+          (out/'process.json').write_text(json.dumps(p,indent=2))
+          (out/'filament.json').write_text(json.dumps(f,indent=2))
+          print('machine/process/filament keys:',len(m),len(p),len(f))
+          PY
+
+      - name: Slice to real Bambu gcode 3MF
+        shell: bash
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          set -euxo pipefail
+          mkdir -p /tmp/out
+          cd /tmp/out
+          /tmp/squashfs-root/AppRun \
+            --debug 3 \
+            --curr-bed-type 'Textured PEI Plate' \
+            --load-settings '/tmp/profiles/machine.json;/tmp/profiles/process.json' \
+            --load-filaments '/tmp/profiles/filament.json' \
+            --scale 0.997911316 \
+            --arrange 1 \
+            --slice 0 \
+            --outputdir /tmp/out \
+            --export-3mf zaha_chair_1-7_P1S_A3_black_ABS_tree.gcode.3mf \
+            /tmp/zaha_chair_1-7.stl
+          ls -lah /tmp/out
+          test -s /tmp/out/zaha_chair_1-7_P1S_A3_black_ABS_tree.gcode.3mf
+
+      - name: Force physical AMS-A A3 and extract real slice estimates
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile, re, os, json
+
+          f=Path('/tmp/out/zaha_chair_1-7_P1S_A3_black_ABS_tree.gcode.3mf')
+          tmp=f.with_suffix(f.suffix+'.tmp')
+          found_gcode=False
+          replacements=0
+          stat_lines=[]
+          all_metadata=[]
+
+          with zipfile.ZipFile(f,'r') as zin, zipfile.ZipFile(tmp,'w') as zout:
+              for info in zin.infolist():
+                  data=zin.read(info.filename)
+                  lowname=info.filename.lower()
+                  if lowname.endswith('.gcode'):
+                      found_gcode=True
+                      text=data.decode('utf-8',errors='replace')
+                      # Single logical filament is T0. Physical AMS slots are 0-based,
+                      # therefore AMS-A A3 is slot 2. Keep S255 unload sentinel untouched.
+                      n1=text.count('M620 S0A')
+                      n2=text.count('M621 S0A')
+                      text=text.replace('M620 S0A','M620 S2A').replace('M621 S0A','M621 S2A')
+                      replacements += n1+n2
+                      if 'M620 S0A' in text or 'M621 S0A' in text:
+                          raise RuntimeError('unpatched logical AMS slot command remains')
+                      if 'M620 S2A' not in text or 'M621 S2A' not in text:
+                          raise RuntimeError('A3 load commands not present after patch')
+                      for line in text.splitlines():
+                          l=line.lower()
+                          if line.lstrip().startswith(';') and any(k in l for k in (
+                              'estimated time','printing time','filament used','filament weight',
+                              'filament cost','total filament','total layer','layer count',
+                              'model printing time','total estimated')):
+                              if line not in stat_lines: stat_lines.append(line)
+                      data=text.encode('utf-8')
+                  elif lowname.startswith('metadata/') and (lowname.endswith('.config') or lowname.endswith('.json')):
+                      try:
+                          txt=data.decode('utf-8',errors='replace')
+                          if any(k in txt.lower() for k in ('prediction','filament','time','weight')):
+                              all_metadata.append('--- '+info.filename+' ---\n'+txt[:30000])
+                      except Exception:
+                          pass
+                  zout.writestr(info,data)
+
+          if not found_gcode: raise RuntimeError('No .gcode payload in exported 3MF')
+          if replacements < 2: raise RuntimeError(f'Expected AMS load/close commands, patched only {replacements}')
+          os.replace(tmp,f)
+
+          # Verify ZIP integrity after patch.
+          with zipfile.ZipFile(f,'r') as z:
+              bad=z.testzip()
+              if bad: raise RuntimeError('ZIP CRC failure: '+bad)
+
+          raw='\n'.join(stat_lines)+'\n\n'+'\n'.join(all_metadata)
+          # Parse common Bambu time comments into minutes where possible.
+          minutes=None
+          patterns=[
+              r'total estimated time\s*[:=]\s*(?:(\d+)h\s*)?(?:(\d+)m\s*)?(?:(\d+)s)?',
+              r'estimated.*?time\s*[:=]\s*(?:(\d+)h\s*)?(?:(\d+)m\s*)?(?:(\d+)s)?',
+          ]
+          for pat in patterns:
+              mm=re.search(pat,raw,re.I)
+              if mm:
+                  h=int(mm.group(1) or 0); m=int(mm.group(2) or 0); s=int(mm.group(3) or 0)
+                  minutes=round(h*60+m+s/60,1); break
+
+          report=[
+              'SLICED: yes (Bambu Studio 2.8.2.61)',
+              'PRINTER: Bambu Lab P1S / 0.4 mm nozzle',
+              'MATERIAL: ABS',
+              'NOZZLE: 260 C first layer, 270 C thereafter',
+              'TEXTURED PEI BED: 90 C',
+              'LAYER HEIGHT PROFILE: 0.16 mm Optimal',
+              'SUPPORT: tree(auto), tree_hybrid, threshold 35 deg',
+              'SCALE: 1:7; longest side capped at 71.4286 mm (= 500 mm full size)',
+              'PHYSICAL FILAMENT SOURCE: AMS-A A3, forced in gcode as slot S2A',
+              f'AMS COMMANDS PATCHED: {replacements}',
+              'ESTIMATED PRINT TIME MINUTES: '+(str(minutes) if minutes is not None else 'see raw slicer stats below'),
+              '',
+              'RAW SLICER STATS / METADATA:',
+              raw,
+          ]
+          Path('/tmp/out/slice_report.txt').write_text('\n'.join(report))
+          print(Path('/tmp/out/slice_report.txt').read_text())
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zaha-sliced-a3
+          path: |
+            /tmp/out/zaha_chair_1-7_P1S_A3_black_ABS_tree.gcode.3mf
+            /tmp/out/slice_report.txt
+            /tmp/out/result.json
+          if-no-files-found: warn
