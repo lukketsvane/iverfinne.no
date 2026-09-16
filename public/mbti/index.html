@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="nn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#ffffff">
+<title>MBTI — tesserakt</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff;color:#111;font-family:Helvetica,Arial,sans-serif}
+body{-webkit-user-select:none;user-select:none}
+a{position:fixed;z-index:10;top:max(18px,env(safe-area-inset-top));left:max(18px,env(safe-area-inset-left));font-size:12px;color:#111;text-decoration:underline;text-underline-offset:3px;background:none}
+svg{display:block;width:100vw;height:100dvh;touch-action:none}
+.edge{stroke:#111;stroke-width:1;stroke-opacity:.18;vector-effect:non-scaling-stroke}
+.edge.hot{stroke-opacity:.58}
+.node{fill:#fff;stroke:#111;stroke-width:1.15;vector-effect:non-scaling-stroke}
+.label{font-size:11px;font-weight:500;letter-spacing:.035em;fill:#111;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+.label.dim{opacity:.28}
+#name{font-size:clamp(28px,8vw,78px);font-weight:500;letter-spacing:-.055em;fill:#111;pointer-events:none}
+#distance{font-size:11px;letter-spacing:.04em;fill:#777;pointer-events:none}
+@media(max-width:600px){.label{font-size:9px}.node{stroke-width:1}}
+</style>
+</head>
+<body>
+<a id="switch" href="#functions">funksjonar</a>
+<svg id="scene" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" aria-label="Interaktiv MBTI-tesserakt">
+<g id="edges"></g>
+<g id="nodes"></g>
+<text id="name" x="500" y="502" text-anchor="middle"></text>
+<text id="distance" x="500" y="530" text-anchor="middle"></text>
+</svg>
+<script>
+(function(){
+'use strict';
+var svg=document.getElementById('scene');
+var edgesG=document.getElementById('edges');
+var nodesG=document.getElementById('nodes');
+var nameEl=document.getElementById('name');
+var distEl=document.getElementById('distance');
+var sw=document.getElementById('switch');
+var axes=[['I','E'],['S','N'],['T','F'],['J','P']];
+var types=[], typeEdges=[];
+for(var i=0;i<16;i++){
+  var b=[(i>>3)&1,(i>>2)&1,(i>>1)&1,i&1];
+  var nm=''; for(var q=0;q<4;q++) nm+=axes[q][b[q]];
+  types.push({name:nm,b:b,p:[b[0]?1:-1,b[1]?1:-1,b[2]?1:-1,b[3]?1:-1]});
+}
+for(var a=0;a<16;a++) for(var d=0;d<4;d++){var j=a^(1<<(3-d));if(a<j)typeEdges.push([a,j]);}
+var funcs=[
+{name:'Ti',p:[-1,0,0,0]},{name:'Te',p:[1,0,0,0]},
+{name:'Si',p:[0,-1,0,0]},{name:'Se',p:[0,1,0,0]},
+{name:'Fi',p:[0,0,-1,0]},{name:'Fe',p:[0,0,1,0]},
+{name:'Ni',p:[0,0,0,-1]},{name:'Ne',p:[0,0,0,1]}
+], funcEdges=[];
+for(var f=0;f<8;f++) for(var g=f+1;g<8;g++){
+  var dot=0; for(var k=0;k<4;k++) dot+=funcs[f].p[k]*funcs[g].p[k];
+  if(dot===0) funcEdges.push([f,g]);
+}
+var mode='types', selected=-1;
+var ax=-0.42, ay=0.66, aw=0.38;
+var dragging=false, moved=false, px=0, py=0, lastMove=Date.now();
+function rot(a,b,t){var c=Math.cos(t),s=Math.sin(t);return[a*c-b*s,a*s+b*c]}
+function proj(v){
+  var x=v[0],y=v[1],z=v[2],w=v[3],r;
+  r=rot(x,w,aw);x=r[0];w=r[1];
+  r=rot(y,w,aw*.67);y=r[0];w=r[1];
+  r=rot(z,w,-aw*.41);z=r[0];w=r[1];
+  r=rot(x,z,ay);x=r[0];z=r[1];
+  r=rot(y,z,ax);y=r[0];z=r[1];
+  var perspective=1/(2.55-w*.34), s=610*perspective;
+  return{x:500+x*s,y:500+y*s,z:z+w*.2};
+}
+function hamming(a,b){var n=0;for(var i=0;i<4;i++)if(a[i]!==b[i])n++;return n}
+function draw(){
+  var data=mode==='types'?types:funcs;
+  var links=mode==='types'?typeEdges:funcEdges;
+  var p=[],i; for(i=0;i<data.length;i++)p.push(proj(data[i].p));
+  var edgeHTML='';
+  for(i=0;i<links.length;i++){
+    var u=links[i][0],v=links[i][1],hot=false;
+    if(selected>=0 && mode==='types') hot=(u===selected||v===selected);
+    edgeHTML+='<line class="edge'+(hot?' hot':'')+'" x1="'+p[u].x.toFixed(1)+'" y1="'+p[u].y.toFixed(1)+'" x2="'+p[v].x.toFixed(1)+'" y2="'+p[v].y.toFixed(1)+'"/>';
+  }
+  edgesG.innerHTML=edgeHTML;
+  var order=[];for(i=0;i<data.length;i++)order.push(i);
+  order.sort(function(m,n){return p[m].z-p[n].z});
+  var nodeHTML='';
+  for(var oi=0;oi<order.length;oi++){
+    i=order[oi]; var fade=false;
+    if(mode==='types'&&selected>=0) fade=hamming(types[selected].b,types[i].b)>1;
+    var anchor=p[i].x<500?'end':'start', dx=p[i].x<500?-10:10;
+    nodeHTML+='<g data-i="'+i+'" style="opacity:'+(fade?'.20':'1')+'"><circle class="node" cx="'+p[i].x.toFixed(1)+'" cy="'+p[i].y.toFixed(1)+'" r="'+(mode==='types'?6.5:9)+'"/><text class="label'+(p[i].z<-.2?' dim':'')+'" x="'+(p[i].x+dx).toFixed(1)+'" y="'+(p[i].y+3.5).toFixed(1)+'" text-anchor="'+anchor+'">'+data[i].name+'</text></g>';
+  }
+  nodesG.innerHTML=nodeHTML;
+  var groups=nodesG.querySelectorAll('g[data-i]');
+  for(i=0;i<groups.length;i++)groups[i].onclick=pick;
+}
+function pick(e){
+  e.stopPropagation(); var i=parseInt(this.getAttribute('data-i'),10); selected=i;
+  if(mode==='types'){
+    nameEl.textContent=types[i].name;
+    var opp=i^15; distEl.textContent='↔ '+types[opp].name+' · avstand 4';
+  }else{ nameEl.textContent=funcs[i].name;distEl.textContent=''; }
+  draw();
+}
+function resetSelection(){selected=-1;nameEl.textContent='';distEl.textContent='';draw()}
+function pointDown(e){dragging=true;moved=false;px=e.clientX;py=e.clientY;lastMove=Date.now();try{svg.setPointerCapture(e.pointerId)}catch(_){}}
+function pointMove(e){if(!dragging)return;var dx=e.clientX-px,dy=e.clientY-py;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;ay+=dx*.006;ax+=dy*.006;aw+=dx*.0016;px=e.clientX;py=e.clientY;lastMove=Date.now();draw()}
+function pointUp(){dragging=false}
+if(window.PointerEvent){svg.addEventListener('pointerdown',pointDown);svg.addEventListener('pointermove',pointMove);svg.addEventListener('pointerup',pointUp);svg.addEventListener('pointercancel',pointUp)}
+else{
+ svg.addEventListener('touchstart',function(e){var t=e.touches[0];pointDown(t)},{passive:true});
+ svg.addEventListener('touchmove',function(e){var t=e.touches[0];pointMove(t)},{passive:true});
+ svg.addEventListener('touchend',pointUp);
+}
+svg.addEventListener('click',function(){if(!moved)resetSelection()});
+sw.addEventListener('click',function(e){e.preventDefault();mode=mode==='types'?'functions':'types';selected=-1;nameEl.textContent='';distEl.textContent='';sw.textContent=mode==='types'?'funksjonar':'typar';sw.setAttribute('href',mode==='types'?'#functions':'#types');draw()});
+function loop(){if(!dragging && Date.now()-lastMove>900){aw+=.00115;draw()}requestAnimationFrame(loop)}
+draw();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
