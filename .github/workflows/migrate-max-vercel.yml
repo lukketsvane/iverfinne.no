@@ -1,0 +1,92 @@
+name: Migrate MAX to dedicated Vercel
+on:
+  push:
+    branches: [migrate-max-vercel-20260921]
+    paths:
+      - '.github/workflows/migrate-max-vercel.yml'
+permissions:
+  contents: read
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      TEAM_ID: team_6ukeAMsNaWMRhHombsc7EIwn
+      TEAM_SLUG: iverfinnes-projects
+      SOURCE_PROJECT: prj_VQXHj0WNLhHH0OplajrjZ5Q4LH9F
+      PROJECT_NAME: max.iverfinne.no
+    steps:
+      - name: Check token
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN"
+
+      - name: Create or find dedicated project
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/project.json -w '%{http_code}'             -H "Authorization: Bearer $VERCEL_TOKEN"             "https://api.vercel.com/v9/projects/$PROJECT_NAME?teamId=$TEAM_ID")
+          if [ "$code" = "200" ]; then
+            echo "Using existing project"
+          else
+            curl -fsS               -X POST "https://api.vercel.com/v11/projects?teamId=$TEAM_ID"               -H "Authorization: Bearer $VERCEL_TOKEN"               -H "Content-Type: application/json"               --data '{"name":"max.iverfinne.no","gitRepository":{"type":"github","repo":"lukketsvane/max.iverfinne.no"}}'               > /tmp/project.json
+          fi
+          PROJECT_ID=$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/project.json'))['id'])
+          PY
+          )
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
+          echo "Dedicated Vercel project: $PROJECT_ID"
+
+      - name: Prepare canonical repository source
+        run: |
+          set -euo pipefail
+          mkdir -p max/.vercel
+          curl -fsSL https://raw.githubusercontent.com/lukketsvane/max.iverfinne.no/main/index.html -o max/index.html
+          curl -fsSL https://raw.githubusercontent.com/lukketsvane/max.iverfinne.no/main/vercel.json -o max/vercel.json
+          python - <<'PY'
+          import json, os
+          p={"orgId":os.environ["TEAM_ID"],"projectId":os.environ["PROJECT_ID"]}
+          open("max/.vercel/project.json","w").write(json.dumps(p))
+          PY
+          grep -q '<title>MAX FUGLESPRENGER</title>' max/index.html
+
+      - name: Deploy canonical source
+        run: |
+          set -euo pipefail
+          cd max
+          npx --yes vercel@latest deploy --prod --yes             --token "$VERCEL_TOKEN" --scope "$TEAM_SLUG" > /tmp/vercel-deploy.log 2>&1
+          cat /tmp/vercel-deploy.log
+          DEPLOY_URL=$(grep -Eo 'https://[^[:space:]]+\.vercel\.app' /tmp/vercel-deploy.log | tail -1)
+          test -n "$DEPLOY_URL"
+          echo "DEPLOY_URL=$DEPLOY_URL" >> "$GITHUB_ENV"
+          npx --yes vercel@latest inspect "$DEPLOY_URL" --wait             --token "$VERCEL_TOKEN" --scope "$TEAM_SLUG" >/tmp/vercel-inspect.log 2>&1
+          cat /tmp/vercel-inspect.log
+
+      - name: Move max.iverfinne.no atomically to dedicated project
+        run: |
+          set -euo pipefail
+          curl -fsS             -X POST "https://api.vercel.com/v1/projects/$SOURCE_PROJECT/domains/max.iverfinne.no/move?teamId=$TEAM_ID"             -H "Authorization: Bearer $VERCEL_TOKEN"             -H "Content-Type: application/json"             --data "{\"projectId\":\"$PROJECT_ID\",\"gitBranch\":\"main\"}"             > /tmp/move.json
+          python - <<'PY'
+          import json,os
+          j=json.load(open('/tmp/move.json'))
+          assert j.get('projectId')==os.environ['PROJECT_ID'], j
+          assert j.get('verified') is True, j
+          print('DOMAIN_MOVED',j.get('name'),j.get('projectId'))
+          PY
+
+      - name: Verify direct production
+        run: |
+          set -euo pipefail
+          for i in {1..12}; do
+            if curl -fsS -D /tmp/headers https://max.iverfinne.no/ -o /tmp/page               && grep -q '<title>MAX FUGLESPRENGER</title>' /tmp/page; then
+              break
+            fi
+            sleep 3
+          done
+          grep -q '<title>MAX FUGLESPRENGER</title>' /tmp/page
+          if grep -qi '^x-max-source:' /tmp/headers; then
+            echo "Still hitting old bridge" >&2
+            exit 1
+          fi
+          echo "MAX_DIRECT_VERCEL_OK"
