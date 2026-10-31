@@ -1219,16 +1219,23 @@
       ],
       "size": [
         747,
-        818
+        427
       ],
-      "sha256": "2f7605031ef32f1ed0fde20ef8e2fd4058956cc5b81453593184df07b9799573",
+      "sha256": "a272f43e8a38e3ad6e275054dcc207c054f78e4aec325d2624cf0f176c7b04db",
       "transparent": true,
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "label": "C-K operator table + lower relation drawing",
+      "label": "C–K-operatorane: tabell utan dei nedre figurteikningane",
       "anchor_after": "1.444",
-      "placement_after": "1.54"
+      "placement_after": "1.54",
+      "crop_region": [
+        0,
+        0,
+        747,
+        427
+      ],
+      "crop_note": "Original linework preserved, tightly cropped above the lower illustration"
     },
     {
       "name": "scan-20261031-p16-royrstol-utvikling",
