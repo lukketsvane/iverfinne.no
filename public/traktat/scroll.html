@@ -84,8 +84,13 @@ body{
 .prop .status{font-size:.58rem;margin-left:.05rem;font-weight:400}
 .prop .t{font:inherit;letter-spacing:0;text-wrap:pretty;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
 .prop-paragraph{white-space:pre-line;margin:0}.prop-paragraph+.prop-paragraph{margin-top:.65em}
-.prop.depth0{font-size:1rem;font-weight:400;margin-top:.85rem;padding-top:.55rem}
-.prop.depth1{margin-top:.3rem}
+/* All structure comes from the logical depth of proposition numbers. */
+.prop.depth0{font-size:1.08rem;line-height:1.48;font-weight:400;margin-top:3.2rem;padding-top:.25rem}
+.prop.depth0:first-child{margin-top:.9rem}
+.prop.depth1{font-size:.97rem;margin-top:1.05rem}
+.prop.depth2{margin-top:.54rem}
+.prop.depth3{margin-top:.3rem}
+.prop.depth4{margin-top:.21rem}
 .prop.active .n{color:var(--fg);font-weight:500}
 .endmark{padding:2rem 0 1rem;text-align:center;font-family:var(--mono);font-size:.61rem;letter-spacing:.16em;color:var(--dim)}
 
@@ -143,7 +148,7 @@ function parseSource(src){
 (async function siteInit(){
   const response=await fetch("/traktat/formlaere.txt",{cache:"no-store"});
   if(!response.ok)throw new Error("Kunne ikkje laste FORMLÆRE");
-  const parsed=parseSource(await response.text()),DATA=parsed.props,TOKENS=parsed.tokens;
+  const parsed=parseSource(await response.text()),DATA=parsed.props,TOKENS=parsed.props;
   if(DATA.length<400)throw new Error("Ufullstendig manuskript");
   const byNum=new Map(DATA.map(d=>[d.n,d]));
   for(const d of DATA){d.kids=[];let p=d.n.slice(0,-1);while(p&&!byNum.has(p))p=p.slice(0,-1);d.parent=p||null;}
