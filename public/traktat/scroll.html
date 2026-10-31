@@ -471,7 +471,7 @@ function parseSource(src){
   function go(n,behavior="smooth"){setCurrent(n,true,true,behavior);}
   function currentFromScroll(){
     if(performance.now()<navUntil)return;
-    if(window.scrollY<=2){if(current!==order[0])setCurrent(order[0]);return;}
+    if(window.scrollY<=2){if(current!==order[0])setCurrent(order[0],false);return;}
     if(document.getElementById("notat")?.getBoundingClientRect().top<=32)return;
     const line=32;
     let candidate=null;
@@ -481,7 +481,7 @@ function parseSource(src){
       if(r.top>line){candidate=n;break;}
     }
     if(!candidate)candidate=order[order.length-1];
-    if(candidate!==current)setCurrent(candidate);
+    if(candidate!==current)setCurrent(candidate,false);
   }
   window.addEventListener("scroll",()=>{if(scrollFrame)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;currentFromScroll();});},{passive:true});
   for(const ev of ["wheel","touchstart","keydown"])window.addEventListener(ev,()=>{navUntil=0;},{passive:true});
@@ -508,7 +508,7 @@ function parseSource(src){
   paint();
   if(byNum.has(h))requestAnimationFrame(()=>go(h,"auto"));
   else if(h)requestAnimationFrame(()=>document.getElementById(h)?.scrollIntoView({block:"start"}));
-  addressWindow.addEventListener("hashchange",()=>{const n=hashNumber();if(byNum.has(n))setCurrent(n,false,true,"auto");});
+  addressWindow.addEventListener("hashchange",()=>{clearTimeout(hashTimer);const n=hashNumber();if(byNum.has(n))setCurrent(n,false,true,"auto");});
 })().catch(err=>{const read=document.getElementById("read");if(read)read.textContent="Klarte ikkje laste FORMLÆRE.";console.error(err);});
 </script>
 
