@@ -149,7 +149,7 @@ function parseSource(src){
   const response=await fetch("/traktat/formlaere.txt",{cache:"no-store"});
   if(!response.ok)throw new Error("Kunne ikkje laste FORMLÆRE");
   const parsed=parseSource(await response.text()),DATA=parsed.props,TOKENS=parsed.tokens;
-  if(DATA.length<400)throw new Error("Ufullstendig manuskript");
+  if(DATA.length!==375||DATA[0]?.n!=="1"||DATA[DATA.length-1]?.n!=="7.4")throw new Error("Ufullstendig eller feil utgåve av FORMLÆRE");
   const byNum=new Map(DATA.map(d=>[d.n,d]));
   for(const d of DATA){d.kids=[];let p=d.n.slice(0,-1);while(p&&!byNum.has(p))p=p.slice(0,-1);d.parent=p||null;}
   for(const d of DATA){if(d.parent)byNum.get(d.parent).kids.push(d);}
