@@ -78,7 +78,7 @@ body{
 
 
 /* ---- reading / continuous stream ---- */
-.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 .5rem 1.5rem;scroll-behavior:auto;touch-action:pan-y}
+.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 .5rem 1.5rem 1rem;scroll-behavior:auto;touch-action:pan-y}
 .read:focus-visible{outline:1px solid var(--dim);outline-offset:-1px}
 .stream{padding:.375rem 0 1.25rem}
 .doc-title{font-family:var(--serif);font-size:2rem;line-height:1.12;letter-spacing:-.025em;font-weight:400;margin:2.25rem 0 .7rem}
@@ -88,7 +88,7 @@ body{
 .prop{position:relative;display:grid;grid-template-columns:3rem minmax(0,1fr);gap:0 .35rem;align-items:start;width:100%;min-width:0;font-size:.91rem;line-height:1.56;font-weight:350;padding:.36rem 0;scroll-margin-top:12px}
 .prop .n{font-family:var(--mono);font-size:.66rem;line-height:1.45;padding-top:.17rem;color:var(--dim);font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:left}
 .prop .status{font-size:.58rem;margin-left:.05rem;font-weight:400}
-.prop .t{font:inherit;min-width:0;width:100%;letter-spacing:0;text-wrap:pretty;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word;-webkit-user-select:text;user-select:text}
+.prop .t{font:inherit;min-width:0;width:100%;letter-spacing:0;text-wrap:pretty;text-align:left;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word;-webkit-user-select:text;user-select:text}
 .prop-paragraph{white-space:pre-line;margin:0;max-width:none}.prop-paragraph+.prop-paragraph{margin-top:.65em}
 /* One fixed left edge for every proposition. Depth is communicated by
    the interactive proposition tree above the text, never by indentation. */
