@@ -1,270 +1,681 @@
 {
-  "source_pdf": "formlaere-ny-utgave 2.pdf",
-  "source_page_count": 74,
-  "asset_count": 52,
-  "transparent": true,
-  "ink_color": "#000000",
-  "dark_mode_css": "filter: invert(1)",
+  "source": "formlaere-ny-utgave 2.pdf",
   "assets": [
     {
-      "file": "page-01.png",
+      "name": "page-01",
+      "filename": "page-01.png",
       "source_page": 1,
-      "url": "/traktat/illustrations/page-01.png"
+      "size": [
+        728,
+        367
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-03.png",
+      "name": "page-03",
+      "filename": "page-03.png",
       "source_page": 3,
-      "url": "/traktat/illustrations/page-03.png"
+      "size": [
+        959,
+        628
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-05.png",
+      "name": "page-05",
+      "filename": "page-05.png",
       "source_page": 5,
-      "url": "/traktat/illustrations/page-05.png"
+      "size": [
+        905,
+        250
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-07.png",
+      "name": "page-07",
+      "filename": "page-07.png",
       "source_page": 7,
-      "url": "/traktat/illustrations/page-07.png"
+      "size": [
+        882,
+        364
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-08.png",
+      "name": "page-08",
+      "filename": "page-08.png",
       "source_page": 8,
-      "url": "/traktat/illustrations/page-08.png"
+      "size": [
+        852,
+        538
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-09.png",
+      "name": "page-09",
+      "filename": "page-09.png",
       "source_page": 9,
-      "url": "/traktat/illustrations/page-09.png"
+      "size": [
+        887,
+        411
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-10.png",
+      "name": "page-10",
+      "filename": "page-10.png",
       "source_page": 10,
-      "url": "/traktat/illustrations/page-10.png"
+      "size": [
+        875,
+        713
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-11.png",
+      "name": "page-11",
+      "filename": "page-11.png",
       "source_page": 11,
-      "url": "/traktat/illustrations/page-11.png"
+      "size": [
+        883,
+        438
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-12.png",
+      "name": "page-12",
+      "filename": "page-12.png",
       "source_page": 12,
-      "url": "/traktat/illustrations/page-12.png"
+      "size": [
+        948,
+        530
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-13.png",
+      "name": "page-13",
+      "filename": "page-13.png",
       "source_page": 13,
-      "url": "/traktat/illustrations/page-13.png"
+      "size": [
+        608,
+        357
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-14.png",
+      "name": "page-14",
+      "filename": "page-14.png",
       "source_page": 14,
-      "url": "/traktat/illustrations/page-14.png"
+      "size": [
+        898,
+        655
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-15.png",
+      "name": "page-15",
+      "filename": "page-15.png",
       "source_page": 15,
-      "url": "/traktat/illustrations/page-15.png"
+      "size": [
+        865,
+        453
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-16.png",
+      "name": "page-16",
+      "filename": "page-16.png",
       "source_page": 16,
-      "url": "/traktat/illustrations/page-16.png"
+      "size": [
+        926,
+        664
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-17.png",
+      "name": "page-17",
+      "filename": "page-17.png",
       "source_page": 17,
-      "url": "/traktat/illustrations/page-17.png"
+      "size": [
+        945,
+        455
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-18.png",
+      "name": "page-18",
+      "filename": "page-18.png",
       "source_page": 18,
-      "url": "/traktat/illustrations/page-18.png"
+      "size": [
+        942,
+        524
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-19.png",
+      "name": "page-19",
+      "filename": "page-19.png",
       "source_page": 19,
-      "url": "/traktat/illustrations/page-19.png"
+      "size": [
+        872,
+        90
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-21.png",
+      "name": "page-21",
+      "filename": "page-21.png",
       "source_page": 21,
-      "url": "/traktat/illustrations/page-21.png"
+      "size": [
+        951,
+        257
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-22.png",
+      "name": "page-22",
+      "filename": "page-22.png",
       "source_page": 22,
-      "url": "/traktat/illustrations/page-22.png"
+      "size": [
+        895,
+        489
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-23.png",
+      "name": "page-23",
+      "filename": "page-23.png",
       "source_page": 23,
-      "url": "/traktat/illustrations/page-23.png"
+      "size": [
+        809,
+        392
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-24.png",
+      "name": "page-24",
+      "filename": "page-24.png",
       "source_page": 24,
-      "url": "/traktat/illustrations/page-24.png"
+      "size": [
+        931,
+        116
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-25.png",
+      "name": "page-25",
+      "filename": "page-25.png",
       "source_page": 25,
-      "url": "/traktat/illustrations/page-25.png"
+      "size": [
+        899,
+        529
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-27.png",
+      "name": "page-27",
+      "filename": "page-27.png",
       "source_page": 27,
-      "url": "/traktat/illustrations/page-27.png"
+      "size": [
+        878,
+        377
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-28.png",
+      "name": "page-28",
+      "filename": "page-28.png",
       "source_page": 28,
-      "url": "/traktat/illustrations/page-28.png"
+      "size": [
+        843,
+        634
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-29-01.png",
+      "name": "page-29-01",
+      "filename": "page-29-01.png",
       "source_page": 29,
-      "url": "/traktat/illustrations/page-29-01.png"
+      "size": [
+        646,
+        377
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-29-02.png",
+      "name": "page-29-02",
+      "filename": "page-29-02.png",
       "source_page": 29,
-      "url": "/traktat/illustrations/page-29-02.png"
+      "size": [
+        875,
+        202
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-30.png",
+      "name": "page-30",
+      "filename": "page-30.png",
       "source_page": 30,
-      "url": "/traktat/illustrations/page-30.png"
+      "size": [
+        907,
+        600
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-32.png",
+      "name": "page-32",
+      "filename": "page-32.png",
       "source_page": 32,
-      "url": "/traktat/illustrations/page-32.png"
+      "size": [
+        817,
+        600
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-33.png",
+      "name": "page-33",
+      "filename": "page-33.png",
       "source_page": 33,
-      "url": "/traktat/illustrations/page-33.png"
+      "size": [
+        834,
+        664
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-35.png",
+      "name": "page-35",
+      "filename": "page-35.png",
       "source_page": 35,
-      "url": "/traktat/illustrations/page-35.png"
+      "size": [
+        819,
+        500
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-37.png",
+      "name": "page-37",
+      "filename": "page-37.png",
       "source_page": 37,
-      "url": "/traktat/illustrations/page-37.png"
+      "size": [
+        829,
+        712
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-41.png",
+      "name": "page-41",
+      "filename": "page-41.png",
       "source_page": 41,
-      "url": "/traktat/illustrations/page-41.png"
+      "size": [
+        920,
+        708
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-42.png",
+      "name": "page-42",
+      "filename": "page-42.png",
       "source_page": 42,
-      "url": "/traktat/illustrations/page-42.png"
+      "size": [
+        957,
+        545
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-43.png",
+      "name": "page-43",
+      "filename": "page-43.png",
       "source_page": 43,
-      "url": "/traktat/illustrations/page-43.png"
+      "size": [
+        891,
+        574
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-44.png",
+      "name": "page-44",
+      "filename": "page-44.png",
       "source_page": 44,
-      "url": "/traktat/illustrations/page-44.png"
+      "size": [
+        854,
+        737
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-47.png",
+      "name": "page-47",
+      "filename": "page-47.png",
       "source_page": 47,
-      "url": "/traktat/illustrations/page-47.png"
+      "size": [
+        880,
+        577
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-48.png",
+      "name": "page-48",
+      "filename": "page-48.png",
       "source_page": 48,
-      "url": "/traktat/illustrations/page-48.png"
+      "size": [
+        709,
+        769
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-50.png",
+      "name": "page-50",
+      "filename": "page-50.png",
       "source_page": 50,
-      "url": "/traktat/illustrations/page-50.png"
+      "size": [
+        879,
+        538
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-52.png",
+      "name": "page-52",
+      "filename": "page-52.png",
       "source_page": 52,
-      "url": "/traktat/illustrations/page-52.png"
+      "size": [
+        906,
+        588
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-53.png",
+      "name": "page-53",
+      "filename": "page-53.png",
       "source_page": 53,
-      "url": "/traktat/illustrations/page-53.png"
+      "size": [
+        840,
+        882
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-54.png",
+      "name": "page-54",
+      "filename": "page-54.png",
       "source_page": 54,
-      "url": "/traktat/illustrations/page-54.png"
+      "size": [
+        873,
+        917
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-55.png",
+      "name": "page-55",
+      "filename": "page-55.png",
       "source_page": 55,
-      "url": "/traktat/illustrations/page-55.png"
+      "size": [
+        814,
+        729
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-58.png",
+      "name": "page-58",
+      "filename": "page-58.png",
       "source_page": 58,
-      "url": "/traktat/illustrations/page-58.png"
+      "size": [
+        934,
+        433
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-59.png",
+      "name": "page-59",
+      "filename": "page-59.png",
       "source_page": 59,
-      "url": "/traktat/illustrations/page-59.png"
+      "size": [
+        871,
+        494
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-60.png",
+      "name": "page-60",
+      "filename": "page-60.png",
       "source_page": 60,
-      "url": "/traktat/illustrations/page-60.png"
+      "size": [
+        895,
+        460
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-61.png",
+      "name": "page-61",
+      "filename": "page-61.png",
       "source_page": 61,
-      "url": "/traktat/illustrations/page-61.png"
+      "size": [
+        933,
+        522
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-62.png",
+      "name": "page-62",
+      "filename": "page-62.png",
       "source_page": 62,
-      "url": "/traktat/illustrations/page-62.png"
+      "size": [
+        877,
+        460
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-63.png",
+      "name": "page-63",
+      "filename": "page-63.png",
       "source_page": 63,
-      "url": "/traktat/illustrations/page-63.png"
+      "size": [
+        836,
+        502
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-64.png",
+      "name": "page-64",
+      "filename": "page-64.png",
       "source_page": 64,
-      "url": "/traktat/illustrations/page-64.png"
+      "size": [
+        880,
+        483
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-67.png",
+      "name": "page-67",
+      "filename": "page-67.png",
       "source_page": 67,
-      "url": "/traktat/illustrations/page-67.png"
+      "size": [
+        891,
+        610
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-68.png",
+      "name": "page-68",
+      "filename": "page-68.png",
       "source_page": 68,
-      "url": "/traktat/illustrations/page-68.png"
+      "size": [
+        849,
+        362
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-71.png",
+      "name": "page-71",
+      "filename": "page-71.png",
       "source_page": 71,
-      "url": "/traktat/illustrations/page-71.png"
+      "size": [
+        872,
+        436
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     },
     {
-      "file": "page-73.png",
+      "name": "page-73",
+      "filename": "page-73.png",
       "source_page": 73,
-      "url": "/traktat/illustrations/page-73.png"
+      "size": [
+        933,
+        517
+      ],
+      "source_pdf": "formlaere-ny-utgave 2.pdf",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)"
     }
   ]
 }
