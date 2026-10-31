@@ -78,7 +78,7 @@ body{
 
 
 /* ---- reading / continuous stream ---- */
-.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 .5rem 1.5rem 1rem;scroll-behavior:auto;touch-action:pan-y}
+.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 1.2rem 1.5rem .5rem;scroll-behavior:auto;touch-action:pan-y}
 .read:focus-visible{outline:1px solid var(--dim);outline-offset:-1px}
 .stream{padding:.375rem 0 1.25rem}
 .doc-title{font-family:var(--serif);font-size:2rem;line-height:1.12;letter-spacing:-.025em;font-weight:400;margin:2.25rem 0 .7rem}
@@ -100,6 +100,15 @@ body{
 .prop.active .n{color:var(--fg);font-weight:500}
 .endmark{padding:2rem 0 1rem;text-align:center;font-family:var(--mono);font-size:.61rem;letter-spacing:.16em;color:var(--dim)}
 
+/* Book drawings live in the normal text stream, never in a floating overlay. */
+.figure-set{display:flex;flex-direction:column;align-items:flex-start;gap:.7rem;width:100%;min-width:0;margin:.5rem 0 1.65rem;padding:0}
+.tractate-figure{margin:0;padding:0;max-width:100%;width:100%;text-align:left}
+.tractate-figure img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain}
+@media(prefers-color-scheme:dark){
+ :root:not([data-theme="light"]) .tractate-figure img{filter:invert(1)}
+}
+:root[data-theme="dark"] .tractate-figure img{filter:invert(1)}
+
 /* References are in-text, and the preview is anchored to the number. */
 .xref{
   display:inline;color:inherit;background:transparent;border:0;border-radius:0;
@@ -114,16 +123,16 @@ body{
 .xref:focus-visible{outline:1px solid var(--fg);outline-offset:2px}
 .prop-preview{
   position:fixed;z-index:9999;box-sizing:border-box;
-  width:min(350px,calc(100vw - 24px));padding:12px 14px;
+  width:min(302px,calc(100vw - 24px));padding:9px 11px;
   color:var(--fg);background:var(--bg);border:1px solid var(--line);
-  border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.17);
-  pointer-events:none;font-family:var(--serif);font-size:.86rem;line-height:1.48;
+  border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.17);
+  pointer-events:none;font-family:var(--serif);font-size:.81rem;line-height:1.39;
   text-align:left;overflow-wrap:break-word;
 }
 .prop-preview[hidden]{display:none!important}
-.prop-preview-num{font-family:var(--mono);font-size:.75rem;font-weight:500;margin-bottom:6px}
-.prop-preview-body{white-space:pre-line;max-height:min(32vh,240px);overflow:hidden}
-.prop-preview-hint{font-family:var(--mono);font-size:.64rem;color:var(--dim);padding-top:9px}
+.prop-preview-num{font-family:var(--mono);font-size:.75rem;font-weight:500;margin-bottom:3px}
+.prop-preview-body{white-space:pre-line;max-height:min(26vh,180px);overflow:hidden}
+
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .prop-preview{box-shadow:0 8px 30px rgba(0,0,0,.6)}
 }
@@ -248,11 +257,8 @@ function parseSource(src){
     const body=document.createElement("div");
     body.className="prop-preview-body";
     const full=d.paragraphs.join("\n\n").replace(/\*{1,2}/g,"").trim();
-    body.textContent=full.length>480?full.slice(0,477).trimEnd()+"…":full;
-    const hint=document.createElement("div");
-    hint.className="prop-preview-hint";
-    hint.textContent=mode==="tap"?"Trykk på tilvisinga igjen for å gå dit":"Klikk for å gå til proposisjonen";
-    preview.replaceChildren(number,body,hint);
+    body.textContent=full.length>335?full.slice(0,332).trimEnd()+"…":full;
+    preview.replaceChildren(number,body);
     preview.hidden=false;
     const rect=anchor.getBoundingClientRect();
     const width=preview.getBoundingClientRect().width;
@@ -331,6 +337,7 @@ function parseSource(src){
   function make(tag,cls,text){
     const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;
   }
+  const FIGURES_AFTER={"1.211":[{"file":"scan-20261031-p08-objekt-serie.png","alt":"Same objekt i ulike ordningar"},{"file":"scan-20261031-p08-objekt-ordning.png","alt":"Objekt i romleg konfigurasjon"}],"1.432":[{"file":"scan-20261031-p11-busette-opne-forbodne.png","alt":"Busette, opne og forbodne regionar"}],"1.421":[{"file":"scan-20261031-p12-boke.png","alt":"Bøk som bøyer seg langs fiberen"},{"file":"scan-20261031-p12-granitt.png","alt":"Granitt som sprekk"}],"1.5":[{"file":"scan-20261031-p12-glidelas.png","alt":"Ei grense som vert opna med glidelås"}],"1.54":[{"file":"scan-20261031-p13-c-k-operator-tabell-og-rorsle.png","alt":"C–K-operasjonane og rørsla mellom agent og form"}],"2.15":[{"file":"scan-20261031-p15-stol-hender-a.png","alt":"To hender som manipulerer ein stol"},{"file":"scan-20261031-p15-sittestillingar-a.png","alt":"Fire ulike sittestillingar"},{"file":"scan-20261031-p15-stol-hender-b.png","alt":"Manipulering av ein annan stol"},{"file":"scan-20261031-p15-sittestillingar-b.png","alt":"Fem variasjonar i sittestilling"}],"2.212":[{"file":"scan-20261031-p16-royrstol-utvikling.png","alt":"Frå sykkelramme til røyrstol"}],"5.125":[{"file":"scan-20261031-p21-agentrang.png","alt":"Agens frå termostat til designar"}],"5.131":[{"file":"scan-20261031-p21-agens-fra-termostat-til-handverkar.png","alt":"Termostat, tre, koloni, pattedyr og handverkar"}],"7.3":[{"file":"scan-20261031-p33-agentar-samspel.png","alt":"Samspelet mellom agentar"},{"file":"scan-20261031-p33-agentar-moglege-retningar.png","alt":"Ulike retningar for agentisk form"},{"file":"scan-20261031-p33-formtransformasjon.png","alt":"Transformasjon av form gjennom fleire steg"}],"6.66":[{"file":"scan-20261031-p35-d-modell-diagram.png","alt":"Formrom, partisjon, grammatikk, landskap og agenthierarki"}],"7.142":[{"file":"scan-20261031-p41-sommarfugl-livslop.png","alt":"Larve, puppe og sommarfugl"},{"file":"scan-20261031-p41-kopp-og-nedbryting.png","alt":"Eingongskopp og nedbryting"}],"6.12":[{"file":"scan-20261031-p52-metamorfose-mycelium.png","alt":"Metamorfose og mycel"},{"file":"scan-20261031-p68-multiskala-kompetanse.png","alt":"Multiskala-kompetanse"}],"5.11":[{"file":"scan-20261031-p68-kybernetisk-sloyfe.png","alt":"Kybernetisk sløyfe"}],"5.22":[{"file":"scan-20261031-p68-kognitiv-lyskjegle.png","alt":"Kognitiv lyskjegle"}],"5.2":[{"file":"scan-20261031-p68-omhug-intelligens.png","alt":"Omhug og intelligens"}]};
   for(const tok of TOKENS){
     if(tok.kind==="title"){const h=make("h1","doc-title",tok.text);stream.appendChild(h);}
     else if(tok.kind==="heading"){const h=make("h2","section-title",tok.text);h.id="del-"+tok.text.toLowerCase().replace(/[^a-z0-9æøå]+/g,"-").replace(/^-|-$/g,"");stream.appendChild(h);}
@@ -341,6 +348,22 @@ function parseSource(src){
       const body=make("div","t");for(const para of tok.paragraphs){const p=make("p","prop-paragraph");rich(p,para);body.appendChild(p);}
       row.append(n,body);row.addEventListener("click",()=>{if(!window.getSelection()?.toString())setCurrent(tok.n,true,false);});
       byRow.set(tok.n,row);stream.appendChild(row);
+      const figures=FIGURES_AFTER[tok.n];
+      if(figures?.length){
+        const group=make("div","figure-set");
+        group.setAttribute("aria-label","Illustrasjonar knytte til proposisjon "+tok.n);
+        for(const item of figures){
+          const figure=make("figure","tractate-figure");
+          const img=document.createElement("img");
+          img.src="/traktat/illustrations/"+item.file;
+          img.alt=item.alt;
+          img.loading="lazy";
+          img.decoding="async";
+          figure.appendChild(img);
+          group.appendChild(figure);
+        }
+        stream.appendChild(group);
+      }
     }
   }
   stream.appendChild(make("div","endmark",order[order.length-1]+" · SLUTT"));
