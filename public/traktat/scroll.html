@@ -148,7 +148,7 @@ function parseSource(src){
 (async function siteInit(){
   const response=await fetch("/traktat/formlaere.txt",{cache:"no-store"});
   if(!response.ok)throw new Error("Kunne ikkje laste FORMLÆRE");
-  const parsed=parseSource(await response.text()),DATA=parsed.props,TOKENS=parsed.props;
+  const parsed=parseSource(await response.text()),DATA=parsed.props,TOKENS=parsed.tokens;
   if(DATA.length<400)throw new Error("Ufullstendig manuskript");
   const byNum=new Map(DATA.map(d=>[d.n,d]));
   for(const d of DATA){d.kids=[];let p=d.n.slice(0,-1);while(p&&!byNum.has(p))p=p.slice(0,-1);d.parent=p||null;}
@@ -273,7 +273,7 @@ function parseSource(src){
   read.addEventListener("touchstart",e=>{if(e.touches.length===1){sx=e.touches[0].clientX;sy=e.touches[0].clientY;tracking=true;}},{passive:true});
   read.addEventListener("touchend",e=>{if(!tracking)return;tracking=false;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>64&&Math.abs(dy)<44)step(dx<0?1:-1);},{passive:true});
   const h=hashNumber();if(byNum.has(h))current=h;
-  paint();if(current!==order[0])requestAnimationFrame(()=>go(current,"auto"));
+  paint();if(byNum.has(h))requestAnimationFrame(()=>go(h,"auto"));
   addressWindow.addEventListener("hashchange",()=>{const n=hashNumber();if(byNum.has(n))setCurrent(n,false,true,"auto");});
 })().catch(err=>{const read=document.getElementById("read");if(read)read.textContent="Klarte ikkje laste FORMLÆRE.";console.error(err);});
 </script>
