@@ -265,9 +265,6 @@ Språket L(SG) er mengda av former som kan nåast ved endelege regelsteg. Den va
 
 Generering og kunnskap er ulike hendingar; dei er ikkje same operator.
 
-
-## II · Seleksjonstrykk, affordansar og stil
-
 **2t**  Realiseringane fordeler seg ikkje likt over alle tilgjengelege former. Dette er ei undersøkjeleg skildring av formklassar, ikkje eit logisk vilkår for at form skal finnast.
 
 **2.01t**  Det materielle forbodet skil ut det som ikkje kan realiserast under gjevne vilkår. Innanfor resten kan ei sannsynsfordeling vise kva som vert produsert ofte og sjeldan.
@@ -332,9 +329,6 @@ At stilen ein gong var eit utfall, hindrar ikkje at han seinare verkar tilbake.
 
 **2.212t**  Ein stilart har ikkje ei eiga fysisk kraft. Han kan likevel verke kausalt gjennom forventingar, opplæring, imitasjon og institusjonar (5.53).
 
-
-## III · Tilpassingslandskapet
-
 **3t**  Seleksjonstrykka spenner ut eit landskap over formrommet.
 
 **3.01t**  Når seleksjonsfaktorane er positive og let seg faktorisere, kan produktet av dei skrivast som ein sum av negative logaritmar. Dette gjev eit samla landskap. Dersom verknadene samspelar, må samspela skrivast inn i potensialet.
@@ -365,9 +359,6 @@ Ei mogleg framstilling er Λ(x,t) = −log P(x|vilkår,t) + konstant. Ei oppdeli
 
 **3.411d**  Reell tyder her: gjeven ved vilkåra i 3.4, lovene i feltet og dei behova formene skal møte, same kva tradisjon som navigerer.
 
-
-## IV · Dynamikk, bifurkasjon og arv
-
 **4t**  Landskapet er dynamisk.
 
 **4.01t**  Ein realisering kan endre tilgang, forventingar og institusjonar for dei som kjem etter. Han treng ikkje flytte alle delane av landskapet.
@@ -393,9 +384,6 @@ Alt nytt er ikkje berre omformgjeving i logisk forstand; men det er alltid laga 
 **4.41t**  Det materielt tilgjengelege kan vekse og minke. Dei logiske moglegheitene står berre fast så lenge modellrommet og operasjonane sine definisjonar står fast (1.2222).
 
 **4.5t**  Eitt svært sterkt trykk kan dominere ei fordeling. Mangfald i utfalla kan kome av mange trykk, av støy, av variasjon i starttilstandar eller av ulike grammatikker. Mangfald åleine måler ikkje talet på verksame mål.
-
-
-## V · Hinne, agens, omhug og kapasitet
 
 **5t**  I formverda finst system som ikkje berre følgjer verknadene av ei endring, men som svarar slik at nokre tilstandar vert haldne ved lag. Desse kallar me agentar.
 
@@ -727,9 +715,6 @@ Viss ein identifiserer ei systematisk restvariasjon som krev eit nytt, uavhengig
 **5.724t**  Den samla modellen krev eit spesifisert formrom 𝕄, ei kunnskapsdeling Π, ein grammatikk SG, ein situasjonsavhengig seleksjonsmodell Λ og ei samling agentar {A_i}. Ingen av desse storleikane må gjerast meir ontologisk grunnleggjande enn oppgåva krev.
 
 Ei god forklaring seier også kva ein har halde utanfor.
-
-
-## VI · Mellom agentar: design, den allmenne forma og sviktrommet
 
 **6t**  Form vert til gjennom verknader mellom materiale, operasjonar og agentar. Nokre former kjem til utan nokon som formgjev dei for andre. Andre ber på avgjerder som bind andre sine liv.
 
@@ -1063,9 +1048,6 @@ Ein god test må difor dokumentere at prøvinga faktisk opna for eit val.
 **6.89t**  Ei form vert forstått når me kan vise kva ho kom frå, kva alternativ ho stengde, kva ho heldt, kva ho overlet til andre og korleis denne forklaringa kunne motseiast.
 
 Det er meir krevjande enn å seie at form følgjer funksjon.
-
-
-## VII · Forma som arkiv, estetisk sansing og ansvar
 
 **7t**  Forma kan vere eit arkiv over kva som vart halde. Ho ber ikkje ei ferdig tilståing om kven som brydde seg. Ho ber spor som kan gjerast leselege gjennom samanlikning, prøving og svar frå dei som lever med henne.
 
