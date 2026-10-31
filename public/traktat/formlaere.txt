@@ -1,76 +1,3 @@
-# FORMLÆRE
-*Ei traktatform om form for design og estetiske fag*
-Iver Raknes Finne · Arkitektur- og designhøgskolen i Oslo · 2026
-
-## Føreord
-Ein stol kan halde ein kropp oppe og likevel gjere vondt. Ein fasade kan vere heilt rett prosjektert og likevel gjere eit rom ubrukeleg. Eit grensesnitt kan oppfylle kvart krav i bestillinga og samstundes gjere brukaren mindre fri. Det avgjerande spørsmålet er ikkje berre om forma verkar. Det er *kva ho verkar på, for kven, og kva som vart halde utanfor arbeidet då ho vart til*.
-
-Designfaget har grammatikkar, metodar og etiske tradisjonar. Det manglar ikkje ord. Men orda ligg ofte i ulike rom. Formgrammatikken forklarer korleis nye konfigurasjonar kan genererast; teori om designkunnskap skildrar rørsla mellom det tenkte og det kjende; utviklingsbiologi, kybernetikk og agentteori spør korleis system held mål gjennom skiftande vilkår. Den same gjenstanden høyrer til alle tre undersøkingsmåtar. Faget har ikkje einigheit om korleis dei skal koplast, eller om kva koplinga kan forklare.
-
-Denne boka er eit forsøk på ei slik kopling. Ho byrjar med skilnaden og endar med ansvaret for det som skiljet gjer. Ho framstiller konfigurasjonar som posisjonar i rom av moglege former, forklarer seleksjon med eit landskap av trykk, og undersøker korleis agentar navigerer dette landskapet med ulik kunnskap, omhug og kapasitet. Ei celle, eit tre og ein handverkar kan i bestemte omsyn skildrast med same struktur. Ein profesjonell designar er likevel ikkje berre ein formgjevar: arbeidet endrar vilkåra for andre, som ikkje nødvendigvis fekk velje.
-
-Her trengst eit viktig skilje. *Omhug* er at noko tel i prioriteringane til ein agent. *Kapasitet* er at agenten kan halde eit relevant utfall innanfor ein toleranse. *Prediksjon* er evna til å sjå kva som kan kome. Dei tre fell ikkje saman. Ein kan sjå det vonde kome og ikkje kunne stanse det. Ein kan kunne stanse det utan å bry seg. Ein kan vere uvitande om at ein hadde eit val. Desse skilnadene er ikkje retoriske figurar: dei gjev ulike hypotesar om korleis ei form vart til og kva ein kan vente at ho kjem til å gjere.
-
-Forma er eit arkiv, men ikkje eit vitne som snakkar av seg sjølv. Det same setet kan vere resultat av omsorgsfull prøving eller tankelaus kopiering. Å lese arkivet krev at me undersøkjer prosessen, alternativa, materialet og svara frå dei som lever med forma. Ein modell som ikkje kan tape mot eit motdøme, kan heller ikkje vinne ei forklaring.
-
-Teorien gjev ikkje moralske plikter ut av naturlover. Det faglege nei-et må grunngjevast ope. Men teorien kan vise kva eit oppdrag gjorde synleg, kva det heldt skjult, kven som hadde kapasitet til å handle, og kven som må bere følgjene. Det er ikkje lite. Det er eit grunnlag for å gjere design meir etterretteleg som kunnskap og som offentleg praksis.
-
-Framstillinga er ei traktatform. Talet viser kvar ei utsegn høyrer heime i argumentet, og bokstaven kva slags krav ho set: definisjon, postulat, teorem, observasjon eller illustrasjon. Eit teorem skal kunne sporast tilbake til føresetnadene sine; ein empirisk påstand skal kunne motseiast av ei undersøking; eit postulat skal stå ope som postulat. Der dette ikkje lèt seg gjere, er teksten ennå ikkje ferdig.
-
-Oppdraget seier kva forma skal gjere. Først når forma møter verda, viser det seg kva oppdraget ikkje heldt.
-
-## Lesekode
-d = definisjon · a = postulat/hypotese · t = modellvilkårsvis følgje · o = observasjon · i = illustrasjon. Desimalnummera viser logiske underordningar, ikkje berre kapittelrekkjefølgje.
-
-## Ordliste
-
-**Affordanse.** Det ein agent kan gjere med eller gjennom ei form under bestemte kroppslege og materielle vilkår (2.14, 5.223).
-**Agent.** Regulerande system med observasjonar, politikkar og ein målregion. Ingen påstand om medvit ligg i definisjonen (5.11).
-**Arkiv.** Forma som realisert spor etter val, material og historie; ho fortel ikkje åleine kva som forårsaka sporet (6.676, 7.02).
-**Avmakt.** Omhug utan tilstrekkeleg kapasitet på ein bestemt akse. Ein kan vere avmektig og likevel føreseie svikten (5.232–5.2323).
-**Blindskap.** Verken omhug eller kapasitet på ein akse. I denne modellen tyder ikkje ordet nødvendigvis mangel på kunnskap (5.232).
-**Designar.** Formgjevar som verkar inn på vilkåra til ein annan og har minst éin relevant konsekvens for den andre i lyskjegla si (6.02).
-**Estetisk sansing.** Merksemd mot dei sansbare skilnadene i forma og den verknaden dei har på persepsjon og erfaring (7.13).
-**For og mot.** Relasjonen mellom måla designaren held for den andre og dei måla den andre sjølv held (6.028).
-**Forbode.** Konfigurasjon som ligg i modellen sitt logiske rom, men ikkje kan realiserast med gjevne materielle/tekniske vilkår (1.42).
-**Form.** Strukturen til ei konfigurasjon under ei oppgjeven ekvivalens mellom realiseringar (1.212).
-**Formalgebra.** Spesifiserte former og operasjonar som kan byggje opp, dele og transformere former (1.6).
-**Formgjevar.** Agent som gjennom regulering eller handling endrar fordelinga av konfigurasjonar som vert realiserte (6.01).
-**Formgrammatikk.** Reglar, representasjonar og startform som spesifiserer kva former som kan genererast (1.61).
-**Formrom 𝕄.** Mengda av konfigurasjonar i den valde klassen. Rommet av strukturelle former kan skrivast 𝔽=𝕄/∼ (1.31).
-**Glede.** Ein mogleg estetisk respons når sansinga finn ordning, spenning eller ei uventa samanheng (7.132).
-**Haldne aksar.** Aksar som både tel i måla til agenten og kan regulerast under oppgjevne vilkår (5.231).
-**Hinne.** Statistisk eller operasjonell grense mellom eit system og omgjevnaden; ikkje nødvendigvis fysisk membran (5.02).
-**Indre spenning.** Representert avvik mellom tilstand og målregion; ikkje det same som feil mellom prediksjon og observasjon (5.14).
-**Kapasitet.** Evna til å halde eit mål under oppgjevne forstyrringar og tid, med valt tryggleiksnivå (5.21).
-**Kjernelikninga.** Strukturelt skjema som koplar generering, estimerte vilkår, prioritering og kapasitet (5.7).
-**Klasse.** Konfigurasjonar som vert undersøkte med same valde operasjonar og vilkår (1.3).
-**Kognitiv lyskjegle.** Dei aksane, agentane og tidshorisontane som tel i agenten sine mål (5.22).
-**Kompetanse.** Evne til å nå eller halde mål på tvers av relevante forstyrringar (5.15).
-**Konfigurasjon.** Ei bestemt ordning av bestemte delar (1.11).
-**Kunstverk.** Form halden fram som rom for estetisk, sanseleg eller omgrepsleg undersøking (7.133).
-**Likegyldigheit.** Kapasitet utan omhug på ein bestemt akse (5.232).
-**Liv.** Arbeidsdefinisjon: system som aktivt held ved lag føresetnadene for si eiga regulering (5.6).
-**Målregion.** Dei tilstandane agenten aksepterer som måloppnåing under den gjevne oppgåva (5.11).
-**Observasjonsekvivalens.** To ulike prosessar som ikkje kan skiljast frå kvarandre med dei data me har (1.324).
-**Omhug.** Praktisk prioritering av eit utfall under moglege avvik, ikkje berre observerbar arbeidsmengde (5.2).
-**Prediksjonshorisont.** Kor langt fram ein modell kan føreseie utfall med oppgjeven presisjon (5.114).
-**Reserve.** Margin mellom belastning og ei oppgjeven sviktgrense (6.72).
-**Seleksjonstrykk.** Mekanisme som endrar den relative vekta mellom tillatne formutfall (2.1).
-**Sjølv.** System som aktivt held ved lag grensene og tilstandane for si eiga regulering (5.022).
-**Smak.** Profilen av estetiske skilnader ein agent merkar og prioriterer (7.1311).
-**Stilart.** Fordeling av liknande former; både historisk spor og mogleg kjelde til nye val gjennom attkjenning (3.3, 6.3).
-**Substans.** Eit metafysisk omgrep for det som kan tenkjast å bere relasjonane; «oppleving» er eit ope postulat (1.203, 1.23).
-**Substrat.** Vilkår som verkar utan målretta regulering: fysiske avgrensingar og passive tendensar (5.4).
-**Sviktlatens.** Forholdet mellom konsekvenslatens og prediksjonshorisont, når horisonten er positiv (6.75).
-**Sviktrom.** Dei konfigurasjonane og brukssituasjonane der predikert belastning overskrid reserven over eit avtalt risikonivå (6.74).
-**Tilpassingslandskap.** Skalar modell for kva posisjonar som er meir eller mindre sannsynlege under seleksjon (3.1).
-**Uro og ro.** Moglege former for oppleving knytte til viktige avvik og oppfylte mål; ikkje definisjonar for alle system (5.144).
-**Vakker.** Ein estetisk dom om ein verdsett samanheng i ei opplevd form (7.1322).
-
-
-## I · Form, substans og formrom
-
 **1d**  Form er ei ordning av skilnader.
 
 Forma vert synleg når noko står i eit forhold til noko anna. Ikkje før.
@@ -1166,10 +1093,6 @@ Ho kan skje utan at noko vert brukt. Men ho står ikkje i motsetnad til bruk: ei
 
 **7.131t**  Den estetiske sansinga har si eiga kompetanse. Ho oppdagar forhold, samanliknar, føreslår samanhengar og endrar kva som kan merkast. Ein som ser fleire skilnader, har ikkje dermed rett i kvar estetisk dom.
 
-**7.1311d**  Smak er profilen av estetiske skilnader ein agent er merksam på og prioriterer, med dei forventingane og erfaringane som gjev skilnadene tyding.
-
-Smak er ikkje eit lukka privat rom. Han kan oppdragast, etterprøvast, utfordrast og endrast gjennom møte med andre.
-
 **7.1312t**  To menneske kan vere usamde om ei form fordi dei ser ulike forhold, fordi dei kjenner dei same forholda ulikt, eller fordi dei verdset det dei ser på ulik måte. Desse tre årsakene krev ulike samtalar.
 
 **7.1313t**  Å vise ein annan noko han ikkje såg, er ikkje å tvinge han til å like det. Estetisk læring utvidar kva som kan vurderast, ikkje på førehand kva vurderinga skal bli.
@@ -1179,14 +1102,6 @@ Smak er ikkje eit lukka privat rom. Han kan oppdragast, etterprøvast, utfordras
 Dette er ikkje den einaste kjelda til estetisk verdi.
 
 **7.1321t**  Eit fullt føreseieleg mønster kan vere livlaust for den som alt kjenner det. Ei form utan nokon samanheng kan vere uleseleg. Mellom attkjenning og overrasking finst mange former for glede, men også for vemjing, sorg og ærefrykt.
-
-**7.1322d**  Vakker er ein estetisk dom der sansinga finn ein verdsett samanheng i forma. Domen seier noko om forma slik ho vert møtt av ein bestemt sansar i ein bestemt situasjon; ho kan grunngjevast med forhold andre også kan undersøkje.
-
-At ein dom er situert, gjer han ikkje vilkårleg.
-
-**7.133d**  Eit kunstverk er ei form som vert halden fram som rom for estetisk, sanseleg eller omgrepsleg undersøking. Det kan vere laga for andre, for ein einsleg utøvar eller for eit publikum som enno ikkje finst.
-
-Det avgjerande er ikkje at kunstnaren kjende eit bestemt publikum sitt mål, men at verket kan setje desse måla og måtane å sanse på i spel.
 
 **7.134t**  Eit kunstverk kan halde omhug for sansinga utan å gje sansinga ro. Det kan føre oss inn i det me ikkje ønskte å sjå, og nett difor gjere noko synleg.
 
@@ -1199,8 +1114,6 @@ Det ein kan prøve, er sambandet mellom form og respons, ikkje ein evig fasit fo
 **7.136t**  Under den metafysiske modulen kan estetisk erfaring tolkast som oppleving som møter den relasjonelle forma til anna oppleving. Utan modulen står undersøkinga av sansing, handling og verk ved lag.
 
 **7.137t**  Estetisk vurdering gjeld ikkje berre om noko er behageleg. Ei form kan vere så godt laga at ho gjer ubehaget uunngåeleg og presist.
-
-**7.1371d**  Stygg er ein estetisk dom om ei form som sansaren ikkje kan forlike med sine forventingar eller verdsetjingar. Domen kan vere gjennomtenkt eller overflatisk, og han gjer ikkje forma mislukka i andre estetiske omsyn.
 
 **7.138t**  Den som lagar noko vakkert, kan samtidig gjere livet verre for den som skal bruke det. Den som lagar noko stygt, kan gjere noko naudsynt synleg.
 
@@ -1271,40 +1184,3 @@ Det er ikkje der designen sluttar. Det er der han får eit svar.
 Det me ikkje held, verkar framleis.
 
 Navigasjonen held fram.
-
-
-## Notat og falsifiseringsvilkår
-
-Falsifiseringsprogram (protokollar som må fyllast med data før publisering)
-
-F1 · 2.13a: Undersøk definerte formklassar der eitt seleksjonstrykk og grammatikken kan forklare fordelingane. Finn ein klasser med tilstrekkeleg forklaring utan konkurrerande trykk, fell den universelle kompromissteorien.
-
-F2 · 3.12a: Estimer eit landskap for ein avgrensa klasse. Dersom data med god statistisk styrke berre støttar eitt stabilt minimum, kan ikkje fleirattraktor-hypotesen gjelde denne klassen.
-
-F3 · 5.2d: Kontroller faktisk handlingsevne og kostnad, og varier relevant målavvik. Om det formelle omhugsmålet ikkje predikerer prioritering under forstyrring, sviktar den valde operasjonaliseringa.
-
-F4 · 5.21d: Lat agenten møte på førehand definerte forstyrringar. Om modellen seier at målet kan haldast med tryggleiksnivå 1−α, men frekvensen av målbrot er større enn α i gyldige prøver, er kapasitetsmodellen feilkalibrert.
-
-F5 · 6.6d: Estimer μ, β og Φ på éin del av materialet. Prediker utvalsfordelingar i ein uavhengig del. Jamfør med ein enklare baseline. Manglar prediksjonsgevinst, er modellen ikkje vist fruktbar.
-
-F6 · 6.674t: Samanlikn kontrollerte endringar i faktisk deltaking og prioritering. Om same formdata støttar fleire uforeinlege W-profilar også etter planlagde inngrep, er omhugen framleis ikkje identifiserbar i dette forsøket.
-
-F7 · 6.741t: Førehandsregistrer belastning, reserve, aksar, tidsrom og risikoterskel. Om uhaldne aksar ikkje har høgare feil- eller sviktrisiko enn samanliknbare haldne aksar, fell den konkrete svikthypotesen.
-
-F8 · 7.139t: Førehandsregistrer kva estetiske trekk som vert manipulerte og kva responsar som vert predikerte. Dersom dei observerte responsane ikkje skil seg frå kontrollen slik modellen seier, må den estetiske hypotesen endrast.
-
-F9 · 7.23a: Det normative postulatet er ikkje falsifiserbart på same måte som eit sannsynsmål. Det må prøvast gjennom grunngjeving, moteksempel og offentleg kritikk, ikkje feilaktig presentert som eit naturvitskapleg teorem.
-
-Ingen av desse testane er her utførte. Det som står, er krav til kva formlæra må vise for å gjere krav på meir enn samanhengande språk.
-
-## Redaksjonell merknad
-
-Arbeidsmerknad om status og kjelder
-
-Dette manuskriptet er ei ny, omfattande redaksjon på grunnlag av originalutgåva på 65 sider og den seinare oppgjevne disposisjonen, ordlista og kommentarteksten. Det er ikkje ein transkripsjon av ein eksisterande revidert versjon. Dei proposisjonane som ikkje finst i original-PDF-en, er nye forslag.
-
-Proposisjonar merkte d er stipulerte definisjonar. Proposisjonar merkte a er valde føresetnader eller eksplisitte hypotesar. Proposisjonar merkte t er følgjer av eit gjeve modellgrunnlag, men der vilkåra ikkje er fullstendig formaliserte må lesaren ikkje tolke bokstaven som eit matematisk bevist teorem. Proposisjonar merkte o er observasjonar som krev data. Proposisjonar merkte i er døme.
-
-Den tidlegare kjeldeindeksen er ikkje ei ferdig litteraturliste. Før publisering må kvar konkret kjeldepåstand, dato og empirisk talfesting kontrollerast i primærkjeldene. Dei historiske variasjonskoeffisientane for setehøgd og ornament er difor ikkje tekne med som etablerte resultat.
-
-Tre skilje avgjer om rammeverket held: (1) omhug, kapasitet og prediksjon er ulike; (2) observasjon av form er ikkje identifikasjon av årsak utan eigne vilkår; (3) deskriptive modellar gjev ikkje normative plikter utan eit normativt premiss. Desse skilja kan ikkje oppgjevast for å gjere avslutninga vakrare.
