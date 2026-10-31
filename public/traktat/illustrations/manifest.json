@@ -676,6 +676,514 @@
       "transparent": true,
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)"
+    },
+    {
+      "name": "scan-20261031-p12-boke",
+      "filename": "scan-20261031-p12-boke.png",
+      "source_page": 12,
+      "source_image": "B31A296B-9BC8-4B1D-A5D9-45E96686D2D3(1).jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        50,
+        884,
+        541,
+        1143
+      ],
+      "size": [
+        491,
+        238
+      ],
+      "sha256": "4420b8a98bbed1aea40ae6f9584ea9e264145509fe9faeeacd33a484279890df",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p12-granitt",
+      "filename": "scan-20261031-p12-granitt.png",
+      "source_page": 12,
+      "source_image": "B31A296B-9BC8-4B1D-A5D9-45E96686D2D3(1).jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        542,
+        880,
+        983,
+        1152
+      ],
+      "size": [
+        422,
+        245
+      ],
+      "sha256": "e7aa36c540a49cfef03c966ff4748202cbb623d37cf233b1dc068d87d8fb2b4f",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p12-glidelas",
+      "filename": "scan-20261031-p12-glidelas.png",
+      "source_page": 12,
+      "source_image": "B31A296B-9BC8-4B1D-A5D9-45E96686D2D3(1).jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        70,
+        1172,
+        967,
+        1445
+      ],
+      "size": [
+        870,
+        250
+      ],
+      "sha256": "ef036f83e3a46ed8803dcac9d3ca196c8b8456a977a2c9aac38684be0351e397",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p15-stol-hender-a",
+      "filename": "scan-20261031-p15-stol-hender-a.png",
+      "source_page": 15,
+      "source_image": "BF483187-AAEB-406E-A8CB-7FFF5332425F.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        123,
+        930,
+        957,
+        1193
+      ],
+      "size": [
+        812,
+        262
+      ],
+      "sha256": "4f77c5fe706c37064d27a757061fcfc683d40aae9732df36741465c472beef2e",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": "a"
+    },
+    {
+      "name": "scan-20261031-p15-sittestillingar-a",
+      "filename": "scan-20261031-p15-sittestillingar-a.png",
+      "source_page": 15,
+      "source_image": "BF483187-AAEB-406E-A8CB-7FFF5332425F.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        77,
+        1220,
+        961,
+        1431
+      ],
+      "size": [
+        851,
+        200
+      ],
+      "sha256": "09ddefb8de4b68fb1f27a2df15e73cbf42d787ea5487bd8bead379c2229e3316",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": "a"
+    },
+    {
+      "name": "scan-20261031-p21-agentrang",
+      "filename": "scan-20261031-p21-agentrang.png",
+      "source_page": 21,
+      "source_image": "D2E6ED71-5A63-4A6D-A982-19318EF859F5(1).jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        379,
+        582,
+        699,
+        851
+      ],
+      "size": [
+        320,
+        253
+      ],
+      "sha256": "4137480e69f6d8acdecb407e50df1c645ab0d92ce1f0bce1347961410391c0c9",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p21-agens-fra-termostat-til-handverkar",
+      "filename": "scan-20261031-p21-agens-fra-termostat-til-handverkar.png",
+      "source_page": 21,
+      "source_image": "D2E6ED71-5A63-4A6D-A982-19318EF859F5(1).jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        58,
+        1170,
+        992,
+        1463
+      ],
+      "size": [
+        934,
+        284
+      ],
+      "sha256": "a6de760ebfee3d6cdda5fe316274eb5675598f591572e8f90fbb80f0d0ccea7e",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p15-stol-hender-b",
+      "filename": "scan-20261031-p15-stol-hender-b.png",
+      "source_page": 15,
+      "source_image": "7AD24ED6-02FC-43EC-9575-2B7AE0B91256.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        121,
+        931,
+        957,
+        1195
+      ],
+      "size": [
+        670,
+        201
+      ],
+      "sha256": "415888ea732bb6ecae1f2c28245d1fa871e102b6ee899bdf4647422c7722f925",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": "b"
+    },
+    {
+      "name": "scan-20261031-p15-sittestillingar-b",
+      "filename": "scan-20261031-p15-sittestillingar-b.png",
+      "source_page": 15,
+      "source_image": "7AD24ED6-02FC-43EC-9575-2B7AE0B91256.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        77,
+        1220,
+        961,
+        1431
+      ],
+      "size": [
+        884,
+        171
+      ],
+      "sha256": "c180dce5068040d7a8f839ddacbd529de5149d356429b5823e9f133a347a7c6d",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": "b"
+    },
+    {
+      "name": "scan-20261031-p33-agentar-samspel",
+      "filename": "scan-20261031-p33-agentar-samspel.png",
+      "source_page": 33,
+      "source_image": "8D3236B6-C41C-4202-927B-2F7181490809.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        75,
+        752,
+        976,
+        981
+      ],
+      "size": [
+        824,
+        225
+      ],
+      "sha256": "92e8817ea6cf9bf5a6f7bd8eeb813c36fbabc2e104978d0574332d39f1dd48f9",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p33-agentar-moglege-retningar",
+      "filename": "scan-20261031-p33-agentar-moglege-retningar.png",
+      "source_page": 33,
+      "source_image": "8D3236B6-C41C-4202-927B-2F7181490809.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        67,
+        986,
+        974,
+        1240
+      ],
+      "size": [
+        900,
+        254
+      ],
+      "sha256": "3868789af5f1e7a69983161bf07e0b5f5afda1686d4069c983942236b4a71d43",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p33-formtransformasjon",
+      "filename": "scan-20261031-p33-formtransformasjon.png",
+      "source_page": 33,
+      "source_image": "8D3236B6-C41C-4202-927B-2F7181490809.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        67,
+        1244,
+        974,
+        1456
+      ],
+      "size": [
+        854,
+        205
+      ],
+      "sha256": "387701ede64681b2d49876f3bab8130a21b7f50ab9c4ff725ee9e22f4a119b50",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p41-sommarfugl-livslop",
+      "filename": "scan-20261031-p41-sommarfugl-livslop.png",
+      "source_page": 41,
+      "source_image": "68E04D5F-BF7B-4D17-9A48-C2F17CE8E8B1.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        63,
+        687,
+        977,
+        1116
+      ],
+      "size": [
+        914,
+        379
+      ],
+      "sha256": "ecfbc12b80177a2f96f8ccc5ac326a40a3559343c130ae377441cdb8f3faf4a7",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p41-kopp-og-nedbryting",
+      "filename": "scan-20261031-p41-kopp-og-nedbryting.png",
+      "source_page": 41,
+      "source_image": "68E04D5F-BF7B-4D17-9A48-C2F17CE8E8B1.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        50,
+        1117,
+        986,
+        1476
+      ],
+      "size": [
+        927,
+        273
+      ],
+      "sha256": "53f44f0f0387e6f26b231fbd903bf64733a05f7839733374f3a4985ee877ef93",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p68-kybernetisk-sloyfe",
+      "filename": "scan-20261031-p68-kybernetisk-sloyfe.png",
+      "source_page": 68,
+      "source_image": "C94131EE-FE8D-4864-BDD7-FBA89165F998.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        76,
+        490,
+        965,
+        649
+      ],
+      "size": [
+        889,
+        159
+      ],
+      "sha256": "22c2d8d57badc55d531ebeea75bd1182f73ab01a1a1922b86f45800d4afd4812",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p68-kognitiv-lyskjegle",
+      "filename": "scan-20261031-p68-kognitiv-lyskjegle.png",
+      "source_page": 68,
+      "source_image": "C94131EE-FE8D-4864-BDD7-FBA89165F998.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        71,
+        764,
+        976,
+        947
+      ],
+      "size": [
+        896,
+        183
+      ],
+      "sha256": "560737847275fac7df7c62b31c5f287d32337ffa9278b8130d7bd6ad14aab2a3",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p68-omhug-intelligens",
+      "filename": "scan-20261031-p68-omhug-intelligens.png",
+      "source_page": 68,
+      "source_image": "C94131EE-FE8D-4864-BDD7-FBA89165F998.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        82,
+        1070,
+        974,
+        1218
+      ],
+      "size": [
+        849,
+        148
+      ],
+      "sha256": "f1b2ca0c3f070e7e9b5268eae2c567c736d993c9c40fc227ac42f3a6c390dc1e",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p68-multiskala-kompetanse",
+      "filename": "scan-20261031-p68-multiskala-kompetanse.png",
+      "source_page": 68,
+      "source_image": "C94131EE-FE8D-4864-BDD7-FBA89165F998.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        66,
+        1342,
+        986,
+        1508
+      ],
+      "size": [
+        896,
+        142
+      ],
+      "sha256": "5e43e2c90b4060f60d6b27a28c652c6479cc2b3b5ad7368f2d20ccf38b6414b6",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p52-metamorfose-mycelium",
+      "filename": "scan-20261031-p52-metamorfose-mycelium.png",
+      "source_page": 52,
+      "source_image": "622C5881-D365-46A4-859C-F237B179ECFD.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        60,
+        889,
+        990,
+        1498
+      ],
+      "size": [
+        909,
+        565
+      ],
+      "sha256": "815549ff09e5b2cb14614752b9f991620a1911f25a9a40db1e54e870b0fa599d",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p08-objekt-serie",
+      "filename": "scan-20261031-p08-objekt-serie.png",
+      "source_page": 8,
+      "source_image": "422B6F34-8FFE-43BA-ADC3-43A1A5FCF053.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        81,
+        795,
+        973,
+        1032
+      ],
+      "size": [
+        827,
+        204
+      ],
+      "sha256": "2dcd83b3756071156666cf29701775fddfe55e7593bd629b64b02ca96deb24b0",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p08-objekt-ordning",
+      "filename": "scan-20261031-p08-objekt-ordning.png",
+      "source_page": 8,
+      "source_image": "422B6F34-8FFE-43BA-ADC3-43A1A5FCF053.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        177,
+        1025,
+        969,
+        1437
+      ],
+      "size": [
+        705,
+        337
+      ],
+      "sha256": "2c2b55ad2e5d23a9f45dd951d1b7c9eb12aa01555e03fc17a863d390c40a35bb",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
+    },
+    {
+      "name": "scan-20261031-p11-busette-opne-forbodne",
+      "filename": "scan-20261031-p11-busette-opne-forbodne.png",
+      "source_page": 11,
+      "source_image": "F802282F-09F3-4914-A292-047BDBFC6D31.jpeg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        69,
+        947,
+        976,
+        1427
+      ],
+      "size": [
+        879,
+        435
+      ],
+      "sha256": "73ccfe947557cfc0e659f944a59f5c24c4f858461d078bccf5e07185e6382192",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "variant": null
     }
-  ]
+  ],
+  "updated_at": "2026-10-31",
+  "asset_count": 74
 }
