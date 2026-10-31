@@ -2,7 +2,7 @@
 <html lang="nn">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="FORMLÆRE">
@@ -35,21 +35,18 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
 html,body{
-  height:100%;margin:0;background:var(--bg);color:var(--fg);
-  overflow:hidden;overscroll-behavior:none;
-  touch-action:pan-y;
+  margin:0;background:var(--bg);color:var(--fg);
 }
 body{
   font-family:var(--serif);font-size:.90625rem;line-height:1.47;
   font-weight:400;font-optical-sizing:auto;
   -webkit-font-smoothing:antialiased;
-  -webkit-user-select:none;user-select:none;
+  -webkit-user-select:text;user-select:text;
 }
 
 .app{
-  height:100vh;height:100dvh;
+  min-height:100vh;
   max-width:520px;margin:0 auto;
-  display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;
   border-left:1px solid var(--hair);border-right:1px solid var(--hair);
   padding-left:env(safe-area-inset-left,0px);
   padding-right:env(safe-area-inset-right,0px);
@@ -78,7 +75,7 @@ body{
 
 
 /* ---- reading / continuous stream ---- */
-.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 1.2rem 1.5rem .5rem;scroll-behavior:auto;touch-action:pan-y}
+.read{padding:0 1.2rem calc(1.5rem + var(--bot)) .5rem}
 .read:focus-visible{outline:1px solid var(--dim);outline-offset:-1px}
 .stream{padding:.375rem 0 1.25rem}
 .section-title{font-family:var(--serif);font-size:1.15rem;font-weight:400;line-height:1.3;margin:2.4rem 0 .8rem;padding-top:.65rem;border-top:1px solid var(--hair);scroll-margin-top:12px}
@@ -137,52 +134,34 @@ body{
 }
 :root[data-theme="dark"] .prop-preview{box-shadow:0 8px 30px rgba(0,0,0,.6)}
 
-/* Notes and bibliography open below the text without moving the reading position. */
-.apparatus{min-height:0;border-top:1px solid var(--line);background:var(--bg)}
-.apparatus[hidden]{display:none}
-.apparatus-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0 16px;border-bottom:1px solid var(--hair)}
-.apparatus-head h2{margin:0;font:400 .68rem var(--mono);letter-spacing:.04em}
-.apparatus-head button{width:44px;height:36px;border:0;background:none;color:var(--fg);font-size:20px;cursor:pointer}
-.apparatus-body{max-height:min(34dvh,320px);overflow-y:auto;overscroll-behavior:contain;padding:0 16px 12px;-webkit-user-select:text;user-select:text}
-.apparatus-entry{padding:.9rem 0;border-bottom:1px solid var(--hair);font-size:.81rem;line-height:1.5;overflow-wrap:anywhere;scroll-margin-top:8px}
-.apparatus-entry:last-child{border:0}
-.apparatus-entry:focus{outline:1px solid var(--dim);outline-offset:-1px}
-.apparatus-entry p{margin:.35rem 0}
-.apparatus-entry .entry-label{font:400 .65rem var(--mono);color:var(--dim)}
-.apparatus-entry a{color:inherit;text-underline-offset:.16em}
-.apparatus-entry .source-links{font-family:var(--mono);font-size:.65rem}
-.apparatus-links{display:flex;justify-content:center;gap:24px;padding:0 12px calc(var(--bot) + 4px)}
-.apparatus-links button{min-height:32px;border:0;padding:0 4px;background:none;color:var(--dim);font:400 .65rem var(--mono);cursor:pointer;touch-action:manipulation}
-.apparatus-links button[aria-expanded="true"]{color:var(--fg);text-decoration:underline;text-underline-offset:.25em}
-.apparatus button:focus-visible,.apparatus-links button:focus-visible{outline:1px solid var(--dim);outline-offset:2px}
+/* Endnotes belong to the document, with the same left edge as the text. */
+.endmatter{margin-top:3rem;scroll-margin-top:1rem}
+.endmatter .section-title{margin-bottom:.8rem}
+.endmatter-list{list-style:none;margin:0;padding:0}
+.endnote{display:grid;grid-template-columns:3rem minmax(0,1fr);gap:.35rem;padding:.45rem 0;font-size:.81rem;line-height:1.45;scroll-margin-top:1rem}
+.endnote-number{font:400 .65rem var(--mono);color:var(--dim);padding-top:.12rem}
+.endnote-body{min-width:0;overflow-wrap:anywhere}
+.endnote-body p{margin:0}.endnote-body p+p{margin-top:.3rem}
+.endnote-meta{font:400 .62rem var(--mono);color:var(--dim);margin-bottom:.25rem}
+.endnote a{color:inherit;text-underline-offset:.16em}
+.source-links{font:400 .65rem var(--mono)}
 .source-ref{font-family:var(--mono);font-size:.63em;line-height:0;vertical-align:super;text-decoration:none;padding:0 .1em}
 .source-ref .xref{display:inline-block;line-height:1;padding:.2em .1em;margin:-.2em 0}
-.note-ref{display:inline-block;margin-left:.35em;color:var(--dim);font-family:var(--mono);font-size:.62em;line-height:1;vertical-align:super}
-.reader-footer .pager{padding-bottom:0}
-@media(max-height:560px){.apparatus-body{max-height:25dvh}.apparatus-head button{height:30px}}
-
-/* Text remains selectable while the reader behaves like a fixed-scale iPhone app. */
-@supports (-webkit-touch-callout: none){
-  .read{overscroll-behavior-y:contain}
-}
-
-/* ---- pager ---- */
-.pager{
-  display:grid;grid-template-columns:64px 1fr 64px;align-items:center;
-  border-top:1px solid var(--hair);
-  padding-bottom:var(--bot);
-}
-.pager button{
-  height:48px;background:none;border:0;color:var(--fg);
-  font-family:var(--serif);font-size:23px;line-height:1;
-  touch-action:manipulation;-webkit-appearance:none;
-}
-.pager button:focus-visible{outline:1px solid var(--dim);outline-offset:-6px}
-.pager button:disabled{color:var(--hair)}
-.pager button:active:not(:disabled){background:var(--hair)}
-.pos{
-  text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--dim);
-  font-variant-numeric:tabular-nums;letter-spacing:.06em;
+.note-ref{display:inline-block;margin-left:.3em;color:var(--dim);font-family:var(--mono);font-size:.62em;line-height:1;vertical-align:super}
+@media print{
+  @page{margin:16mm 14mm}
+  :root{--bg:#fff;--fg:#000;--dim:#555;--line:#bbb;--hair:#ddd}
+  .app{max-width:none;min-height:0;margin:0;border:0;padding:0}
+  .bar,.strip,.prop-preview{display:none!important}
+  .read{padding:0}.stream{padding:0}
+  .prop,.plain-paragraph{font-size:10.5pt;line-height:1.42}
+  .prop .n{font-size:8pt}
+  .endmatter{break-before:page}
+  .endnote{break-inside:avoid;font-size:9pt}
+  p{orphans:3;widows:3}
+  .xref{text-decoration:none}
+  .tractate-figure{break-inside:avoid}
+  .tractate-figure img{filter:none!important}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important}
@@ -194,41 +173,11 @@ body{
 <div class="app">
   <div class="bar">FORMLÆRE</div>
   <div class="strip"><svg id="tree" role="img" aria-label="Traktatens tre"></svg></div>
-  <main class="read" id="read" tabindex="0" aria-label="FORMLÆRE, hele teksten"><div class="stream" id="stream"></div></main>
-  <aside class="apparatus" id="apparatus" aria-labelledby="apparatus-title" hidden>
-    <div class="apparatus-head"><h2 id="apparatus-title">Notat</h2><button type="button" id="apparatus-close" aria-label="Lukk notat og referansar">×</button></div>
-    <div class="apparatus-body" id="apparatus-body" tabindex="0" aria-labelledby="apparatus-title"></div>
-  </aside>
-  <footer class="reader-footer">
-  <nav class="pager" aria-label="Bla i teksten">
-    <button type="button" id="prev" aria-label="Førre">‹</button>
-    <span class="pos" id="pos"></span>
-    <button type="button" id="next" aria-label="Neste">›</button>
-  </nav>
-  <nav class="apparatus-links" aria-label="Notat og referansar">
-    <button type="button" id="show-notes" aria-controls="apparatus" aria-expanded="false">Notat</button>
-    <button type="button" id="show-sources" aria-controls="apparatus" aria-expanded="false">Referansar</button>
-  </nav>
-  </footer>
+  <main class="read" id="read" tabindex="0" aria-label="FORMLÆRE, heile teksten"><div class="stream" id="stream"></div></main>
+
 </div>
 
 <script>
-// WebKit can ignore user-scalable=no on iPhone. Suppress pinch gestures,
-// but keep single-finger scrolling and reader controls entirely native.
-(function preventPagePinch(){
-  const stopIfMultitouch = event => {
-    if (event.touches && event.touches.length > 1 && event.cancelable) {
-      event.preventDefault();
-    }
-  };
-  document.addEventListener('touchstart', stopIfMultitouch, {passive:false, capture:true});
-  document.addEventListener('touchmove', stopIfMultitouch, {passive:false, capture:true});
-  for (const name of ['gesturestart','gesturechange']) {
-    document.addEventListener(name, event => {
-      if (event.cancelable) event.preventDefault();
-    }, {passive:false, capture:true});
-  }
-})();
 function parseSource(src){
   const tokens=[],props=[];let active=null,buf=[];
   const flush=()=>{const t=buf.join("\n").trim();buf=[];if(!t)return;if(active)active.paragraphs.push(t);else tokens.push({kind:"paragraph",text:t});};
@@ -261,7 +210,7 @@ function parseSource(src){
   function depthOf(d){return d.parent?1+depthOf(byNum.get(d.parent)):0;}
   for(const d of DATA)d.depth=depthOf(d);
   const roots=DATA.filter(d=>!d.parent),order=DATA.map(d=>d.n);
-  const byRow=new Map(),read=document.getElementById("read"),stream=document.getElementById("stream"),pos=document.getElementById("pos"),svg=document.getElementById("tree"),NS="http://www.w3.org/2000/svg";
+  const byRow=new Map(),read=document.getElementById("read"),stream=document.getElementById("stream"),svg=document.getElementById("tree"),NS="http://www.w3.org/2000/svg";
   let current=order[0],hashTimer=0,scrollFrame=0,navUntil=0;
   const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
   const catalog=supplement?.[0],citationIndex=new Map((supplement?.[1]?.entries||[]).map(p=>[p.paragraph,p.spans]));
@@ -269,67 +218,47 @@ function parseSource(src){
   const notes=(catalog?.annotations||[]).filter(note=>byNum.has(note.proposition)).sort((a,b)=>order.indexOf(a.proposition)-order.indexOf(b.proposition));
   const introNotes=(catalog?.intro||[]).filter(note=>TOKENS.some(tok=>tok.kind==="paragraph"&&tok.text.includes(note.anchor)));
   const allNotes=[...introNotes,...notes];
-  const apparatus=document.getElementById("apparatus"),apparatusBody=document.getElementById("apparatus-body"),notesButton=document.getElementById("show-notes"),sourcesButton=document.getElementById("show-sources");
-  let apparatusKind="",apparatusReturn=null;
-  function closeApparatus(){
-    if(apparatus.hidden)return;
-    apparatus.hidden=true;apparatusKind="";
-    notesButton.setAttribute("aria-expanded","false");sourcesButton.setAttribute("aria-expanded","false");
-    const target=apparatusReturn;apparatusReturn=null;
-    if(target?.isConnected)target.focus({preventScroll:true});
-  }
   function sourceButton(id){
-    const button=make("button","xref",id);button.type="button";
-    button.setAttribute("aria-label","Vis referanse "+id);
-    button.addEventListener("click",e=>{e.stopPropagation();openApparatus("sources",id,button);});
-    return button;
+    const link=make("a","xref",id);link.href="#referanse-"+id;
+    link.setAttribute("aria-label","Til referanse "+id);
+    link.addEventListener("click",e=>{clearTimeout(hashTimer);e.stopPropagation();closePreview();});
+    return link;
   }
   function appendSources(el,ids){
     ids.forEach((id,index)=>{if(index)el.appendChild(document.createTextNode(", "));el.appendChild(sourceButton(String(id)));});
   }
-  function openApparatus(kind,target=null,trigger=null){
-    closePreview();
-    if(trigger&&!apparatus.contains(trigger))apparatusReturn=trigger;
-    apparatusKind=kind;apparatus.hidden=false;
-    notesButton.setAttribute("aria-expanded",String(kind==="notes"));sourcesButton.setAttribute("aria-expanded",String(kind==="sources"));
-    document.getElementById("apparatus-title").textContent=kind==="notes"?"Notat":"Referansar";
-    apparatusBody.replaceChildren();
-    if(!catalog){apparatusBody.appendChild(make("p","apparatus-entry","Kunne ikkje laste notat og referansar. Last sida på nytt for å prøve igjen."));return;}
-    const entries=kind==="notes"?allNotes:[...sources.values()];
-    entries.forEach((item,index)=>{
-      const entry=make("article","apparatus-entry");entry.tabIndex=-1;
-      entry.id=kind==="notes"?"notat-"+(index+1):"referanse-"+item.id;
-      if(kind==="notes"){
-        const label=make("div","entry-label","Notat "+(index+1)+" · ");
-        if(item.proposition){
-          const back=make("button","xref",item.proposition);back.type="button";
-          back.setAttribute("aria-label","Til proposisjon "+item.proposition);
-          back.addEventListener("click",()=>{closeApparatus();go(item.proposition);read.focus({preventScroll:true});});label.appendChild(back);
-        }else label.appendChild(document.createTextNode("Føreord"));
-        entry.appendChild(label);
-        if(item.relation)entry.appendChild(make("p","entry-label",item.relation));
-        entry.appendChild(make("p","",item.note));
-        const refs=make("p","source-links","Referansar: ");appendSources(refs,item.sources||[]);entry.appendChild(refs);
-      }else{
-        entry.appendChild(make("div","entry-label","Referanse "+item.id));
-        entry.appendChild(make("p","",item.citation));
-        const url=item.url||(item.doi?"https://doi.org/"+item.doi:null);
-        if(url){try{const parsedUrl=new URL(url);if(parsedUrl.protocol==="https:"||parsedUrl.protocol==="http:"){
-          const link=make("a","",item.doi?"DOI: "+item.doi:"Opne kjelda");link.href=parsedUrl.href;link.target="_blank";link.rel="noopener noreferrer";entry.appendChild(link);
-        }}catch(e){}}
-      }
-      apparatusBody.appendChild(entry);
-    });
-    apparatusBody.scrollTop=0;
-    const selected=target!==null?document.getElementById((kind==="notes"?"notat-":"referanse-")+target):null;
-    if(selected){apparatusBody.scrollTop=selected.offsetTop-apparatusBody.offsetTop;selected.focus({preventScroll:true});}
-    else apparatusBody.focus({preventScroll:true});
+  function appendEndmatter(){
+    for(const [kind,title,items] of [["notat","Notat",allNotes],["referansar","Referansar",[...sources.values()]]]){
+      const section=make("section","endmatter");section.id=kind;
+      const heading=make("h2","section-title",title);heading.id=kind+"-tittel";
+      section.setAttribute("aria-labelledby",heading.id);section.appendChild(heading);
+      const list=make("ol","endmatter-list");
+      items.forEach((item,index)=>{
+        const isNote=kind==="notat",number=isNote?index+1:item.id;
+        const entry=make("li","endnote");entry.id=(isNote?"notat-":"referanse-")+number;
+        entry.appendChild(make("span","endnote-number",isNote?"n"+number:String(number)));
+        const body=make("div","endnote-body");
+        if(isNote){
+          const meta=make("div","endnote-meta");
+          const back=make("a","xref",item.proposition||"Føreord");
+          back.href="#"+(item.proposition||"del-føreord");
+          back.setAttribute("aria-label",item.proposition?"Til proposisjon "+item.proposition:"Til føreordet");
+          meta.appendChild(back);
+          if(item.relation)meta.appendChild(document.createTextNode(" · "+item.relation));
+          body.appendChild(meta);body.appendChild(make("p","",item.note));
+          const refs=make("p","source-links","[");appendSources(refs,item.sources||[]);refs.appendChild(document.createTextNode("]"));body.appendChild(refs);
+        }else{
+          body.appendChild(make("p","",item.citation));
+          const url=item.url||(item.doi?"https://doi.org/"+item.doi:null);
+          if(url){try{const parsedUrl=new URL(url);if(["https:","http:"].includes(parsedUrl.protocol)){
+            const link=make("a","source-links",item.doi?"DOI: "+item.doi:"Opne kjelda");link.href=parsedUrl.href;link.target="_blank";link.rel="noopener noreferrer";body.appendChild(link);
+          }}catch(e){}}
+        }
+        entry.appendChild(body);list.appendChild(entry);
+      });
+      section.appendChild(list);stream.appendChild(section);
+    }
   }
-  for(const [button,kind] of [[notesButton,"notes"],[sourcesButton,"sources"]])button.addEventListener("click",()=>{
-    if(apparatusKind===kind)closeApparatus();else openApparatus(kind,null,button);
-  });
-  document.getElementById("apparatus-close").addEventListener("click",closeApparatus);
-  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeApparatus();});
   let addressWindow=window;
   try{if(window.parent!==window&&window.parent.location.hostname===window.location.hostname)addressWindow=window.parent;}catch(e){}
   function hashNumber(){try{return decodeURIComponent(addressWindow.location.hash.slice(1));}catch(e){return "";}}
@@ -448,13 +377,13 @@ function parseSource(src){
   }
   function addNoteLinks(el,items){
     for(const item of items){const index=allNotes.indexOf(item)+1;
-      const button=make("button","xref note-ref","n"+index);button.type="button";
-      button.setAttribute("aria-label","Vis notat "+index);
-      button.addEventListener("click",e=>{e.stopPropagation();openApparatus("notes",index,button);});el.appendChild(button);
+      const link=make("a","xref note-ref","n"+index);link.href="#notat-"+index;
+      link.setAttribute("aria-label","Til notat "+index);
+      link.addEventListener("click",e=>{clearTimeout(hashTimer);e.stopPropagation();closePreview();});el.appendChild(link);
     }
   }
   // Dismiss previews on scrolling, tapping elsewhere, rotating or Escape.
-  read.addEventListener("scroll",closePreview,{passive:true});
+  window.addEventListener("scroll",closePreview,{passive:true});
   document.addEventListener("pointerdown",e=>{
     if(previewAnchor&&!e.target.closest(".xref"))closePreview();
   },{capture:true});
@@ -496,6 +425,7 @@ function parseSource(src){
       }
     }
   }
+  appendEndmatter();
   const VW=358,PAD=5,SGAP=5,YROOT=17,YLAB=8,UNIT=75;
   const branches=roots.flatMap(r=>r.kids);
   const STEP=(VW-2*PAD-SGAP*(roots.length-1))/Math.max(1,branches.length);
@@ -527,9 +457,6 @@ function parseSource(src){
   }
   function paint(){
     for(const [n,el] of byRow)el.classList.toggle("active",n===current);
-    const i=order.indexOf(current);pos.textContent=current+" · "+(i+1)+"/"+order.length;
-    document.getElementById("prev").disabled=i===0;
-    document.getElementById("next").disabled=i===order.length-1;
     drawTree();
   }
   function hashWrite(){
@@ -542,13 +469,11 @@ function parseSource(src){
     if(scroll){const motion=reducedMotion.matches?"auto":behavior;navUntil=performance.now()+(motion==="smooth"?520:80);byRow.get(n)?.scrollIntoView({block:"start",behavior:motion});}
   }
   function go(n,behavior="smooth"){setCurrent(n,true,true,behavior);}
-  function step(k){const i=order.indexOf(current)+k;if(i>=0&&i<order.length)go(order[i]);}
-  document.getElementById("prev").addEventListener("click",()=>step(-1));
-  document.getElementById("next").addEventListener("click",()=>step(1));
   function currentFromScroll(){
     if(performance.now()<navUntil)return;
-    if(read.scrollTop<=2){if(current!==order[0])setCurrent(order[0]);return;}
-    const line=read.getBoundingClientRect().top+32;
+    if(window.scrollY<=2){if(current!==order[0])setCurrent(order[0]);return;}
+    if(document.getElementById("notat")?.getBoundingClientRect().top<=32)return;
+    const line=32;
     let candidate=null;
     for(const n of order){
       const r=byRow.get(n).getBoundingClientRect();
@@ -558,8 +483,8 @@ function parseSource(src){
     if(!candidate)candidate=order[order.length-1];
     if(candidate!==current)setCurrent(candidate);
   }
-  read.addEventListener("scroll",()=>{if(scrollFrame)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;currentFromScroll();});},{passive:true});
-  for(const ev of ["wheel","touchstart","keydown"])read.addEventListener(ev,()=>{navUntil=0;},{passive:true});
+  window.addEventListener("scroll",()=>{if(scrollFrame)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;currentFromScroll();});},{passive:true});
+  for(const ev of ["wheel","touchstart","keydown"])window.addEventListener(ev,()=>{navUntil=0;},{passive:true});
   let scrubbing=false,pending=null,raf=0;
   function atPoint(cx,cy){
     const r=svg.getBoundingClientRect();if(!r.width)return null;
@@ -579,11 +504,10 @@ function parseSource(src){
   svg.addEventListener("pointermove",e=>{if(scrubbing)scrubTo(e.clientX,e.clientY);});
   svg.addEventListener("pointerup",()=>{scrubbing=false;});
   svg.addEventListener("pointercancel",()=>{scrubbing=false;});
-  let sx=0,sy=0,tracking=false;
-  read.addEventListener("touchstart",e=>{if(e.touches.length===1){sx=e.touches[0].clientX;sy=e.touches[0].clientY;tracking=true;}},{passive:true});
-  read.addEventListener("touchend",e=>{if(!tracking)return;tracking=false;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>64&&Math.abs(dy)<44)step(dx<0?1:-1);},{passive:true});
   const h=hashNumber();if(byNum.has(h))current=h;
-  paint();if(byNum.has(h))requestAnimationFrame(()=>go(h,"auto"));
+  paint();
+  if(byNum.has(h))requestAnimationFrame(()=>go(h,"auto"));
+  else if(h)requestAnimationFrame(()=>document.getElementById(h)?.scrollIntoView({block:"start"}));
   addressWindow.addEventListener("hashchange",()=>{const n=hashNumber();if(byNum.has(n))setCurrent(n,false,true,"auto");});
 })().catch(err=>{const read=document.getElementById("read");if(read)read.textContent="Klarte ikkje laste FORMLÆRE.";console.error(err);});
 </script>
