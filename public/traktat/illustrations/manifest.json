@@ -1,0 +1,270 @@
+{
+  "source_pdf": "formlaere-ny-utgave 2.pdf",
+  "source_page_count": 74,
+  "asset_count": 52,
+  "transparent": true,
+  "ink_color": "#000000",
+  "dark_mode_css": "filter: invert(1)",
+  "assets": [
+    {
+      "file": "page-01.png",
+      "source_page": 1,
+      "url": "/traktat/illustrations/page-01.png"
+    },
+    {
+      "file": "page-03.png",
+      "source_page": 3,
+      "url": "/traktat/illustrations/page-03.png"
+    },
+    {
+      "file": "page-05.png",
+      "source_page": 5,
+      "url": "/traktat/illustrations/page-05.png"
+    },
+    {
+      "file": "page-07.png",
+      "source_page": 7,
+      "url": "/traktat/illustrations/page-07.png"
+    },
+    {
+      "file": "page-08.png",
+      "source_page": 8,
+      "url": "/traktat/illustrations/page-08.png"
+    },
+    {
+      "file": "page-09.png",
+      "source_page": 9,
+      "url": "/traktat/illustrations/page-09.png"
+    },
+    {
+      "file": "page-10.png",
+      "source_page": 10,
+      "url": "/traktat/illustrations/page-10.png"
+    },
+    {
+      "file": "page-11.png",
+      "source_page": 11,
+      "url": "/traktat/illustrations/page-11.png"
+    },
+    {
+      "file": "page-12.png",
+      "source_page": 12,
+      "url": "/traktat/illustrations/page-12.png"
+    },
+    {
+      "file": "page-13.png",
+      "source_page": 13,
+      "url": "/traktat/illustrations/page-13.png"
+    },
+    {
+      "file": "page-14.png",
+      "source_page": 14,
+      "url": "/traktat/illustrations/page-14.png"
+    },
+    {
+      "file": "page-15.png",
+      "source_page": 15,
+      "url": "/traktat/illustrations/page-15.png"
+    },
+    {
+      "file": "page-16.png",
+      "source_page": 16,
+      "url": "/traktat/illustrations/page-16.png"
+    },
+    {
+      "file": "page-17.png",
+      "source_page": 17,
+      "url": "/traktat/illustrations/page-17.png"
+    },
+    {
+      "file": "page-18.png",
+      "source_page": 18,
+      "url": "/traktat/illustrations/page-18.png"
+    },
+    {
+      "file": "page-19.png",
+      "source_page": 19,
+      "url": "/traktat/illustrations/page-19.png"
+    },
+    {
+      "file": "page-21.png",
+      "source_page": 21,
+      "url": "/traktat/illustrations/page-21.png"
+    },
+    {
+      "file": "page-22.png",
+      "source_page": 22,
+      "url": "/traktat/illustrations/page-22.png"
+    },
+    {
+      "file": "page-23.png",
+      "source_page": 23,
+      "url": "/traktat/illustrations/page-23.png"
+    },
+    {
+      "file": "page-24.png",
+      "source_page": 24,
+      "url": "/traktat/illustrations/page-24.png"
+    },
+    {
+      "file": "page-25.png",
+      "source_page": 25,
+      "url": "/traktat/illustrations/page-25.png"
+    },
+    {
+      "file": "page-27.png",
+      "source_page": 27,
+      "url": "/traktat/illustrations/page-27.png"
+    },
+    {
+      "file": "page-28.png",
+      "source_page": 28,
+      "url": "/traktat/illustrations/page-28.png"
+    },
+    {
+      "file": "page-29-01.png",
+      "source_page": 29,
+      "url": "/traktat/illustrations/page-29-01.png"
+    },
+    {
+      "file": "page-29-02.png",
+      "source_page": 29,
+      "url": "/traktat/illustrations/page-29-02.png"
+    },
+    {
+      "file": "page-30.png",
+      "source_page": 30,
+      "url": "/traktat/illustrations/page-30.png"
+    },
+    {
+      "file": "page-32.png",
+      "source_page": 32,
+      "url": "/traktat/illustrations/page-32.png"
+    },
+    {
+      "file": "page-33.png",
+      "source_page": 33,
+      "url": "/traktat/illustrations/page-33.png"
+    },
+    {
+      "file": "page-35.png",
+      "source_page": 35,
+      "url": "/traktat/illustrations/page-35.png"
+    },
+    {
+      "file": "page-37.png",
+      "source_page": 37,
+      "url": "/traktat/illustrations/page-37.png"
+    },
+    {
+      "file": "page-41.png",
+      "source_page": 41,
+      "url": "/traktat/illustrations/page-41.png"
+    },
+    {
+      "file": "page-42.png",
+      "source_page": 42,
+      "url": "/traktat/illustrations/page-42.png"
+    },
+    {
+      "file": "page-43.png",
+      "source_page": 43,
+      "url": "/traktat/illustrations/page-43.png"
+    },
+    {
+      "file": "page-44.png",
+      "source_page": 44,
+      "url": "/traktat/illustrations/page-44.png"
+    },
+    {
+      "file": "page-47.png",
+      "source_page": 47,
+      "url": "/traktat/illustrations/page-47.png"
+    },
+    {
+      "file": "page-48.png",
+      "source_page": 48,
+      "url": "/traktat/illustrations/page-48.png"
+    },
+    {
+      "file": "page-50.png",
+      "source_page": 50,
+      "url": "/traktat/illustrations/page-50.png"
+    },
+    {
+      "file": "page-52.png",
+      "source_page": 52,
+      "url": "/traktat/illustrations/page-52.png"
+    },
+    {
+      "file": "page-53.png",
+      "source_page": 53,
+      "url": "/traktat/illustrations/page-53.png"
+    },
+    {
+      "file": "page-54.png",
+      "source_page": 54,
+      "url": "/traktat/illustrations/page-54.png"
+    },
+    {
+      "file": "page-55.png",
+      "source_page": 55,
+      "url": "/traktat/illustrations/page-55.png"
+    },
+    {
+      "file": "page-58.png",
+      "source_page": 58,
+      "url": "/traktat/illustrations/page-58.png"
+    },
+    {
+      "file": "page-59.png",
+      "source_page": 59,
+      "url": "/traktat/illustrations/page-59.png"
+    },
+    {
+      "file": "page-60.png",
+      "source_page": 60,
+      "url": "/traktat/illustrations/page-60.png"
+    },
+    {
+      "file": "page-61.png",
+      "source_page": 61,
+      "url": "/traktat/illustrations/page-61.png"
+    },
+    {
+      "file": "page-62.png",
+      "source_page": 62,
+      "url": "/traktat/illustrations/page-62.png"
+    },
+    {
+      "file": "page-63.png",
+      "source_page": 63,
+      "url": "/traktat/illustrations/page-63.png"
+    },
+    {
+      "file": "page-64.png",
+      "source_page": 64,
+      "url": "/traktat/illustrations/page-64.png"
+    },
+    {
+      "file": "page-67.png",
+      "source_page": 67,
+      "url": "/traktat/illustrations/page-67.png"
+    },
+    {
+      "file": "page-68.png",
+      "source_page": 68,
+      "url": "/traktat/illustrations/page-68.png"
+    },
+    {
+      "file": "page-71.png",
+      "source_page": 71,
+      "url": "/traktat/illustrations/page-71.png"
+    },
+    {
+      "file": "page-73.png",
+      "source_page": 73,
+      "url": "/traktat/illustrations/page-73.png"
+    }
+  ]
+}
