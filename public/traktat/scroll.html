@@ -55,12 +55,20 @@ body{
 
 /* ---- top ---- */
 .bar{
-  padding:calc(var(--top) + 10px) 16px 7px;
-  font-family:var(--mono);font-size:9px;letter-spacing:.19em;color:var(--dim);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:calc(var(--top) + 6px) 16px 4px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.02em;color:var(--dim);
 }
+.bar a{display:inline-flex;align-items:center;min-height:28px;color:inherit;text-decoration:none}
+.bar a:hover{color:var(--fg)}
+.bar a:focus-visible{outline:1px solid var(--dim);outline-offset:3px}
+.continue-reading{margin:1.5rem 0 .5rem;font:400 .72rem var(--mono)}
+.continue-reading a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line);padding:.4rem 0}
+.continue-reading a:focus-visible{outline:1px solid var(--dim);outline-offset:3px}
 
 /* ---- tree strip ---- */
 .strip{padding:1px 14px 8px;border-bottom:1px solid var(--hair)}
+.strip[hidden]{display:none}
 .strip svg{display:block;width:100%;height:auto;overflow:visible;touch-action:none}
 .strip{-webkit-user-select:none;user-select:none}
 .rbar{stroke:var(--line);stroke-width:1.1;fill:none;stroke-linecap:round}
@@ -171,7 +179,10 @@ body{
 </head>
 <body>
 <div class="app">
-  <div class="bar">FORMLÆRE</div>
+  <nav class="bar" aria-label="Dokument og nettstad">
+    <a href="/traktat/formlaere.pdf" download="formlære.pdf" type="application/pdf" aria-label="Last ned formlære.pdf, utskriftsversjonen">formlære.pdf</a>
+    <a href="https://iverfinne.no">iverfinne.no</a>
+  </nav>
   <div class="strip"><svg id="tree" role="img" aria-label="Traktatens tre"></svg></div>
   <main class="read" id="read" tabindex="0" aria-label="FORMLÆRE, heile teksten"><div class="stream" id="stream"></div></main>
 
@@ -193,6 +204,10 @@ function parseSource(src){
   return {tokens,props};
 }
 (async function siteInit(){
+  const forewordView=window.location.pathname==="/";
+  if(forewordView&&/^#(?:\d|notat|referanse)/.test(window.location.hash)){
+    window.location.replace("/les"+window.location.hash);return;
+  }
   const [response,supplement]=await Promise.all([
     fetch("/traktat/formlaere.txt",{cache:"no-store"}),
     Promise.all(["kjelder.json","citations.json"].map(async file=>{
@@ -219,7 +234,7 @@ function parseSource(src){
   const introNotes=(catalog?.intro||[]).filter(note=>TOKENS.some(tok=>tok.kind==="paragraph"&&tok.text.includes(note.anchor)));
   const allNotes=[...introNotes,...notes];
   function sourceButton(id){
-    const link=make("a","xref",id);link.href="#referanse-"+id;
+    const link=make("a","xref",id);link.href=(forewordView?"/les":"")+"#referanse-"+id;
     link.setAttribute("aria-label","Til referanse "+id);
     link.addEventListener("click",e=>{clearTimeout(hashTimer);e.stopPropagation();closePreview();});
     return link;
@@ -241,7 +256,7 @@ function parseSource(src){
         if(isNote){
           const meta=make("div","endnote-meta");
           const back=make("a","xref",item.proposition||"Føreord");
-          back.href="#"+(item.proposition||"del-føreord");
+          back.href=item.proposition?"#"+item.proposition:"/";
           back.setAttribute("aria-label",item.proposition?"Til proposisjon "+item.proposition:"Til føreordet");
           meta.appendChild(back);
           if(item.relation)meta.appendChild(document.createTextNode(" · "+item.relation));
@@ -377,7 +392,7 @@ function parseSource(src){
   }
   function addNoteLinks(el,items){
     for(const item of items){const index=allNotes.indexOf(item)+1;
-      const link=make("a","xref note-ref","n"+index);link.href="#notat-"+index;
+      const link=make("a","xref note-ref","n"+index);link.href=(forewordView?"/les":"")+"#notat-"+index;
       link.setAttribute("aria-label","Til notat "+index);
       link.addEventListener("click",e=>{clearTimeout(hashTimer);e.stopPropagation();closePreview();});el.appendChild(link);
     }
@@ -397,7 +412,10 @@ function parseSource(src){
   // source metadata, not part of the reading stream.
   const bodyStart=TOKENS.findIndex(tok=>tok.kind==="heading"&&tok.text==="Føreord");
   if(bodyStart<0)throw new Error("Føreord manglar i FORMLÆRE");
-  for(const tok of TOKENS.slice(bodyStart)){
+  const readingStart=TOKENS.findIndex(tok=>tok.kind==="heading"&&tok.text==="Lesekode");
+  if(readingStart<0)throw new Error("Lesekode manglar i FORMLÆRE");
+  const visibleTokens=forewordView?TOKENS.slice(bodyStart,readingStart):TOKENS.slice(readingStart);
+  for(const tok of visibleTokens){
     if(tok.kind==="heading"){const h=make("h2","section-title",tok.text);h.id="del-"+tok.text.toLowerCase().replace(/[^a-z0-9æøå]+/g,"-").replace(/^-|-$/g,"");stream.appendChild(h);}
     else if(tok.kind==="paragraph"){const p=make("p","plain-paragraph");rich(p,tok.text);addNoteLinks(p,introNotes.filter(note=>tok.text.includes(note.anchor)));stream.appendChild(p);}
     else if(tok.kind==="prop"){
@@ -424,6 +442,15 @@ function parseSource(src){
         stream.appendChild(group);
       }
     }
+  }
+  if(forewordView){
+    document.title="Føreord · FORMLÆRE";
+    document.querySelector(".strip").hidden=true;
+    read.setAttribute("aria-label","Føreord til FORMLÆRE");
+    const continuation=make("p","continue-reading");
+    const link=make("a","","Les FORMLÆRE →");link.href="/les";
+    continuation.appendChild(link);stream.appendChild(continuation);
+    return;
   }
   appendEndmatter();
   const VW=358,PAD=5,SGAP=5,YROOT=17,YLAB=8,UNIT=75;

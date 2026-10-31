@@ -4,7 +4,7 @@
   "provenance": {
     "bibliography": "traktat/src/traktat.tex",
     "text": "traktat/tekst/formlaere.txt",
-    "note": "Nummera 1–107 følgjer den opphavlege kjeldelista; 108 viser til tekstlege parallellar med Tractatus, og 109 til Investigations. Eit sentralt utval er kontrollert mot primærkjelder 1. november 2026; kontrollerte postar har verified_on og primærlenkje. Resten av metadataa er overførte og ikkje systematisk nyverifiserte. Notata skil kjeldegrunnlag, omgrepslege parallellar og FORMLÆRE sine eigne vidareføringar."
+    "note": "Kjeldenummera følgjer den opphavlege kjeldelista. Eit sentralt utval er kontrollert mot primærkjelder 1. november 2026; kontrollerte postar har verified_on og primærlenkje. Resten av metadataa er overførte og ikkje systematisk nyverifiserte. Notata skil kjeldegrunnlag, omgrepslege parallellar og FORMLÆRE sine eigne vidareføringar."
   },
   "sources": [
     {
@@ -636,15 +636,6 @@
       "year": "2024"
     },
     {
-      "id": "108",
-      "citation": "Wittgenstein, L. (1922). Tractatus Logico-Philosophicus. Engelsk utgåve ved F. P. Ramsey og C. K. Ogden. Kegan Paul, Trench, Trubner & Co. Digital primærtekst: The Ludwig Wittgenstein Project.",
-      "year": "1922",
-      "url": "https://wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_(English)",
-      "note": "Tilføyd for tekstlege parallellar og omarbeidingar av namngjevne proposisjonar. Tilvisinga er ikkje empirisk støtte til formmodellen.",
-      "verification_note": "Digitalutgåva opplyser eksplisitt at ho byggjer på 1922-utgåva og gjev denne oversetjar/redaktørkrediteringa. Brukast for tekstlege parallellar; ikkje empirisk støtte.",
-      "verified_on": "2026-11-01"
-    },
-    {
       "citation": "Kauffman, S. A. (2000). Investigations. Oxford University Press.",
       "year": "2000",
       "url": "https://academic.oup.com/book/51166/chapter-abstract/421882688",
@@ -655,132 +646,6 @@
     }
   ],
   "annotations": [
-    {
-      "proposition": "1.1",
-      "anchor": "Formverda er alt som er tilfelle",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 1 og 1.1. Opninga omarbeider skiljet mellom verda som det som er tilfelle og som totalitet av ting."
-    },
-    {
-      "proposition": "1.203",
-      "anchor": "Substansen finst uavhengig av kva som er tilfelle",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.021 og 2.024. Substansomgrepet er ein tekstleg parallell; ledd- og nivåargumentet er forma om for denne teksten."
-    },
-    {
-      "proposition": "1.2031",
-      "anchor": "Utan substans",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.0211. Regressargumentet omarbeider ein passasje om korleis meining elles ville avhenge av ei anna sann proposisjon."
-    },
-    {
-      "proposition": "1.204",
-      "anchor": "Konfigurasjonen er det skiftande",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.0271. Skiljet mellom det faste objektet og den skiftande konfigurasjonen er omarbeidd til eit skilje mellom analysenivå."
-    },
-    {
-      "proposition": "1.21",
-      "anchor": "Måten objekta heng saman på",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.032. Definisjonen av struktur har ein nær tekstleg parallell."
-    },
-    {
-      "proposition": "1.211",
-      "anchor": "som lenkene i ei kjede",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.03. Kjedebiletet er omarbeidd til sambandet mellom delane i ein stol."
-    },
-    {
-      "proposition": "1.2123",
-      "anchor": "moglegheita strukturen har",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.033. Forma som strukturens moglegheit er her vidareført gjennom at strukturen kan gå att i andre objekt."
-    },
-    {
-      "proposition": "1.22",
-      "anchor": "Moglegheita eit objekt har for å inngå i konfigurasjonar",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.0141. Teksten kallar denne moglegheita valens, der Tractatus nyttar form."
-    },
-    {
-      "proposition": "1.221",
-      "anchor": "alle moglege former gjevne",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.0124. Den modal-logiske tanken om at moglege samanhengar er gjevne med objekta, er overført til valensane."
-    },
-    {
-      "proposition": "1.223",
-      "anchor": "Å kjenne objektet fullt ut",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 2.0123. Parallellen gjeld sambandet mellom å kjenne objektet og å kjenne samanhengane det kan inngå i."
-    },
-    {
-      "proposition": "1.53",
-      "anchor": "Grensa mellom C og U kan ikkje sjåast frå C",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus føreordet. Føreordet til Tractatus drøftar problemet med å trekkje ei grense for tanken utan å kunne tenkje begge sider. C/U-formaliseringa er denne teksten si eiga."
-    },
-    {
-      "proposition": "7.3",
-      "anchor": "Dei er ein stige",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 6.54. Stigebiletet er ein tydeleg litterær parallell til Tractatus."
-    },
-    {
-      "proposition": "7.33",
-      "anchor": "Stigen vert difor ikkje kasta",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 6.54. Dette er ei uttrykkeleg vending av stigebiletet: FORMLÆRE held fram lesinga der Tractatus skildrar overskriding."
-    },
-    {
-      "proposition": "7.4",
-      "anchor": "Formverda er alt som er tilfelle",
-      "sources": [
-        "108"
-      ],
-      "relation": "tekstleg parallell",
-      "note": "Tractatus 1. Slutten tek opp att opningsparallellen og fører henne vidare med verknad og navigasjon."
-    },
     {
       "proposition": "1",
       "anchor": "ordning av skilnader",
@@ -1233,4 +1098,3 @@
     }
   ]
 }
-
