@@ -2,7 +2,10 @@
 <html lang="nn">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FORMLÆRE">
 <title>FORMLÆRE — Iver Raknes Finne</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +37,7 @@ html{-webkit-text-size-adjust:100%}
 html,body{
   height:100%;margin:0;background:var(--bg);color:var(--fg);
   overflow:hidden;overscroll-behavior:none;
+  touch-action:pan-y;
 }
 body{
   font-family:var(--serif);font-size:.90625rem;line-height:1.52;
@@ -47,6 +51,8 @@ body{
   max-width:520px;margin:0 auto;
   display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;
   border-left:1px solid var(--hair);border-right:1px solid var(--hair);
+  padding-left:env(safe-area-inset-left,0px);
+  padding-right:env(safe-area-inset-right,0px);
 }
 @media (max-width:522px){.app{border:0}}
 
@@ -72,7 +78,7 @@ body{
 
 
 /* ---- reading / continuous stream ---- */
-.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 .875rem 1.5rem;scroll-behavior:auto}
+.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 .875rem 1.5rem;scroll-behavior:auto;touch-action:pan-y}
 .read:focus-visible{outline:1px solid var(--dim);outline-offset:-1px}
 .stream{padding:.375rem 0 1.25rem}
 .doc-title{font-family:var(--serif);font-size:2rem;line-height:1.12;letter-spacing:-.025em;font-weight:400;margin:2.25rem 0 .7rem}
@@ -93,6 +99,11 @@ body{
 .prop.depth4{margin-left:0;margin-top:.21rem}
 .prop.active .n{color:var(--fg);font-weight:500}
 .endmark{padding:2rem 0 1rem;text-align:center;font-family:var(--mono);font-size:.61rem;letter-spacing:.16em;color:var(--dim)}
+
+/* Text remains selectable while the reader behaves like a fixed-scale iPhone app. */
+@supports (-webkit-touch-callout: none){
+  .read{overscroll-behavior-y:contain}
+}
 
 /* ---- pager ---- */
 .pager{
@@ -131,6 +142,22 @@ body{
 </div>
 
 <script>
+// WebKit can ignore user-scalable=no on iPhone. Suppress pinch gestures,
+// but keep single-finger scrolling and reader controls entirely native.
+(function preventPagePinch(){
+  const stopIfMultitouch = event => {
+    if (event.touches && event.touches.length > 1 && event.cancelable) {
+      event.preventDefault();
+    }
+  };
+  document.addEventListener('touchstart', stopIfMultitouch, {passive:false, capture:true});
+  document.addEventListener('touchmove', stopIfMultitouch, {passive:false, capture:true});
+  for (const name of ['gesturestart','gesturechange']) {
+    document.addEventListener(name, event => {
+      if (event.cancelable) event.preventDefault();
+    }, {passive:false, capture:true});
+  }
+})();
 function parseSource(src){
   const tokens=[],props=[];let active=null,buf=[];
   const flush=()=>{const t=buf.join("\n").trim();buf=[];if(!t)return;if(active)active.paragraphs.push(t);else tokens.push({kind:"paragraph",text:t});};
