@@ -1,16 +1,12 @@
 {
-  "version": 1,
-  "source": "FORMLÆRE: 375 proposisjonar",
+  "version": 2,
+  "source": "FORMLÆRE – første ni illustrasjonar",
+  "note": "First selected nine drawings, one illustration per image; source manuscript contains 375 numbered propositions.",
   "assets": [
     {
       "after": "1.211",
       "file": "scan-20261031-p08-objekt-serie.png",
       "alt": "Same objekt i ulike ordningar"
-    },
-    {
-      "after": "1.211",
-      "file": "scan-20261031-p08-objekt-ordning.png",
-      "alt": "Objekt i romleg konfigurasjon"
     },
     {
       "after": "1.432",
@@ -19,18 +15,8 @@
     },
     {
       "after": "1.421",
-      "file": "scan-20261031-p12-boke.png",
-      "alt": "Bøk som bøyer seg langs fiberen"
-    },
-    {
-      "after": "1.421",
-      "file": "scan-20261031-p12-granitt.png",
-      "alt": "Granitt som sprekk"
-    },
-    {
-      "after": "1.5",
-      "file": "scan-20261031-p12-glidelas.png",
-      "alt": "Ei grense som vert opna med glidelås"
+      "file": "page-12.png",
+      "alt": "Bøk, granitt og glidelås: materielle vilkår og opne og forbodne regionar"
     },
     {
       "after": "1.54",
@@ -43,21 +29,6 @@
       "alt": "To hender som manipulerer ein stol"
     },
     {
-      "after": "2.15",
-      "file": "scan-20261031-p15-sittestillingar-a.png",
-      "alt": "Fire ulike sittestillingar"
-    },
-    {
-      "after": "2.15",
-      "file": "scan-20261031-p15-stol-hender-b.png",
-      "alt": "Manipulering av ein annan stol"
-    },
-    {
-      "after": "2.15",
-      "file": "scan-20261031-p15-sittestillingar-b.png",
-      "alt": "Fem variasjonar i sittestilling"
-    },
-    {
       "after": "2.212",
       "file": "scan-20261031-p16-royrstol-utvikling.png",
       "alt": "Frå sykkelramme til røyrstol"
@@ -68,26 +39,6 @@
       "alt": "Agens frå termostat til designar"
     },
     {
-      "after": "5.131",
-      "file": "scan-20261031-p21-agens-fra-termostat-til-handverkar.png",
-      "alt": "Termostat, tre, koloni, pattedyr og handverkar"
-    },
-    {
-      "after": "7.3",
-      "file": "scan-20261031-p33-agentar-samspel.png",
-      "alt": "Samspelet mellom agentar"
-    },
-    {
-      "after": "7.3",
-      "file": "scan-20261031-p33-agentar-moglege-retningar.png",
-      "alt": "Ulike retningar for agentisk form"
-    },
-    {
-      "after": "7.3",
-      "file": "scan-20261031-p33-formtransformasjon.png",
-      "alt": "Transformasjon av form gjennom fleire steg"
-    },
-    {
       "after": "6.66",
       "file": "scan-20261031-p35-d-modell-diagram.png",
       "alt": "Formrom, partisjon, grammatikk, landskap og agenthierarki"
@@ -96,36 +47,6 @@
       "after": "7.142",
       "file": "scan-20261031-p41-sommarfugl-livslop.png",
       "alt": "Larve, puppe og sommarfugl"
-    },
-    {
-      "after": "7.142",
-      "file": "scan-20261031-p41-kopp-og-nedbryting.png",
-      "alt": "Eingongskopp og nedbryting"
-    },
-    {
-      "after": "6.12",
-      "file": "scan-20261031-p52-metamorfose-mycelium.png",
-      "alt": "Metamorfose og mycel"
-    },
-    {
-      "after": "6.12",
-      "file": "scan-20261031-p68-multiskala-kompetanse.png",
-      "alt": "Multiskala-kompetanse"
-    },
-    {
-      "after": "5.11",
-      "file": "scan-20261031-p68-kybernetisk-sloyfe.png",
-      "alt": "Kybernetisk sløyfe"
-    },
-    {
-      "after": "5.22",
-      "file": "scan-20261031-p68-kognitiv-lyskjegle.png",
-      "alt": "Kognitiv lyskjegle"
-    },
-    {
-      "after": "5.2",
-      "file": "scan-20261031-p68-omhug-intelligens.png",
-      "alt": "Omhug og intelligens"
     }
   ]
 }
