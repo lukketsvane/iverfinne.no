@@ -40,8 +40,8 @@ html,body{
   touch-action:pan-y;
 }
 body{
-  font-family:var(--serif);font-size:.90625rem;line-height:1.52;
-  font-weight:350;font-optical-sizing:none;
+  font-family:var(--serif);font-size:.90625rem;line-height:1.47;
+  font-weight:400;font-optical-sizing:auto;
   -webkit-font-smoothing:antialiased;
   -webkit-user-select:none;user-select:none;
 }
@@ -83,20 +83,20 @@ body{
 .stream{padding:.375rem 0 1.25rem}
 .doc-title{font-family:var(--serif);font-size:2rem;line-height:1.12;letter-spacing:-.025em;font-weight:400;margin:2.25rem 0 .7rem}
 .section-title{font-family:var(--serif);font-size:1.15rem;font-weight:400;line-height:1.3;margin:2.4rem 0 .8rem;padding-top:.65rem;border-top:1px solid var(--hair);scroll-margin-top:12px}
-.plain-paragraph{font-size:.89rem;line-height:1.62;font-weight:350;white-space:pre-line;margin:.72rem 0;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
+.plain-paragraph{font-size:.90rem;line-height:1.49;font-weight:400;white-space:pre-line;margin:.67rem 0;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
 .plain-paragraph em,.prop em{font-style:italic}.plain-paragraph strong,.prop strong{font-weight:600}
-.prop{position:relative;display:grid;grid-template-columns:3rem minmax(0,1fr);gap:0 .35rem;align-items:start;width:100%;min-width:0;font-size:.91rem;line-height:1.56;font-weight:350;padding:.36rem 0;scroll-margin-top:12px}
-.prop .n{font-family:var(--mono);font-size:.66rem;line-height:1.45;padding-top:.17rem;color:var(--dim);font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:left}
+.prop{position:relative;display:grid;grid-template-columns:3rem minmax(0,1fr);gap:0 .35rem;align-items:start;width:100%;min-width:0;font-size:.93rem;line-height:1.45;font-weight:400;padding:.18rem 0;scroll-margin-top:12px}
+.prop .n{font-family:var(--mono);font-size:.69rem;line-height:1.4;padding-top:.15rem;color:var(--dim);font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:left}
 .prop .status{font-size:.58rem;margin-left:.05rem;font-weight:400}
 .prop .t{font:inherit;min-width:0;width:100%;letter-spacing:0;text-wrap:pretty;text-align:left;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word;-webkit-user-select:text;user-select:text}
-.prop-paragraph{white-space:pre-line;margin:0;max-width:none}.prop-paragraph+.prop-paragraph{margin-top:.65em}
+.prop-paragraph{white-space:pre-line;margin:0;max-width:none}.prop-paragraph+.prop-paragraph{margin-top:.57em}
 /* One fixed left edge for every proposition. Depth is communicated by
    the interactive proposition tree above the text, never by indentation. */
-.prop.depth0{margin-left:0;font-size:1.08rem;line-height:1.48;font-weight:400;margin-top:3.2rem;padding-top:.25rem}
-.prop.depth1{margin-left:0;font-size:.97rem;margin-top:1.05rem}
-.prop.depth2{margin-left:0;margin-top:.54rem}
-.prop.depth3{margin-left:0;margin-top:.3rem}
-.prop.depth4{margin-left:0;margin-top:.21rem}
+.prop.depth0{margin-left:0;font-size:.97rem;line-height:1.45;font-weight:400;margin-top:1.10rem;padding-top:.18rem}
+.prop.depth1{margin-left:0;font-size:.93rem;margin-top:.78rem}
+.prop.depth2{margin-left:0;margin-top:.48rem}
+.prop.depth3{margin-left:0;margin-top:.34rem}
+.prop.depth4{margin-left:0;margin-top:.24rem}
 .prop.active .n{color:var(--fg);font-weight:500}
 .endmark{padding:2rem 0 1rem;text-align:center;font-family:var(--mono);font-size:.61rem;letter-spacing:.16em;color:var(--dim)}
 
@@ -337,7 +337,7 @@ function parseSource(src){
   function make(tag,cls,text){
     const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;
   }
-  const FIGURES_AFTER={"1.421":[{"file":"page-12.png","alt":"Bøk, granitt og glidelås: materielle vilkår og opne og forbodne regionar"}],"1.54":[{"file":"scan-20261031-p13-c-k-operator-tabell-og-rorsle.png","alt":"C–K-operasjonane og rørsla mellom agent og form"}],"2.15":[{"file":"scan-20261031-p15-stol-hender-a.png","alt":"To hender som manipulerer ein stol"}],"2.212":[{"file":"scan-20261031-p16-royrstol-utvikling.png","alt":"Frå sykkelramme til røyrstol"}],"5.125":[{"file":"scan-20261031-p21-agentrang.png","alt":"Agens frå termostat til designar"}],"6.66":[{"file":"scan-20261031-p35-d-modell-diagram.png","alt":"Formrom, partisjon, grammatikk, landskap og agenthierarki"}],"7.142":[{"file":"scan-20261031-p41-sommarfugl-livslop.png","alt":"Larve, puppe og sommarfugl"}],"1.4":[{"file":"scan-20261031-p11-busette-opne-forbodne.png","alt":"Busette, opne og forbodne regionar"}]};
+  const FIGURES_AFTER={"1.54":[{"file":"scan-20261031-p13-c-k-operator-tabell-og-rorsle.png","alt":"C–K-operasjonane og rørsla mellom agent og form"}],"2.212":[{"file":"scan-20261031-p16-royrstol-utvikling.png","alt":"Frå sykkelramme til røyrstol"}],"5.125":[{"file":"scan-20261031-p21-agentrang.png","alt":"Agens frå termostat til designar"}],"6.66":[{"file":"scan-20261031-p35-d-modell-diagram.png","alt":"Formrom, partisjon, grammatikk, landskap og agenthierarki"}],"7.142":[{"file":"scan-20261031-p41-sommarfugl-livslop.png","alt":"Larve, puppe og sommarfugl"}],"1.4":[{"file":"scan-20261031-p11-busette-opne-forbodne.png","alt":"Busette, opne og forbodne regionar"}]};
   for(const tok of TOKENS){
     if(tok.kind==="title"){const h=make("h1","doc-title",tok.text);stream.appendChild(h);}
     else if(tok.kind==="heading"){const h=make("h2","section-title",tok.text);h.id="del-"+tok.text.toLowerCase().replace(/[^a-z0-9æøå]+/g,"-").replace(/^-|-$/g,"");stream.appendChild(h);}
