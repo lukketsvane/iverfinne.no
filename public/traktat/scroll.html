@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nb">
+<html lang="nn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -70,47 +70,24 @@ body{
 .rlab.on{fill:var(--fg)}
 .tap{fill:transparent}
 
-/* ---- reading / continuous stream ---- */
-.read{
-  overflow-y:auto;overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;
-  padding:0 .625rem 1rem;
-  scroll-behavior:auto;
-}
-.read:focus-visible{outline:1px solid var(--dim);outline-offset:-1px}
-.stream{padding:.375rem 0 .625rem}
-.prop{
-  --indent:0rem;
-  position:relative;
-  display:grid;grid-template-columns:1.5rem minmax(0,1fr);gap:0 .375rem;align-items:baseline;
-  font-size:.90625rem;line-height:1.52;font-weight:350;
-  margin-left:var(--indent);
-  padding:.34375rem 0;
-  scroll-margin-top:12px;
-}
-.prop .n{
-  font-family:var(--mono);font-size:.6875rem;line-height:1;color:var(--dim);
-  font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right;
-}
-.prop .t{
-  font:inherit;letter-spacing:0;text-wrap:pretty;overflow-wrap:break-word;
-  -webkit-user-select:text;user-select:text;
-}
-.prop.depth0{
-  --indent:0rem;
-  font-size:.9375rem;
-  margin-top:.375rem;
-}
-.prop.depth0:first-child{margin-top:0}
-.prop.depth1{--indent:.625rem;margin-top:.1875rem}
-.prop.depth2{--indent:1.25rem}
-.prop.active .n{color:var(--fg);font-weight:500}
 
-/* tiny end marker: the document really ends; no pagination wall */
-.endmark{
-  padding:18px 0 8px;text-align:center;font-family:var(--mono);
-  font-size:9px;letter-spacing:.18em;color:var(--dim);
-}
+/* ---- reading / continuous stream ---- */
+.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 .875rem 1.5rem;scroll-behavior:auto}
+.read:focus-visible{outline:1px solid var(--dim);outline-offset:-1px}
+.stream{padding:.375rem 0 1.25rem}
+.doc-title{font-family:var(--serif);font-size:2rem;line-height:1.12;letter-spacing:-.025em;font-weight:400;margin:2.25rem 0 .7rem}
+.section-title{font-family:var(--serif);font-size:1.15rem;font-weight:400;line-height:1.3;margin:2.4rem 0 .8rem;padding-top:.65rem;border-top:1px solid var(--hair);scroll-margin-top:12px}
+.plain-paragraph{font-size:.89rem;line-height:1.62;font-weight:350;white-space:pre-line;margin:.72rem 0;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
+.plain-paragraph em,.prop em{font-style:italic}.plain-paragraph strong,.prop strong{font-weight:600}
+.prop{position:relative;display:grid;grid-template-columns:4.8rem minmax(0,1fr);gap:0 .6rem;align-items:start;font-size:.91rem;line-height:1.56;font-weight:350;padding:.36rem 0;scroll-margin-top:12px}
+.prop .n{font-family:var(--mono);font-size:.66rem;line-height:1.45;padding-top:.17rem;color:var(--dim);font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.prop .status{font-size:.58rem;margin-left:.05rem;font-weight:400}
+.prop .t{font:inherit;letter-spacing:0;text-wrap:pretty;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
+.prop-paragraph{white-space:pre-line;margin:0}.prop-paragraph+.prop-paragraph{margin-top:.65em}
+.prop.depth0{font-size:1rem;font-weight:400;margin-top:.85rem;padding-top:.55rem}
+.prop.depth1{margin-top:.3rem}
+.prop.active .n{color:var(--fg);font-weight:500}
+.endmark{padding:2rem 0 1rem;text-align:center;font-family:var(--mono);font-size:.61rem;letter-spacing:.16em;color:var(--dim)}
 
 /* ---- pager ---- */
 .pager{
@@ -142,244 +119,158 @@ body{
   <div class="strip"><svg id="tree" role="img" aria-label="Traktatens tre"></svg></div>
   <main class="read" id="read" tabindex="0" aria-label="FORMLÆRE, hele teksten"><div class="stream" id="stream"></div></main>
   <nav class="pager">
-    <button type="button" id="prev" aria-label="Forrige">‹</button>
+    <button type="button" id="prev" aria-label="Førre">‹</button>
     <span class="pos" id="pos"></span>
     <button type="button" id="next" aria-label="Neste">›</button>
   </nav>
 </div>
 
 <script>
-async function loadData(){
-  const source=await fetch('/traktat/formlaere.txt',{cache:'no-store'}).then(r=>{
-    if(!r.ok) throw new Error('Kunne ikke laste traktaten');
-    return r.text();
-  });
-  const data=source.split(/\r?\n/).map(line=>{
-    const m=line.trim().match(/^(\d+(?:\.\d+)?)\s+(.+)$/);
-    return m ? {n:m[1],t:m[2]} : null;
-  }).filter(Boolean);
-  if(!data.length) throw new Error('Fant ikke traktatdata');
-  return data;
-}
-
-(async()=>{
-const DATA=await loadData();
-
-const byNum = new Map();
-DATA.forEach(d=>{
-  const dot=d.n.indexOf('.');
-  d.depth = dot<0?0 : d.n.length-dot-1;
-  d.parent = d.depth===0?null : d.depth===1?d.n.slice(0,dot) : d.n.slice(0,d.n.length-1);
-  d.kids=[]; byNum.set(d.n,d);
-});
-DATA.forEach(d=>{ if(d.parent) byNum.get(d.parent).kids.push(d); });
-const roots = DATA.filter(d=>d.depth===0);
-const order = DATA.map(d=>d.n);
-let cur = '1';
-
-function chainOf(n){ const o=[]; let d=byNum.get(n); while(d.parent){ d=byNum.get(d.parent); o.unshift(d);} return o; }
-
-/* ---------- tree strip: fits the width exactly, never scrolls ---------- */
-const VW=358, PAD=5, SGAP=5;
-const NB = roots.reduce((a,r)=>a+r.kids.length,0);
-const STEP = (VW - PAD*2 - SGAP*(roots.length-1)) / NB;
-const Y_LAB=8, Y_ROOT=17, UNIT=8.0;
-let x = PAD;
-roots.forEach(r=>{
-  r.x0 = x;
-  r.kids.forEach(b=>{ b.x = x + STEP/2; x += STEP; });
-  r.x1 = x; x += SGAP;
-});
-const maxT = Math.max(...DATA.filter(d=>d.depth===1).map(d=>d.kids.length));
-const VH = Y_ROOT + (maxT+1)*UNIT + 7;
-
-const svg=document.getElementById('tree'), NS='http://www.w3.org/2000/svg';
-function mk(t,a){ const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); return e; }
-
-function drawTree(){
-  svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`);
-  svg.innerHTML='';
-  const sec = cur.split('.')[0];
-  const br = cur.includes('.') ? sec+'.'+cur.split('.')[1][0] : null;
-  const g=mk('g',{});
-
-  roots.forEach(r=>{
-    const inSec = r.n===sec;
-    g.appendChild(mk('path',{d:`M${r.x0},${Y_ROOT} H${r.x1}`, class:'rbar'+(inSec?' on':'')}));
-    const lab=mk('text',{x:(r.x0+r.x1)/2, y:Y_LAB, class:'rlab'+(inSec?' on':'')});
-    lab.textContent=r.n; g.appendChild(lab);
-    r.kids.forEach(b=>{
-      const onB = b.n===br;
-      const cls = onB?' on' : inSec?' sec' : '';
-      const len = (b.kids.length+1)*UNIT;
-      g.appendChild(mk('path',{d:`M${b.x},${Y_ROOT} V${Y_ROOT+len}`, class:'stem'+cls}));
-      let dotY = null;
-      if(b.n===cur) dotY = Y_ROOT + UNIT/2;
-      else { const ci=b.kids.findIndex(k=>k.n===cur);
-             if(ci>=0) dotY = Y_ROOT + (ci+1)*UNIT + UNIT/2; }
-      if(dotY!==null) g.appendChild(mk('circle',{cx:b.x, cy:dotY, r:1.9, class:'dot'}));
-    });
-  });
-  svg.appendChild(g);
-}
-
-/* ---------- reading: one continuous document ---------- */
-const readEl=document.getElementById('read'), streamEl=document.getElementById('stream'),
-      posEl=document.getElementById('pos');
-const rowByNum=new Map();
-let hashT=0, scrollRAF=0, programmaticUntil=0;
-const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
-// Keep shared links on the public address when this reader is framed there.
-let addressWindow=window;
-try{
-  if(window.parent!==window && window.parent.location.hostname==='traktat.iverfinne.no'){
-    addressWindow=window.parent;
+function parseSource(src){
+  const tokens=[],props=[];let active=null,buf=[];
+  const flush=()=>{const t=buf.join("\n").trim();buf=[];if(!t)return;if(active)active.paragraphs.push(t);else tokens.push({kind:"paragraph",text:t});};
+  for(const line of src.replace(/\r\n?/g,"\n").split("\n")){
+    if(line.startsWith("## ")){flush();active=null;tokens.push({kind:"heading",text:line.slice(3).trim()});continue;}
+    if(line.startsWith("# ")){flush();active=null;tokens.push({kind:"title",text:line.slice(2).trim()});continue;}
+    const m=line.match(/^\*\*(\d+(?:\.\d+)*)([datio])\*\*\s+(.*)$/);
+    if(m){flush();active={kind:"prop",n:m[1],status:m[2],paragraphs:[]};tokens.push(active);props.push(active);if(m[3])buf.push(m[3]);continue;}
+    if(!line.trim()){flush();continue;}
+    buf.push(line);
   }
-}catch(e){}
-function hashNumber(){
-  try{return decodeURIComponent(addressWindow.location.hash.slice(1));}
-  catch(e){return '';}
+  flush();
+  return {tokens,props};
 }
-
-function buildStream(){
-  const frag=document.createDocumentFragment();
-  DATA.forEach(d=>{
-    const row=document.createElement('article');
-    row.className=`prop depth${d.depth}`;
-    row.dataset.n=d.n; row.id=d.n;
-    const n=document.createElement('span'); n.className='n'; n.textContent=d.n;
-    const t=document.createElement('span'); t.className='t'; t.textContent=d.t;
-    row.appendChild(n); row.appendChild(t);
-    row.addEventListener('click',e=>{ if(!window.getSelection()?.toString()) setCurrent(d.n,true,false); });
-    rowByNum.set(d.n,row); frag.appendChild(row);
-  });
-  const end=document.createElement('div'); end.className='endmark'; end.textContent=order[order.length-1]+' · SLUTT';
-  frag.appendChild(end); streamEl.appendChild(frag);
-}
-
-function writeHash(){
-  clearTimeout(hashT);
-  hashT=setTimeout(()=>{ try{ addressWindow.history.replaceState(null,'','#'+cur); }catch(e){} }, 320);
-}
-
-function paintCurrent(){
-  rowByNum.forEach((el,n)=>el.classList.toggle('active',n===cur));
-  const i=order.indexOf(cur);
-  posEl.textContent=cur;
-  document.getElementById('prev').disabled=i===0;
-  document.getElementById('next').disabled=i===order.length-1;
-  drawTree();
-}
-
-function setCurrent(n, write=true, scroll=false, behavior='smooth'){
-  if(!byNum.has(n)) return;
-  cur=n; paintCurrent();
-  if(write) writeHash();
-  if(scroll){
-    const motion=reducedMotion.matches?'auto':behavior;
-    programmaticUntil=performance.now()+(motion==='smooth'?520:80);
-    rowByNum.get(n)?.scrollIntoView({block:'start',behavior:motion});
+(async function siteInit(){
+  const response=await fetch("/traktat/formlaere.txt",{cache:"no-store"});
+  if(!response.ok)throw new Error("Kunne ikkje laste FORMLÆRE");
+  const parsed=parseSource(await response.text()),DATA=parsed.props,TOKENS=parsed.tokens;
+  if(DATA.length<400)throw new Error("Ufullstendig manuskript");
+  const byNum=new Map(DATA.map(d=>[d.n,d]));
+  for(const d of DATA){d.kids=[];let p=d.n.slice(0,-1);while(p&&!byNum.has(p))p=p.slice(0,-1);d.parent=p||null;}
+  for(const d of DATA){if(d.parent)byNum.get(d.parent).kids.push(d);}
+  function depthOf(d){return d.parent?1+depthOf(byNum.get(d.parent)):0;}
+  for(const d of DATA)d.depth=depthOf(d);
+  const roots=DATA.filter(d=>!d.parent),order=DATA.map(d=>d.n);
+  const byRow=new Map(),read=document.getElementById("read"),stream=document.getElementById("stream"),pos=document.getElementById("pos"),svg=document.getElementById("tree"),NS="http://www.w3.org/2000/svg";
+  let current=order[0],hashTimer=0,scrollFrame=0,navUntil=0;
+  const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+  let addressWindow=window;
+  try{if(window.parent!==window&&window.parent.location.hostname===window.location.hostname)addressWindow=window.parent;}catch(e){}
+  function hashNumber(){try{return decodeURIComponent(addressWindow.location.hash.slice(1));}catch(e){return "";}}
+  function rich(el,s){
+    for(const part of s.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)){
+      if(!part)continue;
+      if(part.startsWith("**")&&part.endsWith("**")){const b=document.createElement("strong");b.textContent=part.slice(2,-2);el.appendChild(b);}
+      else if(part.startsWith("*")&&part.endsWith("*")){const em=document.createElement("em");em.textContent=part.slice(1,-1);el.appendChild(em);}
+      else el.appendChild(document.createTextNode(part));
+    }
   }
-}
-
-function go(n, behavior='smooth'){ setCurrent(n,true,true,behavior); }
-function step(k){
-  const i=order.indexOf(cur)+k;
-  if(i>=0 && i<order.length) go(order[i]);
-}
-document.getElementById('prev').addEventListener('click',()=>step(-1));
-document.getElementById('next').addEventListener('click',()=>step(1));
-
-/* While the reader simply doom-scrolls, keep the tree and proposition number
-   synchronized with the text nearest the reading line. */
-function currentFromScroll(){
-  if(performance.now()<programmaticUntil) return;
-  if(readEl.scrollTop<=2){
-    if(cur!==order[0]) setCurrent(order[0],true,false);
-    return;
+  function make(tag,cls,text){
+    const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;
   }
-  const atEnd=readEl.scrollTop+readEl.clientHeight>=readEl.scrollHeight-2;
-  if(atEnd){
-    const last=order[order.length-1];
-    if(cur!==last) setCurrent(last,true,false);
-    return;
+  for(const tok of TOKENS){
+    if(tok.kind==="title"){const h=make("h1","doc-title",tok.text);stream.appendChild(h);}
+    else if(tok.kind==="heading"){const h=make("h2","section-title",tok.text);h.id="del-"+tok.text.toLowerCase().replace(/[^a-z0-9æøå]+/g,"-").replace(/^-|-$/g,"");stream.appendChild(h);}
+    else if(tok.kind==="paragraph"){const p=make("p","plain-paragraph");rich(p,tok.text);stream.appendChild(p);}
+    else if(tok.kind==="prop"){
+      const row=make("article","prop depth"+Math.min(tok.depth,4));row.dataset.n=tok.n;row.id=tok.n;
+      const n=make("span","n",tok.n);const sup=make("sup","status",tok.status);n.appendChild(sup);
+      const body=make("div","t");for(const para of tok.paragraphs){const p=make("p","prop-paragraph");rich(p,para);body.appendChild(p);}
+      row.append(n,body);row.addEventListener("click",()=>{if(!window.getSelection()?.toString())setCurrent(tok.n,true,false);});
+      byRow.set(tok.n,row);stream.appendChild(row);
+    }
   }
-  const top=readEl.getBoundingClientRect().top+28;
-  let best=order[0], bestDist=Infinity;
-  for(const n of order){
-    const r=rowByNum.get(n).getBoundingClientRect();
-    const dist=Math.abs(r.top-top);
-    if(r.bottom>=top-8 && dist<bestDist){ best=n; bestDist=dist; }
-    if(r.top>top+160 && bestDist<Infinity) break;
+  stream.appendChild(make("div","endmark",order[order.length-1]+" · SLUTT"));
+  const VW=358,PAD=5,SGAP=5,YROOT=17,YLAB=8,UNIT=75;
+  const branches=roots.flatMap(r=>r.kids);
+  const STEP=(VW-2*PAD-SGAP*(roots.length-1))/Math.max(1,branches.length);
+  let x=PAD;
+  for(const r of roots){r.x0=x;for(const b of r.kids){b.x=x+STEP/2;x+=STEP;}r.x1=x;x+=SGAP;}
+  const VH=YROOT+UNIT+7;
+  function ancestorBranch(d){
+    if(!d||!d.parent)return null;
+    while(d.parent&&byNum.get(d.parent)?.parent)d=byNum.get(d.parent);
+    return d;
   }
-  if(best!==cur) setCurrent(best,true,false);
-}
-readEl.addEventListener('scroll',()=>{
-  if(scrollRAF) return;
-  scrollRAF=requestAnimationFrame(()=>{ scrollRAF=0; currentFromScroll(); });
-},{passive:true});
-// A new reading gesture takes priority over a pending navigation animation.
-for(const event of ['wheel','touchstart','keydown']){
-  readEl.addEventListener(event,()=>{programmaticUntil=0;},{passive:true});
-}
-
-/* scrub: drag anywhere across the strip. x picks the branch, y picks how far
-   down that branch you are — band 0 is the branch itself, then its remarks. */
-const branches = DATA.filter(d=>d.depth===1);
-let scrubbing=false, pending=null, raf=0;
-
-function atPoint(cx, cy){
-  const r = svg.getBoundingClientRect();
-  if(!r.width) return null;
-  const u = (cx - r.left) / r.width * VW;
-  const v = (cy - r.top) / r.height * VH;
-  let best=branches[0], bd=Infinity;
-  for(const b of branches){ const d=Math.abs(b.x-u); if(d<bd){bd=d; best=b;} }
-  if(v < Y_ROOT) return best.parent;
-  const i = Math.floor((v - Y_ROOT) / UNIT);
-  if(i <= 0) return best.n;
-  return best.kids[Math.min(i-1, best.kids.length-1)].n;
-}
-function scrubTo(cx, cy){
-  const n = atPoint(cx, cy);
-  if(!n || n===cur) return;
-  pending = n;
-  if(!raf) raf = requestAnimationFrame(()=>{ raf=0; if(pending) go(pending,'auto'); pending=null; });
-}
-svg.addEventListener('pointerdown', e=>{
-  scrubbing=true; svg.setPointerCapture(e.pointerId);
-  scrubTo(e.clientX, e.clientY); e.preventDefault();
-});
-svg.addEventListener('pointermove', e=>{ if(scrubbing) scrubTo(e.clientX, e.clientY); });
-svg.addEventListener('pointerup', ()=>{ scrubbing=false; });
-svg.addEventListener('pointercancel', ()=>{ scrubbing=false; });
-
-/* swipe */
-let sx=0, sy=0, tracking=false;
-readEl.addEventListener('touchstart',e=>{
-  if(e.touches.length!==1) return;
-  sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true;
-},{passive:true});
-readEl.addEventListener('touchend',e=>{
-  if(!tracking) return; tracking=false;
-  const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
-  if(Math.abs(dx)>64 && Math.abs(dy)<44) step(dx<0?1:-1);
-},{passive:true});
-
-buildStream();
-const h=hashNumber();
-if(byNum.has(h)) cur=h;
-paintCurrent();
-if(cur!=='1') requestAnimationFrame(()=>go(cur,'auto'));
-addressWindow.addEventListener('hashchange',()=>{
-  const n=hashNumber();
-  if(byNum.has(n)) setCurrent(n,false,true,'auto');
-});
-})().catch(err=>{
-  const read=document.getElementById('read');
-  if(read) read.innerHTML='<div style="padding:24px 0;font-family:var(--mono);font-size:12px;color:var(--dim)">Kunne ikke laste traktaten.</div>';
-  console.error(err);
-});
+  for(const b of branches)b.members=DATA.filter(d=>ancestorBranch(d)?.n===b.n);
+  function mk(tag,attrs){const e=document.createElementNS(NS,tag);for(const key in attrs)e.setAttribute(key,attrs[key]);return e;}
+  function drawTree(){
+    svg.setAttribute("viewBox",`0 0 ${VW} ${VH}`);svg.innerHTML="";
+    const sec=byNum.get(current)?.n[0]||"1",group=ancestorBranch(byNum.get(current));const g=mk("g",{});
+    for(const r of roots){
+      const on=r.n===sec;
+      g.appendChild(mk("path",{d:`M${r.x0} ${YROOT} H${r.x1}`,class:"rbar"+(on?" on":"")}));
+      const lab=mk("text",{x:(r.x0+r.x1)/2,y:YLAB,class:"rlab"+(on?" on":"")});lab.textContent=r.n;g.appendChild(lab);
+      for(const b of r.kids){
+        const isBranch=group&&group.n===b.n;
+        const ht=12+Math.min(UNIT-14,6*Math.sqrt(b.members.length));
+        g.appendChild(mk("path",{d:`M${b.x} ${YROOT} V${YROOT+ht}`,class:"stem"+(isBranch?" on":on?" sec":"")}));
+        if(isBranch){const i=b.members.findIndex(d=>d.n===current);if(i>=0){const cy=YROOT+5+(i+.5)/Math.max(1,b.members.length)*(ht-5);g.appendChild(mk("circle",{cx:b.x,cy,r:2.5,class:"dot"}));}}
+      }
+    }
+    svg.appendChild(g);
+  }
+  function paint(){
+    for(const [n,el] of byRow)el.classList.toggle("active",n===current);
+    const i=order.indexOf(current);pos.textContent=current+" · "+(i+1)+"/"+order.length;
+    document.getElementById("prev").disabled=i===0;
+    document.getElementById("next").disabled=i===order.length-1;
+    drawTree();
+  }
+  function hashWrite(){
+    clearTimeout(hashTimer);
+    hashTimer=setTimeout(()=>{try{addressWindow.history.replaceState(null,"","#"+current);}catch(e){}},220);
+  }
+  function setCurrent(n,write=true,scroll=false,behavior="smooth"){
+    if(!byNum.has(n))return;
+    current=n;paint();if(write)hashWrite();
+    if(scroll){const motion=reducedMotion.matches?"auto":behavior;navUntil=performance.now()+(motion==="smooth"?520:80);byRow.get(n)?.scrollIntoView({block:"start",behavior:motion});}
+  }
+  function go(n,behavior="smooth"){setCurrent(n,true,true,behavior);}
+  function step(k){const i=order.indexOf(current)+k;if(i>=0&&i<order.length)go(order[i]);}
+  document.getElementById("prev").addEventListener("click",()=>step(-1));
+  document.getElementById("next").addEventListener("click",()=>step(1));
+  function currentFromScroll(){
+    if(performance.now()<navUntil)return;
+    if(read.scrollTop<=2){if(current!==order[0])setCurrent(order[0]);return;}
+    const line=read.getBoundingClientRect().top+32;
+    let candidate=null;
+    for(const n of order){
+      const r=byRow.get(n).getBoundingClientRect();
+      if(r.top<=line&&r.bottom>=line){candidate=n;break;}
+      if(r.top>line){candidate=n;break;}
+    }
+    if(!candidate)candidate=order[order.length-1];
+    if(candidate!==current)setCurrent(candidate);
+  }
+  read.addEventListener("scroll",()=>{if(scrollFrame)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;currentFromScroll();});},{passive:true});
+  for(const ev of ["wheel","touchstart","keydown"])read.addEventListener(ev,()=>{navUntil=0;},{passive:true});
+  let scrubbing=false,pending=null,raf=0;
+  function atPoint(cx,cy){
+    const r=svg.getBoundingClientRect();if(!r.width)return null;
+    const u=(cx-r.left)/r.width*VW,v=(cy-r.top)/r.height*VH;
+    let b=branches[0],dist=Infinity;
+    for(const c of branches){const d=Math.abs(c.x-u);if(d<dist){dist=d;b=c;}}
+    if(!b)return null;
+    if(v<YROOT)return b.parent;
+    const t=Math.max(0,Math.min(1,(v-YROOT)/UNIT));
+    return (b.members[Math.min(b.members.length-1,Math.floor(t*b.members.length))]||b).n;
+  }
+  function scrubTo(cx,cy){
+    const n=atPoint(cx,cy);if(!n||n===current)return;
+    pending=n;if(!raf)raf=requestAnimationFrame(()=>{raf=0;if(pending)go(pending,"auto");pending=null;});
+  }
+  svg.addEventListener("pointerdown",e=>{scrubbing=true;svg.setPointerCapture(e.pointerId);scrubTo(e.clientX,e.clientY);e.preventDefault();});
+  svg.addEventListener("pointermove",e=>{if(scrubbing)scrubTo(e.clientX,e.clientY);});
+  svg.addEventListener("pointerup",()=>{scrubbing=false;});
+  svg.addEventListener("pointercancel",()=>{scrubbing=false;});
+  let sx=0,sy=0,tracking=false;
+  read.addEventListener("touchstart",e=>{if(e.touches.length===1){sx=e.touches[0].clientX;sy=e.touches[0].clientY;tracking=true;}},{passive:true});
+  read.addEventListener("touchend",e=>{if(!tracking)return;tracking=false;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>64&&Math.abs(dy)<44)step(dx<0?1:-1);},{passive:true});
+  const h=hashNumber();if(byNum.has(h))current=h;
+  paint();if(current!==order[0])requestAnimationFrame(()=>go(current,"auto"));
+  addressWindow.addEventListener("hashchange",()=>{const n=hashNumber();if(byNum.has(n))setCurrent(n,false,true,"auto");});
+})().catch(err=>{const read=document.getElementById("read");if(read)read.textContent="Klarte ikkje laste FORMLÆRE.";console.error(err);});
 </script>
 
 </body>
