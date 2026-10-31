@@ -84,13 +84,13 @@ body{
 .prop .status{font-size:.58rem;margin-left:.05rem;font-weight:400}
 .prop .t{font:inherit;letter-spacing:0;text-wrap:pretty;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
 .prop-paragraph{white-space:pre-line;margin:0}.prop-paragraph+.prop-paragraph{margin-top:.65em}
-/* The number at depth 0 is flush left. Every additional digit
-   in the proposition tree moves the whole proposition one step right. */
+/* One fixed left edge for every proposition. Depth is communicated by
+   the interactive proposition tree above the text, never by indentation. */
 .prop.depth0{margin-left:0;font-size:1.08rem;line-height:1.48;font-weight:400;margin-top:3.2rem;padding-top:.25rem}
-.prop.depth1{margin-left:.8rem;font-size:.97rem;margin-top:1.05rem}
-.prop.depth2{margin-left:1.6rem;margin-top:.54rem}
-.prop.depth3{margin-left:2.4rem;margin-top:.3rem}
-.prop.depth4{margin-left:3.2rem;margin-top:.21rem}
+.prop.depth1{margin-left:0;font-size:.97rem;margin-top:1.05rem}
+.prop.depth2{margin-left:0;margin-top:.54rem}
+.prop.depth3{margin-left:0;margin-top:.3rem}
+.prop.depth4{margin-left:0;margin-top:.21rem}
 .prop.active .n{color:var(--fg);font-weight:500}
 .endmark{padding:2rem 0 1rem;text-align:center;font-family:var(--mono);font-size:.61rem;letter-spacing:.16em;color:var(--dim)}
 
