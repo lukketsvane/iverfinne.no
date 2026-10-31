@@ -1,3 +1,27 @@
+# FORMLÆRE
+*Ei traktatform om form for design og estetiske fag*
+Iver Raknes Finne · Arkitektur- og designhøgskolen i Oslo · 2026
+
+## Føreord
+Ein stol kan halde ein kropp oppe og likevel gjere vondt. Ein fasade kan vere heilt rett prosjektert og likevel gjere eit rom ubrukeleg. Eit grensesnitt kan oppfylle kvart krav i bestillinga og samstundes gjere brukaren mindre fri. Det avgjerande spørsmålet er ikkje berre om forma verkar. Det er *kva ho verkar på, for kven, og kva som vart halde utanfor arbeidet då ho vart til*.
+
+Designfaget har grammatikkar, metodar og etiske tradisjonar. Det manglar ikkje ord. Men orda ligg ofte i ulike rom. Formgrammatikken forklarer korleis nye konfigurasjonar kan genererast; teori om designkunnskap skildrar rørsla mellom det tenkte og det kjende; utviklingsbiologi, kybernetikk og agentteori spør korleis system held mål gjennom skiftande vilkår. Den same gjenstanden høyrer til alle tre undersøkingsmåtar. Faget har ikkje einigheit om korleis dei skal koplast, eller om kva koplinga kan forklare.
+
+Denne boka er eit forsøk på ei slik kopling. Ho byrjar med skilnaden og endar med ansvaret for det som skiljet gjer. Ho framstiller konfigurasjonar som posisjonar i rom av moglege former, forklarer seleksjon med eit landskap av trykk, og undersøker korleis agentar navigerer dette landskapet med ulik kunnskap, omhug og kapasitet. Ei celle, eit tre og ein handverkar kan i bestemte omsyn skildrast med same struktur. Ein profesjonell designar er likevel ikkje berre ein formgjevar: arbeidet endrar vilkåra for andre, som ikkje nødvendigvis fekk velje.
+
+Her trengst eit viktig skilje. *Omhug* er at noko tel i prioriteringane til ein agent. *Kapasitet* er at agenten kan halde eit relevant utfall innanfor ein toleranse. *Prediksjon* er evna til å sjå kva som kan kome. Dei tre fell ikkje saman. Ein kan sjå det vonde kome og ikkje kunne stanse det. Ein kan kunne stanse det utan å bry seg. Ein kan vere uvitande om at ein hadde eit val. Desse skilnadene er ikkje retoriske figurar: dei gjev ulike hypotesar om korleis ei form vart til og kva ein kan vente at ho kjem til å gjere.
+
+Forma er eit arkiv, men ikkje eit vitne som snakkar av seg sjølv. Det same setet kan vere resultat av omsorgsfull prøving eller tankelaus kopiering. Å lese arkivet krev at me undersøkjer prosessen, alternativa, materialet og svara frå dei som lever med forma. Ein modell som ikkje kan tape mot eit motdøme, kan heller ikkje vinne ei forklaring.
+
+Teorien gjev ikkje moralske plikter ut av naturlover. Det faglege nei-et må grunngjevast ope. Men teorien kan vise kva eit oppdrag gjorde synleg, kva det heldt skjult, kven som hadde kapasitet til å handle, og kven som må bere følgjene. Det er ikkje lite. Det er eit grunnlag for å gjere design meir etterretteleg som kunnskap og som offentleg praksis.
+
+Framstillinga er ei traktatform. Talet viser kvar ei utsegn høyrer heime i argumentet, og bokstaven kva slags krav ho set: definisjon, postulat, teorem, observasjon eller illustrasjon. Eit teorem skal kunne sporast tilbake til føresetnadene sine; ein empirisk påstand skal kunne motseiast av ei undersøking; eit postulat skal stå ope som postulat. Der dette ikkje lèt seg gjere, er teksten ennå ikkje ferdig.
+
+Oppdraget seier kva forma skal gjere. Først når forma møter verda, viser det seg kva oppdraget ikkje heldt.
+
+## Lesekode
+d = definisjon · a = postulat/hypotese · t = modellvilkårsvis følgje · o = observasjon · i = illustrasjon. Desimalnummera viser logiske underordningar, ikkje berre kapittelrekkjefølgje.
+
 **1d**  Form er ei ordning av skilnader.
 
 Forma vert synleg når noko står i eit forhold til noko anna. Ikkje før.
