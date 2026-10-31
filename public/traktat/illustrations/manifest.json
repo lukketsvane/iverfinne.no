@@ -698,7 +698,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "1.421"
     },
     {
       "name": "scan-20261031-p12-granitt",
@@ -721,7 +722,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "1.421"
     },
     {
       "name": "scan-20261031-p12-glidelas",
@@ -744,7 +746,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "1.5"
     },
     {
       "name": "scan-20261031-p15-stol-hender-a",
@@ -767,7 +770,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": "a"
+      "variant": "a",
+      "placement_after": "2.15"
     },
     {
       "name": "scan-20261031-p15-sittestillingar-a",
@@ -790,7 +794,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": "a"
+      "variant": "a",
+      "placement_after": "2.15"
     },
     {
       "name": "scan-20261031-p21-agentrang",
@@ -813,7 +818,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "5.125"
     },
     {
       "name": "scan-20261031-p21-agens-fra-termostat-til-handverkar",
@@ -836,7 +842,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "5.131"
     },
     {
       "name": "scan-20261031-p15-stol-hender-b",
@@ -859,7 +866,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": "b"
+      "variant": "b",
+      "placement_after": "2.15"
     },
     {
       "name": "scan-20261031-p15-sittestillingar-b",
@@ -882,7 +890,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": "b"
+      "variant": "b",
+      "placement_after": "2.15"
     },
     {
       "name": "scan-20261031-p33-agentar-samspel",
@@ -905,7 +914,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "7.3"
     },
     {
       "name": "scan-20261031-p33-agentar-moglege-retningar",
@@ -928,7 +938,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "7.3"
     },
     {
       "name": "scan-20261031-p33-formtransformasjon",
@@ -951,7 +962,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "7.3"
     },
     {
       "name": "scan-20261031-p41-sommarfugl-livslop",
@@ -974,7 +986,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "7.142"
     },
     {
       "name": "scan-20261031-p41-kopp-og-nedbryting",
@@ -997,7 +1010,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "7.142"
     },
     {
       "name": "scan-20261031-p68-kybernetisk-sloyfe",
@@ -1020,7 +1034,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "5.11"
     },
     {
       "name": "scan-20261031-p68-kognitiv-lyskjegle",
@@ -1043,7 +1058,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "5.22"
     },
     {
       "name": "scan-20261031-p68-omhug-intelligens",
@@ -1066,7 +1082,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "5.2"
     },
     {
       "name": "scan-20261031-p68-multiskala-kompetanse",
@@ -1089,7 +1106,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "6.12"
     },
     {
       "name": "scan-20261031-p52-metamorfose-mycelium",
@@ -1112,7 +1130,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "6.12"
     },
     {
       "name": "scan-20261031-p08-objekt-serie",
@@ -1135,7 +1154,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "1.211"
     },
     {
       "name": "scan-20261031-p08-objekt-ordning",
@@ -1158,7 +1178,8 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "1.211"
     },
     {
       "name": "scan-20261031-p11-busette-opne-forbodne",
@@ -1181,9 +1202,85 @@
       "ink_color": "black",
       "dark_mode": "CSS filter: invert(1)",
       "category": "illustration",
-      "variant": null
+      "variant": null,
+      "placement_after": "1.432"
+    },
+    {
+      "name": "scan-20261031-p13-c-k-operator-tabell-og-rorsle",
+      "filename": "scan-20261031-p13-c-k-operator-tabell-og-rorsle.png",
+      "source_page": 13,
+      "source_image": "28c98e04-d35b-5718-91bf-6c2759ca5682.jpg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        206,
+        585,
+        955,
+        1450
+      ],
+      "size": [
+        747,
+        818
+      ],
+      "sha256": "2f7605031ef32f1ed0fde20ef8e2fd4058956cc5b81453593184df07b9799573",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "label": "C-K operator table + lower relation drawing",
+      "anchor_after": "1.444",
+      "placement_after": "1.54"
+    },
+    {
+      "name": "scan-20261031-p16-royrstol-utvikling",
+      "filename": "scan-20261031-p16-royrstol-utvikling.png",
+      "source_page": 16,
+      "source_image": "cca87d84-e96f-5dcc-95c2-ca9086914bce.jpg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        54,
+        744,
+        983,
+        1439
+      ],
+      "size": [
+        917,
+        666
+      ],
+      "sha256": "81fc638b6981e98d5d4300488d1c4c166de3e0c340403877f95db541bbf33092",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "label": "tube-chair development sequence",
+      "anchor_after": "2.212",
+      "placement_after": "2.212"
+    },
+    {
+      "name": "scan-20261031-p35-d-modell-diagram",
+      "filename": "scan-20261031-p35-d-modell-diagram.png",
+      "source_page": 35,
+      "source_image": "e6efd1f0-e1db-5bc8-af11-8443de2aae02.jpg",
+      "source_kind": "user-uploaded-page-image",
+      "source_rect": [
+        118,
+        757,
+        963,
+        1452
+      ],
+      "size": [
+        811,
+        664
+      ],
+      "sha256": "50055497d0341d5116c6fe4ce63302e2952fb1f134821582e0a8b5de74dc6092",
+      "transparent": true,
+      "ink_color": "black",
+      "dark_mode": "CSS filter: invert(1)",
+      "category": "illustration",
+      "label": "D ≡ (M, Π, SG, ℒ, A) systems diagram",
+      "anchor_after": "8.31",
+      "placement_after": "6.66"
     }
   ],
   "updated_at": "2026-10-31",
-  "asset_count": 74
+  "asset_count": 77
 }
