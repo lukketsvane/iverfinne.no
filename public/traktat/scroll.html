@@ -78,18 +78,18 @@ body{
 
 
 /* ---- reading / continuous stream ---- */
-.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 .875rem 1.5rem;scroll-behavior:auto;touch-action:pan-y}
+.read{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 .5rem 1.5rem;scroll-behavior:auto;touch-action:pan-y}
 .read:focus-visible{outline:1px solid var(--dim);outline-offset:-1px}
 .stream{padding:.375rem 0 1.25rem}
 .doc-title{font-family:var(--serif);font-size:2rem;line-height:1.12;letter-spacing:-.025em;font-weight:400;margin:2.25rem 0 .7rem}
 .section-title{font-family:var(--serif);font-size:1.15rem;font-weight:400;line-height:1.3;margin:2.4rem 0 .8rem;padding-top:.65rem;border-top:1px solid var(--hair);scroll-margin-top:12px}
 .plain-paragraph{font-size:.89rem;line-height:1.62;font-weight:350;white-space:pre-line;margin:.72rem 0;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
 .plain-paragraph em,.prop em{font-style:italic}.plain-paragraph strong,.prop strong{font-weight:600}
-.prop{position:relative;display:grid;grid-template-columns:4.1rem minmax(0,1fr);gap:0 .45rem;align-items:start;font-size:.91rem;line-height:1.56;font-weight:350;padding:.36rem 0;scroll-margin-top:12px}
+.prop{position:relative;display:grid;grid-template-columns:3rem minmax(0,1fr);gap:0 .35rem;align-items:start;width:100%;min-width:0;font-size:.91rem;line-height:1.56;font-weight:350;padding:.36rem 0;scroll-margin-top:12px}
 .prop .n{font-family:var(--mono);font-size:.66rem;line-height:1.45;padding-top:.17rem;color:var(--dim);font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:left}
 .prop .status{font-size:.58rem;margin-left:.05rem;font-weight:400}
-.prop .t{font:inherit;letter-spacing:0;text-wrap:pretty;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
-.prop-paragraph{white-space:pre-line;margin:0}.prop-paragraph+.prop-paragraph{margin-top:.65em}
+.prop .t{font:inherit;min-width:0;width:100%;letter-spacing:0;text-wrap:pretty;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word;-webkit-user-select:text;user-select:text}
+.prop-paragraph{white-space:pre-line;margin:0;max-width:none}.prop-paragraph+.prop-paragraph{margin-top:.65em}
 /* One fixed left edge for every proposition. Depth is communicated by
    the interactive proposition tree above the text, never by indentation. */
 .prop.depth0{margin-left:0;font-size:1.08rem;line-height:1.48;font-weight:400;margin-top:3.2rem;padding-top:.25rem}
@@ -99,6 +99,35 @@ body{
 .prop.depth4{margin-left:0;margin-top:.21rem}
 .prop.active .n{color:var(--fg);font-weight:500}
 .endmark{padding:2rem 0 1rem;text-align:center;font-family:var(--mono);font-size:.61rem;letter-spacing:.16em;color:var(--dim)}
+
+/* References are in-text, and the preview is anchored to the number. */
+.xref{
+  display:inline;color:inherit;background:transparent;border:0;border-radius:0;
+  margin:0;padding:0;font:inherit;line-height:inherit;cursor:pointer;vertical-align:baseline;
+  text-decoration:underline;text-decoration-style:dotted;text-decoration-color:var(--dim);
+  text-decoration-thickness:1px;text-underline-offset:.16em;touch-action:manipulation;
+  -webkit-appearance:none;-webkit-tap-highlight-color:transparent;
+}
+.xref:hover,.xref:focus-visible,.xref.previewing{
+  text-decoration-style:solid;text-decoration-color:var(--fg);
+}
+.xref:focus-visible{outline:1px solid var(--fg);outline-offset:2px}
+.prop-preview{
+  position:fixed;z-index:9999;box-sizing:border-box;
+  width:min(350px,calc(100vw - 24px));padding:12px 14px;
+  color:var(--fg);background:var(--bg);border:1px solid var(--line);
+  border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.17);
+  pointer-events:none;font-family:var(--serif);font-size:.86rem;line-height:1.48;
+  text-align:left;overflow-wrap:break-word;
+}
+.prop-preview[hidden]{display:none!important}
+.prop-preview-num{font-family:var(--mono);font-size:.75rem;font-weight:500;margin-bottom:6px}
+.prop-preview-body{white-space:pre-line;max-height:min(32vh,240px);overflow:hidden}
+.prop-preview-hint{font-family:var(--mono);font-size:.64rem;color:var(--dim);padding-top:9px}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .prop-preview{box-shadow:0 8px 30px rgba(0,0,0,.6)}
+}
+:root[data-theme="dark"] .prop-preview{box-shadow:0 8px 30px rgba(0,0,0,.6)}
 
 /* Text remains selectable while the reader behaves like a fixed-scale iPhone app. */
 @supports (-webkit-touch-callout: none){
@@ -189,14 +218,116 @@ function parseSource(src){
   let addressWindow=window;
   try{if(window.parent!==window&&window.parent.location.hostname===window.location.hostname)addressWindow=window.parent;}catch(e){}
   function hashNumber(){try{return decodeURIComponent(addressWindow.location.hash.slice(1));}catch(e){return "";}}
+  // A single transient preview for every reference: mouse hover, or first touch.
+  const preview=document.createElement("aside");
+  preview.className="prop-preview";
+  preview.id="prop-preview";
+  preview.setAttribute("role","tooltip");
+  preview.hidden=true;
+  document.body.appendChild(preview);
+  let previewAnchor=null,previewMode="";
+  function closePreview(){
+    if(previewAnchor){
+      previewAnchor.classList.remove("previewing");
+      previewAnchor.removeAttribute("aria-describedby");
+      previewAnchor.removeAttribute("aria-expanded");
+    }
+    previewAnchor=null;previewMode="";preview.hidden=true;
+  }
+  function showPreview(anchor,mode){
+    const n=anchor.dataset.ref,d=byNum.get(n);
+    if(!d)return;
+    if(previewAnchor&&previewAnchor!==anchor)closePreview();
+    previewAnchor=anchor;previewMode=mode;
+    anchor.classList.add("previewing");
+    anchor.setAttribute("aria-describedby","prop-preview");
+    anchor.setAttribute("aria-expanded","true");
+    const number=document.createElement("div");
+    number.className="prop-preview-num";
+    number.textContent=d.n+" · "+({d:"definisjon",a:"postulat",t:"teorem",o:"observasjon",i:"illustrasjon"}[d.status]||"");
+    const body=document.createElement("div");
+    body.className="prop-preview-body";
+    const full=d.paragraphs.join("\n\n").replace(/\*{1,2}/g,"").trim();
+    body.textContent=full.length>480?full.slice(0,477).trimEnd()+"…":full;
+    const hint=document.createElement("div");
+    hint.className="prop-preview-hint";
+    hint.textContent=mode==="tap"?"Trykk på tilvisinga igjen for å gå dit":"Klikk for å gå til proposisjonen";
+    preview.replaceChildren(number,body,hint);
+    preview.hidden=false;
+    const rect=anchor.getBoundingClientRect();
+    const width=preview.getBoundingClientRect().width;
+    const left=Math.max(12,Math.min(window.innerWidth-width-12,rect.left+rect.width/2-width/2));
+    const height=preview.getBoundingClientRect().height;
+    const roomAbove=rect.top-12,roomBelow=window.innerHeight-rect.bottom-12;
+    let top=roomAbove>=height?rect.top-height-9:rect.bottom+9;
+    if(top+height>window.innerHeight-8&&roomAbove>roomBelow)top=rect.top-height-9;
+    preview.style.left=left+"px";
+    preview.style.top=Math.max(8,Math.min(top,window.innerHeight-height-8))+"px";
+  }
+  function addLinkedText(el,text){
+    // Only parenthesized proposition citations become links; numbers in
+    // mathematical expressions, dates and note numbers stay untouched.
+    const group=/\((\s*\d+(?:\.\d+)*(?:\s*[,;–—−-]\s*\d+(?:\.\d+)*)*\s*)\)/g;
+    let start=0,m;
+    while((m=group.exec(text))!==null){
+      el.appendChild(document.createTextNode(text.slice(start,m.index)+"("));
+      const inner=m[1],numberPattern=/\d+(?:\.\d+)*/g;
+      let last=0,match;
+      while((match=numberPattern.exec(inner))!==null){
+        el.appendChild(document.createTextNode(inner.slice(last,match.index)));
+        const n=match[0];
+        if(byNum.has(n)){
+          const link=document.createElement("button");
+          link.type="button";link.className="xref";link.dataset.ref=n;
+          link.textContent=n;
+          link.setAttribute("aria-label","Vis proposisjon "+n);
+          let pointerType="mouse";
+          link.addEventListener("pointerdown",e=>{pointerType=e.pointerType;});
+          link.addEventListener("touchstart",()=>{pointerType="touch";},{passive:true});
+          link.addEventListener("pointerenter",e=>{
+            if(e.pointerType==="mouse"||e.pointerType==="pen")showPreview(link,"hover");
+          });
+          link.addEventListener("pointerleave",e=>{
+            if((e.pointerType==="mouse"||e.pointerType==="pen")&&previewAnchor===link&&previewMode==="hover")closePreview();
+          });
+          link.addEventListener("focus",()=>{
+            if(link.matches(":focus-visible"))showPreview(link,"hover");
+          });
+          link.addEventListener("click",e=>{
+            e.stopPropagation();e.preventDefault();
+            if(pointerType==="touch"){
+              if(previewAnchor===link&&previewMode==="tap"){closePreview();go(n);}
+              else showPreview(link,"tap");
+            }else{
+              closePreview();go(n);
+            }
+          });
+          el.appendChild(link);
+        }else el.appendChild(document.createTextNode(n));
+        last=match.index+n.length;
+      }
+      el.appendChild(document.createTextNode(inner.slice(last)+")"));
+      start=group.lastIndex;
+    }
+    el.appendChild(document.createTextNode(text.slice(start)));
+  }
   function rich(el,s){
     for(const part of s.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)){
       if(!part)continue;
-      if(part.startsWith("**")&&part.endsWith("**")){const b=document.createElement("strong");b.textContent=part.slice(2,-2);el.appendChild(b);}
-      else if(part.startsWith("*")&&part.endsWith("*")){const em=document.createElement("em");em.textContent=part.slice(1,-1);el.appendChild(em);}
-      else el.appendChild(document.createTextNode(part));
+      if(part.startsWith("**")&&part.endsWith("**")){
+        const b=document.createElement("strong");addLinkedText(b,part.slice(2,-2));el.appendChild(b);
+      }else if(part.startsWith("*")&&part.endsWith("*")){
+        const em=document.createElement("em");addLinkedText(em,part.slice(1,-1));el.appendChild(em);
+      }else addLinkedText(el,part);
     }
   }
+  // Dismiss previews on scrolling, tapping elsewhere, rotating or Escape.
+  read.addEventListener("scroll",closePreview,{passive:true});
+  document.addEventListener("pointerdown",e=>{
+    if(previewAnchor&&!e.target.closest(".xref"))closePreview();
+  },{capture:true});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closePreview();});
+  window.addEventListener("resize",closePreview,{passive:true});
   function make(tag,cls,text){
     const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;
   }
