@@ -414,7 +414,7 @@ function parseSource(src){
   if(bodyStart<0)throw new Error("Føreord manglar i FORMLÆRE");
   const readingStart=TOKENS.findIndex(tok=>tok.kind==="heading"&&tok.text==="Lesekode");
   if(readingStart<0)throw new Error("Lesekode manglar i FORMLÆRE");
-  const visibleTokens=forewordView?TOKENS.slice(bodyStart,readingStart):TOKENS.slice(readingStart);
+  const visibleTokens=forewordView?TOKENS.slice(bodyStart,readingStart):TOKENS.slice(bodyStart);
   for(const tok of visibleTokens){
     if(tok.kind==="heading"){const h=make("h2","section-title",tok.text);h.id="del-"+tok.text.toLowerCase().replace(/[^a-z0-9æøå]+/g,"-").replace(/^-|-$/g,"");stream.appendChild(h);}
     else if(tok.kind==="paragraph"){const p=make("p","plain-paragraph");rich(p,tok.text);addNoteLinks(p,introNotes.filter(note=>tok.text.includes(note.anchor)));stream.appendChild(p);}
