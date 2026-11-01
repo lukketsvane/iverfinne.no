@@ -152,7 +152,8 @@ def build_html(source_dir: Path) -> tuple[str, dict]:
                 marks = note_links([n for n in notes if n["proposition"] == number]) if i == len(token["paragraphs"]) - 1 else ""
                 content.append('<p class="prop-paragraph">' + rich(paragraph) + marks + "</p>")
             depth = 0 if "." not in number else min(4, len(number.split(".")[1]))
-            body.append(f'<article class="prop depth{depth}" id="{number}"><span class="n">{number}<sup class="status">{token["status"]}</sup></span><div class="t">' + "".join(content) + "</div></article>")
+            short = " short" if len(" ".join(token["paragraphs"]).split()) <= 100 else ""
+            body.append(f'<article class="prop depth{depth}{short}" id="{number}"><span class="n">{number}<sup class="status">{token["status"]}</sup></span><div class="t">' + "".join(content) + "</div></article>")
             for figure in figures.get(number, []):
                 path = source_dir / "illustrations" / figure["file"]
                 if not path.is_file():
@@ -195,6 +196,7 @@ p { orphans: 3; widows: 3; }
 .section-title:first-child { margin-top: 7.8pt; padding-top: 0; border: 0; }
 .plain-paragraph { white-space: pre-line; margin: 8pt 0; }
 .prop { position: relative; padding: 2.16pt 0; margin-top: 4pt; }
+.prop.short { break-inside: avoid; }
 .prop .n { float: left; width: 36pt; font: 400 8pt/1.4 'DejaVu Sans Mono', monospace; color: #666; padding-top: 1.8pt; white-space: nowrap; }
 .status { font-size: 6.5pt; margin-left: .6pt; }
 .prop .t { margin-left: 40.2pt; }

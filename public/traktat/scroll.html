@@ -407,7 +407,7 @@ function parseSource(src){
   function make(tag,cls,text){
     const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;
   }
-  const FIGURES_AFTER={"1.54":[{"file":"scan-20261031-p13-c-k-operator-tabell-og-rorsle.png","alt":"C–K-operasjonane: retning og lyskjegleoperasjonar"}],"2.212":[{"file":"scan-20261031-p16-royrstol-utvikling.png","alt":"Frå sykkelramme til røyrstol"}],"5.125":[{"file":"scan-20261031-p21-agentrang.png","alt":"Agens frå termostat til designar"}],"6.66":[{"file":"scan-20261031-p35-d-modell-diagram.png","alt":"Formrom, partisjon, grammatikk, landskap og agenthierarki"}],"7.142":[{"file":"scan-20261031-p41-sommarfugl-livslop.png","alt":"Larve, puppe og sommarfugl"}],"1.4":[{"file":"scan-20261031-p11-busette-opne-forbodne.png","alt":"Busette, opne og forbodne regionar"}]};
+  const FIGURES_AFTER={"1.54":[{"file":"scan-20261031-p13-c-k-operator-tabell-og-rorsle.png","alt":"C–K-operasjonane: retning og lyskjegleoperasjonar"}],"2.212":[{"file":"scan-20261031-p16-royrstol-utvikling.png","alt":"Frå sykkelramme til røyrstol"}],"5.125":[{"file":"scan-20261031-p21-agentrang.png","alt":"Agens frå termostat til designar"}],"6.66":[{"file":"model-overview-20261101.jpg","alt":"Formrom, partisjon, grammatikk, landskap og agenthierarki"}],"7.142":[{"file":"scan-20261031-p41-sommarfugl-livslop.png","alt":"Larve, puppe og sommarfugl"}],"1.4":[{"file":"scan-20261031-p11-busette-opne-forbodne.png","alt":"Busette, opne og forbodne regionar"}]};
   // The reader begins at "Føreord". Title, subtitle and byline are
   // source metadata, not part of the reading stream.
   const bodyStart=TOKENS.findIndex(tok=>tok.kind==="heading"&&tok.text==="Føreord");
