@@ -1,4 +1,35 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "alias": ["traktat.iverfinne.no"]
+  "redirects": [
+    {
+      "source": "/traktat",
+      "destination": "https://traktat.iverfinne.no/",
+      "permanent": true
+    },
+    {
+      "source": "/traktat/",
+      "destination": "https://traktat.iverfinne.no/",
+      "permanent": true
+    },
+    {
+      "source": "/traktat/index.html",
+      "destination": "https://traktat.iverfinne.no/",
+      "permanent": true
+    },
+    {
+      "source": "/traktat/scroll.html",
+      "destination": "https://traktat.iverfinne.no/",
+      "permanent": true
+    },
+    {
+      "source": "/traktat/formlaere.pdf",
+      "destination": "https://traktat.iverfinne.no/traktat/formlaere.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/traktat/formlaere.txt",
+      "destination": "https://traktat.iverfinne.no/traktat/formlaere.txt",
+      "permanent": true
+    }
+  ]
 }

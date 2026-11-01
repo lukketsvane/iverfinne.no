@@ -3,13 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0;url=/traktat/scroll.html">
+<meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://traktat.iverfinne.no/">
-<title>FORMLÆRE — Iver Raknes Finne</title>
+<title>FORMLÆRE</title>
 </head>
 <body>
-<p><a href="/traktat/scroll.html">Les FORMLÆRE</a></p>
-<script>window.location.replace("/traktat/scroll.html"+window.location.hash);</script>
+<p>FORMLÆRE har flytta til <a id="canonical-reader" href="https://traktat.iverfinne.no/">traktat.iverfinne.no</a>.</p>
+<script>
+const destination = new URL("https://traktat.iverfinne.no/");
+destination.search = window.location.search;
+destination.hash = window.location.hash;
+document.getElementById("canonical-reader").href = destination.href;
+window.location.replace(destination.href);
+</script>
 </body>
 </html>

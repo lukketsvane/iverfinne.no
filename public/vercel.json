@@ -1,28 +1,35 @@
 {
-  "rewrites": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
     {
-      "source": "/",
-      "destination": "/traktat/scroll.html"
-    }
-  ],
-  "headers": [
+      "source": "/traktat",
+      "destination": "https://traktat.iverfinne.no/",
+      "permanent": true
+    },
+    {
+      "source": "/traktat/",
+      "destination": "https://traktat.iverfinne.no/",
+      "permanent": true
+    },
+    {
+      "source": "/traktat/index.html",
+      "destination": "https://traktat.iverfinne.no/",
+      "permanent": true
+    },
     {
       "source": "/traktat/scroll.html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
-      ]
+      "destination": "https://traktat.iverfinne.no/",
+      "permanent": true
+    },
+    {
+      "source": "/traktat/formlaere.pdf",
+      "destination": "https://traktat.iverfinne.no/traktat/formlaere.pdf",
+      "permanent": true
     },
     {
       "source": "/traktat/formlaere.txt",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
-      ]
+      "destination": "https://traktat.iverfinne.no/traktat/formlaere.txt",
+      "permanent": true
     }
   ]
 }

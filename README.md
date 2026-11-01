@@ -36,3 +36,9 @@ yarn start
 vercel --prod
 
 my personal webpage
+
+## FORMLÆRE
+
+Den kanoniske teksten, referansane, LaTeX-kjelda, PDF-en og nettbyggjet vert vedlikehaldne i [FORML-RE/traktat](https://github.com/lukketsvane/FORML-RE/tree/main/traktat).
+
+Lesaren ligg på [traktat.iverfinne.no](https://traktat.iverfinne.no/). Dette repoet held berre vidaresending frå gamle lesaradresser og det eksisterande illustrasjonsarkivet. Endringar i FORMLÆRE skal gjerast i det kanoniske repoet.
